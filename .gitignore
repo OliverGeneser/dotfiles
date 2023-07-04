@@ -16,6 +16,8 @@
 .local/bin/
 .local/state/
 
+!pkglist-*.txt
+
 # ignore history and logs
 *.log
 *_history
