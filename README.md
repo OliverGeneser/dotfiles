@@ -5,8 +5,17 @@ Dotfiles backup
 
 ### Installes all packages from AUR and deploys config files
 ```bash
-git clone --bare git@github.com:olivergeneser/dotfiles.git dotfiles
-git --git-dir=$HOME/dotfiles --work-tree=$HOME config --local core.worktree $HOME
+SETUP
+git clone --bare https://github.com/olivergeneser/dotfiles.git $HOME/.myconf
+alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+config config status.showUntrackedFiles no
+
+RESTORED
+git clone --separate-git-dir=$HOME/.myconf [/path/to/repo](https://github.com/olivergeneser/dotfiles.git) $HOME/myconf-tmp
+cp ~/myconf-tmp/.gitmodules ~  # If you use Git submodules
+rm -r ~/myconf-tmp/
+alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+
 
 # install yay
 pacman -S --needed git base-devel
