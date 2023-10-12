@@ -5,6 +5,18 @@ Dotfiles backup
 
 ### Installes all packages from AUR and deploys config files
 ```bash
+
+# install yay
+pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd .. && rm -rf yay
+yay -Y --gendb
+yay -Syu --devel
+
+
+
 SETUP
 git clone --bare https://github.com/olivergeneser/dotfiles.git $HOME/.myconf
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
@@ -16,14 +28,6 @@ cp ~/myconf-tmp/.gitmodules ~  # If you use Git submodules
 rm -r ~/myconf-tmp/
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
-
-# install yay
-pacman -S --needed git base-devel
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd .. && rm -rf yay
-yay -Y --gendb
 
 # install packages
 mkdir -p /tmp/yay; yay -S --builddir /tmp/yay --needed --nodiffmenu --noeditmenu - < pkglist-intel.txt
