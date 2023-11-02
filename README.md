@@ -3,18 +3,48 @@ Dotfiles backup
 
 <h2>Restore backup</h2>
 
-### Installes all packages from AUR and deploys config files
+### Init pacman
 ```bash
+sudo pacman-keys --init
+```
+```bash
+sudo pacman-keys --populate archlinux
+```
 
-# install yay
-pacman -S --needed git base-devel
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd .. && rm -rf yay
-yay -Y --gendb
-yay -Syu --devel
+### Download and make the files exec
+```bash
+git clone https://github.com/olivergeneser/dotfiles && cd dotfiles && sudo chmod +x *.sh
+```
 
+### Install all the essentials
+```bash
+./install-yay.sh
+```
+```bash
+./install.sh
+```
+```bash
+./install-dev.sh
+```
+
+### Copy relevant files
+```bash
+cp .config /.config
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+```bash
 
 
 SETUP
