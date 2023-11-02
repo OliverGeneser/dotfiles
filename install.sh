@@ -13,7 +13,7 @@ yay -S qt5-wayland qt6-wayland cliphist wl-clip-persist viewnior thunar thunar-a
 yay -S pipewire wireplumber
 
 # Themes
-yay -S nwg-look-bin
+yay -S catppuccin-gtk-theme-mocha catppuccin-cursors-mocha colloid-gtk-theme papirus-icon-theme nwg-look-bin
 
 # Font
 mkdir -p ~/.local/share/fonts/nerd-fonts
