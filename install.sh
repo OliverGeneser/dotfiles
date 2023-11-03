@@ -14,6 +14,9 @@ yay -S pipewire wireplumber
 
 # Themes
 yay -S catppuccin-gtk-theme-mocha catppuccin-cursors-mocha colloid-gtk-theme papirus-icon-theme nwg-look-bin
+git clone https://github.com/catppuccin/sddm
+sudo mv ./sddm/src/catppuccin-mocha/ /usr/share/sddm/themes/
+sudo mv ./sddm.conf /etc/sddm.conf
 
 # Font
 mkdir -p ~/.local/share/fonts/nerd-fonts
