@@ -17,6 +17,7 @@ yay -S catppuccin-gtk-theme-mocha catppuccin-cursors-mocha colloid-gtk-theme pap
 git clone https://github.com/catppuccin/sddm
 sudo mv ./sddm/src/catppuccin-mocha/ /usr/share/sddm/themes/
 sudo cp ./sddm.conf /etc/sddm.conf
+curl https://raw.githubusercontent.com/catppuccin/tofi/main/catppuccin-mocha >> ~/.config/tofi/config
 
 # Font
 mkdir -p ~/.local/share/fonts/nerd-fonts
