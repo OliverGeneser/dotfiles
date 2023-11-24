@@ -23,53 +23,25 @@ git clone https://github.com/olivergeneser/dotfiles && cd dotfiles && sudo chmod
 ```bash
 ./install.sh
 ```
-```bash
-./install-dev.sh
-```
 
 ### Copy relevant files
 ```bash
 cp .config /.config
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
+### Dev tools
 ```bash
-
-
-SETUP
-git clone --bare https://github.com/olivergeneser/dotfiles.git $HOME/.myconf
-alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
-config config status.showUntrackedFiles no
-
-RESTORED
-git clone --separate-git-dir=$HOME/.myconf [/path/to/repo](https://github.com/olivergeneser/dotfiles.git) $HOME/myconf-tmp
-cp ~/myconf-tmp/.gitmodules ~  # If you use Git submodules
-rm -r ~/myconf-tmp/
-alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
-
-
-# install packages
-mkdir -p /tmp/yay; yay -S --builddir /tmp/yay --needed --nodiffmenu --noeditmenu - < pkglist-intel.txt
-
-# add firewall rule
-sudo ufw default deny incoming
-sudo ufw allow syncthing
-sudo ufw enable
-
-# enable services
-sudo systemctl enable --now input-remapper docker tlp ufw bluetooth
+./install-dev.sh
 ```
+
+### Nvidia 
+```bash
+./install-nvidia.sh
+```
+
+
+
+
 
 ### Restores GTK options
 ```bash
@@ -81,7 +53,3 @@ gsettings set org.gnome.desktop.interface cursor-theme 'bloom'
 gsettings set org.gnome.desktop.interface icon-theme 'bloom-classic'
 ```
 
-### Neovim plugins and dependencies
-```bash
-sh -c "$(wget -O- https://raw.githubusercontent.com/olivergeneser/dotfiles/master/fetch-nvim-conf.sh)"
-```
