@@ -34,6 +34,11 @@ cp .config /.config
 ./install-dev.sh
 ```
 
+### Laptop
+```bash
+./install-laptop.sh
+```
+
 ### Nvidia 
 ```bash
 ./install-nvidia.sh
