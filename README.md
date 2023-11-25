@@ -5,10 +5,10 @@ Dotfiles backup
 
 ### Init pacman
 ```bash
-sudo pacman-keys --init
+sudo pacman-key --init
 ```
 ```bash
-sudo pacman-keys --populate archlinux
+sudo pacman-key --populate archlinux
 ```
 
 ### Download and make the files exec
