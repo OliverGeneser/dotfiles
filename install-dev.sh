@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Tools
-yay -S --answerdiff None --answerclean None neovim gnupg pass git-credential-manager-core
+yay -S --answerdiff None --answerclean None neovim gnupg pass git-credential-manager-core git-credential-manager-core-extras ttf-ms-fonts
 
 # Setup GCM
 # sudo gpg --gen-key | sed '3!d' | xargs pass init {}
