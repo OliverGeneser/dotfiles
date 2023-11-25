@@ -1,9 +1,9 @@
 #!/bin/bash
 
-pacman -S --needed git base-devel
+sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay-bin
 cd yay-bin
-makepkg -si
+sudo makepkg -si
 cd .. && rm -rf yay-bin
 
 yay -Y --gendb
