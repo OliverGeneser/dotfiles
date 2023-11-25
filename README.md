@@ -40,8 +40,23 @@ cp -r .config/* ~/.config
 ```
 
 ### Nvidia 
+https://wiki.hyprland.org/Nvidia/
 ```bash
 ./install-nvidia.sh
+
+nvidia_drm.modeset=1 to the end of /boot/loader/entries/arch.conf
+/etc/mkinitcpio.conf add nvidia nvidia_modeset nvidia_uvm nvidia_drm to your MODULES
+run # mkinitcpio --config /etc/mkinitcpio.conf --generate /boot/initramfs-custom.img
+add a new line to /etc/modprobe.d/nvidia.conf (make it if it does not exist) and add the line options nvidia-drm modeset=1
+
+Export these variables in your hyprland config:
+
+env = LIBVA_DRIVER_NAME,nvidia
+env = XDG_SESSION_TYPE,wayland
+env = GBM_BACKEND,nvidia-drm
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+env = WLR_NO_HARDWARE_CURSORS,1
+
 ```
 
 
