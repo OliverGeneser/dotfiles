@@ -33,4 +33,4 @@ sudo ufw default deny incoming
 sudo ufw enable
 
 # Enable services
-sudo systemctl enable --now sddm.service ufw bluetooth
+sudo systemctl enable sddm.service ufw bluetooth
