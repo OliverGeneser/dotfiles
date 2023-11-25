@@ -1,19 +1,19 @@
 #!/bin/bash
 
 # Tools
-yay -S git base-devel rustup
+yay -S --answerdiff None --answerclean None git base-devel rustup
 
 # Hyprland stuff
-yay -S hyprland-git polkit-kde-agent xdg-desktop-portal-hyprland-git kitty hyprpicker-git eww-wayland dunst tofi eww-wayland nwg-look-bin wlogout
+yay -S --answerdiff None --answerclean None hyprland-git polkit-kde-agent xdg-desktop-portal-hyprland-git kitty hyprpicker-git eww-wayland dunst tofi eww-wayland nwg-look-bin wlogout
 
 # Must haves
-yay -S qt5-wayland qt6-wayland cliphist wl-clip-persist viewnior thunar thunar-archive-plugin thunar-volman file-roller gvfs ffmpeg ffmpegthumbnailer brightnessctl sddm-git qt5-graphicaleffects qt5-svg qt5-quickcontrols2 swaylock-effects-git ufw bluez blueman webcord
+yay -S --answerdiff None --answerclean None qt5-wayland qt6-wayland cliphist wl-clip-persist viewnior thunar thunar-archive-plugin thunar-volman file-roller gvfs ffmpeg ffmpegthumbnailer brightnessctl sddm-git qt5-graphicaleffects qt5-svg qt5-quickcontrols2 swaylock-effects-git ufw bluez blueman webcord
 
 # Audio
-yay -S pipewire wireplumber
+yay -S --answerdiff None --answerclean None pipewire wireplumber
 
 # Themes
-yay -S catppuccin-gtk-theme-mocha catppuccin-cursors-mocha colloid-gtk-theme papirus-icon-theme nwg-look-bin
+yay -S --answerdiff None --answerclean None catppuccin-gtk-theme-mocha catppuccin-cursors-mocha colloid-gtk-theme papirus-icon-theme nwg-look-bin
 git clone https://github.com/catppuccin/sddm
 sudo mv ./sddm/src/catppuccin-mocha/ /usr/share/sddm/themes/
 sudo cp ./sddm.conf /etc/sddm.conf
@@ -26,7 +26,7 @@ mv FiraCode.zip ~/.local/share/fonts/nerd-fonts
 unzip ~/.local/share/fonts/nerd-fonts/FiraCode.zip -d ~/.local/share/fonts/nerd-fonts
 
 # Apps
-yay -S neovim firefox vlc
+yay -S --answerdiff None --answerclean None neovim firefox vlc
 
 # Secure
 sudo ufw default deny incoming
