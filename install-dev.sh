@@ -1,9 +1,12 @@
 #!/bin/bash
 
 # Tools
-yay -S neovim gnupg pass git-credential-manager-core
+yay -S --answerdiff None --answerclean None neovim gnupg pass git-credential-manager-core
 
 # Setup GCM
-sudo gpg --gen-key | sed '3!d' | xargs pass init {}
+# sudo gpg --gen-key | sed '3!d' | xargs pass init {}
 git config --global credential.credentialStore gpg
-git-credential-manager configure
+
+echo "run gpg --gen-key"
+echo "run pass init <gpg-id>"
+echo "run git-credential-manager configure"
