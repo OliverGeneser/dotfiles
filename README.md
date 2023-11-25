@@ -26,7 +26,7 @@ git clone https://github.com/olivergeneser/dotfiles && cd dotfiles && sudo chmod
 
 ### Copy relevant files
 ```bash
-cp .config /.config
+sudo cp -r .config /.config
 ```
 
 ### Dev tools
