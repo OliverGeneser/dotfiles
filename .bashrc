@@ -12,3 +12,5 @@ PS1='[\u@\h \W]\$ '
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+source /usr/share/nvm/init-nvm.sh
