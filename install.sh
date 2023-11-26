@@ -24,6 +24,7 @@ mkdir -p ~/.local/share/fonts/nerd-fonts
 curl https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip -L -o FiraCode.zip
 mv FiraCode.zip ~/.local/share/fonts/nerd-fonts
 unzip ~/.local/share/fonts/nerd-fonts/FiraCode.zip -d ~/.local/share/fonts/nerd-fonts
+yay -S --answerdiff None --answerclean None noto-fonts
 
 # Apps
 yay -S --answerdiff None --answerclean None neovim firefox vlc
