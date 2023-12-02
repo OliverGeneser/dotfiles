@@ -9,6 +9,9 @@ yay -S --answerdiff None --answerclean None hyprland-git polkit-kde-agent xdg-de
 # Must haves
 yay -S --answerdiff None --answerclean None qt5-wayland qt6-wayland cliphist wl-clip-persist viewnior thunar thunar-archive-plugin thunar-volman file-roller gvfs ffmpeg ffmpegthumbnailer brightnessctl sddm-git qt5-graphicaleffects qt5-svg qt5-quickcontrols2 swaylock-effects-git ufw bluez blueman webcord networkmanager network-manager-applet
 
+# Networking
+yay -S --answerdiff None --answerclean None net-tools
+
 # Audio
 yay -S --answerdiff None --answerclean None pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber alsa-plugins alsa-utils pavucontrol pamixer easyeffects
 
