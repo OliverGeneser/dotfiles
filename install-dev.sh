@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Tools
-yay -S --answerdiff None --answerclean None vi neovim lazygit nvm openssh libfido2 ttf-ms-fonts
+yay -S --answerdiff None --answerclean None vi neovim ripgrep nvm openssh libfido2 ttf-ms-fonts
 
 yay -S --answerdiff None --answerclean None docker docker-compose
 sudo groupadd docker
