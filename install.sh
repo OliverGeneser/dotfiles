@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Tools
-yay -S --answerdiff None --answerclean None git base-devel rustup
+yay -S --answerdiff None --answerclean None util-linux git base-devel rustup
 
 # Hyprland stuff
-yay -S --answerdiff None --answerclean None hyprland-git polkit-kde-agent xdg-desktop-portal-gtk xdg-desktop-portal-hyprland-git kitty hyprpicker-git eww-wayland dunst tofi eww-wayland nwg-look-bin wlogout
+yay -S --answerdiff None --answerclean None hyprland-git polkit-kde-agent xdg-desktop-portal-gtk xdg-desktop-portal-hyprland-git kitty tmux hyprpicker-git eww-wayland dunst tofi eww-wayland nwg-look-bin wlogout
 
 # Must haves
-yay -S --answerdiff None --answerclean None qt5-wayland qt6-wayland cliphist wl-clip-persist viewnior thunar thunar-archive-plugin thunar-volman file-roller gvfs ffmpeg ffmpegthumbnailer brightnessctl sddm-git qt5-graphicaleffects qt5-svg qt5-quickcontrols2 swaylock-effects-git ufw bluez blueman webcord networkmanager network-manager-applet
+yay -S --answerdiff None --answerclean None qt5-wayland qt6-wayland cliphist wl-clip-persist viewnior thunar thunar-archive-plugin thunar-volman file-roller gvfs ffmpeg ffmpegthumbnailer brightnessctl sddm-git qt5-graphicaleffects qt5-svg qt5-quickcontrols2 swaylock-effects-git ufw bluez blueman webcord networkmanager network-manager-applet fzf
 
 # Networking
 yay -S --answerdiff None --answerclean None net-tools
@@ -31,11 +31,18 @@ unzip ~/.local/share/fonts/nerd-fonts/FiraCode.zip -d ~/.local/share/fonts/nerd-
 yay -S --answerdiff None --answerclean None noto-fonts
 
 # Apps
-yay -S --answerdiff None --answerclean None neovim firefox vlc
+yay -S --answerdiff None --answerclean None firefox vlc webcord
+
+# Tools
+yay -S --answerdiff None --answerclean None neovim ripgrep nvm openssh libfido2 ttf-ms-fonts
+
+yay -S --answerdiff None --answerclean None docker docker-compose
+sudo groupadd docker
+sudo usermod -aG docker $USER
 
 # Secure
 sudo ufw default deny incoming
 sudo ufw enable
 
 # Enable services
-sudo systemctl enable sddm.service ufw bluetooth
+sudo systemctl enable sddm.service ufw bluetooth docker.service containerd.service

@@ -27,11 +27,7 @@ git clone https://github.com/olivergeneser/dotfiles && cd dotfiles && sudo chmod
 ### Copy relevant files
 ```bash
 cp -r .config/* ~/.config
-```
-
-### Dev tools
-```bash
-./install-dev.sh
+cp -r .local/* ~/.local
 ```
 
 ### Laptop
