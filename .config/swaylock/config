@@ -3,10 +3,11 @@ font=FiraCode Nerd Font 11
 
 clock
 timestr=%R
+datestr=%d.%m.%Y
 
-image=~/.wallpapers/Anime.png
+image=~/.wallpapers/programming-wallpaper.png
 
-fade-in=0.2
+fade-in=0
 
 #effect-blur=15x2
 #effect-greyscale
@@ -17,7 +18,7 @@ indicator-radius=110
 indicator-thickness=10
 indicator-caps-lock
 
-key-hl-color=880033ff
+key-hl-color=194f2b
 
 separator-color=00000000
 
@@ -27,11 +28,11 @@ inside-caps-lock-color=009ddc33
 inside-ver-color=d9d8d833
 inside-wrong-color=ee2e2433
 
-ring-color=231f20D9
-ring-clear-color=231f20D9
-ring-caps-lock-color=231f20D9
-ring-ver-color=231f20D9
-ring-wrong-color=231f20D9
+ring-color=50c878
+ring-clear-color=50c878
+ring-caps-lock-color=50c878
+ring-ver-color=50c878
+ring-wrong-color=50c878
 
 line-color=00000000
 line-clear-color=ffd204FF

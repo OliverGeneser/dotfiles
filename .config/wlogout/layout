@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "swaylock -C /home/oliver/.config/swaylock/config",
+    "action" : "swaylock -f -c ~/.config/swaylock/config",
     "text" : "Lock",
     "keybind" : "l"
 }
