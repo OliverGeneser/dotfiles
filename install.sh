@@ -17,7 +17,7 @@ yay -S --answerdiff None --answerclean None util-linux git base-devel rustup
 yay -S --answerdiff None --answerclean None hyprland-git polkit-kde-agent xdg-desktop-portal-gtk xdg-desktop-portal-hyprland-git kitty tmux hyprpicker-git eww-wayland dunst tofi eww-wayland nwg-look-bin wlogout
 
 # Must haves
-yay -S --answerdiff None --answerclean None qt5-wayland qt6-wayland cliphist wl-clip-persist viewnior thunar thunar-archive-plugin thunar-volman file-roller gvfs ffmpeg ffmpegthumbnailer brightnessctl sddm-git qt5-graphicaleffects qt5-svg qt5-quickcontrols2 swaylock-effects-git ufw bluez blueman webcord networkmanager network-manager-applet fzf
+yay -S --answerdiff None --answerclean None qt5-wayland qt6-wayland cliphist wl-clip-persist viewnior thunar thunar-archive-plugin thunar-volman file-roller gvfs ffmpeg ffmpegthumbnailer brightnessctl sddm-git qt5-graphicaleffects qt5-svg qt5-quickcontrols2 swaylock-effects-git swayidle ufw bluez blueman webcord networkmanager network-manager-applet fzf
 
 # Networking
 yay -S --answerdiff None --answerclean None net-tools
