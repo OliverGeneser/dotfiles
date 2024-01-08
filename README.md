@@ -28,6 +28,9 @@ git clone https://github.com/olivergeneser/dotfiles && cd dotfiles && sudo chmod
 ```bash
 cp -r .config/* ~/.config
 cp -r .local/* ~/.local
+
+cp .bashrc ~/.bashrc
+cp .tmux.conf ~/.tmux.conf
 ```
 
 ### Laptop
