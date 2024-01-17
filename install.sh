@@ -50,6 +50,11 @@ yay -S --answerdiff None --answerclean None docker docker-compose
 sudo groupadd docker
 sudo usermod -aG docker $USER
 
+# Zsh
+yay -S --answerdiff None --answerclean None zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+chsh -s $(which zsh)
+
 # Secure
 sudo ufw default deny incoming
 sudo ufw enable
