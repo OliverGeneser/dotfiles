@@ -59,16 +59,7 @@ env = WLR_NO_HARDWARE_CURSORS,1
 ```
 
 
-
-
-
-### Restores GTK options
+### Restores XDG options
 ```bash
-gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-gsettings set org.gtk.Settings.FileChooser startup-mode cwd
-gsettings set org.gtk.gtk4.Settings.FileChooser startup-mode cwd
-# cursor and icon themes
-gsettings set org.gnome.desktop.interface cursor-theme 'bloom'
-gsettings set org.gnome.desktop.interface icon-theme 'bloom-classic'
+xdg-settings set default-web-browser firefox.desktop
 ```
-
