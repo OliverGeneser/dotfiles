@@ -11,7 +11,7 @@ else
 fi
 
 # Tools
-yay -S --answerdiff None --answerclean None util-linux git base-devel rustup
+yay -S --answerdiff None --answerclean None util-linux git base-devel rustup neofetch
 
 # Hyprland stuff
 yay -S --answerdiff None --answerclean None hyprland-git polkit-kde-agent xdg-desktop-portal-gtk xdg-desktop-portal-hyprland-git kitty tmux hyprpicker-git eww-wayland dunst tofi eww-wayland nwg-look-bin wlogout
@@ -33,18 +33,19 @@ sudo cp ./sddm.conf /etc/sddm.conf
 curl https://raw.githubusercontent.com/catppuccin/tofi/main/catppuccin-mocha >>~/.config/tofi/config
 
 # Font
-mkdir -p ~/.local/share/fonts/nerd-fonts
-curl https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip -L -o FiraCode.zip
-mv FiraCode.zip ~/.local/share/fonts/nerd-fonts
-unzip ~/.local/share/fonts/nerd-fonts/FiraCode.zip -d ~/.local/share/fonts/nerd-fonts
+mkdir -p /usr/share/fonts/nerd-fonts
+curl https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip -L -o /usr/share/fonts/nerd-fonts/FiraCode.zip
+unzip /usr/share/fonts/nerd-fonts/FiraCode.zip -d /usr/share/fonts/nerd-fonts
+rm /usr/share/fonts/nerd-fonts/FiraCode.zip
+fc-cache -rv
 
-yay -S --answerdiff None --answerclean None noto-fonts
+yay -S --answerdiff None --answerclean None noto-fonts ttf-ms-fonts
 
 # Apps
 yay -S --answerdiff None --answerclean None firefox vlc webcord
 
 # Tools
-yay -S --answerdiff None --answerclean None neovim ripgrep nvm openssh libfido2 ttf-ms-fonts
+yay -S --answerdiff None --answerclean None neovim ripgrep nvm openssh libfido2
 
 yay -S --answerdiff None --answerclean None docker docker-compose
 sudo groupadd docker

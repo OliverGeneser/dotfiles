@@ -59,7 +59,11 @@ env = WLR_NO_HARDWARE_CURSORS,1
 ```
 
 
-### Restores XDG options
+### Restores XDG and GTK options
 ```bash
 xdg-settings set default-web-browser firefox.desktop
+
+gsettings set org.gnome.desktop.interface monospace-font-name 'FiraCode Nerd Font 11'
+gsettings set org.gnome.desktop.interface document-font-name 'FiraCode Nerd Font 11'
+gsettings set org.gnome.desktop.interface font-name 'FiraCode Nerd Font 11'
 ```
