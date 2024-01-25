@@ -13,6 +13,9 @@ fi
 # Tools
 yay -S --answerdiff None --answerclean None util-linux git base-devel rustup neofetch
 
+# Git packages
+yay -S --answerdiff None --answerclean None sway-audio-idle-inhibit-git
+
 # Hyprland stuff
 yay -S --answerdiff None --answerclean None hyprland-git polkit-kde-agent xdg-desktop-portal-gtk xdg-desktop-portal-hyprland-git kitty tmux hyprpicker-git eww-wayland dunst tofi eww-wayland nwg-look-bin wlogout
 
