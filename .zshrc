@@ -1,5 +1,11 @@
 source $HOME/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
+export PATH=~/.dotnet/tools:$PATH
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+
+bindkey -s ^f "~/.local/bin/tmux-sessionizer\n"
+
 # now load zsh-syntax-highlighting plugin
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
