@@ -21,6 +21,21 @@
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    hypr-contrib.url = "github:hyprwm/contrib";
+    hypridle.url = "github:hyprwm/Hypridle";
+    hyprlock.url = "github:hyprwm/Hyprlock";
+    hyprpaper.url = "github:hyprwm/hyprpaper";
+
+    hyprland-git.url = "github:hyprwm/hyprland";
+    hyprland-xdph-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    hyprland-protocols-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    hyprland-nix.url = "github:spikespaz/hyprland-nix";
+    hyprland-nix.inputs = {
+      hyprland.follows = "hyprland-git";
+      hyprland-xdph.follows = "hyprland-xdph-git";
+      hyprland-protocols.follows = "hyprland-protocols-git";
+    };
   };
 
   outputs = inputs: let
@@ -34,7 +49,11 @@
           title = "dotfiles";
         };
 
-        namespace = "custom";
+        namespace = "dotfiles";
+      };
+
+      channels-config = {
+        allowUnfree = true;
       };
     };
   in
@@ -49,6 +68,7 @@
       overlays = with inputs; [];
 
       systems.modules.nixos = with inputs; [
+        home-manager.nixosModules.home-manager
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
       ];
