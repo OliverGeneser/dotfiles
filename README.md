@@ -1,69 +1,47 @@
-# dotfiles
-Dotfiles backup
+<h1 align="center"> <img src="./.github/assets/flake.webp" width="250px"/></h1>
+<h2 align="center">My NixOS flake template made with <a href="https://github.com/snowfallorg/lib">snowfall</a>.</h2>
 
-<h2>Restore backup</h2>
+<h1 align="center">
+<a href='#'><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png" width="600px"/></a>
+  <br>
+  <br>
+  <div>
+    <a href="https://github.com/Iogamaster/snowfall-starter/issues">
+        <img src="https://img.shields.io/github/issues/Iogamaster/snowfall-starter?color=fab387&labelColor=303446&style=for-the-badge">
+    </a>
+    <a href="https://github.com/Iogamaster/snowfall-starter/stargazers">
+        <img src="https://img.shields.io/github/stars/Iogamaster/snowfall-starter?color=ca9ee6&labelColor=303446&style=for-the-badge">
+    </a>
+    <a href="https://github.com/Iogamaster/snowfall-starter">
+        <img src="https://img.shields.io/github/repo-size/Iogamaster/snowfall-starter?color=ea999c&labelColor=303446&style=for-the-badge">
+    </a>
+    <a href="https://github.com/Iogamaster/snowfall-starter/blob/main/.github/LICENCE">
+        <img src="https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=MIT&logoColor=ca9ee6&colorA=313244&colorB=cba6f7"/>
+    </a>
+    <br>
+    </div>
+        <img href="https://builtwithnix.org" src="https://builtwithnix.org/badge.svg"/>
+   </h1>
+   <br>
 
-### Init pacman
-```bash
-sudo pacman-key --init
-```
-```bash
-sudo pacman-key --populate archlinux
-```
+## My system management tool `sys`
 
-### Download and make the files exec
-```bash
-git clone https://github.com/olivergeneser/dotfiles && cd dotfiles && sudo chmod +x *.sh
-```
+`sys` is a bash script I made that makes working with NixOS easier.
 
-### Install all the essentials
-```bash
-./install-yay.sh
-```
-```bash
-./install.sh
-```
+Rebuild (in flake directory)
 
-### Copy relevant files
-```bash
-cp -r .config/* ~/.config
-cp -r .local/* ~/.local
-
-cp .zshrc ~/.zshrc
-cp .tmux.conf ~/.tmux.conf
-```
-
-### Laptop
-```bash
-./install-laptop.sh
+```sh
+sudo sys rebuild # or `r` as a shorthand
 ```
 
-### Nvidia 
-https://wiki.hyprland.org/Nvidia/
-```bash
-./install-nvidia.sh
+Testing an ephemeral config:
 
-nvidia_drm.modeset=1 to the end of /boot/loader/entries/arch.conf
-/etc/mkinitcpio.conf add nvidia nvidia_modeset nvidia_uvm nvidia_drm to your MODULES
-run # mkinitcpio --config /etc/mkinitcpio.conf --generate /boot/initramfs-custom.img
-add a new line to /etc/modprobe.d/nvidia.conf (make it if it does not exist) and add the line options nvidia-drm modeset=1
-
-Export these variables in your hyprland config:
-
-env = LIBVA_DRIVER_NAME,nvidia
-env = XDG_SESSION_TYPE,wayland
-env = GBM_BACKEND,nvidia-drm
-env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-env = WLR_NO_HARDWARE_CURSORS,1
-
+```sh
+sudo sys test # or `t` as a shorthand
 ```
 
+Deploying to a server (in flake directory):
 
-### Restores XDG and GTK options
-```bash
-xdg-settings set default-web-browser firefox.desktop
-
-gsettings set org.gnome.desktop.interface monospace-font-name 'FiraCode Nerd Font 11'
-gsettings set org.gnome.desktop.interface document-font-name 'FiraCode Nerd Font 11'
-gsettings set org.gnome.desktop.interface font-name 'FiraCode Nerd Font 11'
+```sh
+sudo sys deploy HOSTNAME # or `d` as a shorthand
 ```
