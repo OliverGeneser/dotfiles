@@ -45,3 +45,16 @@ Deploying to a server (in flake directory):
 ```sh
 sudo sys deploy HOSTNAME # or `d` as a shorthand
 ```
+
+## Install system
+```sh
+sudo nix run github:nix-community/disko \
+    --extra-experimental-features "nix-command flakes" \
+    --no-write-lock-file \
+    -- \
+    --mode zap_create_mount \
+    "$HOME/dotfiles/systems/x86_64-linux/TARGET/disks.nix"
+```
+```sh
+sudo nixos-install --flake "$HOME/dotfiles#$TARGET_HOST"
+```
