@@ -13,8 +13,12 @@
   environment.systemPackages = with pkgs; [
     # Any particular packages only for this host
   ];
-
-  suites.common.enable = true; # Enables the basics, like audio, networking, ssh, etc.
+  suites = {
+    common.enable = true;
+    desktop = {
+      hyprland.enable = true;
+    };
+  };
 
   networking.hostName = "huawei";
   swapDevices = [{device = "/swap/swapfile";}];
