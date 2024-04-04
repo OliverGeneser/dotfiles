@@ -49,7 +49,7 @@
           title = "dotfiles";
         };
 
-        namespace = "dotfiles";
+        namespace = "custom";
       };
 
       channels-config = {
