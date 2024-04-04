@@ -16,7 +16,7 @@ in {
     services.openssh = {
       enable = true;
       ports = [22];
-      PermitRootLogin = "prohibit-password";
+      settings.PermitRootLogin = "prohibit-password";
     };
 
     users.users = let 
