@@ -48,7 +48,10 @@
 
       overlays = with inputs; [];
 
-      systems.modules.nixos = with inputs; [];
+      systems.modules.nixos = with inputs; [
+        disko.nixosModules.disko
+        impermanence.nixosModules.impermanence
+      ];
 
       templates = import ./templates {};
     };
