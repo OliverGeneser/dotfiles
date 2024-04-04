@@ -35,6 +35,8 @@ in {
     services.ssh.enable = true;
     programs.dconf.enable = true;
 
+    apps.tools.git.enable = true;
+
     system.impermanence.enable = true;
 
     environment.systemPackages = [pkgs.bluetuith pkgs.custom.sys];
