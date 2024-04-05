@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.system.impermanence;
+  cfg = config.impermanence;
 in {
-  options.system.impermanence = with types; {
+  options.impermanence = with types; {
     enable = mkBoolOpt false "Enable impermanence";
     removeTmpFilesOlderThan = mkOpt int 14 "Number of days to keep old btrfs_tmp files";
   };
