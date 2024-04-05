@@ -24,6 +24,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      git
       git-remote-gcrypt
       commitizen
     ];
@@ -36,7 +37,7 @@ in {
 
     };
 
-    programs.git = {
+    home.programs.git = {
       enable = true;
       userName = "Oliver Geneser";
       userEmail = cfg.email;
@@ -87,5 +88,9 @@ in {
 
     # home.configFile."git/config".text = import ./config.nix {sshKeyPath = "/home/${config.user.name}/.ssh/key.pub"; name = ""; email = "";};
     home.configFile."lazygit/config.yml".source = ./lazygitConfig.yml;
+    
+    home.persist.directories = [
+      ".config/systemd" # For git maintainance
+    ];
   };
 }
