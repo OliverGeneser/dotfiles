@@ -23,6 +23,7 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Desktop - Hyprland
     hypr-contrib.url = "github:hyprwm/contrib";
     hypridle.url = "github:hyprwm/Hypridle";
     hyprlock.url = "github:hyprwm/Hyprlock";
@@ -36,6 +37,11 @@
       hyprland.follows = "hyprland-git";
       hyprland-xdph.follows = "hyprland-xdph-git";
       hyprland-protocols.follows = "hyprland-protocols-git";
+    };
+
+    # Terminal
+    wezterm = {
+      url = "github:wez/wezterm?dir=nix";
     };
   };
 
