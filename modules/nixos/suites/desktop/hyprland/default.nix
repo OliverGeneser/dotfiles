@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.suites.desktop.addons.hyprland;
+  cfg = config.suites.desktop.hyprland;
 in {
-  options.suites.desktop.addons.hyprland = with types; {
+  options.suites.desktop.hyprland = with types; {
     enable = mkBoolOpt false "Enable or disable the hyprland window manager.";
   };
 

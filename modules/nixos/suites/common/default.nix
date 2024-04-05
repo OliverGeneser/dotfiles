@@ -14,14 +14,14 @@ in {
   };
 
   config = mkIf cfg.enable {
-    apps.misc.enable = true;
-    
     system.nix.enable = true;
     system.security.doas.enable = true;
 
     hardware.audio.enable = true;
     hardware.networking.enable = true;
 
+    apps.misc.enable = true;
+    
     # hardware.bluetooth.enable = true;
     # hardware.bluetooth.settings = {
     #   General = {
@@ -38,8 +38,6 @@ in {
     programs.dconf.enable = true;
 
     apps.tools.git.enable = true;
-
-    system.impermanence.enable = true;
 
     environment.systemPackages = [pkgs.bluetuith pkgs.custom.sys];
 

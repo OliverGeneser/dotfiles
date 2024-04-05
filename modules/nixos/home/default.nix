@@ -37,5 +37,7 @@ with lib.custom; {
       users.${config.user.name} =
         mkAliasDefinitions options.home.extraOptions;
     };
+
+    environment.persistence."/persist".users.${config.user.name} = mkIf options.impermanence.enable.value (mkAliasDefinitions options.home.persist);
   };
 }

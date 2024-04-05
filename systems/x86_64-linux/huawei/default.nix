@@ -6,13 +6,8 @@
 
   # Enable Bootloader
   system.boot.efi.enable = true;
-  # system.boot.bios.enable = true;
 
   system.battery.enable = true; # Only for laptops, they will still work without it, just improves battery life
-
-  environment.systemPackages = with pkgs; [
-    # Any particular packages only for this host
-  ];
   
   suites = {
     common.enable = true;
@@ -20,6 +15,8 @@
       hyprland.enable = true;
     };
   };
+
+  impermanence.enable = true;
 
   networking.hostName = "huawei";
   swapDevices = [{device = "/swap/swapfile";}];
@@ -33,6 +30,10 @@
     resumeDevice = "/dev/disk/by-label/nixos";
     initrd.systemd.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    # Any particular packages only for this host
+  ];
 
   # ======================== DO NOT CHANGE THIS ========================
   system.stateVersion = "22.11";

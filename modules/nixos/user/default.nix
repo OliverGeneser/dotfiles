@@ -58,7 +58,6 @@ in {
         "Downloads/.keep".text = "";
         "Music/.keep".text = "";
         "Pictures/.keep".text = "";
-        "dev/.keep".text = "";
         ".face".source = cfg.icon;
         "Pictures/${
           cfg.icon.fileName or (builtins.baseNameOf cfg.icon)
@@ -66,6 +65,15 @@ in {
           cfg.icon;
       };
     };
+
+    persist.directories = [
+      "Documents"
+      "Downloads"
+      "Music"
+      "Pictures"
+
+      "dotfiles"
+    ];
 
     users.users.${cfg.name} =
       {

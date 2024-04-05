@@ -18,6 +18,7 @@
 
     # Custom
     impermanence.url = "github:nix-community/impermanence";
+    persist-retro.url = "github:Geometer1729/persist-retro";
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -68,9 +69,13 @@
       overlays = with inputs; [];
 
       systems.modules.nixos = with inputs; [
-        home-manager.nixosModules.home-manager
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
+        persist-retro.nixosModules.persist-retro
+        {
+          # Required for impermanence
+          fileSystems."/persist".neededForBoot = true;
+        }
       ];
 
       templates = import ./templates {};
