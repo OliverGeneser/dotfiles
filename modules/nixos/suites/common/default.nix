@@ -14,6 +14,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    apps.misc.enable = true;
+    
     system.nix.enable = true;
     system.security.doas.enable = true;
 
