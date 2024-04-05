@@ -13,6 +13,7 @@
   environment.systemPackages = with pkgs; [
     # Any particular packages only for this host
   ];
+  
   suites = {
     common.enable = true;
     desktop = {

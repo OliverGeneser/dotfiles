@@ -5,7 +5,7 @@
   ...
 }:
 with lib;
-with lib.nixicle; let
+with lib.custom; let
   cfg = config.suites.desktop.addons.hyprland;
 in {
   options.suites.desktop.addons.hyprland = with types; {

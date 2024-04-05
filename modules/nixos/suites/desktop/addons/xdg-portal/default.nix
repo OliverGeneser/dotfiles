@@ -6,7 +6,7 @@
   ...
 }:
 with lib;
-with lib.nixicle; let
+with lib.custom; let
   cfg = config.suites.desktop.addons.xdg-portal;
 in {
   options.suites.desktop.addons.xdg-portal = with types; {
