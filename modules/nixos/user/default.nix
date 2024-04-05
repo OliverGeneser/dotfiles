@@ -64,16 +64,16 @@ in {
         }".source =
           cfg.icon;
       };
+    
+      persist.directories = [
+        "Documents"
+        "Downloads"
+        "Music"
+        "Pictures"
+
+        "dotfiles"
+      ];
     };
-
-    persist.directories = [
-      "Documents"
-      "Downloads"
-      "Music"
-      "Pictures"
-
-      "dotfiles"
-    ];
 
     users.users.${cfg.name} =
       {
