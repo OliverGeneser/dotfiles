@@ -8,6 +8,13 @@
 with lib;
 with lib.custom; let
   cfg = config.apps.tools.git;
+
+  rewriteURL =
+    lib.mapAttrs' (key: value: {
+      name = "url.${key}";
+      value = {insteadOf = value;};
+    })
+    cfg.urlRewrites;
 in {
   options.apps.tools.git = with types; {
     enable = mkBoolOpt false "Enable or disable git";
@@ -17,9 +24,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      git
       git-remote-gcrypt
-
       commitizen
     ];
 
