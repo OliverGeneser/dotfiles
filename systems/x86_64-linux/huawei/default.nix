@@ -10,12 +10,11 @@
   system.battery.enable = true; # Only for laptops, they will still work without it, just improves battery life
   
   suites = {
-    common.enable = true;
-    desktop = {
-      hyprland.enable = true;
-    };
+    desktop.enable = true;
+  
   };
 
+  hardware.nvidia.enable = true;
   impermanence.enable = true;
 
   networking.hostName = "huawei";

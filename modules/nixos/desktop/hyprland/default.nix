@@ -22,7 +22,10 @@ in {
 
 
 
-    desktop.addons.greetd.enable = true;
+    desktop.addons.tofi.enable = true;
+    desktop.addons.mako.enable = true;
+    desktop.addons.wlogout.enable = true;
+
     desktop.addons.xdg-portal.enable = true;
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Hint electron apps to use wayland

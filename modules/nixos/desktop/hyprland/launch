@@ -2,4 +2,6 @@
 
 rm -rf $XDG_RUNTIME_DIR/swww.socket
 
-swww init & waybar & mako & xwaylandvideobridge
+/usr/lib/polkit-kde-authentication-agent-1
+
+mako & xwaylandvideobridge
