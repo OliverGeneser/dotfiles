@@ -14,6 +14,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      mullvad-browser
+    ];
+
     home.programs.mullvad-browser = {
       enable = true;
     };
