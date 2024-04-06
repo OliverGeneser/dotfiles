@@ -15,7 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     desktop.hyprland.enable = true;
-    apps.mullvad.enable = true;
+    apps.browsers.mullvad.enable = true;
     apps.ai.ollama.enable = true;
 
     suites.common.enable = true;
