@@ -18,9 +18,9 @@ in {
       mullvad-browser
     ];
 
-    home.programs.mullvad-browser = {
-      enable = true;
-    };
+    # home.programs.mullvad-browser = {
+    #   enable = true;
+    # };
 
     home.persist.directories = [
       ".mullvad"
