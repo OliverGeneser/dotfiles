@@ -18,7 +18,6 @@
   impermanence.enable = true;
 
   networking.hostName = "huawei";
-  swapDevices = [{device = "/swap/swapfile";}];
 
   boot = {
     kernelParams = [

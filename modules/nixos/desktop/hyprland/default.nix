@@ -33,6 +33,7 @@ in {
     ];
 
     # Hyprland configuration files
+    home.configFile."hypr/hyprland.conf".force = true;
     home.configFile = {
       "hypr/launch".source = ./launch;
       "hypr/hyprland.conf".source = ./hyprland.conf;
