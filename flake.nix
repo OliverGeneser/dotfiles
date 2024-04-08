@@ -13,6 +13,10 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
+
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -23,21 +27,28 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Desktop - Hyprland
-    hypr-contrib.url = "github:hyprwm/contrib";
-    hypridle.url = "github:hyprwm/Hypridle";
-    hyprlock.url = "github:hyprwm/Hyprlock";
-    hyprpaper.url = "github:hyprwm/hyprpaper";
-
-    hyprland-git.url = "github:hyprwm/hyprland";
-    hyprland-xdph-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
-    hyprland-protocols-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
-    hyprland-nix.url = "github:spikespaz/hyprland-nix";
-    hyprland-nix.inputs = {
-      hyprland.follows = "hyprland-git";
-      hyprland-xdph.follows = "hyprland-xdph-git";
-      hyprland-protocols.follows = "hyprland-protocols-git";
+    neovim = {
+      url = "github:IogaMaster/neovim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-colors.url = "github:IogaMaster/nix-colors";
+
+    # Desktop - Hyprland
+    # hypr-contrib.url = "github:hyprwm/contrib";
+    # hypridle.url = "github:hyprwm/Hypridle";
+    # hyprlock.url = "github:hyprwm/Hyprlock";
+    # hyprpaper.url = "github:hyprwm/hyprpaper";
+
+    # hyprland-git.url = "github:hyprwm/hyprland";
+    # hyprland-xdph-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    # hyprland-protocols-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    # hyprland-nix.url = "github:spikespaz/hyprland-nix";
+    # hyprland-nix.inputs = {
+    #   hyprland.follows = "hyprland-git";
+    #   hyprland-xdph.follows = "hyprland-xdph-git";
+    #   hyprland-protocols.follows = "hyprland-protocols-git";
+    # };
 
     # Terminal
     wezterm = {
@@ -58,10 +69,6 @@
 
         namespace = "custom";
       };
-
-      channels-config = {
-        allowUnfree = true;
-      };
     };
   in
     lib.mkFlake {
@@ -72,7 +79,9 @@
         allowUnfree = true;
       };
 
-      overlays = with inputs; [];
+      overlays = with inputs; [
+        neovim.overlays.x86_64-linux.neovim
+      ];
 
       systems.modules.nixos = with inputs; [
         disko.nixosModules.disko
