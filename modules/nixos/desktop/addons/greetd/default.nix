@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.suites.desktop.addons.greetd;
+  cfg = config.desktop.addons.greetd;
 in {
-  options.suites.desktop.addons.greetd = {
+  options.desktop.addons.greetd = {
     enable = mkEnableOption "Enable login greeter";
   };
 
