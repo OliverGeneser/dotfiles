@@ -42,6 +42,14 @@ in {
       enableNushellIntegration = true;
     };
 
+    home.persist.directories = [
+      ".local/share/zoxide"
+      ".cache/zoxide"
+      ".cache/starship"
+      ".config/nushell"
+      ".config/fish"
+    ];
+
     # Actual Shell Configurations
     home.programs.fish = mkIf (cfg.shell == "fish") {
       enable = true;
