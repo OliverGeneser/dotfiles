@@ -17,7 +17,7 @@ in {
     services.ollama = {
       enable = true;
       acceleration = "cuda";
-    }
+    };
 
     home.persist.directories = [
       ".ollama"
