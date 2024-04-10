@@ -17,12 +17,6 @@ in {
   };
 
   config = {
-    prism = {
-      enable = true;
-      wallpapers = ./wallpapers;
-      colorscheme = inputs.nix-colors.colorschemes.${cfg.colorscheme};
-    };
-
     environment.variables = {
       GTK_THEME = "Catppuccin-Mocha-Compact-Blue-dark";
     };
