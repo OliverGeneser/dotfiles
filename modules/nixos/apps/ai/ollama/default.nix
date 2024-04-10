@@ -14,9 +14,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.programs.ollama = {
+    services.ollama = {
       enable = true;
-    };
+      acceleration = "cuda";
+    }
 
     home.persist.directories = [
       ".ollama"
