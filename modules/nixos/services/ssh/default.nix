@@ -17,7 +17,7 @@ in {
       enable = true;
       ports = [22];
       settings.PermitRootLogin = "prohibit-password";
-      passwordAuthentication = false;
+      settings.PasswordAuthentication = false;
     };
 
     users.users = let 
