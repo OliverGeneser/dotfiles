@@ -19,16 +19,17 @@ in {
       
     ];
 
-  
-    # home.configFile."git/config".text = import ./config.nix {sshKeyPath = "/home/${config.user.name}/.ssh/key.pub"; name = ""; email = "";};
-
-
-
     # Actual Shell Configurations
     home.programs.wezterm = mkIf (cfg.terminal == "wezterm") {
       enable = true;
       package = inputs.wezterm.packages.${pkgs.system}.default;
     };
+
+    home.configFile."wezterm/wexterm.lua".text = import ./config.nix {terminal = "${cfg.terminal}";};
+
+    home.persist.directories = [
+      ".config/wezterm"
+    ];
 
   };
 }
