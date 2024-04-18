@@ -17,14 +17,9 @@ in {
       enable = true;
       package = pkgs.mullvad-vpn;
     };
-    services.tailscale.enable = true;
-
-    sops.secrets.mullvad_account_id = {
-      sopsFile = ../../secrets.yaml;
-    };
 
     systemd.services."mullvad-daemon" = {
-      serviceConfig.LoadCredential = ["account:${config.sops.secrets.mullvad_account_id.path}"];
+      serviceConfig.LoadCredential = ["account:f"];
 
       postStart = ''
         #    while ! ${pkgs.mullvad}/bin/mullvad status >/dev/null; do sleep 1; done

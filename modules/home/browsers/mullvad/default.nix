@@ -1,8 +1,8 @@
 {
-  options,
-  config,
   pkgs,
   lib,
+  options,
+  config,
   ...
 }:
 with lib;
@@ -14,7 +14,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
+    home.packages = with pkgs; [
       mullvad-browser
     ];
   };
