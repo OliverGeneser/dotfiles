@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-rm -rf $XDG_RUNTIME_DIR/swww.socket
-
-/usr/lib/polkit-kde-authentication-agent-1
-
-mako & xwaylandvideobridge

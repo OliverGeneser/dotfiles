@@ -1,23 +1,28 @@
-{lib, pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./disks.nix
+
+    ../../nixos
+    ../../nixos/users/olivergeneser.nix
   ];
 
-  # Enable Bootloader
-  system.boot.efi.enable = true;
-
-  system.battery.enable = true; # Only for laptops, they will still work without it, just improves battery life
-  
-  suites = {
-    desktop.enable = true;
-  
+  networking = {
+    hostName = "huawei";
   };
 
-  hardware.nvidia.enable = true;
-  impermanence.enable = true;
-
-  networking.hostName = "huawei";
+  modules.nixos = {
+    auto-hibernate.enable = false;
+    bluetooth.enable = true;
+    login.enable = true;
+    extraSecurity.enable = true;
+    power.enable = true;
+  };
 
   boot = {
     kernelParams = [
@@ -25,15 +30,23 @@
     ];
     supportedFilesystems = lib.mkForce ["btrfs"];
     kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
     resumeDevice = "/dev/disk/by-label/nixos";
     initrd.systemd.enable = true;
+    # lanzaboote = {
+    #   enable = true;
+    #   pkiBundle = "/etc/secureboot";
+    # };
   };
 
-  environment.systemPackages = with pkgs; [
-    # Any particular packages only for this host
-  ];
+  boot.plymouth = {
+    enable = true;
+    themePackages = [(pkgs.catppuccin-plymouth.override {variant = "mocha";})];
+    theme = "catppuccin-mocha";
+  };
 
-  # ======================== DO NOT CHANGE THIS ========================
-  system.stateVersion = "22.11";
-  # ======================== DO NOT CHANGE THIS ========================
+  system.stateVersion = "23.11";
 }

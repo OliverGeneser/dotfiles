@@ -1,5 +1,4 @@
 {
-  options,
   config,
   pkgs,
   lib,
@@ -10,46 +9,24 @@ with lib.custom; let
   cfg = config.system.nix;
 in {
   options.system.nix = with types; {
-    enable = mkBoolOpt true "Whether or not to manage nix configuration.";
-    package = mkOpt package pkgs.nixUnstable "Which nix package to use.";
-    extraUsers = mkOpt (listOf str) [] "Extra users to trust";
+    enable = mkBoolOpt false "Whether or not to manage nix configuration";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      nil
-      nixfmt
-      nix-index
-      nix-prefetch-git
-    ];
-
-    nix = let
-      users = ["root" config.user.name];
-    in {
-      inherit (cfg) package;
-
-      settings =
-        {
-          experimental-features = "nix-command flakes";
-          http-connections = 50;
-          warn-dirty = false;
-          log-lines = 50;
-          sandbox = "relaxed";
-          auto-optimise-store = true;
-          trusted-users = users ++ cfg.extraUsers;
-          allowed-users = users;
-        }
-        // (lib.optionalAttrs config.apps.tools.direnv.enable {
-          keep-outputs = true;
-          keep-derivations = true;
-        });
-
+    nix = {
+      settings = {
+        trusted-users = ["root" "@wheel"];
+        auto-optimise-store = lib.mkDefault true;
+        use-xdg-base-directories = true;
+        experimental-features = ["nix-command" "flakes" "repl-flake"];
+        warn-dirty = false;
+        system-features = ["kvm" "big-parallel" "nixos-test"];
+      };
       gc = {
         automatic = true;
         dates = "weekly";
         options = "--delete-older-than 7d";
       };
-
       # flake-utils-plus
       generateRegistryFromInputs = true;
       generateNixPathFromInputs = true;
