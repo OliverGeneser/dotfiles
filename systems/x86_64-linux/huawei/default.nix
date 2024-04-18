@@ -7,22 +7,24 @@
   imports = [
     ./hardware-configuration.nix
     ./disks.nix
-
-    ../../nixos
-    ../../nixos/users/olivergeneser.nix
   ];
 
   networking = {
     hostName = "huawei";
   };
 
-  modules.nixos = {
-    auto-hibernate.enable = false;
-    bluetooth.enable = true;
-    login.enable = true;
-    extraSecurity.enable = true;
-    power.enable = true;
+  suites = {
+    gaming.enable = true;
+    desktop = {
+      enable = true;
+      addons = {
+        hyprland.enable = true;
+      };
+    };
   };
+
+  environment.systemPackages = with pkgs; [
+  ];
 
   boot = {
     kernelParams = [
@@ -43,7 +45,7 @@
   };
 
   boot.plymouth = {
-    enable = true;
+    enable = lib.mkForce true;
     themePackages = [(pkgs.catppuccin-plymouth.override {variant = "mocha";})];
     theme = "catppuccin-mocha";
   };
