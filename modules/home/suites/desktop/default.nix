@@ -42,7 +42,7 @@ in {
       clipse
       pamixer
       playerctl
-      thunar
+      xfce.thunar
 
       grimblast
       slurp
