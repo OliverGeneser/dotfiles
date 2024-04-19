@@ -82,7 +82,7 @@ in {
 
       backgrounds = [
         {
-          path = "${pkgs.custom.wallpapers.Kurzgesagt-Galaxies}";
+          path = "${pkgs.custom.wallpapers.Kurzgesagt-Galaxy_2}";
         }
       ];
     };

@@ -86,46 +86,46 @@ in {
         "SUPER,bracketright" = "exec, grimblast --notify --cursor copy area";
 
         # Focus
-        "SUPER,h" = "movefocus,l";
-        "SUPER,l" = "movefocus,r";
-        "SUPER,k" = "movefocus,u";
-        "SUPER,j" = "movefocus,d";
-        "SUPERCONTROL,h" = "focusmonitor,l";
-        "SUPERCONTROL,l" = "focusmonitor,r";
-        "SUPERCONTROL,k" = "focusmonitor,u";
-        "SUPERCONTROL,j" = "focusmonitor,d";
+        "ALT,h" = "movefocus,l";
+        "ALT,l" = "movefocus,r";
+        "ALT,k" = "movefocus,u";
+        "ALT,j" = "movefocus,d";
+        "ALTCONTROL,h" = "focusmonitor,l";
+        "ALTCONTROL,l" = "focusmonitor,r";
+        "ALTCONTROL,k" = "focusmonitor,u";
+        "ALTCONTROL,j" = "focusmonitor,d";
 
         # Change Workspace
-        "SUPER,1" = "workspace,01";
-        "SUPER,2" = "workspace,02";
-        "SUPER,3" = "workspace,03";
-        "SUPER,4" = "workspace,04";
-        "SUPER,5" = "workspace,05";
-        "SUPER,6" = "workspace,06";
-        "SUPER,7" = "workspace,07";
-        "SUPER,8" = "workspace,08";
-        "SUPER,9" = "workspace,09";
-        "SUPER,0" = "workspace,10";
+        "ALT,1" = "workspace,01";
+        "ALT,2" = "workspace,02";
+        "ALT,3" = "workspace,03";
+        "ALT,4" = "workspace,04";
+        "ALT,5" = "workspace,05";
+        "ALT,6" = "workspace,06";
+        "ALT,7" = "workspace,07";
+        "ALT,8" = "workspace,08";
+        "ALT,9" = "workspace,09";
+        "ALT,0" = "workspace,10";
 
         # Move Workspace
-        "SUPERSHIFT,1" = "movetoworkspacesilent,01";
-        "SUPERSHIFT,2" = "movetoworkspacesilent,02";
-        "SUPERSHIFT,3" = "movetoworkspacesilent,03";
-        "SUPERSHIFT,4" = "movetoworkspacesilent,04";
-        "SUPERSHIFT,5" = "movetoworkspacesilent,05";
-        "SUPERSHIFT,6" = "movetoworkspacesilent,06";
-        "SUPERSHIFT,7" = "movetoworkspacesilent,07";
-        "SUPERSHIFT,8" = "movetoworkspacesilent,08";
-        "SUPERSHIFT,9" = "movetoworkspacesilent,09";
-        "SUPERSHIFT,0" = "movetoworkspacesilent,10";
+        "ALTSHIFT,1" = "movetoworkspacesilent,01";
+        "ALTSHIFT,2" = "movetoworkspacesilent,02";
+        "ALTSHIFT,3" = "movetoworkspacesilent,03";
+        "ALTSHIFT,4" = "movetoworkspacesilent,04";
+        "ALTSHIFT,5" = "movetoworkspacesilent,05";
+        "ALTSHIFT,6" = "movetoworkspacesilent,06";
+        "ALTSHIFT,7" = "movetoworkspacesilent,07";
+        "ALTSHIFT,8" = "movetoworkspacesilent,08";
+        "ALTSHIFT,9" = "movetoworkspacesilent,09";
+        "ALTSHIFT,0" = "movetoworkspacesilent,10";
         "SUPERALT,h" = "movecurrentworkspacetomonitor,l";
         "SUPERALT,l" = "movecurrentworkspacetomonitor,r";
         "SUPERALT,k" = "movecurrentworkspacetomonitor,u";
         "SUPERALT,j" = "movecurrentworkspacetomonitor,d";
-        "ALTCTRL,L" = "movewindow,r";
-        "ALTCTRL,H" = "movewindow,l";
-        "ALTCTRL,K" = "movewindow,u";
-        "ALTCTRL,J" = "movewindow,d";
+        "ALTSHIFT,L" = "movewindow,r";
+        "ALTSHIFT,H" = "movewindow,l";
+        "ALTSHIFT,K" = "movewindow,u";
+        "ALTSHIFT,J" = "movewindow,d";
 
         # Swap windows
         "SUPERSHIFT,h" = "swapwindow,l";
@@ -151,12 +151,6 @@ in {
       };
       bindl = {
         ",switch:Lid Switch" = "exec, ${laptop_lid_switch}/bin/laptop_lid_switch";
-      };
-      binde = {
-        "SUPERALT, h" = "resizeactive, -20 0";
-        "SUPERALT, l" = "resizeactive, 20 0";
-        "SUPERALT, k" = "resizeactive, 0 -20";
-        "SUPERALT, j" = "resizeactive, 0 20";
       };
       bindm = {
         "SUPER, mouse:272" = "movewindow";
