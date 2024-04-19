@@ -28,7 +28,7 @@ in {
 
       signing = {
         signByDefault = true;
-        key = "D528 BD50 F4E9 F031 AACB 1F7A 9833 E49C 848D 6C90";
+        key = "sk-ecdsa-sha2-nistp256@openssh.com AAAAInNrLWVjZHNhLXNoYTItbmlzdHAyNTZAb3BlbnNzaC5jb20AAAAIbmlzdHAyNTYAAABBBGC3EOmZkrcXn3E9+xUAVxWsgWIDjPDFn6HPt/IAzkWnGa00XtfkcuLijMohxny+Lw/U8gIPs67vqSC8tR2ITowAAAAEc3NoOg==";
       };
 
       extraConfig =
