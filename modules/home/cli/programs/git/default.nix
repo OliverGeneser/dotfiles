@@ -28,7 +28,7 @@ in {
 
       signing = {
         signByDefault = true;
-        key = "sk-ecdsa-sha2-nistp256@openssh.com AAAAInNrLWVjZHNhLXNoYTItbmlzdHAyNTZAb3BlbnNzaC5jb20AAAAIbmlzdHAyNTYAAABBBGC3EOmZkrcXn3E9+xUAVxWsgWIDjPDFn6HPt/IAzkWnGa00XtfkcuLijMohxny+Lw/U8gIPs67vqSC8tR2ITowAAAAEc3NoOg==";
+        key = "~/.ssh/id_ecdsa_sk.pub";
       };
 
       extraConfig =
@@ -54,6 +54,10 @@ in {
             options.syntax-theme = "catppuccin";
           };
 
+          gpg = {
+            format="ssh";
+          };          
+          
           pull = {
             ff = "only";
           };
