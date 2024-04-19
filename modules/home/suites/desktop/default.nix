@@ -18,13 +18,10 @@ in {
     };
 
     services = {
-      custom.kdeconnect.enable = true;
-      spotify.enable = true;
     };
     desktops.addons.xdg.enable = true;
 
     programs = {
-      discord.enable = true;
       shotwell.enable = true;
     };
 
@@ -45,6 +42,7 @@ in {
       clipse
       pamixer
       playerctl
+      thunar
 
       grimblast
       slurp

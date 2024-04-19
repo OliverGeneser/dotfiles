@@ -62,9 +62,10 @@ in {
     wayland.windowManager.hyprland.keyBinds = {
       bind = {
         "SUPER, Return" = "exec, foot";
-        "SUPER, B" = "exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun";
+        "SUPER, E" = "exec, thunar";
+        "SUPER, F" = "exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun";
         "SUPER, Q" = "killactive,";
-        "SUPER, F" = "Fullscreen,0";
+        "SUPER, X" = "Fullscreen,0";
         "SUPER, R" = "exec, ${resize}/bin/resize";
         "SUPER, Space" = "togglefloating,";
         "SUPER, V" = "exec, ${pkgs.pyprland}/bin/pypr toggle pavucontrol";
@@ -74,7 +75,7 @@ in {
         ",XF86Launch5" = "exec,${pkgs.hyprlock}/bin/hyprlock";
         ",XF86Launch4" = "exec,${pkgs.hyprlock}/bin/hyprlock";
         "SUPER,backspace" = "exec,${pkgs.hyprlock}/bin/hyprlock";
-        "CTRL_SUPER,backspace" = "exec,wlogout --column-spacing 50 --row-spacing 50";
+        "SUPER,escape" = "exec,wlogout --column-spacing 50 --row-spacing 50";
 
         # Screenshot
         ",Print" = "exec,grimblast --notify copysave area";
