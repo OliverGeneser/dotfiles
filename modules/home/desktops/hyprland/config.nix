@@ -20,22 +20,25 @@ in {
 
       config = {
         input = {
-          kb_layout = "gb";
+          kb_layout = "us,dk";
+          kb_variant = "altgr-intl";
+          kb_options = "grp:alt_space_toggle";
           touchpad = {
             disable_while_typing = false;
+            natural_scroll = true;
           };
         };
 
         general = {
-          gaps_in = 3;
+          gaps_in = 5;
           gaps_out = 5;
-          border_size = 3;
+          border_size = 0;
           active_border_color = "0xff${palette.base07}";
           inactive_border_color = "0xff${palette.base02}";
         };
 
         decoration = {
-          rounding = 5;
+          rounding = 8;
         };
 
         misc = let
