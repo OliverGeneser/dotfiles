@@ -20,7 +20,11 @@ in {
       };
     };
 
-    home.packages = [pkgs.nixgl.nixGLIntel];
+    home.packages = with pkgs; [
+      nixgl.nixGLIntel
+      nix-ouput-monitor
+      nvd
+    ];
 
     systemd.user.startServices = "sd-switch";
 
@@ -28,22 +32,27 @@ in {
       home-manager.enable = true;
     };
 
+    home.sessionVariables = {
+      FLAKE = "/home/${config.custom.user.name}/dotfiles";
+    };
+
     nix = {
       settings = {
         trusted-substituters = [
           "https://cache.nixos.org"
           "https://nix-community.cachix.org"
+          "https://numtide.cachix.org?priority=42"
         ];
 
         trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
         ];
 
         experimental-features = ["nix-command" "flakes" "repl-flake"];
         warn-dirty = false;
         use-xdg-base-directories = true;
-        netrc-file = "$HOME/.config/nix/netrc";
       };
     };
 
