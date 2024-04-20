@@ -32,22 +32,13 @@
     ];
     supportedFilesystems = lib.mkForce ["btrfs"];
     kernelPackages = pkgs.linuxPackages_latest;
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
     resumeDevice = "/dev/disk/by-label/nixos";
-    initrd.systemd.enable = true;
-    # lanzaboote = {
-    #   enable = true;
-    #   pkiBundle = "/etc/secureboot";
-    # };
   };
 
-  boot.plymouth = {
+  system.boot = {
     enable = lib.mkForce true;
-    themePackages = [(pkgs.catppuccin-plymouth.override {variant = "mocha";})];
-    theme = "catppuccin-mocha";
+    plymouth = lib.mkForce true;
+    #secureBoot = lib.mkForce true;
   };
 
   system.stateVersion = "23.11";

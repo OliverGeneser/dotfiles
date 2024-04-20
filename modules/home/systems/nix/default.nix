@@ -22,7 +22,7 @@ in {
 
     home.packages = with pkgs; [
       nixgl.nixGLIntel
-      nix-ouput-monitor
+      nix-output-monitor
       nvd
     ];
 
