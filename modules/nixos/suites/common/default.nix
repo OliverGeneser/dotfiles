@@ -28,7 +28,10 @@ in {
     };
 
     system = {
-      boot.enable = true;
+      boot = {
+        enable = true;
+        plymouth = true;      
+      };
       fonts.enable = true;
       locale.enable = true;
     };
