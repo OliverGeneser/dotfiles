@@ -33,6 +33,7 @@ in {
         plymouth = true;      
       };
       fonts.enable = true;
+      impermanence.enable = true;
       locale.enable = true;
     };
   };
