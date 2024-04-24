@@ -1,8 +1,7 @@
 {
-  options,
   config,
-  lib,
   pkgs,
+  lib,
   ...
 }:
 with lib;
@@ -10,23 +9,27 @@ with lib.custom; let
   cfg = config.hardware.audio;
 in {
   options.hardware.audio = with types; {
-    enable = mkBoolOpt false "Enable pipewire";
+    enable = mkBoolOpt false "Enable or disable pipewire";
   };
 
   config = mkIf cfg.enable {
+    # Enable sound with pipewire.
+    hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
-      wireplumber.enable = true;
-      jack.enable = true;
       pulse.enable = true;
+      jack.enable = true;
+      wireplumber.enable = true;
     };
     programs.noisetorch.enable = true;
 
+
+    # TODO: add headset as a package
     environment.systemPackages = with pkgs; [
-      pavucontrol
+      pulsemixer
     ];
   };
 }

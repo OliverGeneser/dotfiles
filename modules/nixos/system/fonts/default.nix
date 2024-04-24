@@ -15,21 +15,41 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.variables = {
-      # Enable icons in tooling since we have nerdfonts.
-      LOG_ICONS = "true";
+    fonts = {
+      enableDefaultPackages = false;
+      fontDir.enable = true;
+      packages = with pkgs;
+        [
+          fira
+          fira-go
+          fira-code-nerdfont
+          noto-fonts-emoji
+          source-serif
+          ubuntu_font_family
+          jetbrains-mono
+          open-sans
+        ]
+        ++ cfg.fonts;
+
+      fontconfig = {
+        antialias = true;
+        defaultFonts = {
+          serif = ["Source Serif"];
+          sansSerif = ["Fira Sans" "FiraGO"];
+          monospace = ["FiraCode Nerd Font Mono" "SauceCodePro Nerd Font Mono"];
+          emoji = ["Noto Color Emoji"];
+        };
+        enable = true;
+        hinting = {
+          autohint = false;
+          enable = true;
+          style = "slight";
+        };
+        subpixel = {
+          rgba = "rgb";
+          lcdfilter = "light";
+        };
+      };
     };
-
-    environment.systemPackages = with pkgs; [font-manager];
-
-    fonts.packages = with pkgs;
-      [
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-cjk-serif
-        noto-fonts-emoji
-        (nerdfonts.override {fonts = ["JetBrainsMono"];})
-      ]
-      ++ cfg.fonts;
   };
 }

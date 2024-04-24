@@ -1,51 +1,40 @@
 {
-  options,
-  config,
   lib,
-  pkgs,
+  config,
   ...
 }:
-with lib;
-with lib.custom; let
+with lib; let
   cfg = config.suites.common;
 in {
-  options.suites.common = with types; {
-    enable = mkBoolOpt false "Enable the common suite";
+  options.suites.common = {
+    enable = mkEnableOption "Enable common configuration";
   };
 
   config = mkIf cfg.enable {
-    system.nix.enable = true;
-    system.security.doas.enable = false;
+    nix.enable = true;
+    hardware = {
+      audio.enable = true;
+      bluetooth.enable = true;
+      networking.enable = true;
+    };
 
-    hardware.audio.enable = true;
-    hardware.networking.enable = true;
+    services = {
+      openssh.enable = true;
+    };
 
-    apps.misc.enable = true;
-    
-    # hardware.bluetooth.enable = true;
-    # hardware.bluetooth.settings = {
-    #   General = {
-    #     FastConnectable = true;
-    #     JustWorksRepairing = "always";
-    #     Privacy = "device";
-    #   };
-    #   Policy = {
-    #     AutoEnable = true;
-    #   };
-    # };
-
-    services.ssh.enable = true;
-    programs.dconf.enable = true;
-
-    apps.tools.git.enable = true;
-
-    environment.systemPackages = [pkgs.bluetuith pkgs.custom.sys];
+    security = {
+      sops.enable = true;
+      yubikey.enable = true;
+    };
 
     system = {
+      boot = {
+        enable = true;
+        plymouth = true;      
+      };
       fonts.enable = true;
+      impermanence.enable = true;
       locale.enable = true;
-      time.enable = true;
-      xkb.enable = true;
     };
   };
 }

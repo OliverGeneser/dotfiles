@@ -1,23 +1,30 @@
-{lib, pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./disks.nix
   ];
 
-  # Enable Bootloader
-  system.boot.efi.enable = true;
-
-  system.battery.enable = true; # Only for laptops, they will still work without it, just improves battery life
-  
-  suites = {
-    desktop.enable = true;
-  
+  networking = {
+    hostName = "huawei";
   };
 
-  hardware.nvidia.enable = true;
-  impermanence.enable = true;
+  suites = {
+    gaming.enable = true;
+    desktop = {
+      enable = true;
+      addons = {
+        hyprland.enable = true;
+      };
+    };
+  };
 
-  networking.hostName = "huawei";
+  environment.systemPackages = with pkgs; [
+  ];
 
   boot = {
     kernelParams = [
@@ -26,14 +33,13 @@
     supportedFilesystems = lib.mkForce ["btrfs"];
     kernelPackages = pkgs.linuxPackages_latest;
     resumeDevice = "/dev/disk/by-label/nixos";
-    initrd.systemd.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    # Any particular packages only for this host
-  ];
+  system.boot = {
+    enable = lib.mkForce true;
+    plymouth = lib.mkForce true;
+    #secureBoot = lib.mkForce true;
+  };
 
-  # ======================== DO NOT CHANGE THIS ========================
-  system.stateVersion = "22.11";
-  # ======================== DO NOT CHANGE THIS ========================
+  system.stateVersion = "23.11";
 }

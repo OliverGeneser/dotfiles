@@ -1,36 +1,45 @@
 {
-  options,
-  config,
   lib,
-  pkgs,
+  config,
   ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.suites.desktop;
 in {
-  options.suites.desktop = with types; {
-    enable = mkBoolOpt false "Enable the desktop suite";
+  options.suites.desktop = {
+    enable = mkEnableOption "Enable desktop configuration";
   };
 
   config = mkIf cfg.enable {
-    desktop.hyprland.enable = true;
-    apps.browsers.mullvad.enable = true;
-    apps.ai.ollama.enable = true;
+    suites = {
+      common.enable = true;
 
-    suites.common.enable = true;
-
-    services.xserver = {
-      enable = true;
-      displayManager.gdm.enable = true;
+      desktop.addons = {
+        nautilus.enable = true;
+      };
     };
 
-    environment.persist.directories = [
-      "/etc/gdm"
-    ];
+    hardware = {
+      logitechMouse.enable = true;
+    };
 
-    environment.systemPackages = with pkgs; [
- 
-    ];
+    virtualisation = {
+      podman.enable = true;
+    };
+
+    services = {
+      vpn.enable = true;
+      virtualisation.podman.enable = true;
+    };
+
+    cli.programs = {
+      nix-ld.enable = true;
+    };
+
+    user = {
+      name = "olivergeneser";
+      initialPassword = "test1234";
+    };
   };
 }
