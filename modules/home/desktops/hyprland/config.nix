@@ -20,6 +20,20 @@ in {
 
       config = {
         monitor = [ "HDMI-A-1,addreserved,0,0,0,150" ];
+        
+        workspace = [
+          "1, monitor:DP-1, on-created-empty:[silent,fullscreen] firefox"
+          "2, monitor:DP-1, on-created-empty:[silent,fullscreen] firefox"
+          "3, monitor:DP-1, on-created-empty:[silent,fullscreen] kitty --config NONE -o background_opacity=0.75 tmux"
+          "4, monitor:DP-1"
+          "5, monitor:DP-1, on-created-empty:[silent,fullscreen] webcord"
+          "6, monitor:DP-1, on-created-empty:[silent,fullscreen] gimp"
+          "7, monitor:DP-1"
+          "8, monitor:DP-1"
+          "9, monitor:DP-1"
+          "0, monitor:DP-1"
+        ];
+
         input = {
           kb_layout = "us,dk";
           kb_variant = "altgr-intl";
