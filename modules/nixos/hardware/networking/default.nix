@@ -29,8 +29,5 @@ in {
       ];
     };
     networking.networkmanager.enable = true;
-    environment.persist.directories = [
-      "/etc/NetworkManager"
-    ];
   };
 }
