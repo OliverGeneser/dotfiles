@@ -23,6 +23,10 @@ in {
 
     programs = {
       shotwell.enable = true;
+    
+      media = {
+        jellyfin.enable = true;
+      };
     };
 
     home.sessionVariables = {
