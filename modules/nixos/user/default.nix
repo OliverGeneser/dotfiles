@@ -21,10 +21,12 @@ in {
   };
 
   config = {
+    users.mutableUsers = false;
     users.users.olivergeneser =
       {
         isNormalUser = true;
-        inherit (cfg) name initialPassword;
+        inherit (cfg) name;
+        hashedPassword = "$6$fGDkSQ/rlUmeMmpx$L3cNIDSUVuetvqVdwgynz4m3IrPEukPcMPzjvS84zaxkU1xNOglduoFDgsHSVqSSjUZOydCGvoEpbzJTFktV/1";
         home = "/home/olivergeneser";
         group = "users";
 
