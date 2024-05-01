@@ -66,14 +66,19 @@ in {
         desktop = {
           outputs = [
             {
-              criteria = "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 21351B000087";
-              position = "3840,0";
-              mode = "3840x2160@144Hz";
+              criteria = "ASUSTek COMPUTER INC VG27A N8LMQS070105";
+              position = "0,0";
+              mode = "2560x1440@165Hz";
             }
             {
-              criteria = "Dell Inc. DELL G3223Q 82X70P3";
-              position = "0,0";
-              mode = "3840x2160@60Hz";
+              criteria = "AOC 2778G5 F67G8BA000681";
+              position = "-1920,180";
+              mode = "1920x1080@60Hz";
+            }
+            {
+              criteria = "AOC 2460 D04E9BA001708";
+              position = "320,-1080";
+              mode = "1920x1080@60Hz";
             }
           ];
         };

@@ -19,6 +19,7 @@ in {
       xwayland.enable = true;
 
       config = {
+        monitor = [ "HDMI-A-1,addreserved,0,0,0,150" ];
         input = {
           kb_layout = "us,dk";
           kb_variant = "altgr-intl";
