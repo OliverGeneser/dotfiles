@@ -23,7 +23,7 @@ in {
 
     programs = {
       shotwell.enable = true;
-    
+      webcord.enable = true;   
       media = {
         jellyfin.enable = true;
       };
