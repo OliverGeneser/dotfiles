@@ -22,7 +22,7 @@ in {
         monitor = [ "HDMI-A-1,addreserved,0,0,0,150" ];
         
         workspace = [
-          "1, monitor:DP-1, on-created-empty:[silent,fullscreen] firefox"
+          "1, monitor:DP-1, on-created-empty:[silent,fullscreen] mullvadbrowser"
           "2, monitor:DP-1, on-created-empty:[silent,fullscreen] firefox"
           "3, monitor:DP-1, on-created-empty:[silent,fullscreen] kitty --config NONE -o background_opacity=0.75 tmux"
           "4, monitor:DP-1"
@@ -78,6 +78,8 @@ in {
           "${pkgs.pyprland}/bin/pypr"
           "${pkgs.clipse}/bin/clipse -listen"
           "solaar -w hide"
+          "[workspace 01 silent] mullvad-browser"
+          "[workspace 05 silent] webcord"
         ];
       };
     };
