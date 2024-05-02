@@ -71,7 +71,7 @@ in {
     environment.persistence."/persist" = {
       hideMounts = true;
       directories = [
-        "/home/haseeb"
+        "/home/olivergeneser"
         "/srv"
         "/.cache/nix/"
         "/etc/NetworkManager/system-connections"
