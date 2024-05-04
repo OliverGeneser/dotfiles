@@ -24,7 +24,7 @@ in {
         workspace = [
           "1, monitor:DP-1, on-created-empty:[silent,fullscreen] mullvadbrowser"
           "2, monitor:DP-1, on-created-empty:[silent,fullscreen] firefox"
-          "3, monitor:DP-1, on-created-empty:[silent,fullscreen] kitty --config NONE -o background_opacity=0.75 tmux"
+          "3, monitor:DP-1, on-created-empty:[silent,fullscreen] wezterm"
           "4, monitor:DP-1"
           "5, monitor:DP-1, on-created-empty:[silent,fullscreen] webcord"
           "6, monitor:DP-1, on-created-empty:[silent,fullscreen] gimp"
@@ -79,6 +79,7 @@ in {
           "${pkgs.clipse}/bin/clipse -listen"
           "solaar -w hide"
           "[workspace 01 silent] mullvad-browser"
+          "[workspace 03 silent] wezterm"
           "[workspace 05 silent] webcord"
         ];
       };

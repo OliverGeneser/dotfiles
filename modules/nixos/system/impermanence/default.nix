@@ -71,21 +71,26 @@ in {
     environment.persistence."/persist" = {
       hideMounts = true;
       directories = [
-        "/home/olivergeneser"
-        "/srv"
-        "/.cache/nix/"
-        "/etc/NetworkManager/system-connections"
-        "/var/cache/"
-        "/var/db/sudo/"
+        "/var/log"
         "/var/lib/"
+        "/etc/NetworkManager/system-connections"
       ];
       files = [
         "/etc/machine-id"
-        "/etc/ssh/ssh_host_ed25519_key"
-        "/etc/ssh/ssh_host_ed25519_key.pub"
-        "/etc/ssh/ssh_host_rsa_key"
-        "/etc/ssh/ssh_host_rsa_key.pub"
       ];
+      users.olivergeneser = {
+        "Downloads"
+        "Music"
+        "Pictures"
+        "Documents"
+        "Videos"
+        "VirturalBox VMs"
+        { directory = ".gnupg"; mode = "0700"; }
+        { directory = ".ssh"; mode = "0700"; }
+        { directory = ".nixops"; mode = "0700"; }
+        { directory = ".local/share/keyrings"; mode = "0700"; }
+        ".local/share/direnv"
+      };
     };
   };
 }
