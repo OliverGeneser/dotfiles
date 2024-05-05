@@ -9,7 +9,7 @@ with lib.custom; let
 in {
   options.system.impermanence = with types; {
     enable = mkBoolOpt false "Enable impermanence";
-    home = mkBoolOps false "Enable home impermanence";
+    home = mkBoolOpt false "Enable home impermanence";
   };
 
   config = mkIf cfg.enable {
@@ -20,9 +20,6 @@ in {
 
     programs.fuse.userAllowOther = true;
 
-    # This script does the actual wipe of the system
-    # So if it doesn't run, the btrfs system effectively acts like a normal system
-    # Taken from https://github.com/NotAShelf/nyx/blob/2a8273ed3f11a4b4ca027a68405d9eb35eba567b/modules/core/common/system/impermanence/default.nix
     boot.initrd.systemd.services.rollback = {
       description = "Rollback BTRFS root subvolume to a pristine state";
       wantedBy = ["initrd.target"];
@@ -41,7 +38,7 @@ in {
         mount -o subvol=/ /dev/mapper/cryptroot /mnt
 
         # If home is meant to be impermanent, also mount the home subvolume to be deleted later
-        ${optionalString cfg.home "mount -o subvol=/home /dev/mapper/enc /mnt/home"}
+        ${optionalString cfg.home "mount -o subvol=/home /dev/mapper/cryptroot /mnt/home"}
 
         # While we're tempted to just delete /root and create
         # a new snapshot from /root-blank, /root is already
@@ -79,11 +76,17 @@ in {
     environment.persistence."/persist" = {
       hideMounts = true;
       directories = [
-        "/var/lib/"
+        "/etc/nixos"
+        "/var/log"
+        "/var/lib/bluetooth"
+        "/var/lib/nixos"
+        "/var/lib/systemd/coredump"
         "/etc/NetworkManager/system-connections"
+        { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
       ];
       files = [
         "/etc/machine-id"
+        { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
       ];
       users.olivergeneser = {
         directories = [
