@@ -35,11 +35,7 @@
     resumeDevice = "/dev/disk/by-label/nixos";
   };
 
-  system.boot = {
-    enable = lib.mkForce true;
-    plymouth = lib.mkForce true;
-    #secureBoot = lib.mkForce true;
-  };
+  nix.package = pkgs.nixVersions.git;  
 
   system.stateVersion = "23.11";
 }
