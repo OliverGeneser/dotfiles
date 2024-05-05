@@ -31,6 +31,7 @@ in {
       generateRegistryFromInputs = true;
       generateNixPathFromInputs = true;
       linkInputs = true;
+      package = lib.mkDefault pkgs.nixVersions.git;
     };
   };
 }

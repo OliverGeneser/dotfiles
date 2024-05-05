@@ -78,9 +78,6 @@ in {
           "${pkgs.pyprland}/bin/pypr"
           "${pkgs.clipse}/bin/clipse -listen"
           "solaar -w hide"
-          "[workspace 01 silent] mullvad-browser"
-          "[workspace 03 silent] wezterm"
-          "[workspace 05 silent] webcord"
         ];
       };
     };

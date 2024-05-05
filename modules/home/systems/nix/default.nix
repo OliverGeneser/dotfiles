@@ -54,6 +54,7 @@ in {
         warn-dirty = false;
         use-xdg-base-directories = true;
       };
+      package = lib.mkForce pkgs.nixVersions.git;
     };
 
     news = {
