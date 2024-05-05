@@ -30,45 +30,13 @@ in {
             }
           ];
         };
-        home_office_laptop_docked = {
-          outputs = [
-            {
-              criteria = "GIGA-BYTE TECHNOLOGY CO. LTD. Gigabyte M32U  (DP-5 via HDMI)";
-              position = "3840,0";
-              mode = "3840x2160@144Hz";
-            }
-            {
-              criteria = "Dell Inc. DELL G3223Q 82X70P3 (DP-4)";
-              position = "0,0";
-              mode = "3840x2160@60Hz";
-            }
-            {
-              criteria = "eDP-1";
-              status = "disable";
-            }
-          ];
-        };
-        home_office = {
-          outputs = [
-            {
-              criteria = "GIGA-BYTE TECHNOLOGY CO. LTD. Gigabyte M32U  (DP-5 via HDMI)";
-              position = "3840,0";
-              mode = "3840x2160@144Hz";
-            }
-            {
-              criteria = "Dell Inc. DELL G3223Q 82X70P3 (DP-4)";
-              position = "0,0";
-              mode = "3840x2160@60Hz";
-            }
-          ];
-        };
 
         desktop = {
           outputs = [
             {
               criteria = "ASUSTek COMPUTER INC VG27A N8LMQS070105";
               position = "0,0";
-              mode = "2560x1440@165Hz";
+              mode = "2560x1440@144Hz";
             }
             {
               criteria = "AOC 2778G5 F67G8BA000681";
