@@ -38,7 +38,7 @@ in {
 
         # We first mount the btrfs root to /mnt
         # so we can manipulate btrfs subvolumes.
-        mount -o subvol=/ /dev/mapper/enc /mnt
+        mount -o subvol=/ /dev/mapper/cryptroot /mnt
 
         # If home is meant to be impermanent, also mount the home subvolume to be deleted later
         ${optionalString cfg.home "mount -o subvol=/home /dev/mapper/enc /mnt/home"}
