@@ -9,6 +9,7 @@ with lib.custom; let
 in {
   options.system.impermanence = with types; {
     enable = mkBoolOpt false "Enable impermanence";
+    home = mkBoolOps false "Enable home impermanence";
   };
 
   config = mkIf cfg.enable {
@@ -38,7 +39,9 @@ in {
         # We first mount the btrfs root to /mnt
         # so we can manipulate btrfs subvolumes.
         mount -o subvol=/ /dev/mapper/enc /mnt
-        btrfs subvolume list -o /mnt/root
+
+        # If home is meant to be impermanent, also mount the home subvolume to be deleted later
+        ${optionalString cfg.home "mount -o subvol=/home /dev/mapper/enc /mnt/home"}
 
         # While we're tempted to just delete /root and create
         # a new snapshot from /root-blank, /root is already
@@ -54,13 +57,18 @@ in {
         cut -f9 -d' ' |
         while read subvolume; do
           echo "deleting /$subvolume subvolume..."
-          # btrfs subvolume delete "/mnt/$subvolume"
+          btrfs subvolume delete "/mnt/$subvolume"
         done &&
         echo "deleting /root subvolume..." &&
-        # btrfs subvolume delete /mnt/root
+        btrfs subvolume delete /mnt/root
 
         echo "restoring blank /root subvolume..."
-        # btrfs subvolume snapshot /mnt/root-blank /mnt/root
+        btrfs subvolume snapshot /mnt/root-blank /mnt/root
+
+        ${optionalString cfg.home ''
+          echo "restoring blank /home subvolume..."
+          mount -o subvol=/home /dev/mapper/enc /mnt/home
+        ''}
 
         # Once we're done rolling back to a blank snapshot,
         # we can unmount /mnt and continue on the boot process.
@@ -71,7 +79,6 @@ in {
     environment.persistence."/persist" = {
       hideMounts = true;
       directories = [
-        "/var/log"
         "/var/lib/"
         "/etc/NetworkManager/system-connections"
       ];
@@ -79,17 +86,20 @@ in {
         "/etc/machine-id"
       ];
       users.olivergeneser = {
-        "Downloads"
-        "Music"
-        "Pictures"
-        "Documents"
-        "Videos"
-        "VirturalBox VMs"
-        { directory = ".gnupg"; mode = "0700"; }
-        { directory = ".ssh"; mode = "0700"; }
-        { directory = ".nixops"; mode = "0700"; }
-        { directory = ".local/share/keyrings"; mode = "0700"; }
-        ".local/share/direnv"
+        directories = [
+          "dotfiles"
+          "Downloads"
+          "Music"
+          "Pictures"
+          "Documents"
+          "Videos"
+          "VirturalBox VMs"
+          { directory = ".gnupg"; mode = "0700"; }
+          { directory = ".ssh"; mode = "0700"; }
+          { directory = ".nixops"; mode = "0700"; }
+          { directory = ".local/share/keyrings"; mode = "0700"; }
+          ".local/share/direnv"
+        ];
       };
     };
   };
