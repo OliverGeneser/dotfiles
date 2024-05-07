@@ -19,14 +19,13 @@
       enable = true;
       addons = {
         hyprland.enable = true;
+        nvidia.enable = true;
       };
     };
   };
   
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  environment.systemPackages = with pkgs; [
-  ];
-
+  
   boot = {
     kernelParams = [
       "resume_offset=533760"
