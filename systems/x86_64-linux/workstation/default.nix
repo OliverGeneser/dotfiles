@@ -19,12 +19,11 @@
       enable = true;
       addons = {
         hyprland.enable = true;
-        nvidia.enable = true;
       };
     };
   };
   
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  hardware.nvidia.enable = true;
   
   boot = {
     kernelParams = [
