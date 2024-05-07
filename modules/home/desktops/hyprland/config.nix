@@ -7,6 +7,10 @@
 with lib; let
   cfg = config.desktops.hyprland;
   inherit (config.colorScheme) palette;
+  hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
+  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+  loginctl = "${pkgs.systemd}/bin/loginctl";
+
 in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
@@ -17,6 +21,26 @@ in {
       systemdIntegration = true;
       recommendedEnvironment = true;
       xwayland.enable = true;
+
+      settings = {
+      hypridle = {
+        lockCmd = "pidof hyprlock || ${hyprlock}";
+        beforeSleepCmd = "${hyprctl} dispatch dpms off";
+        afterSleepCmd = "${hyprctl} dispatch dpms on && ${loginctl} lock-session";
+        listeners = [
+          {
+            timeout = 300;
+            onTimeout = "${loginctl} lock-session";
+          }
+          {
+            timeout = 360;
+            onTimeout = "${hyprctl} dispatch dpms off";
+            onResume = "${hyprctl} dispatch dpms on";
+          }
+        ];
+      };
+      };
+
 
       config = {
         monitor = [ "HDMI-A-1,addreserved,0,0,0,150" ];

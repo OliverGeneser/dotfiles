@@ -47,11 +47,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hypridle = {
-      url = "github:hyprwm/Hypridle";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hyprlock = {
       url = "github:hyprwm/Hyprlock";
       inputs.nixpkgs.follows = "nixpkgs";

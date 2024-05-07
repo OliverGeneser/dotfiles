@@ -36,14 +36,14 @@ in {
       kanshi.enable = true;
       rofi.enable = true;
       swaync.enable = true;
-      #waybar.enable = true;
+      waybar.enable = true;
       wlogout.enable = true;
       wlsunset.enable = true;
 
       pyprland.enable = true;
       hyprpaper.enable = true;
       hyprlock.enable = true;
-      hypridle.enable = true;
+      #hypridle.enable = true;
     };
   };
 }
