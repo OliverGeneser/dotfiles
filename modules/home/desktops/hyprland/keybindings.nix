@@ -97,28 +97,28 @@ in {
         "ALTCONTROL,j" = "focusmonitor,d";
 
         # Change Workspace
-        "ALT,1" = "workspace,01";
-        "ALT,2" = "workspace,02";
-        "ALT,3" = "workspace,03";
-        "ALT,4" = "workspace,04";
-        "ALT,5" = "workspace,05";
-        "ALT,6" = "workspace,06";
-        "ALT,7" = "workspace,07";
-        "ALT,8" = "workspace,08";
-        "ALT,9" = "workspace,09";
-        "ALT,0" = "workspace,10";
+        "ALT,1" = "workspace,1";
+        "ALT,2" = "workspace,2";
+        "ALT,3" = "workspace,3";
+        "ALT,4" = "workspace,4";
+        "ALT,5" = "workspace,5";
+        "ALT,6" = "workspace,6";
+        "ALT,7" = "workspace,7";
+        "ALT,8" = "workspace,8";
+        "ALT,9" = "workspace,9";
+        "ALT,0" = "workspace,0";
 
         # Move Workspace
-        "ALTSHIFT,1" = "movetoworkspacesilent,01";
-        "ALTSHIFT,2" = "movetoworkspacesilent,02";
-        "ALTSHIFT,3" = "movetoworkspacesilent,03";
-        "ALTSHIFT,4" = "movetoworkspacesilent,04";
-        "ALTSHIFT,5" = "movetoworkspacesilent,05";
-        "ALTSHIFT,6" = "movetoworkspacesilent,06";
-        "ALTSHIFT,7" = "movetoworkspacesilent,07";
-        "ALTSHIFT,8" = "movetoworkspacesilent,08";
-        "ALTSHIFT,9" = "movetoworkspacesilent,09";
-        "ALTSHIFT,0" = "movetoworkspacesilent,10";
+        "ALTSHIFT,1" = "movetoworkspacesilent,1";
+        "ALTSHIFT,2" = "movetoworkspacesilent,2";
+        "ALTSHIFT,3" = "movetoworkspacesilent,3";
+        "ALTSHIFT,4" = "movetoworkspacesilent,4";
+        "ALTSHIFT,5" = "movetoworkspacesilent,5";
+        "ALTSHIFT,6" = "movetoworkspacesilent,6";
+        "ALTSHIFT,7" = "movetoworkspacesilent,7";
+        "ALTSHIFT,8" = "movetoworkspacesilent,8";
+        "ALTSHIFT,9" = "movetoworkspacesilent,9";
+        "ALTSHIFT,0" = "movetoworkspacesilent,0";
         "SUPERALT,h" = "movecurrentworkspacetomonitor,l";
         "SUPERALT,l" = "movecurrentworkspacetomonitor,r";
         "SUPERALT,k" = "movecurrentworkspacetomonitor,u";
