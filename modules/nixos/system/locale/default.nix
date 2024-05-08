@@ -31,10 +31,11 @@ in {
 
     # Configure keymap in X11
     services.xserver = {
-      xkb.layout = "dk";
-      xkb.variant = "";
+      xkb.layout = "us";
+      xkb.variant = "altgr-intl";
+      exportConfiguration = true;
     };
     # Configure console keymap
-    console.keyMap = "dk";
+    console.keyMap = "us";
   };
 }
