@@ -19,7 +19,7 @@ in {
     services.kanshi = {
       enable = true;
       package = pkgs.kanshi;
-      systemdTarget = "";
+      systemdTarget = "hyprland-session.target";
       profiles = {
         undocked = {
           outputs = [
@@ -34,37 +34,19 @@ in {
         desktop = {
           outputs = [
             {
-              criteria = "ASUSTek COMPUTER INC VG27A N8LMQS070105";
+              criteria = "DP-1";
               position = "0,0";
-              mode = "2560x1440@144Hz";
+              mode = "2560x1440@165Hz";
             }
             {
-              criteria = "AOC 2778G5 F67G8BA000681";
+              criteria = "HDMI-A-1";
               position = "-1920,180";
               mode = "1920x1080@60Hz";
             }
             {
-              criteria = "AOC 2460 D04E9BA001708";
+              criteria = "DVI-D-1";
               position = "320,-1080";
               mode = "1920x1080@60Hz";
-            }
-          ];
-        };
-        home_office_alt = {
-          outputs = [
-            {
-              criteria = "eDP-1";
-              status = "disable";
-            }
-            {
-              criteria = "DP-5";
-              position = "3840,0";
-              mode = "3840x2160@143.85600Hz";
-            }
-            {
-              criteria = "DP-4";
-              position = "0,0";
-              mode = "3840x2160@60Hz";
             }
           ];
         };
