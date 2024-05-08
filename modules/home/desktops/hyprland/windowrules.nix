@@ -11,7 +11,7 @@ in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.windowRules = let
       mullvadVideo = {
-        class = ["mullvad browser"];
+        class = ["Mullvad Browser"];
       };
       bitwarden = {
         title = [".*Bitwarden.*"];

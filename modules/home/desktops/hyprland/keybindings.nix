@@ -75,7 +75,7 @@ in {
         ",XF86Launch5" = "exec,${pkgs.hyprlock}/bin/hyprlock";
         ",XF86Launch4" = "exec,${pkgs.hyprlock}/bin/hyprlock";
         "SUPER,backspace" = "exec,${pkgs.hyprlock}/bin/hyprlock";
-        "SUPER,escape" = "exec,wlogout --column-spacing 50 --row-spacing 50";
+        "SUPER,escape" = "exec, killall wlogout || wlogout --column-spacing 50 --row-spacing 50";
 
         # Screenshot
         ",Print" = "exec,grimblast --notify copysave area";

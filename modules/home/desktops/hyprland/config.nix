@@ -7,41 +7,9 @@
 with lib; let
   cfg = config.desktops.hyprland;
   inherit (config.colorScheme) palette;
-  hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
-  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
-  loginctl = "${pkgs.systemd}/bin/loginctl";
-
 in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
-      enable = true;
-      package = pkgs.hyprland;
-
-      reloadConfig = true;
-      systemdIntegration = true;
-      recommendedEnvironment = true;
-      xwayland.enable = true;
-
-      settings = {
-      hypridle = {
-        lockCmd = "pidof hyprlock || ${hyprlock}";
-        beforeSleepCmd = "${hyprctl} dispatch dpms off";
-        afterSleepCmd = "${hyprctl} dispatch dpms on && ${loginctl} lock-session";
-        listeners = [
-          {
-            timeout = 300;
-            onTimeout = "${loginctl} lock-session";
-          }
-          {
-            timeout = 360;
-            onTimeout = "${hyprctl} dispatch dpms off";
-            onResume = "${hyprctl} dispatch dpms on";
-          }
-        ];
-      };
-      };
-
-
       config = {
         monitor = [ "HDMI-A-1,addreserved,0,0,0,150" ];
         
@@ -60,8 +28,8 @@ in {
 
         input = {
           kb_layout = "us,dk";
-          kb_variant = "altgr-intl";
-          kb_options = "grp:alt_space_toggle";
+          kb_variant = "altgr-intl,";
+          kb_options = "grp:alt_space_toggle,";
           touchpad = {
             disable_while_typing = false;
             natural_scroll = true;
@@ -91,18 +59,6 @@ in {
           variable_refresh = FULLSCREEN_ONLY;
           disable_autoreload = true;
         };
-
-        exec_once = [
-          "dbus-update-activation-environment --systemd --all"
-          "systemctl --user import-environment QT_QPA_PLATFORMTHEME"
-          "${pkgs.swaynotificationcenter}/bin/swaync"
-          "${pkgs.kanshi}/bin/kanshi"
-          "${pkgs.waybar}/bin/waybar"
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-          "${pkgs.pyprland}/bin/pypr"
-          "${pkgs.clipse}/bin/clipse -listen"
-          "solaar -w hide"
-        ];
       };
     };
   };
