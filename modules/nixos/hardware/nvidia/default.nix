@@ -19,6 +19,8 @@ in {
       driSupport32Bit = true;
     };
 
+    boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
+
     # Load nvidia driver for Xorg and Wayland
     services.xserver.videoDrivers = ["nvidia"];
  
@@ -77,7 +79,7 @@ in {
       nvidiaSettings = true;
 
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
   };
 }
