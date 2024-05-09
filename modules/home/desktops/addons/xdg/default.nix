@@ -16,6 +16,7 @@ in {
       HISTFILE = lib.mkForce "${config.xdg.stateHome}/bash/history";
       #GNUPGHOME = lib.mkForce "${config.xdg.dataHome}/gnupg";
       GTK2_RC_FILES = lib.mkForce "${config.xdg.configHome}/gtk-2.0/gtkrc";
+      NIXOS_XDG_OPEN_USE_PORTAL = "1";
     };
 
     xdg = {

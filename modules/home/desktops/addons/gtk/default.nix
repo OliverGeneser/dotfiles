@@ -66,7 +66,11 @@ in {
       gtk4.extraCss = builtins.readFile ./gtk.css;
     };
 
-    home.sessionVariables.GTK_THEME = "Adwaita-dark";
+    home.sessionVariables = {
+      GTK_THEME = "Adwaita-dark";
+      GTK_USE_PORTAL = "1";
+    };
+
     home.pointerCursor = {
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;

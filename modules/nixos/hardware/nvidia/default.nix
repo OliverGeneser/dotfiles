@@ -25,27 +25,33 @@ in {
     services.xserver.videoDrivers = ["nvidia"];
 
     environment.sessionVariables = {
-      SDL_VIDEODRIVER = "wayland";
-      CLUTTER_BACKEND = "wayland";
-      MOZ_ENABLE_WAYLAND = "1";
-      MOZ_DISABLE_RDD_SANDBOX = "1";
-      _JAVA_AWT_WM_NONREPARENTING = "1";
-      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      PROTON_ENABLE_NGX_UPDATER = "1";
-      NVD_BACKEND = "direct";
-      __GL_GSYNC_ALLOWED = "1";
-      __GL_VRR_ALLOWED = "1";
-      WLR_DRM_NO_ATOMIC = "1";
-      WLR_USE_LIBINPUT = "1";
-      __GL_MaxFramesAllowed = "1";
-      WLR_RENDERER_ALLOW_SOFTWARE = "1";
       NIXOS_OZONE_WL = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
+
       LIBVA_DRIVER_NAME = "nvidia";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      SDL_VIDEODRIVER = "wayland";
+      NVD_BACKEND = "direct";
+      CLUTTER_BACKEND = "wayland";
       GBM_BACKEND = "nvidia-drm";
-      GTK_USE_PORTAL = "1";
-      NIXOS_XDG_OPEN_USE_PORTAL = "1";
+
+      MOZ_ENABLE_WAYLAND = "1";
+      MOZ_DISABLE_RDD_SANDBOX = "1";
+
+      # https://wiki.archlinux.org/title/Java
+      _JAVA_AWT_WM_NONREPARENTING = "1";
+      AWT_TOOLKIT = "MToolkit";
+
+      # QT HDPI
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+
+      # Steam fixes https://www.reddit.com/r/linux_gaming/comments/zgrktp/raytracing_on_linux/
+      PROTON_HIDE_NVIDIA_GPU = "0";
+      PROTON_ENABLE_NVAPI = "1";
+      VKD3D_CONFIG = "dxr,dxr11";
+      PROTON_ENABLE_NGX_UPDATER = "1";
+      __GL_GSYNC_ALLOWED = "1";
+      __GL_VRR_ALLOWED = "1";
+      __GL_MaxFramesAllowed = "1";
     };
 
     hardware.nvidia = {
