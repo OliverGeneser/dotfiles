@@ -34,6 +34,7 @@ in {
         starship.enable = true;
         yazi.enable = true;
         zoxide.enable = true;
+        nodejs.enable = true;
       };
     };
   };
