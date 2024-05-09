@@ -23,7 +23,7 @@
     };
   };
 
-  #  hardware.nvidia.enable = true;
+  hardware.nvidia.enable = true;
 
   boot = {
     kernelParams = [

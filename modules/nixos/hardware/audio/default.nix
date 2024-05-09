@@ -24,10 +24,9 @@ in {
       jack.enable = true;
       wireplumber.enable = true;
     };
+
     programs.noisetorch.enable = true;
 
-
-    # TODO: add headset as a package
     environment.systemPackages = with pkgs; [
       pulsemixer
     ];

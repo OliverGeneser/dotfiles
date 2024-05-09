@@ -19,11 +19,11 @@ in {
       driSupport32Bit = true;
     };
 
-    boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
+    boot.kernelParams = ["nvidia-drm.fbdev=1"];
 
     # Load nvidia driver for Xorg and Wayland
     services.xserver.videoDrivers = ["nvidia"];
- 
+
     environment.sessionVariables = {
       SDL_VIDEODRIVER = "wayland";
       CLUTTER_BACKEND = "wayland";
@@ -31,8 +31,6 @@ in {
       MOZ_DISABLE_RDD_SANDBOX = "1";
       _JAVA_AWT_WM_NONREPARENTING = "1";
       QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      __NV_PRIME_RENDER_OFFLOAD = "1";
-      __VK_LAYER_NV_optimus = "NVIDIA_only";
       PROTON_ENABLE_NGX_UPDATER = "1";
       NVD_BACKEND = "direct";
       __GL_GSYNC_ALLOWED = "1";
@@ -51,13 +49,12 @@ in {
     };
 
     hardware.nvidia = {
-
       # Modesetting is required.
       modesetting.enable = true;
 
       # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
       # Enable this if you have graphical corruption issues or application crashes after waking
-      # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+      # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
       # of just the bare essentials.
       powerManagement.enable = false;
 
@@ -67,9 +64,9 @@ in {
 
       # Use the NVidia open source kernel module (not to be confused with the
       # independent third-party "nouveau" open source driver).
-      # Support is limited to the Turing and later architectures. Full list of 
-      # supported GPUs is at: 
-      # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+      # Support is limited to the Turing and later architectures. Full list of
+      # supported GPUs is at:
+      # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
       # Only available from driver 515.43.04+
       # Currently alpha-quality/buggy, so false is currently the recommended setting.
       open = false;
