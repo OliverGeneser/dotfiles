@@ -22,9 +22,9 @@
       };
     };
   };
-  
-  hardware.nvidia.enable = true;
-  
+
+  #  hardware.nvidia.enable = true;
+
   boot = {
     kernelParams = [
       "resume_offset=533760"
