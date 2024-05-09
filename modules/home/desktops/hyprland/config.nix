@@ -30,7 +30,7 @@ in {
           kb_layout = "us,dk";
           kb_variant = "altgr-intl,";
           kb_options = "grp:alt_space_toggle,";
-          follow_mouse = false;
+          follow_mouse = true;
           touchpad = {
             disable_while_typing = false;
             natural_scroll = true;
