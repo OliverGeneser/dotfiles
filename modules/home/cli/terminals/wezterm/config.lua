@@ -48,4 +48,5 @@ return {
 			action = wezterm.action.DisableDefaultAssignment,
 		},
 	},
+	enable_wayland = false,
 }
