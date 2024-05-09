@@ -11,12 +11,12 @@ in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       config = {
-        monitor = [ "HDMI-A-1,addreserved,0,0,0,150" ];
-        
+        monitor = ["HDMI-A-1,addreserved,0,0,0,150"];
+
         workspace = [
-          "1, monitor:DP-1, on-created-empty:[silent,fullscreen] mullvadbrowser"
+          "1, monitor:DP-1, on-created-empty:[silent,fullscreen] mullvad-browser"
           "2, monitor:DP-1, on-created-empty:[silent,fullscreen] firefox"
-          "3, monitor:DP-1, on-created-empty:[silent,fullscreen] wezterm"
+          "3, monitor:DP-1, on-created-empty:[silent,float,tile,fullscreen] wezterm start --always-new-process"
           "4, monitor:DP-1"
           "5, monitor:DP-1, on-created-empty:[silent,fullscreen] webcord"
           "6, monitor:DP-1, on-created-empty:[silent,fullscreen] gimp"
@@ -30,6 +30,7 @@ in {
           kb_layout = "us,dk";
           kb_variant = "altgr-intl,";
           kb_options = "grp:alt_space_toggle,";
+          follow_mouse = false;
           touchpad = {
             disable_while_typing = false;
             natural_scroll = true;
@@ -40,6 +41,7 @@ in {
           gaps_in = 5;
           gaps_out = 5;
           border_size = 0;
+          no_border_on_floating = true;
           active_border_color = "0xff${palette.base07}";
           inactive_border_color = "0xff${palette.base02}";
         };

@@ -71,11 +71,14 @@ in {
           "systemctl --user import-environment QT_QPA_PLATFORMTHEME"
           "${pkgs.swaynotificationcenter}/bin/swaync"
           "${pkgs.kanshi}/bin/kanshi"
-          "${pkgs.waybar}/bin/waybar"
+ #         "${pkgs.waybar}/bin/waybar"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
           "${pkgs.pyprland}/bin/pypr"
           "${pkgs.clipse}/bin/clipse -listen"
           "solaar -w hide"
+          "[workspace 1 silent] mullvad-browser"
+          "[worlspace 3 float;tile;silent] wezterm start --always-new-process"
+          "[workspace 5 silent] webcord"
         ];
       };
     };
@@ -90,7 +93,7 @@ in {
       kanshi.enable = true;
       rofi.enable = true;
       swaync.enable = true;
-      waybar.enable = true;
+#      waybar.enable = true;
       wlogout.enable = true;
       wlsunset.enable = true;
 

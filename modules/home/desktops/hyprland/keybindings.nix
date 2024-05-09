@@ -61,7 +61,7 @@ in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.keyBinds = {
       bind = {
-        "SUPER, Return" = "exec, wezterm";
+        "SUPER, Return" = "exec, [float;tile] wezterm start --always-new-process";
         "SUPER, E" = "exec, thunar";
         "SUPER, F" = "exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun";
         "SUPER, Q" = "killactive,";
