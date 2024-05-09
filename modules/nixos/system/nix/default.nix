@@ -15,7 +15,7 @@ in {
   config = mkIf cfg.enable {
     nix = {
       settings = {
-        trusted-users = ["root" "@wheel"];
+        trusted-users = ["root" "@wheel" config.custom.user.name];
         auto-optimise-store = lib.mkDefault true;
         use-xdg-base-directories = true;
         experimental-features = ["nix-command" "flakes"];
