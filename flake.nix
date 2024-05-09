@@ -38,7 +38,7 @@
     };
 
     hypr-contrib = {
-      url = "github:hyprwm/Hyprcursor";
+      url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -78,12 +78,8 @@
     };
 
     # For waiting for updates
-    waybar.url = "github:Alexays/Waybar?rev=32eac3ccb738691974121b77b4af0c47d1cbe524";
+    #waybar.url = "github:Alexays/Waybar?rev=32eac3ccb738691974121b77b4af0c47d1cbe524";
 
-    copilotchat-nvim = {
-      url = "github:copilotc-nvim/copilotchat.nvim";
-      flake = false;
-    };
     neorg-templates = {
       url = "github:pysan3/neorg-templates";
       flake = false;
@@ -98,10 +94,11 @@
     };
   };
 
-  outputs = inputs:
-    inputs.snowfall-lib.mkFlake {
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
       inherit inputs;
       src = ./.;
+
       snowfall = {
         metadata = "dotfiles";
         namespace = "custom";
@@ -110,7 +107,9 @@
           title = "Geneser Nix Flake";
         };
       };
-
+    };
+  in
+    lib.mkFlake {
       channels-config = {
         allowUnfree = true;
       };
@@ -124,10 +123,6 @@
         nix-ld.nixosModules.nix-ld
         catppuccin.nixosModules.catppuccin
       ];
-
-      # homes.modules = with inputs; [
-      #   impermanence.nixosModules.home-manager.impermanence
-      # ];
 
       overlays = with inputs; [
         nixgl.overlay

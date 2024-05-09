@@ -7,18 +7,16 @@
 }:
 with lib; let
   cfg = config.desktops.hyprland;
-  inherit (config.colorScheme) palette;
   hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   loginctl = "${pkgs.systemd}/bin/loginctl";
 in {
-  imports = with inputs;
-    [
-      hyprland-nix.homeManagerModules.default
-      ./config.nix
-      ./windowrules.nix
-      ./keybindings.nix
-    ];
+  imports = with inputs; [
+    hyprland-nix.homeManagerModules.default
+    ./config.nix
+    ./windowrules.nix
+    ./keybindings.nix
+  ];
 
   options.desktops.hyprland = {
     enable = mkEnableOption "enable hyprland window manager";
@@ -34,7 +32,7 @@ in {
       trusted-substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
-   
+
     xdg.configFile."hypr".recursive = true;
 
     wayland.windowManager.hyprland = {
@@ -71,7 +69,7 @@ in {
           "systemctl --user import-environment QT_QPA_PLATFORMTHEME"
           "${pkgs.swaynotificationcenter}/bin/swaync"
           "${pkgs.kanshi}/bin/kanshi"
- #         "${pkgs.waybar}/bin/waybar"
+          #         "${pkgs.waybar}/bin/waybar"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
           "${pkgs.pyprland}/bin/pypr"
           "${pkgs.clipse}/bin/clipse -listen"
@@ -82,10 +80,7 @@ in {
         ];
       };
     };
-  #  xdg.configFile."hypr".recursive = true;
-
-
-
+    #  xdg.configFile."hypr".recursive = true;
 
     desktops.addons = {
       gtk.enable = true;
@@ -93,14 +88,14 @@ in {
       kanshi.enable = true;
       rofi.enable = true;
       swaync.enable = true;
-#      waybar.enable = true;
+      #      waybar.enable = true;
       wlogout.enable = true;
       wlsunset.enable = true;
 
       pyprland.enable = true;
       hyprpaper.enable = true;
       hyprlock.enable = true;
-     #hypridle.enable = true;
+      #hypridle.enable = true;
     };
   };
 }

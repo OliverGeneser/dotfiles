@@ -25,9 +25,6 @@ in {
     services.xserver.videoDrivers = ["nvidia"];
 
     environment.sessionVariables = {
-      NIXOS_OZONE_WL = "1";
-      WLR_NO_HARDWARE_CURSORS = "1";
-
       LIBVA_DRIVER_NAME = "nvidia";
       SDL_VIDEODRIVER = "wayland";
       NVD_BACKEND = "direct";
