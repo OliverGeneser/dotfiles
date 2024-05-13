@@ -54,8 +54,6 @@ in {
         experimental-features = ["nix-command" "flakes"];
         warn-dirty = false;
         use-xdg-base-directories = true;
-
-        trusted-users = [config.custom.user.name]; # FIXME: if someday custom cache works without this
       };
       package = lib.mkForce pkgs.nixVersions.git;
     };
