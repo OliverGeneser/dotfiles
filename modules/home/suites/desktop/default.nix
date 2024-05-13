@@ -19,12 +19,14 @@ in {
 
     services = {
     };
+
     desktops.addons.xdg.enable = true;
 
     programs = {
       shotwell.enable = true;
-      webcord.enable = true;   
+      webcord.enable = true;
       bitwarden.enable = true;
+      tuta.enable = true;
       media = {
         jellyfin.enable = true;
       };
