@@ -20,19 +20,20 @@ in {
       enable = true;
       package = pkgs.kanshi;
       systemdTarget = "hyprland-session.target";
-      profiles = {
-        undocked = {
-          outputs = [
+      settings = [
+        {
+          profile.name = "undocked";
+          profile.outputs = [
             {
               criteria = "eDP-1";
               scale = 1.0;
               status = "enable";
             }
           ];
-        };
-
-        desktop = {
-          outputs = [
+        }
+        {
+          profile.name = "desktop";
+          profile.outputs = [
             {
               criteria = "DP-1";
               position = "0,0";
@@ -49,8 +50,8 @@ in {
               mode = "1920x1080@60Hz";
             }
           ];
-        };
-      };
+        }
+      ];
     };
   };
 }
