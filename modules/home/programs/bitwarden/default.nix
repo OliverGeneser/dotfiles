@@ -15,8 +15,5 @@ in {
     home.packages = with pkgs; [
       bitwarden-desktop
     ];
-    
-    services.gnome-keyring.enable = true;
-
   };
 }
