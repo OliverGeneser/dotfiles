@@ -20,7 +20,7 @@ in {
 
   config = mkIf cfg.enable {
     colorscheme = nix-colors.colorSchemes.catppuccin-mocha;
-    catppuccin.flavour = "mocha";
+    # catppuccin.flavour = "mocha";
 
     browsers.mullvad.enable = true;
 

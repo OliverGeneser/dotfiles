@@ -16,6 +16,8 @@ in {
     services.gvfs.enable = true;
     services.udisks2.enable = true;
 
+    programs.dconf.enable = true;
+
     environment = {
       sessionVariables = {
         NAUTILUS_EXTENSION_DIR = "${config.system.path}/lib/nautilus/extensions-4";
