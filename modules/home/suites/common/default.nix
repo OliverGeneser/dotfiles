@@ -22,8 +22,6 @@ in {
     colorscheme = nix-colors.colorSchemes.catppuccin-mocha;
     # catppuccin.flavour = "mocha";
 
-    browsers.mullvad.enable = true;
-
     system = {
       nix.enable = true;
       fonts.enable = true;

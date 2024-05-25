@@ -19,7 +19,10 @@ in {
 
     services = {
     };
-
+    browsers = {
+      mullvad.enable = true;
+      firefox.enable = true;
+    };
     desktops.addons.xdg.enable = true;
 
     programs = {
