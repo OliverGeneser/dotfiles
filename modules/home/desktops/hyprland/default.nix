@@ -5,7 +5,9 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+with lib.custom;
+with types; let
   cfg = config.desktops.hyprland;
 in {
   imports = with inputs; [
