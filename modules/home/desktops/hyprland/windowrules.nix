@@ -19,13 +19,10 @@ in {
       wezterm = {
         class = ["^(org.wezfurlong.wezterm)$"];
       };
-
     in
       lib.concatLists [
         (map (rule ["idleinhibit fullscreen"]) [mullvadVideo])
-        (map (rule ["float"]) [bitwarden])
-        (map (rule ["float"]) [wezterm])
-        (map (rule ["tile"]) [wezterm])      
+        (map (rule ["fullscreen"]) [bitwarden])
       ];
   };
 }

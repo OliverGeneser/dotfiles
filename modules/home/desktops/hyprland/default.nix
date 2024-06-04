@@ -2,7 +2,6 @@
   inputs,
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib;
@@ -33,34 +32,6 @@ in {
     };
 
     xdg.configFile."hypr".recursive = true;
-
-    wayland.windowManager.hyprland = {
-      enable = true;
-      package = pkgs.hyprland;
-
-      reloadConfig = true;
-      systemdIntegration = true;
-      recommendedEnvironment = true;
-      xwayland.enable = true;
-
-      settings = {
-        config = {
-          exec_once = [
-            "dbus-update-activation-environment --systemd --all"
-            "systemctl --user import-environment QT_QPA_PLATFORMTHEME"
-            "${pkgs.swaynotificationcenter}/bin/swaync"
-            "${pkgs.kanshi}/bin/kanshi"
-            "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-            "${pkgs.pyprland}/bin/pypr"
-            "${pkgs.clipse}/bin/clipse -listen"
-            "solaar -w hide"
-            #"[workspace 1 silent] mullvad-browser"
-            #"[worlspace 3 float;tile;silent] wezterm start --always-new-process"
-            # "[workspace 5 silent] webcord"
-          ];
-        };
-      };
-    };
 
     desktops.addons = {
       gtk.enable = true;
