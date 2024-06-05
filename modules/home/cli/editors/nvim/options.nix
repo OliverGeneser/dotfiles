@@ -1,52 +1,43 @@
-{
+{config, ...}: {
   programs.nixvim = {
     globals = {
       mapleader = " ";
       maplocalleader = ",";
+
+      netrw_browse_split = 0;
+      netrw_banner = 0;
+      netrw_winsize = 25;
     };
 
     opts = {
-      sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions";
-      switchbuf = "useopen,uselast";
-      termguicolors = true;
-      scrolloff = 8;
+      nu = true;
+      relativenumber = true;
+
+      tabstop = 4;
+      softtabstop = 4;
+      shiftwidth = 4;
+      expandtab = true;
+
+      smartindent = true;
+
+      wrap = false;
+
       swapfile = false;
+      backup = false;
+      undodir = "/home/${config.custom.user.name}/.vim/undodir";
+      undofile = true;
+
       hlsearch = false;
       incsearch = true;
 
-      shiftwidth = 4;
-      tabstop = 4;
-      softtabstop = 4;
-      expandtab = true;
-      smartindent = true;
+      termguicolors = true;
 
-      cursorline = true;
-      number = true;
-      relativenumber = true;
-      numberwidth = 2;
-      ruler = false;
-
-      splitbelow = true;
-      splitright = true;
-      undofile = true;
-      undolevels = 10000;
-
+      scrolloff = 8;
       signcolumn = "yes";
-      cmdheight = 0;
-      cot = ["menu" "menuone" "noselect"];
-      colorcolumn = "120";
 
-      updatetime = 100;
-      timeout = true;
-      timeoutlen = 250;
+      updatetime = 50;
 
-      foldlevel = 99;
-      foldlevelstart = 99;
-      foldenable = true;
-
-      winwidth = 10;
-      winminwidth = 10;
-      equalalways = false;
+      colorcolumn = "80";
     };
   };
 }

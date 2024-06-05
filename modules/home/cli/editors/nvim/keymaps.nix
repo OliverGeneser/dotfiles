@@ -2,10 +2,40 @@
   programs.nixvim = {
     keymaps = [
       {
+        action = ":m '>+1<CR>gv=gv";
+        key = "J";
+        options = {
+          desc = "Move line down";
+        };
+        mode = [
+          "v"
+        ];
+      }
+      {
+        action = ":m '<-2<CR>gv=gv";
+        key = "K";
+        options = {
+          desc = "Move line up";
+        };
+        mode = [
+          "v"
+        ];
+      }
+      {
+        action = "mzJ`z";
+        key = "J";
+        options = {
+          desc = "Combine line into one";
+        };
+        mode = [
+          "n"
+        ];
+      }
+      {
         action = "<C-d>zz";
         key = "<C-d>";
         options = {
-          desc = "Keep cursor in middle when jumping";
+          desc = "Move half down and center";
         };
         mode = [
           "n"
@@ -15,17 +45,7 @@
         action = "<C-u>zz";
         key = "<C-u>";
         options = {
-          desc = "Keep cursor in middle when jumping";
-        };
-        mode = [
-          "n"
-        ];
-      }
-      {
-        action = "mzJ`z";
-        key = "J";
-        options = {
-          desc = "Combine line into one";
+          desc = "Move half up and center";
         };
         mode = [
           "n"
@@ -52,57 +72,45 @@
         ];
       }
       {
-        action = "v:count == 0 ? 'gj' : 'j'";
-        key = "j";
+        action = "'+y";
+        key = "<leader>y";
         options = {
-          silent = true;
-          expr = true;
-        };
-        mode = [
-          "n"
-        ];
-      }
-      {
-        action = "v:count == 0 ? 'gk' : 'k'";
-        key = "k";
-        options = {
-          silent = true;
-          expr = true;
-        };
-        mode = [
-          "n"
-        ];
-      }
-      {
-        action = "<C-w>v";
-        key = "<leader>|";
-        options = {
-          desc = "Split window right";
-        };
-        mode = [
-          "n"
-        ];
-      }
-      {
-        action = "<C-w>s";
-        key = "<leader>-";
-        options = {
-          desc = "Split window below";
-        };
-        mode = [
-          "n"
-        ];
-      }
-      {
-        action = "<cmd>w<cr><esc>";
-        key = "<C-s>";
-        options = {
-          desc = "Save file";
+          desc = "???";
         };
         mode = [
           "n"
           "v"
-          "x"
+        ];
+      }
+      {
+        action = "'+Y";
+        key = "<leader>Y";
+        options = {
+          desc = "???";
+        };
+        mode = [
+          "n"
+        ];
+      }
+      {
+        action = "'_d";
+        key = "<leader>d";
+        options = {
+          desc = "???";
+        };
+        mode = [
+          "n"
+          "v"
+        ];
+      }
+      {
+        action = "<nop>";
+        key = "Q";
+        options = {
+          desc = "???";
+        };
+        mode = [
+          "n"
         ];
       }
       {
@@ -116,25 +124,104 @@
         ];
       }
       {
-        action = ">gv";
-        key = ">";
+        action = {__raw = "vim.lsp.buf.format";};
+        key = "<leader>f";
         options = {
-          desc = "Stay in visual mode during outdent";
+          desc = "Format";
         };
         mode = [
-          "v"
-          "x"
+          "n"
         ];
       }
       {
-        action = "<gv";
-        key = "<";
+        action = "<cmd>cnext<CR>zz";
+        key = "<C-k>";
         options = {
-          desc = "Stay in visual mode during indent";
+          desc = "??";
         };
         mode = [
-          "v"
-          "x"
+          "n"
+        ];
+      }
+      {
+        action = "<cmd>cprev<CR>zz";
+        key = "<C-j>";
+        options = {
+          desc = "??";
+        };
+        mode = [
+          "n"
+        ];
+      }
+      {
+        action = "<cmd>lnext<CR>zz";
+        key = "<leader>k";
+        options = {
+          desc = "??";
+        };
+        mode = [
+          "n"
+        ];
+      }
+      {
+        action = "<cmd>lprev<CR>zz";
+        key = "<leader>j";
+        options = {
+          desc = "??";
+        };
+        mode = [
+          "n"
+        ];
+      }
+      {
+        action = ":%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>";
+        key = "<leader>s";
+        options = {
+          desc = "Seach";
+        };
+        mode = [
+          "n"
+        ];
+      }
+      {
+        action = "<cmd>!chmod +x %<CR>";
+        key = "<leader>x";
+        options = {
+          desc = "Seach";
+          silent = true;
+        };
+        mode = [
+          "n"
+        ];
+      }
+      {
+        action = "oif err != nil {<CR>}<Esc>Oreturn err<Esc>";
+        key = "<leader>ee";
+        options = {
+          desc = "???";
+        };
+        mode = [
+          "n"
+        ];
+      }
+      {
+        action = "<cmd>CellularAutomaton make_it_rain<CR>";
+        key = "<leader>mr";
+        options = {
+          desc = "Make it rain!";
+        };
+        mode = [
+          "n"
+        ];
+      }
+      {
+        action = "so";
+        key = "<leader><leader>";
+        options = {
+          desc = "SO";
+        };
+        mode = [
+          "n"
         ];
       }
     ];

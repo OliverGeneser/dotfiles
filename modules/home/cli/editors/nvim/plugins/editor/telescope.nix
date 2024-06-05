@@ -16,30 +16,21 @@
     plugins.telescope = {
       enable = true;
       extensions.fzf-native.enable = true;
-      extensions.undo.enable = true;
 
       keymaps = {
-        "<leader>ff" = {
+        "<leader>pf" = {
           action = "find_files";
           options = {
-            desc = "Find files";
+            desc = "Find file in project";
           };
         };
-        "<leader>fz" = {
-          action = "current_buffer_fuzzy_find";
-
+        "<C-p>" = {
+          action = "git_files";
           options = {
-            desc = "Find in current buffer";
+            desc = "Find file in git project";
           };
         };
-        "<leader>fr" = {
-          action = "oldfiles";
-
-          options = {
-            desc = "Recent files";
-          };
-        };
-        "<leader>fg" = {
+        "<leader>ps" = {
           action = "live_grep";
           options = {
             desc = "Grep";
@@ -49,19 +40,6 @@
           action = "grep_string";
           options = {
             desc = "Search word under cursor";
-          };
-        };
-        "<leader>fb" = {
-          action = "buffers";
-          options = {
-            desc = "Find buffer";
-          };
-        };
-        "<leader>fc" = {
-          action = "command_history";
-
-          options = {
-            desc = "Search in command history";
           };
         };
       };
