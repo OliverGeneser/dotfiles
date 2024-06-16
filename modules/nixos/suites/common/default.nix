@@ -30,7 +30,7 @@ in {
     system = {
       boot = {
         enable = true;
-        plymouth = true;      
+        plymouth = true;
       };
       fonts.enable = true;
       impermanence.enable = true;

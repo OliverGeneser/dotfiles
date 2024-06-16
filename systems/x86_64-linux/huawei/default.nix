@@ -21,6 +21,7 @@
         hyprland.enable = true;
       };
     };
+    laptop.enable = true;
   };
 
   boot = {
