@@ -30,7 +30,7 @@ in {
     };
 
     system = {
-      #boot.plymouth = true;
+      boot.plymouth = true;
     };
 
     cli.programs = {
