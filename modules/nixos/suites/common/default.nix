@@ -11,7 +11,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    nix.enable = true;
     hardware = {
       audio.enable = true;
       bluetooth.enable = true;
@@ -28,10 +27,8 @@ in {
     };
 
     system = {
-      boot = {
-        enable = true;
-        plymouth = true;
-      };
+      nix.enable = true;
+      boot.enable = true;
       fonts.enable = true;
       impermanence.enable = true;
       locale.enable = true;

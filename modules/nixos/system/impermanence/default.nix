@@ -1,5 +1,4 @@
 {
-  inputs,
   config,
   lib,
   ...
@@ -83,43 +82,11 @@ in {
       ];
       files = [
         "/etc/machine-id"
-        {
-          file = "/var/keys/secret_file";
-          parentDirectory = {mode = "u=rwx,g=,o=";};
-        }
         "/etc/ssh/ssh_host_ed25519_key"
         "/etc/ssh/ssh_host_ed25519_key.pub"
         "/etc/ssh/ssh_host_rsa_key"
         "/etc/ssh/ssh_host_rsa_key.pub"
       ];
-      users.olivergeneser = {
-        directories = [
-          "dotfiles"
-          "Downloads"
-          "Music"
-          "Pictures"
-          "Documents"
-          "Videos"
-          "VirturalBox VMs"
-          {
-            directory = ".gnupg";
-            mode = "0700";
-          }
-          {
-            directory = ".ssh";
-            mode = "0700";
-          }
-          {
-            directory = ".nixops";
-            mode = "0700";
-          }
-          {
-            directory = ".local/share/keyrings";
-            mode = "0700";
-          }
-          ".local/share/direnv"
-        ];
-      };
     };
   };
 }

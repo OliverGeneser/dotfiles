@@ -1,7 +1,5 @@
 {
-  inputs,
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -22,16 +20,25 @@ in {
 
   config = {
     users.mutableUsers = false;
-    users.users.olivergeneser =
+    users.users.${cfg.name} =
       {
         isNormalUser = true;
         inherit (cfg) name;
         hashedPassword = "$6$fGDkSQ/rlUmeMmpx$L3cNIDSUVuetvqVdwgynz4m3IrPEukPcMPzjvS84zaxkU1xNOglduoFDgsHSVqSSjUZOydCGvoEpbzJTFktV/1";
-        home = "/home/olivergeneser";
+        home = "/home/${cfg.name}";
         group = "users";
 
         extraGroups =
-          ["wheel" "audio" "sound" "video" "render" "networkmanager" "input" "tty"]
+          [
+            "wheel"
+            "audio"
+            "sound"
+            "video"
+            "render"
+            "networkmanager"
+            "input"
+            "tty"
+          ]
           ++ cfg.extraGroups;
       }
       // cfg.extraOptions;
@@ -39,7 +46,6 @@ in {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      backupFileExtension = "backup";
     };
   };
 }

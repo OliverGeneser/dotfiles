@@ -33,7 +33,6 @@ in {
     services.xserver = {
       xkb.layout = "us";
       xkb.variant = "altgr-intl";
-      exportConfiguration = true;
     };
     # Configure console keymap
     console.keyMap = "us";

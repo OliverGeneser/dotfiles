@@ -24,13 +24,13 @@ in {
       logitechMouse.enable = true;
     };
 
-    virtualisation = {
-      podman.enable = true;
-    };
-
     services = {
       vpn.enable = true;
       virtualisation.podman.enable = true;
+    };
+
+    system = {
+      #boot.plymouth = true;
     };
 
     cli.programs = {
