@@ -11,6 +11,15 @@
 
   desktops.hyprland.enable = true;
 
+  cli.programs.ssh.extraHosts = {
+    "bitbucket-qinspect" = {
+      hostname = "bitbucket.org";
+      user = "git";
+      identityFile = "~/.ssh/ssh_prod_qreport";
+      identitiesOnly = true;
+    };
+  };
+
   custom.user = {
     enable = true;
     name = "olivergeneser";

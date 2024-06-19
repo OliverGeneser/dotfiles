@@ -17,9 +17,17 @@ in {
             type = lib.types.str;
             description = "The hostname or IP address of the SSH host.";
           };
+          user = lib.mkOption {
+            type = lib.types.str;
+            description = "Set user";
+          };
           identityFile = lib.mkOption {
             type = lib.types.str;
             description = "The path to the identity file for the SSH host.";
+          };
+          identitiesOnly = lib.mkOption {
+            type = lib.types.bool;
+            description = "Only identities";
           };
         };
       });
