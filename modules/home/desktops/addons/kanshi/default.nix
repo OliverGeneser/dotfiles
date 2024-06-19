@@ -32,6 +32,19 @@ in {
           ];
         }
         {
+          profile.name = "docked";
+          profile.outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 1.25;
+              status = "enable";
+            }
+            {
+              criteria = "DP-1";
+            }
+          ];
+        }
+        {
           profile.name = "desktop";
           profile.outputs = [
             {
