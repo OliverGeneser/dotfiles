@@ -55,11 +55,11 @@ in {
           };
 
           gpg = {
-            format="ssh";
-          };          
-          
+            format = "ssh";
+          };
+
           pull = {
-            ff = "only";
+            rebase = true;
           };
 
           push = {
