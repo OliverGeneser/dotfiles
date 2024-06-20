@@ -19,6 +19,16 @@
       identityFile = "~/.ssh/ssh_prod_qreport";
       identitiesOnly = true;
     };
+    "qmaster.q-inspect.com" = {
+      hostname = "qmaster.q-inspect.com";
+      identityFile = "~/.ssh/ssh_prod_qreport";
+      identitiesOnly = true;
+    };
+    "q-inspect.dk" = {
+      hostname = "q-inspect.dk";
+      identityFile = "~/.ssh/ssh_prod_qreport";
+      identitiesOnly = true;
+    };
   };
 
   custom.user = {

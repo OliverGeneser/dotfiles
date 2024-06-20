@@ -15,11 +15,14 @@
 mkShell {
   # Create your shell
   packages = with pkgs; [
-    nodejs_20
-    corepack_20
+    nodejs_18
+    corepack_18
+    libuuid
+    zip
   ];
 
   shellHook = ''
-    echo "node `${pkgs.nodejs}/bin/node --version`"
+    export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [pkgs.libuuid]}"
+    node --version
   '';
 }
