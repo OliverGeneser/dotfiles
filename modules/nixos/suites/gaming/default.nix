@@ -22,7 +22,7 @@ in {
         driSupport = true;
         driSupport32Bit = true;
         extraPackages = with pkgs; [
-          #mesa
+          mesa
         ];
       };
     };

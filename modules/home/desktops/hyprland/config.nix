@@ -21,18 +21,18 @@ in {
       config = {
         monitor = ["HDMI-A-1,addreserved,0,0,0,150"];
 
-        workspace = [
-          "1, monitor:DP-1, on-created-empty:[silent,fullscreen] mullvad-browser"
-          "2, monitor:DP-1, on-created-empty:[silent,fullscreen] firefox"
-          "3, monitor:DP-1, on-created-empty:[silent,float,tile,fullscreen] wezterm start --always-new-process"
-          "4, monitor:DP-1"
-          "5, monitor:DP-1, on-created-empty:[silent,fullscreen] webcord"
-          "6, monitor:DP-1, on-created-empty:[silent,fullscreen] gimp"
-          "7, monitor:DP-1"
-          "8, monitor:DP-1"
-          "9, monitor:DP-1"
-          "0, monitor:DP-1"
-        ];
+        #workspace = [
+        #  "1, monitor:DP-1, on-created-empty:[silent,fullscreen] mullvad-browser"
+        #  "2, monitor:DP-1, on-created-empty:[silent,fullscreen] firefox"
+        #  "3, monitor:DP-1, on-created-empty:[silent,float,tile,fullscreen] wezterm start --always-new-process"
+        #  "4, monitor:DP-1"
+        #  "5, monitor:DP-1, on-created-empty:[silent,fullscreen] webcord"
+        #  "6, monitor:DP-1, on-created-empty:[silent,fullscreen] gimp"
+        #  "7, monitor:DP-1"
+        #  "8, monitor:DP-1"
+        #  "9, monitor:DP-1"
+        #  "0, monitor:DP-1"
+        #];
 
         input = {
           kb_layout = "us,dk";
@@ -51,6 +51,7 @@ in {
           border_size = 0;
           active_border_color = "0xff${palette.base07}";
           inactive_border_color = "0xff${palette.base02}";
+          layout = "dwindle";
         };
 
         decoration = {
@@ -61,6 +62,7 @@ in {
           FULLSCREEN_ONLY = 2;
         in {
           vrr = 2;
+          vfr = 1;
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
           force_default_wallpaper = 0;
@@ -69,12 +71,19 @@ in {
           disable_autoreload = true;
         };
 
+        # <https://wiki.hyprland.org/Configuring/Dwindle-Layout/>
+        dwindle = {
+          pseudotile = true;
+          preserve_split = true; # false
+          no_gaps_when_only = true;
+        };
+
         exec_once = [
-          "dbus-update-activation-environment --systemd --all"
+          #"dbus-update-activation-environment --systemd --all"
           "systemctl --user import-environment QT_QPA_PLATFORMTHEME"
           "${pkgs.swaynotificationcenter}/bin/swaync"
-          "${pkgs.kanshi}/bin/kanshi"
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+          #"${pkgs.kanshi}/bin/kanshi"
+          #"${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
           "${pkgs.pyprland}/bin/pypr"
           "${pkgs.clipse}/bin/clipse -listen"
           "${pkgs.solaar}/bin/solaar -w hide"
