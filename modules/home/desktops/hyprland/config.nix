@@ -35,9 +35,9 @@ in {
         #];
 
         input = {
-          kb_layout = "us,dk";
-          kb_variant = "altgr-intl,";
-          kb_options = "grp:alt_space_toggle,";
+          kb_layout = cfg.layout;
+          kb_variant = cfg.variant;
+          kb_options = cfg.options;
           follow_mouse = true;
           touchpad = {
             disable_while_typing = false;

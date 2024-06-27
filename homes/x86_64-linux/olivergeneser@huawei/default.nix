@@ -8,9 +8,15 @@
     desktop.enable = true;
     gaming.enable = true;
     office.enable = true;
+    hobby.enable = true;
   };
 
-  desktops.hyprland.enable = true;
+  desktops.hyprland = {
+    enable = true;
+    layout = "dk,us";
+    variant = ",altgr-intl";
+    options = ",grp:alt_space_toggle";
+  };
 
   cli.programs.ssh.extraHosts = {
     "bitbucket-qinspect" = {
