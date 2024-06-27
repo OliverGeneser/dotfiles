@@ -57,13 +57,13 @@ in {
         {
           profile.name = "undocked";
           profile.outputs = [
-            (internalMonitor.config // {scale = 1.25;})
+            (internalMonitor.config // {scale = 1.333333;})
           ];
         }
         {
           profile.name = "docked";
           profile.outputs = [
-            (internalMonitor.config // {scale = 1.25;})
+            (internalMonitor.config // {scale = 1.333333;})
             (dockedMonitor.config // {})
           ];
         }
