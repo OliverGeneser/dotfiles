@@ -1,4 +1,4 @@
-theme "catppuccin-mocha"
+//theme "catppuccin-mocha"
 pane_frames false
 simplified_ui true
 default_layout "mine"
@@ -9,6 +9,11 @@ copy_on_select true
 keybinds {
     unbind "Ctrl q"
     normal {
+        bind "Ctrl f" {
+            Run "sesh" {
+                direction "Down"
+            }
+        }
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
     }
@@ -52,7 +57,7 @@ keybinds {
 
     move clear-defaults=true {
         bind "Alt m" "Esc" "Ctrl {" { SwitchToMode "Normal"; }
-        
+
         bind "n" "Tab" { MovePane; }
         bind "p" { MovePaneBackwards; }
         bind "h" "Left" { MovePane "Left"; }

@@ -14,13 +14,15 @@ in {
   config = mkIf cfg.enable {
     programs.foot = {
       enable = true;
+
       catppuccin.enable = true;
+
       settings = {
         main = {
           term = "foot";
           font = "MonoLisa Nerd Font:size=14, JoyPixels:size=14";
           shell = "fish";
-          pad = "30x30";
+          pad = "15x15";
           selection-target = "clipboard";
         };
 

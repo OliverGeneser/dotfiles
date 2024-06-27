@@ -7,8 +7,6 @@
 with lib;
 with lib.custom; let
   cfg = config.cli.multiplexers.zellij;
-  inherit (config.colorscheme) colors;
-
   sesh = pkgs.writeScriptBin "sesh" ''
     #! /usr/bin/env sh
 

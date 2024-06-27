@@ -28,7 +28,7 @@ in {
     };
 
     cli = {
-      terminals.wezterm.enable = true;
+      terminals.foot.enable = true;
       terminals.kitty.enable = true;
       shells.fish.enable = true;
     };
@@ -54,6 +54,7 @@ in {
       nvtopPackages.amd
       htop
       unzip
+      zip
       gnupg
 
       showmethekey
