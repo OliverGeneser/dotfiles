@@ -14,7 +14,7 @@ in {
     extraHosts = mkOption {
       type = lib.types.anything;
       description = "Extra SSH match blocks.";
-      default = [];
+      default = {};
     };
   };
 
