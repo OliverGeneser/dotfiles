@@ -79,8 +79,8 @@ in {
         };
 
         exec_once = [
-          #"dbus-update-activation-environment --systemd --all"
-          "systemctl --user import-environment QT_QPA_PLATFORMTHEME"
+          "dbus-update-activation-environment --systemd --all"
+          "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE"
           "${pkgs.swaynotificationcenter}/bin/swaync"
           #"${pkgs.kanshi}/bin/kanshi"
           #"${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"

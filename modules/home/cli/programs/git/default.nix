@@ -43,7 +43,7 @@ in {
           };
 
           interactive = {
-            diffFitler = "delta --color-only";
+            diffFilter = "delta --color-only";
           };
 
           delta = {

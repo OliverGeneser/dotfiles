@@ -14,10 +14,6 @@
     ];
 
     plugins = {
-      which-key.registrations = {
-        "<leader>gs" = "git";
-      };
-
       diffview = {
         enable = true;
       };

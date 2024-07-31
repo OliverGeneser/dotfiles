@@ -24,9 +24,9 @@ in {
       fragments
       baobab
       gnome.gnome-power-manager
-      gnome.sushi
-      gnome.gnome-disk-utility
-      gnome.totem
+      sushi
+      gnome-disk-utility
+      totem
       celluloid
       gnome.gvfs
       loupe
@@ -34,9 +34,9 @@ in {
       gnome-network-displays
       gnome-firmware
 
-      gnome.nautilus
+      nautilus
       ffmpegthumbnailer # thumbnails
-      gnome.nautilus-python # enable plugins
+      nautilus-python # enable plugins
       gst_all_1.gst-libav # thumbnails
       nautilus-open-any-terminal # terminal-context-entry
     ];

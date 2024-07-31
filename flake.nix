@@ -34,7 +34,6 @@
     nixgl.url = "github:nix-community/nixGL";
     nix-colors.url = "github:misterio77/nix-colors";
     catppuccin.url = "github:catppuccin/nix";
-    nix-ld.url = "github:Mic92/nix-ld";
     nix-index-database.url = "github:nix-community/nix-index-database";
 
     nixos-generators = {
@@ -78,7 +77,7 @@
     };
 
     nixvim = {
-      url = "github:pta2002/nixvim";
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -134,7 +133,6 @@
         lanzaboote.nixosModules.lanzaboote
         impermanence.nixosModules.impermanence
         sops-nix.nixosModules.sops
-        nix-ld.nixosModules.nix-ld
         catppuccin.nixosModules.catppuccin
       ];
 

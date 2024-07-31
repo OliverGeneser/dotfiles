@@ -4,17 +4,20 @@
       treesitter = {
         enable = true;
         nixvimInjections = true;
-        indent = true;
+        settings = {
+          indent = {
+            enable = true;
+          };
 
-        incrementalSelection = {
-          enable = true;
-          keymaps = {
-            initSelection = "<C-space>";
-            nodeIncremental = "<C-space>";
-            nodeDecremental = "<bs>";
+          incremental_selection = {
+            enable = true;
+            keymaps = {
+              initSelection = "<C-space>";
+              nodeIncremental = "<C-space>";
+              nodeDecremental = "<bs>";
+            };
           };
         };
-
         grammarPackages = with config.programs.nixvim.plugins.treesitter.package.builtGrammars; [
           c
           css

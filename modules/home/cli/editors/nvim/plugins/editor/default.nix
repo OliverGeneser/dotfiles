@@ -70,15 +70,6 @@
         enable = true;
       };
 
-      which-key = {
-        enable = true;
-
-        registrations = {
-          "<leader>f" = "+file/find";
-          "<leader>h" = "+harpoon";
-          "<leader>r" = "+refactor";
-        };
-      };
       zellij = {
         enable = true;
         settings = {

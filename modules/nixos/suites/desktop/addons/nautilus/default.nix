@@ -38,7 +38,7 @@ in {
         ffmpegthumbnailer # thumbnails
         gst_all_1.gst-libav # thumbnails
         nautilus-open-any-terminal
-        gnome.nautilus-python
+        nautilus-python
       ];
     };
 
