@@ -67,6 +67,7 @@ in {
         hms = "home-manager switch --flake ~/dotfiles#${config.custom.user.name}@${host}";
         hmr = "home-manager generations | fzf --tac --no-sort | awk '{print $7}' | xargs -I{} bash {}/activate";
         nrs = "sudo nixos-rebuild switch --flake ~/dotfiles#${host}";
+        nrt = "sudo nixos-rebuild test --flake ~/dotfiles#${host}";
         niso = "nix build .#nixosConfigurations.iso.config.system.build.isoImage";
 
         # new commads
@@ -78,6 +79,9 @@ in {
         ds = "docker stop (docker ps -a -q)";
         drm = "docker rm (docker ps -a -q)";
         docker-compose = "podman-compose";
+
+        # laptop
+        battery = "set batteryCharge (bat /sys/class/power_supply/BAT0/capacity) && set batteryStatus (bat /sys/class/power_supply/BAT0/status); echo -e \"Charge: $batteryCharge% \nCurrently: $batteryStatus\"";
       };
 
       functions = {
