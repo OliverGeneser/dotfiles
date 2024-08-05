@@ -13,7 +13,7 @@
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     nixos-hardware = {
       url = "github:nixos/nixos-hardware";
     };
@@ -66,15 +66,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland-git.url = "github:hyprwm/hyprland";
-    hyprland-xdph-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
-    hyprland-protocols-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
-    hyprland-nix.url = "github:spikespaz/hyprland-nix";
-    hyprland-nix.inputs = {
-      hyprland.follows = "hyprland-git";
-      hyprland-xdph.follows = "hyprland-xdph-git";
-      hyprland-protocols.follows = "hyprland-protocols-git";
+    hyprland = {
+      type = "git";
+      url = "https://github.com/hyprwm/Hyprland";
+      submodules = true;
     };
+
+    #hyprland-git.url = "github:hyprwm/hyprland";
+    #hyprland-xdph-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    #hyprland-protocols-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    #hyprland-nix.url = "github:spikespaz/hyprland-nix";
+    #hyprland-nix.inputs = {
+    #  hyprland.follows = "hyprland-git";
+    #  hyprland-xdph.follows = "hyprland-xdph-git";
+    #  hyprland-protocols.follows = "hyprland-protocols-git";
+    #};
 
     nixvim = {
       url = "github:nix-community/nixvim";
