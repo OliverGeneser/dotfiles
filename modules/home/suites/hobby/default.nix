@@ -12,5 +12,6 @@ in {
 
   config = mkIf cfg.enable {
     programs.printing.super-slicer.enable = true;
+    programs.design.freecad.enable = true;
   };
 }
