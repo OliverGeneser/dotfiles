@@ -96,6 +96,7 @@ in {
       users.olivergeneser = {
         directories = [
           "dotfiles"
+          "Work"
           "Downloads"
           "Music"
           "Pictures"
