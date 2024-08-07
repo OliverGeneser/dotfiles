@@ -38,7 +38,8 @@ in {
         # We first mount the btrfs root to /mnt
         # so we can manipulate btrfs subvolumes.
         mount -o subvol=/ /dev/mapper/cryptroot /mnt
-        #btrfs subvolume list -o /mnt/root
+
+        btrfs subvolume list -o /mnt/root
 
         # While we're tempted to just delete /root and create
         # a new snapshot from /root-blank, /root is already
@@ -54,13 +55,13 @@ in {
         cut -f9 -d' ' |
         while read subvolume; do
           echo "deleting /$subvolume subvolume..."
-          # btrfs subvolume delete "/mnt/$subvolume"
+          btrfs subvolume delete "/mnt/$subvolume"
         done &&
         echo "deleting /root subvolume..." &&
-        # btrfs subvolume delete /mnt/root
+        btrfs subvolume delete /mnt/root
 
         echo "restoring blank /root subvolume..."
-        # btrfs subvolume snapshot /mnt/root-blank /mnt/root
+        btrfs subvolume snapshot /mnt/root-blank /mnt/root
 
         # Once we're done rolling back to a blank snapshot,
         # we can unmount /mnt and continue on the boot process.
@@ -71,14 +72,15 @@ in {
     environment.persistence."/persist" = {
       hideMounts = true;
       directories = [
-        "/var/lib/bluetooth"
-        "/var/lib/nixos"
-        "/var/lib/systemd/coredump"
         "/.cache/nix/"
-        "/etc/NetworkManager/system-connections"
         "/var/cache/"
         "/var/db/sudo/"
         "/var/lib/"
+
+        "/var/lib/bluetooth"
+        "/var/lib/nixos"
+        "/var/lib/systemd/coredump"
+        "/etc/NetworkManager/system-connections"
       ];
       files = [
         "/etc/machine-id"
@@ -86,7 +88,42 @@ in {
         "/etc/ssh/ssh_host_ed25519_key.pub"
         "/etc/ssh/ssh_host_rsa_key"
         "/etc/ssh/ssh_host_rsa_key.pub"
+        {
+          file = "/var/keys/secret_file";
+          parentDirectory = {mode = "u=rwx,g=,o=";};
+        }
       ];
+      users.olivergeneser = {
+        directories = [
+          "dotfiles"
+          "Downloads"
+          "Music"
+          "Pictures"
+          "Documents"
+          "Videos"
+          "VirtualBox VMs"
+          {
+            directory = ".gnupg";
+            mode = "0700";
+          }
+          {
+            directory = ".ssh";
+            mode = "0700";
+          }
+          {
+            directory = ".nixops";
+            mode = "0700";
+          }
+          {
+            directory = ".local/share/keyrings";
+            mode = "0700";
+          }
+          ".local/share/direnv"
+        ];
+        files = [
+          ".screenrc"
+        ];
+      };
     };
   };
 }
