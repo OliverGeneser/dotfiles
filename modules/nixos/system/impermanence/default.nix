@@ -55,13 +55,13 @@ in {
         cut -f9 -d' ' |
         while read subvolume; do
           echo "deleting /$subvolume subvolume..."
-          btrfs subvolume delete "/mnt/$subvolume"
+          #btrfs subvolume delete "/mnt/$subvolume"
         done &&
         echo "deleting /root subvolume..." &&
-        btrfs subvolume delete /mnt/root
+        #btrfs subvolume delete /mnt/root
 
         echo "restoring blank /root subvolume..."
-        btrfs subvolume snapshot /mnt/root-blank /mnt/root
+        #btrfs subvolume snapshot /mnt/root-blank /mnt/root
 
         # Once we're done rolling back to a blank snapshot,
         # we can unmount /mnt and continue on the boot process.
