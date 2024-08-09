@@ -14,8 +14,9 @@ in {
     ];
 
     wayland.windowManager.hyprland.settings.workspace = [
-      "1, on-created-empty:[float] firefox"
-      "3, on-created-empty:[float] foot"
+      "1, monitor:eDP-1, on-created-empty:[silent] firefox"
+      "3, monitor:eDP-1, on-created-empty:[silent] foot"
+      "5, monitor:eDP-1, on-created-empty:[silent] webcord"
     ];
   };
 }
