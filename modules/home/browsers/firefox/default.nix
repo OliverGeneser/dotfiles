@@ -38,24 +38,27 @@ in {
           vimium
           user-agent-string-switcher
         ];
-        search.default = "DuckDuckGo";
-        search.engines = {
-          "Nix Packages" = {
-            urls = [
-              {
-                template = "https://search.nixos.org/packages";
-                params = [
-                  {
-                    name = "type";
-                    value = "packages";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
+        search = {
+          default = "DuckDuckGo";
+          force = true;
+          engines = {
+            "Nix Packages" = {
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    {
+                      name = "type";
+                      value = "packages";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+            };
           };
         };
         arkenfox = {
