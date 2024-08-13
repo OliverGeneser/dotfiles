@@ -12,8 +12,13 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      kanshi
+    ];
+
     services.kanshi = {
       enable = true;
+      package = pkgs.kanshi;
       systemdTarget = "hyprland-session.target";
 
       settings = [
@@ -66,6 +71,21 @@ in {
             }
             {
               criteria = "DVI-D-1";
+              position = "320,-1080";
+              mode = "1920x1080@60Hz";
+            }
+          ];
+        }
+        {
+          profile.name = "desktop2monitors";
+          profile.outputs = [
+            {
+              criteria = "DP-1";
+              position = "0,0";
+              mode = "2560x1440@165Hz";
+            }
+            {
+              criteria = "HDMI-A-1";
               position = "320,-1080";
               mode = "1920x1080@60Hz";
             }
