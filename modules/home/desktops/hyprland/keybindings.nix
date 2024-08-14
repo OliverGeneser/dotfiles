@@ -97,16 +97,16 @@ in {
         "ALTCONTROL, j, focusmonitor, d"
 
         # Change Workspace
-        "ALT, 1, workspace, 1"
-        "ALT, 2, workspace, 2"
-        "ALT, 3, workspace, 3"
-        "ALT, 4, workspace, 4"
-        "ALT, 5, workspace, 5"
-        "ALT, 6, workspace, 6"
-        "ALT, 7, workspace, 7"
-        "ALT, 8, workspace, 8"
-        "ALT, 9, workspace, 9"
-        "ALT, 0, workspace, 0"
+        "ALT, 1, focusworkspaceoncurrentmonitor, 1"
+        "ALT, 2, focusworkspaceoncurrentmonitor, 2"
+        "ALT, 3, focusworkspaceoncurrentmonitor, 3"
+        "ALT, 4, focusworkspaceoncurrentmonitor, 4"
+        "ALT, 5, focusworkspaceoncurrentmonitor, 5"
+        "ALT, 6, focusworkspaceoncurrentmonitor, 6"
+        "ALT, 7, focusworkspaceoncurrentmonitor, 7"
+        "ALT, 8, focusworkspaceoncurrentmonitor, 8"
+        "ALT, 9, focusworkspaceoncurrentmonitor, 9"
+        "ALT, 0, focusworkspaceoncurrentmonitor, 0"
 
         # Move Workspace
         "ALTSHIFT, 1, movetoworkspacesilent, 1"

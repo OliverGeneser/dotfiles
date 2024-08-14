@@ -14,6 +14,7 @@ in {
     #hyprland-nix.homeManagerModules.default
     ./config.nix
     ./windowrules.nix
+    ./monitors.nix
     ./keybindings.nix
   ];
 
@@ -22,6 +23,7 @@ in {
     layout = mkOpt str "us,dk" "Keyboard layout";
     variant = mkOpt str "altgr-intl," "Keyboard variant";
     options = mkOpt str "grp:alt_space_toggle," "Keyboard options";
+    primary_monitor = mkOpt str "eDP-1" "Primary display";
   };
 
   # FIX: this hack to use nix catppuccin module: https://github.com/catppuccin/nix/issues/102
