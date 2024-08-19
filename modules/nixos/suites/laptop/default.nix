@@ -11,6 +11,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    services.thermald.enable = true;
+
     hardware = {
       batteryctl.enable = true;
     };

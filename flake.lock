@@ -56,22 +56,6 @@
         "type": "github"
       }
     },
-    "arrow-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1716900917,
-        "narHash": "sha256-C8MVnF+f4hxHxFDPnZ4P5ywmfDCMzMjPeMoKRFiQeY0=",
-        "owner": "otavioschwanck",
-        "repo": "arrow.nvim",
-        "rev": "0b0191d967d9fd837a850f2ccaa95d5917239404",
-        "type": "github"
-      },
-      "original": {
-        "owner": "otavioschwanck",
-        "repo": "arrow.nvim",
-        "type": "github"
-      }
-    },
     "base16-schemes": {
       "flake": false,
       "locked": {
@@ -1015,39 +999,6 @@
         "type": "github"
       }
     },
-    "neorg": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1703783667,
-        "narHash": "sha256-Q5V3ru+fgPYS3OxN5jDMh+4Vi9eJOuq5cC/kJ6neJ3I=",
-        "owner": "nvim-neorg",
-        "repo": "neorg",
-        "rev": "4cbedbbdd4ccb6f45a2045477f5658a1311dffa3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-neorg",
-        "repo": "neorg",
-        "rev": "4cbedbbdd4ccb6f45a2045477f5658a1311dffa3",
-        "type": "github"
-      }
-    },
-    "neorg-templates": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1707616388,
-        "narHash": "sha256-nZOAxXSHTUDBpUBS/Esq5HHwEaTB01dI7x5CQFB3pcw=",
-        "owner": "pysan3",
-        "repo": "neorg-templates",
-        "rev": "2808ec9796e0ba89377e1eeb73bd25af3d10ef7f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pysan3",
-        "repo": "neorg-templates",
-        "type": "github"
-      }
-    },
     "nix-colors": {
       "inputs": {
         "base16-schemes": "base16-schemes",
@@ -1505,7 +1456,6 @@
     "root": {
       "inputs": {
         "arkenfox": "arkenfox",
-        "arrow-nvim": "arrow-nvim",
         "catppuccin": "catppuccin",
         "comma": "comma",
         "disko": "disko",
@@ -1517,8 +1467,6 @@
         "hyprlock": "hyprlock",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
-        "neorg": "neorg",
-        "neorg-templates": "neorg-templates",
         "nix-colors": "nix-colors",
         "nix-index-database": "nix-index-database",
         "nixgl": "nixgl",

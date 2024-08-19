@@ -87,22 +87,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # For waiting for updates
-    #waybar.url = "github:Alexays/Waybar?rev=32eac3ccb738691974121b77b4af0c47d1cbe524";
-
-    neorg-templates = {
-      url = "github:pysan3/neorg-templates";
-      flake = false;
-    };
-    neorg = {
-      url = "github:nvim-neorg/neorg?rev=4cbedbbdd4ccb6f45a2045477f5658a1311dffa3";
-      flake = false;
-    };
-    arrow-nvim = {
-      url = "github:otavioschwanck/arrow.nvim";
-      flake = false;
-    };
-
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -140,6 +124,10 @@
         impermanence.nixosModules.impermanence
         sops-nix.nixosModules.sops
         catppuccin.nixosModules.catppuccin
+      ];
+
+      systems.hosts.huawei.modules = with inputs; [
+        nixos-hardware.nixosModules.huawei-machc-wa
       ];
 
       overlays = with inputs; [
