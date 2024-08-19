@@ -22,6 +22,7 @@ in {
     browsers = {
       mullvad.enable = true;
       firefox.enable = true;
+      chromium.enable = true;
     };
     desktops.addons.xdg.enable = true;
 
