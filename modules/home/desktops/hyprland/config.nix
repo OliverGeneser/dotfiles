@@ -1,28 +1,15 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib; let
   cfg = config.desktops.hyprland;
   inherit (config.colorScheme) palette;
-in {
+in
+{
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
-      #workspace = [
-      #  "1, monitor:DP-1, on-created-empty:[silent,fullscreen] mullvad-browser"
-      #  "2, monitor:DP-1, on-created-empty:[silent,fullscreen] firefox"
-      #  "3, monitor:DP-1, on-created-empty:[silent,float,tile,fullscreen] wezterm start --always-new-process"
-      #  "4, monitor:DP-1"
-      #  "5, monitor:DP-1, on-created-empty:[silent,fullscreen] webcord"
-      #  "6, monitor:DP-1, on-created-empty:[silent,fullscreen] gimp"
-      #  "7, monitor:DP-1"
-      #  "8, monitor:DP-1"
-      #  "9, monitor:DP-1"
-      #  "0, monitor:DP-1"
-      #];
-
       input = {
         kb_layout = cfg.layout;
         kb_variant = cfg.variant;

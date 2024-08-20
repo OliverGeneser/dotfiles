@@ -1,13 +1,13 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.desktops.addons.rofi;
-in {
+in
+{
   options.desktops.addons.rofi = {
     enable = mkEnableOption "Enable rofi app manager";
     package = mkPackageOpt pkgs.rofi-wayland "Package to use for rofi";
@@ -19,7 +19,7 @@ in {
       package = cfg.package;
       catppuccin.enable = true;
       font = "MonoLisa Nerd Font 12";
-      terminal = "${pkgs.foot}/bin/foot";
+      terminal = "${pkgs.wezterm}/bin/wezterm";
       extraConfig = {
         modi = "run,drun,window";
         show-icons = true;

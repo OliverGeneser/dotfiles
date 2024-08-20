@@ -1,11 +1,11 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib; let
   cfg = config.cli.terminals.wezterm;
-in {
+in
+{
   options.cli.terminals.wezterm = {
     enable = mkEnableOption "enable wezterm terminal emulator";
   };
@@ -15,5 +15,6 @@ in {
       enable = true;
       extraConfig = builtins.readFile ./config.lua;
     };
+    xdg.configFile."wezterm/sessionizer.lua".source = ./sessionizer.lua;
   };
 }

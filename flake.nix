@@ -95,23 +95,36 @@
       url = "github:dwarfmaster/arkenfox-nixos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Rust prject helper
+    naersk = {
+      url = "github:nix-community/naersk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Wezterm unstable
+    wezterm = {
+      url = "git+https://github.com/wez/wezterm.git?submodules=1";
+      flake = false;
+    };
   };
 
-  outputs = inputs: let
-    lib = inputs.snowfall-lib.mkLib {
-      inherit inputs;
-      src = ./.;
+  outputs = inputs:
+    let
+      lib = inputs.snowfall-lib.mkLib {
+        inherit inputs;
+        src = ./.;
 
-      snowfall = {
-        metadata = "dotfiles";
-        namespace = "custom";
-        meta = {
-          name = "dotfiles";
-          title = "Geneser Nix Flake";
+        snowfall = {
+          metadata = "dotfiles";
+          namespace = "custom";
+          meta = {
+            name = "dotfiles";
+            title = "Geneser Nix Flake";
+          };
         };
       };
-    };
-  in
+    in
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;

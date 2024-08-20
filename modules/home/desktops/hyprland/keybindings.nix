@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib; let
   cfg = config.desktops.hyprland;
@@ -57,11 +56,12 @@ with lib; let
     hyprctl dispatch moveactive exact $pos_x $pos_y
     hyprctl dispatch resizeactive exact $size_x $size_y
   '';
-in {
+in
+{
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       bind = [
-        "SUPER, Return, exec, [float;tile] foot zellij"
+        "SUPER, Return, exec, [float;tile] wezterm start --always-new-process"
         "SUPER, E, exec, thunar"
         "SUPER, F, exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun"
         "SUPER, Q, killactive,"

@@ -999,6 +999,26 @@
         "type": "github"
       }
     },
+    "naersk_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1721727458,
+        "narHash": "sha256-r/xppY958gmZ4oTfLiHN0ZGuQ+RSTijDblVgVLFi1mw=",
+        "owner": "nix-community",
+        "repo": "naersk",
+        "rev": "3fb418eaf352498f6b6c30592e3beb63df42ef11",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "naersk",
+        "type": "github"
+      }
+    },
     "nix-colors": {
       "inputs": {
         "base16-schemes": "base16-schemes",
@@ -1467,6 +1487,7 @@
         "hyprlock": "hyprlock",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
+        "naersk": "naersk_2",
         "nix-colors": "nix-colors",
         "nix-index-database": "nix-index-database",
         "nixgl": "nixgl",
@@ -1476,7 +1497,8 @@
         "nixvim": "nixvim",
         "pyprland": "pyprland",
         "snowfall-lib": "snowfall-lib",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "wezterm": "wezterm"
       }
     },
     "rust-overlay": {
@@ -1751,6 +1773,24 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "type": "github"
+      }
+    },
+    "wezterm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723525023,
+        "narHash": "sha256-By7g1yImmuVba/MTcB6ajNSHeWDRn4gO+p0UOWcCEgE=",
+        "ref": "refs/heads/main",
+        "rev": "30345b36d8a00fed347e4df5dadd83915a7693fb",
+        "revCount": 8086,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/wez/wezterm.git"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/wez/wezterm.git"
       }
     },
     "xdph": {

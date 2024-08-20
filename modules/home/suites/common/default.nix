@@ -1,14 +1,14 @@
-{
-  lib,
-  pkgs,
-  config,
-  inputs,
-  ...
+{ lib
+, pkgs
+, config
+, inputs
+, ...
 }:
 with lib;
 with inputs; let
   cfg = config.suites.common;
-in {
+in
+{
   imports = [
     catppuccin.homeManagerModules.catppuccin
     nix-colors.homeManagerModule
@@ -28,8 +28,8 @@ in {
     };
 
     cli = {
+      terminals.wezterm.enable = true;
       terminals.foot.enable = true;
-      terminals.kitty.enable = true;
       shells.fish.enable = true;
     };
 
@@ -41,23 +41,25 @@ in {
 
     # TODO: move this to a separate module
     home.packages = with pkgs;
-    with pkgs.custom; [
-      monolisa
+      with pkgs.custom; [
+        monolisa
 
-      keymapp
-      powertop
+        keymapp
+        powertop
 
-      src-cli
+        src-cli
 
-      (lib.hiPrio parallel)
-      moreutils
-      nvtopPackages.amd
-      htop
-      unzip
-      zip
-      gnupg
+        (lib.hiPrio parallel)
+        moreutils
+        nvtopPackages.amd
+        htop
+        unzip
+        zip
+        gnupg
 
-      showmethekey
-    ];
+        showmethekey
+        python3
+        rustup
+      ];
   };
 }
