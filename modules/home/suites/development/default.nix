@@ -1,11 +1,11 @@
-{
-  lib,
-  config,
-  ...
+{ lib
+, config
+, ...
 }:
 with lib; let
   cfg = config.suites.development;
-in {
+in
+{
   options.suites.development = {
     enable = mkEnableOption "Enable development configuration";
   };
@@ -13,8 +13,10 @@ in {
   config = mkIf cfg.enable {
     suites.common.enable = true;
 
-    programs.beekeeperStudio.enable = true;
-
+    programs = {
+      beekeeperStudio.enable = true;
+      androidStudio.enable = true;
+    };
     cli = {
       editors.nvim.enable = true;
       multiplexers.zellij.enable = true;

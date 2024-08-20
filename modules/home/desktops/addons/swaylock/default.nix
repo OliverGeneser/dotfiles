@@ -1,14 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.custom; let
   inherit (config.colorScheme) palette;
   cfg = config.desktops.addons.swaylock;
-in {
+in
+{
   options.desktops.addons.swaylock = {
     enable = mkEnableOption "Enable swaylock lock management";
     blur = mkOpt (types.nullOr types.str) "7x5" "radius x times blur the image.";
@@ -53,32 +53,6 @@ in {
         ring-caps-lock-color = "${palette.base02}";
         separator-color = "${palette.base02}";
       };
-    };
-
-    services.swayidle = {
-      enable = true;
-      systemdTarget = "hyprland-session.target";
-      events = [
-        {
-          event = "before-sleep";
-          command = "${cfg.binary} -fF";
-        }
-        {
-          event = "lock";
-          command = "${cfg.binary} -fF";
-        }
-      ];
-      timeouts = [
-        {
-          timeout = 600;
-          command = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms off";
-          resumeCommand = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms on";
-        }
-        {
-          timeout = 610;
-          command = "${pkgs.systemd}/bin/loginctl lock-session";
-        }
-      ];
     };
   };
 }
