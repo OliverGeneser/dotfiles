@@ -33,11 +33,18 @@ in
       shells.fish.enable = true;
     };
 
-    suites.guis.enable = true;
+    suites = {
+      guis.enable = true;
+    };
 
     security = {
       sops.enable = true;
     };
+
+    service = {
+      ollama.enable = true;
+    };
+
 
     # TODO: move this to a separate module
     home.packages = with pkgs;
