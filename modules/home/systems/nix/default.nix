@@ -33,6 +33,8 @@ in
       home-manager.enable = true;
     };
 
+    manual.html.enable = true;
+
     home.sessionVariables = {
       FLAKE = "/home/${config.custom.user.name}/dotfiles";
       NIXPKGS_ALLOW_UNFREE = "1";

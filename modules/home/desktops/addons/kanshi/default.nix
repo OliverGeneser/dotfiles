@@ -1,12 +1,12 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib; let
   cfg = config.desktops.addons.kanshi;
-in {
+in
+{
   options.desktops.addons.kanshi = {
     enable = mkEnableOption "Enable kanshi display addon";
   };
@@ -31,6 +31,19 @@ in {
               mode = null;
               position = null;
               scale = 1.333333;
+              transform = "normal";
+            }
+          ];
+        }
+        {
+          profile.name = "undocked-zoomed";
+          profile.outputs = [
+            {
+              criteria = "eDP-1";
+              status = "enable";
+              mode = null;
+              position = null;
+              scale = 1.6;
               transform = "normal";
             }
           ];
