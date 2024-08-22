@@ -30,7 +30,8 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "gopls",
-                "rnix"
+                "rnix",
+                "docker_compose_language_service"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
