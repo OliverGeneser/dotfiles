@@ -8,6 +8,7 @@
     desktop.enable = true;
     gaming.enable = true;
     office.enable = true;
+    hobby.enable = true;
   };
 
   desktops.hyprland.enable = true;
