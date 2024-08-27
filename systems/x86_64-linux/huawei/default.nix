@@ -13,6 +13,7 @@
   };
 
   services.thermald.enable = true;
+  hardware.nvidia.open = lib.mkForce false;
 
   suites = {
     gaming.enable = true;

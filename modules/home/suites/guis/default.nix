@@ -23,7 +23,7 @@ in {
 
       fragments
       baobab
-      gnome.gnome-power-manager
+      gnome-power-manager
       sushi
       gnome-disk-utility
       totem
