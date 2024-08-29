@@ -63,6 +63,7 @@ in
         unzip
         zip
         gnupg
+        e2fsprogs
 
         showmethekey
         python3
