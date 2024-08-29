@@ -1,6 +1,32 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
+local mux = wezterm.mux
 local sessionizer = require("sessionizer")
+
+-- Decide whether cmd represents a default startup invocation
+function is_default_startup(cmd)
+    if not cmd then
+        -- we were started with `wezterm` or `wezterm start` with
+        -- no other arguments
+        return true
+    end
+    if cmd.domain == "DefaultDomain" and not cmd.args then
+        -- Launched via `wezterm start --cwd something`
+        return true
+    end
+    -- we were launched some other way
+    return false
+end
+
+--wezterm.on('gui-startup', function(cmd)
+--    if is_default_startup(cmd) then
+--        -- for the default startup case, we want to switch to the unix domain instead
+--        local unix = mux.get_domain("unix")
+--        mux.set_default_domain(unix)
+--        -- ensure that it is attached
+--        unix:attach()
+--    end
+--end)
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
     local overrides = window:get_config_overrides() or {}
@@ -43,26 +69,47 @@ return {
         top = 20,
         bottom = 20,
     },
+    --unix_domains = {
+    --    {
+    --        name = "unix",
+    --        no_serve_automatically = false,
+    --    }
+    --},
     disable_default_key_bindings = true,
     leader = { key = "a", mods = "CTRL", timeout_milliseconds = 5000 },
     keys = {
-        { key = "f", mods = "LEADER", action = wezterm.action_callback(sessionizer.toggle) },
-        { key = "p", mods = "LEADER", action = act.ActivateCommandPalette },
-        { key = "e", mods = "LEADER", action = act.ShowLauncher },
-        { key = "w", mods = "LEADER", action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
-        { key = "q", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
-        { key = "l", mods = "LEADER", action = act.ShowDebugOverlay },
-        { key = "t", mods = "LEADER", action = act.ShowTabNavigator },
+        { key = "f", mods = "LEADER",       action = wezterm.action_callback(sessionizer.toggle) },
+        { key = "p", mods = "LEADER",       action = act.ActivateCommandPalette },
+        { key = "e", mods = "LEADER",       action = act.ShowLauncher },
+        { key = "w", mods = "LEADER",       action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
+        { key = "q", mods = "LEADER",       action = act.CloseCurrentTab({ confirm = true }) },
+        { key = "l", mods = "LEADER",       action = act.ShowDebugOverlay },
+        { key = "n", mods = "LEADER",       action = act.ShowTabNavigator },
 
-        { key = "1", mods = "LEADER", action = act.ActivateTab(1) },
-        { key = "2", mods = "LEADER", action = act.ActivateTab(2) },
-        { key = "3", mods = "LEADER", action = act.ActivateTab(3) },
-        { key = "4", mods = "LEADER", action = act.ActivateTab(4) },
-        { key = "5", mods = "LEADER", action = act.ActivateTab(5) },
-        { key = "6", mods = "LEADER", action = act.ActivateTab(6) },
-        { key = "7", mods = "LEADER", action = act.ActivateTab(7) },
-        { key = "8", mods = "LEADER", action = act.ActivateTab(8) },
-        { key = "9", mods = "LEADER", action = act.ActivateTab(9) },
+        { key = "1", mods = "LEADER",       action = act.ActivateTab(1) },
+        { key = "2", mods = "LEADER",       action = act.ActivateTab(2) },
+        { key = "3", mods = "LEADER",       action = act.ActivateTab(3) },
+        { key = "4", mods = "LEADER",       action = act.ActivateTab(4) },
+        { key = "5", mods = "LEADER",       action = act.ActivateTab(5) },
+        { key = "6", mods = "LEADER",       action = act.ActivateTab(6) },
+        { key = "7", mods = "LEADER",       action = act.ActivateTab(7) },
+        { key = "8", mods = "LEADER",       action = act.ActivateTab(8) },
+        { key = "9", mods = "LEADER",       action = act.ActivateTab(9) },
+
+        { key = '"', mods = "LEADER",       action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+        { key = '"', mods = "LEADER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+        { key = "%", mods = "LEADER",       action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+        { key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+
+        --- Font Size
+        { key = "+", mods = "CTRL",         action = act.IncreaseFontSize },
+        { key = "+", mods = "SHIFT|CTRL",   action = act.IncreaseFontSize },
+        { key = "-", mods = "CTRL",         action = act.DecreaseFontSize },
+        { key = "-", mods = "SHIFT|CTRL",   action = act.DecreaseFontSize },
+        { key = "0", mods = "CTRL",         action = act.ResetFontSize },
+        { key = "0", mods = "SHIFT|CTRL",   action = act.ResetFontSize },
+
+        { key = "t", mods = "LEADER",       action = act.SpawnTab("CurrentPaneDomain") },
 
         {
             key = "c",
@@ -99,21 +146,10 @@ return {
         { key = "Tab",   mods = "CTRL",           action = act.ActivateTabRelative(1) },
         { key = "Tab",   mods = "SHIFT|CTRL",     action = act.ActivateTabRelative(-1) },
         { key = "Enter", mods = "ALT",            action = act.ToggleFullScreen },
-        { key = '"',     mods = "ALT|CTRL",       action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-        { key = '"',     mods = "SHIFT|ALT|CTRL", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-        { key = "%",     mods = "ALT|CTRL",       action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-        { key = "%",     mods = "SHIFT|ALT|CTRL", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-        { key = "'",     mods = "SHIFT|ALT|CTRL", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+
         { key = "(",     mods = "CTRL",           action = act.ActivateTab(-1) },
         { key = "(",     mods = "SHIFT|CTRL",     action = act.ActivateTab(-1) },
 
-        --- Font Size
-        { key = "+",     mods = "CTRL",           action = act.IncreaseFontSize },
-        { key = "+",     mods = "SHIFT|CTRL",     action = act.IncreaseFontSize },
-        { key = "-",     mods = "CTRL",           action = act.DecreaseFontSize },
-        { key = "-",     mods = "SHIFT|CTRL",     action = act.DecreaseFontSize },
-        { key = "0",     mods = "CTRL",           action = act.ResetFontSize },
-        { key = "0",     mods = "SHIFT|CTRL",     action = act.ResetFontSize },
 
         { key = "5",     mods = "SHIFT|ALT|CTRL", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
         { key = "9",     mods = "SHIFT|CTRL",     action = act.ActivateTab(-1) },
@@ -126,14 +162,10 @@ return {
         { key = "K",     mods = "SHIFT|CTRL",     action = act.ClearScrollback("ScrollbackOnly") },
         { key = "M",     mods = "CTRL",           action = act.Hide },
         { key = "M",     mods = "SHIFT|CTRL",     action = act.Hide },
-        { key = "N",     mods = "CTRL",           action = act.SpawnWindow },
-        { key = "N",     mods = "SHIFT|CTRL",     action = act.SpawnWindow },
         { key = "P",     mods = "CTRL",           action = act.ActivateCommandPalette },
         { key = "P",     mods = "SHIFT|CTRL",     action = act.ActivateCommandPalette },
         { key = "R",     mods = "CTRL",           action = act.ReloadConfiguration },
         { key = "R",     mods = "SHIFT|CTRL",     action = act.ReloadConfiguration },
-        { key = "T",     mods = "CTRL",           action = act.SpawnTab("CurrentPaneDomain") },
-        { key = "T",     mods = "SHIFT|CTRL",     action = act.SpawnTab("CurrentPaneDomain") },
         {
             key = "U",
             mods = "CTRL",
@@ -163,8 +195,6 @@ return {
         { key = "l", mods = "SHIFT|CTRL",  action = act.ShowDebugOverlay },
         { key = "m", mods = "SHIFT|CTRL",  action = act.Hide },
         { key = "m", mods = "SUPER",       action = act.Hide },
-        { key = "n", mods = "SHIFT|CTRL",  action = act.SpawnWindow },
-        { key = "n", mods = "SUPER",       action = act.SpawnWindow },
         { key = "r", mods = "SHIFT|CTRL",  action = act.ReloadConfiguration },
         { key = "r", mods = "SUPER",       action = act.ReloadConfiguration },
         { key = "t", mods = "SHIFT|CTRL",  action = act.SpawnTab("CurrentPaneDomain") },
