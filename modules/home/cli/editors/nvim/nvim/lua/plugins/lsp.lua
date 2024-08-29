@@ -21,6 +21,8 @@ return {
             {},
             vim.lsp.protocol.make_client_capabilities(),
             cmp_lsp.default_capabilities())
+        capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 
         require("fidget").setup({})
         require("mason").setup()
@@ -31,7 +33,9 @@ return {
                 "rust_analyzer",
                 "gopls",
                 "rnix",
-                "docker_compose_language_service"
+                "docker_compose_language_service",
+                "tailwindcss",
+                "cssls"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
