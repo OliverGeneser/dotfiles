@@ -23,6 +23,7 @@ in
       scripts.enable = true;
 
       programs = {
+        act.enable = true;
         bat.enable = true;
         bottom.enable = true;
         direnv.enable = true;
