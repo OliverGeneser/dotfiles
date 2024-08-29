@@ -27,7 +27,7 @@
 
   boot = {
     kernelParams = [
-      "resume_offset=533760"
+      "resume_offset=269569"
     ];
     supportedFilesystems = lib.mkForce ["btrfs"];
     kernelPackages = pkgs.linuxPackages_latest;
