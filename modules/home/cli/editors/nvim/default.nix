@@ -82,9 +82,8 @@ in
           };
         };
 
-        home.file.".config/nvim/lua/geneser/init.lua".text = ''
-          require("geneser.set")
-          require("geneser.remap")
+        home.file.".config/nvim/init.lua".text = ''
+          require("geneser")
           vim.opt.runtimepath:append("${treesitter-parsers}")
         '';
 
