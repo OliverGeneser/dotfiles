@@ -35,6 +35,7 @@ in
         network-tools.enable = true;
         nix-index.enable = true;
         podman.enable = true;
+        sqlite.enable = true;
         ssh.enable = true;
         starship.enable = true;
         yazi.enable = true;
