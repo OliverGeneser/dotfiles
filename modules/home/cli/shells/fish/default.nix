@@ -70,6 +70,8 @@ in {
         nrt = "sudo nixos-rebuild test --flake ~/dotfiles#${host}";
         niso = "nix build .#nixosConfigurations.iso.config.system.build.isoImage";
 
+        resof = "sudo filefrag -v /swap/swapfile | awk '$1==\"0:\" {print substr($4, 1, length($4)-2)}'";
+
         # new commads
         weather = "curl wttr.in/London";
 
@@ -82,6 +84,9 @@ in {
 
         # laptop
         battery = "set batteryCharge (bat /sys/class/power_supply/BAT0/capacity) && set batteryStatus (bat /sys/class/power_supply/BAT0/status); echo -e \"Charge: $batteryCharge% \nCurrently: $batteryStatus\"";
+
+        # git
+        gmt = "git merge template/main --allow-unrelated-histories";
       };
 
       functions = {
