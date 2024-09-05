@@ -1,14 +1,14 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
+{ options
+, config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.suites.desktop.addons.xdg-portal;
-in {
+in
+{
   options.suites.desktop.addons.xdg-portal = with types; {
     enable = mkBoolOpt false "Whether or not to add support for xdg portal.";
   };
