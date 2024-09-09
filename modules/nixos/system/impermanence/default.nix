@@ -103,7 +103,6 @@ in
           "Pictures"
           "Documents"
           "Videos"
-          "VirtualBox VMs"
           {
             directory = ".gnupg";
             mode = "0700";

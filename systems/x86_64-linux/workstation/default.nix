@@ -13,6 +13,9 @@
     hostName = "workstation";
   };
 
+  services.thermald.enable = true;
+  hardware.nvidia.enable = true;
+
   suites = {
     gaming.enable = true;
     desktop = {
@@ -23,8 +26,6 @@
     };
   };
 
-  hardware.nvidia.enable = true;
-
   boot = {
     kernelParams = [
       "resume_offset=269569"
@@ -33,8 +34,6 @@
     kernelPackages = pkgs.linuxPackages_latest;
     resumeDevice = "/dev/disk/by-label/nixos";
   };
-
-  nix.package = pkgs.nixVersions.git;
 
   system.stateVersion = "23.11";
 }
