@@ -64,6 +64,7 @@ in
         zip
         gnupg
         e2fsprogs
+        wget
 
         showmethekey
         python3

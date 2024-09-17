@@ -38,6 +38,8 @@ in {
             "networkmanager"
             "input"
             "tty"
+            "kvm"
+            "adbusers"
           ]
           ++ cfg.extraGroups;
       }
