@@ -30,11 +30,12 @@ in {
       gping
       hyperfine
       hexyl
+      htop
       jqp
       ouch
       silver-searcher
       procs
-      psensor
+      lm_sensors
       trash-cli
       gtrash
       ripgrep

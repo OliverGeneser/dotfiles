@@ -12,16 +12,17 @@ in
   };
 
   config = mkIf cfg.enable {
+    nixpkgs = {
+        config = {
+          android_sdk.accept_license = true;
+        };
+      };
     home.packages = with pkgs; [
-      android-tools
-      android-studio
-      gradle
-      kotlin
-      cmdline-tools-latest
-      build-tools-34-0-0
-      platform-tools
-      platforms-android-34
-      emulator
+      #android-tools
+      android-studio-full
+     # gradle
+     # kotlin
+      #jdk21
     ];
   };
 }

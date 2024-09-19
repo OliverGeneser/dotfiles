@@ -15,7 +15,6 @@ in
 
     programs = {
       beekeeperStudio.enable = true;
-      androidStudio.enable = true;
     };
     cli = {
       editors.nvim.enable = true;
