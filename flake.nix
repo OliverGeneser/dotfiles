@@ -107,8 +107,8 @@
 
     # Wezterm unstable
     wezterm = {
-      url = "git+https://github.com/wez/wezterm.git?submodules=1";
-      flake = false;
+      url = "github:wez/wezterm/main?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

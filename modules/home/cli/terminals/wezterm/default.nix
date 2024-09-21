@@ -1,5 +1,7 @@
-{ config
+{ inputs
+, config
 , lib
+, pkgs
 , ...
 }:
 with lib; let
@@ -13,6 +15,7 @@ in
   config = mkIf cfg.enable {
     programs.wezterm = {
       enable = true;
+      package = inputs.wezterm.packages.${pkgs.system}.default;
       extraConfig = builtins.readFile ./config.lua;
     };
     xdg.configFile."wezterm/sessionizer.lua".source = ./sessionizer.lua;

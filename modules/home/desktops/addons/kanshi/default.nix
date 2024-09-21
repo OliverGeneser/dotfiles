@@ -93,12 +93,12 @@ in
           profile.name = "desktop2monitors";
           profile.outputs = [
             {
-              criteria = "DP-1";
+              criteria = "ASUSTek COMPUTER INC VG27A N8LMQS070105";
               position = "0,0";
               mode = "2560x1440@165Hz";
             }
             {
-              criteria = "HDMI-A-1";
+              criteria = "AOC 2778G5 F67G8BA000681";
               position = "320,-1080";
               mode = "1920x1080@60Hz";
             }

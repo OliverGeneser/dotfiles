@@ -17,7 +17,7 @@ in {
       enable32Bit = true;
     };
 
-    boot.kernelParams = ["nvidia-drm.fbdev=1"];
+    boot.kernelParams = ["nvidia_drm.fbdev=1" "nvidia_drm.modeset=1"];
 
     # Load nvidia driver for Xorg and Wayland
     services.xserver.videoDrivers = ["nvidia"];
