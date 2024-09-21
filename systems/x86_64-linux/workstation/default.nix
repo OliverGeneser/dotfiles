@@ -31,7 +31,7 @@
       "resume_offset=269569"
     ];
     supportedFilesystems = lib.mkForce ["btrfs"];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_10;
     resumeDevice = "/dev/disk/by-label/nixos";
   };
 
