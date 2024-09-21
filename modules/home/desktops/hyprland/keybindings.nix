@@ -12,7 +12,7 @@ with lib; let
     	echo "Lid open!"
     else
         echo "Lid closed!"
-    	systemctl suspend
+    	systemctl hibernate
     fi
   '';
 

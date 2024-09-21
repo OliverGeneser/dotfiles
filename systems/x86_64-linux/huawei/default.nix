@@ -27,10 +27,10 @@
 
   boot = {
     kernelParams = [
-      "resume_offset=269568"
+      "resume_offset=533760" # sudo -E -s btrfs inspect-internal map-swapfile -r /swap/swapfile
     ];
     supportedFilesystems = lib.mkForce [ "btrfs" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_10;
     resumeDevice = "/dev/disk/by-label/nixos";
   };
 
