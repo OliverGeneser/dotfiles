@@ -59,6 +59,10 @@ in
           lua-language-server
           rustup
           black
+          cmake
+          ninja
+          gcc
+          gpp
         ];
 
         programs.neovim = {

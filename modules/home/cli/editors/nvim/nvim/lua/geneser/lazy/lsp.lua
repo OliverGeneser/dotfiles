@@ -32,7 +32,7 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "gopls",
-                "nil_ls",
+                "rnix",
                 "docker_compose_language_service",
                 "tailwindcss",
                 "cssls"
