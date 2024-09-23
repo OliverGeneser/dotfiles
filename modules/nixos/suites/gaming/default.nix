@@ -15,7 +15,7 @@ in {
   config = mkIf cfg.enable {
     hardware = {
       xpadneo.enable = true;
-      #xone.enable = true;
+      xone.enable = true;
 
       graphics = {
         enable = true;
@@ -66,6 +66,8 @@ in {
       samba4Full
       winetricks
       wineWowPackages.waylandFull
+      vulkan-tools
+      glxinfo
     ];
   };
 }
