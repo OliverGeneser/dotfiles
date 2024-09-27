@@ -49,7 +49,6 @@
                       swap.swapfile.size = "32G";
                     };
                   };
-                };
                   mountpoint = "/partition-root";
                   swap.swapfile.size = "32G";
               };
@@ -59,5 +58,6 @@
       };
     };
   };
-
+  fileSystems."/persist".neededForBoot = true;
+  fileSystems."/var/log".neededForBoot = true;
 }

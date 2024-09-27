@@ -20,10 +20,7 @@ in {
 
       settings = {
         PasswordAuthentication = false;
-        PermitRootLogin =
-          if format == "install-iso"
-          then "yes"
-          else "no";
+        PermitRootLogin = "no";
         StreamLocalBindUnlink = "yes";
         GatewayPorts = "clientspecified";
       };
