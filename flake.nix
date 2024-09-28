@@ -71,7 +71,7 @@
 
     hyprland = {
       type = "git";
-      url = "https://github.com/hyprwm/Hyprland";
+      url = "https://github.com/hyprwm/Hyprland?ref=refs/pull/7784/merge";
       submodules = true;
     };
 
