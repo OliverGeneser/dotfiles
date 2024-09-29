@@ -1,12 +1,12 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib; let
   cfg = config.suites.desktop;
-in {
+in
+{
   options.suites.desktop = {
     enable = mkEnableOption "Enable desktop suite";
   };
@@ -17,8 +17,7 @@ in {
       development.enable = true;
     };
 
-    services = {
-    };
+    services = { };
     browsers = {
       mullvad.enable = true;
       firefox.enable = true;
@@ -35,6 +34,9 @@ in {
       };
       media = {
         jellyfin.enable = true;
+      };
+      design = {
+        gimp.enable = true;
       };
     };
 
