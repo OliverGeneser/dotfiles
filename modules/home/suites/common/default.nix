@@ -31,6 +31,12 @@ in
       terminals.wezterm.enable = true;
       terminals.foot.enable = true;
       shells.fish.enable = true;
+
+      editors = { nvim.enable = true; };
+      program = {
+        git.enable = true;
+      };
+
     };
 
     suites = {

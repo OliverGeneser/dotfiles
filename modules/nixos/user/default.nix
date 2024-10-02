@@ -23,8 +23,8 @@ in {
     users.users.${cfg.name} =
       {
         isNormalUser = true;
-        inherit (cfg) name;
-        hashedPassword = "$6$fGDkSQ/rlUmeMmpx$L3cNIDSUVuetvqVdwgynz4m3IrPEukPcMPzjvS84zaxkU1xNOglduoFDgsHSVqSSjUZOydCGvoEpbzJTFktV/1";
+        inherit (cfg) name initialPassword;
+        #hashedPassword = "$6$fGDkSQ/rlUmeMmpx$L3cNIDSUVuetvqVdwgynz4m3IrPEukPcMPzjvS84zaxkU1xNOglduoFDgsHSVqSSjUZOydCGvoEpbzJTFktV/1";
         home = "/home/${cfg.name}";
         group = "users";
 
@@ -40,6 +40,7 @@ in {
             "tty"
             "kvm"
             "adbusers"
+            "libvirtd"
           ]
           ++ cfg.extraGroups;
       }

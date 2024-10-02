@@ -72,6 +72,7 @@ in
     environment.persistence."/persist" = {
       hideMounts = true;
       directories = [
+        "/srv/"
         "/.cache/nix/"
         "/var/cache/"
         "/var/db/sudo/"
