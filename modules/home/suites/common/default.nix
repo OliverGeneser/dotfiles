@@ -33,7 +33,7 @@ in
       shells.fish.enable = true;
 
       editors = { nvim.enable = true; };
-      program = {
+      programs = {
         git.enable = true;
       };
 
