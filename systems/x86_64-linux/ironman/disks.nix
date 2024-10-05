@@ -64,6 +64,60 @@
           };
         };
       };
+      tank0 = {
+        type = "disk";
+        device = "/dev/disk/by-id/ata-ST2000DM001-1E6164_Z1E55KEJ";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "ztank";
+              };
+            };
+          };
+        };
+      };
+      tank1 = {
+        type = "disk";
+        device = "/dev/disk/by-id/ata-ST3160812AS_4LS1JB4F";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "ztank";
+              };
+            };
+          };
+        };
+      };
+    };
+    zpool = {
+      ztank = {
+        type = "zpool";
+        mode = "mirror";
+        # Workaround: cannot import 'zroot': I/O error in disko tests
+        options.cachefile = "none";
+        rootFsOptions = {
+          compression = "zstd";
+          "com.sun:auto-snapshot" = "false";
+        };
+        mountpoint = "/";
+        postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot@blank$' || zfs snapshot zroot@blank";
+
+        datasets = {
+          tank = {
+            type = "zfs_fs";
+            mountpoint = "/zfs_fs";
+            options."com.sun:auto-snapshot" = "true";
+          };
+        };
+      };
     };
   };
   fileSystems."/persist".neededForBoot = true;
