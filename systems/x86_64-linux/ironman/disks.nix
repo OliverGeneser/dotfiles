@@ -74,7 +74,7 @@
               size = "100%";
               content = {
                 type = "zfs";
-                pool = "ztank";
+                pool = "tank";
               };
             };
           };
@@ -90,7 +90,7 @@
               size = "100%";
               content = {
                 type = "zfs";
-                pool = "ztank";
+                pool = "tank";
               };
             };
           };
@@ -98,22 +98,26 @@
       };
     };
     zpool = {
-      ztank = {
+      tank = {
         type = "zpool";
         mode = "mirror";
-        # Workaround: cannot import 'zroot': I/O error in disko tests
-        options.cachefile = "none";
+        options = {
+          ashift = "12";
+          autotrim = "on";
+          # Workaround: cannot import 'zroot': I/O error in disko tests
+          cachefile = "none";
+        };
         rootFsOptions = {
           compression = "zstd";
           "com.sun:auto-snapshot" = "false";
         };
-        mountpoint = "/";
-        postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot@blank$' || zfs snapshot zroot@blank";
+
+        postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^tank@blank$' || zfs snapshot tank@blank";
 
         datasets = {
-          tank = {
+          vault = {
             type = "zfs_fs";
-            mountpoint = "/zfs_fs";
+            mountpoint = "/vault";
             options."com.sun:auto-snapshot" = "true";
           };
         };
