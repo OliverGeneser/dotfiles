@@ -1,13 +1,13 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.desktops.addons.hypridle;
-in {
+in
+{
   options.desktops.addons.hypridle = with types; {
     enable = mkBoolOpt false "Whether to enable the hypridle";
   };
@@ -17,16 +17,16 @@ in {
       enable = true;
       settings = {
         general = {
-          before_sleep_cmd = "hyprctl dispatch dpms off";
+          before_sleep_cmd = "loginctl lock-session";
           after_sleep_cmd = "hyprctl dispatch dpms on";
           ignore_dbus_inhibit = false;
-          lock_cmd = "hyprlock";
+          lock_cmd = "pidof hyprlock || hyprlock";
         };
 
         listener = [
           {
             timeout = 300;
-            on-timeout = "hyprlock";
+            on-timeout = "loginctl lock-session";
           }
           {
             timeout = 120; # 2.5min.
@@ -40,9 +40,13 @@ in {
             on-resume = "${pkgs.brightnessctl}/bin/brightnessctl - rd rgb:kbd_backlight"; # turn on keyboard backlight.
           }
           {
-            timeout = 900;
+            timeout = 330;
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
+          }
+          {
+            timeout = 1800;
+            on-timeout = "systemctl suspend";
           }
         ];
       };

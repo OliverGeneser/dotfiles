@@ -15,7 +15,7 @@
   services.thermald.enable = true;
   hardware.nvidia.open = lib.mkForce false;
 
-  suites = {
+  roles = {
     gaming.enable = true;
     desktop = {
       enable = true;

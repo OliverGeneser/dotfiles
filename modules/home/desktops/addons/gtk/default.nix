@@ -1,18 +1,18 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib; let
   cfg = config.desktops.addons.gtk;
-in {
+in
+{
   options.desktops.addons.gtk = {
     enable = mkEnableOption "enable gtk theme management";
   };
 
   config = mkIf cfg.enable {
-    gtk = {
+    gtk = lib.mkForce {
       enable = true;
       font = {
         name = "Fira Sans";

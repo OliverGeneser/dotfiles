@@ -12,7 +12,7 @@
     hostName = "ironman";
   };
 
-  suites = {
+  roles = {
     server.enable = true;
   };
 

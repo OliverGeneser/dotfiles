@@ -3,7 +3,7 @@
 , pkgs
 , ...
 }: {
-  suites = {
+  roles = {
     desktop.enable = true;
     gaming.enable = true;
     office.enable = true;

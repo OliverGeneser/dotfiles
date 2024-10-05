@@ -33,11 +33,8 @@ in
       home-manager.enable = true;
     };
 
-    manual.html.enable = true;
-
     home.sessionVariables = {
       FLAKE = "/home/${config.custom.user.name}/dotfiles";
-      NIXPKGS_ALLOW_UNFREE = "1";
     };
 
     nix = {
@@ -58,7 +55,6 @@ in
         warn-dirty = false;
         use-xdg-base-directories = true;
       };
-      package = lib.mkForce pkgs.nixVersions.git;
     };
 
     news = {
