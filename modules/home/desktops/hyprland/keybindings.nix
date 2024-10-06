@@ -86,9 +86,9 @@ with lib; let
     #!/usr/bin/env bash
 
     if [ "$(hyprctl activewindow -j | jq -r ".class")" = "cs2" ]; then
-        echo "don't fullscreen cs"
+        exit
     else
-        hyprctl dispatch Fullscreen ""
+        hyprctl dispatch fullscreen
     fi
   '';
 
