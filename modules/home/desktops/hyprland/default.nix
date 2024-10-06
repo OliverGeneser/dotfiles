@@ -43,7 +43,7 @@ in
       qt.enable = true;
       kanshi.enable = true;
       rofi.enable = true;
-      swaync.enable = true;
+      dunst.enable = true;
       wlogout.enable = true;
       wlsunset.enable = true;
 
