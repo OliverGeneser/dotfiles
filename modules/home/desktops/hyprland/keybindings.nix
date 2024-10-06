@@ -82,6 +82,16 @@ with lib; let
     fi
   '';
 
+  protected_fullscreen = pkgs.writeShellScriptBin "protected_fullscreen" ''
+    #!/usr/bin/env bash
+
+    if [ "$(hyprctl activewindow -j | jq -r ".class")" = "cs2" ]; then
+        echo "don't fullscreen cs"
+    else
+        hyprctl dispatch Fullscreen ""
+    fi
+  '';
+
 in
 {
   config = mkIf cfg.enable {
@@ -91,7 +101,7 @@ in
         "SUPER, E, exec, thunar"
         "SUPER, F, exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun"
         "SUPER, Q, exec, ${protected_killactive}/bin/protected_killactive"
-        "SUPER, X, Fullscreen,0"
+        "SUPER, X, exec, ${protected_fullscreen}/bin/protected_fullscreen"
         "SUPER, R, exec, ${resize}/bin/resize"
         "SUPER, Space, togglefloating,"
         "SUPER, V, exec, ${pkgs.pyprland}/bin/pypr toggle pwvucontrol"
