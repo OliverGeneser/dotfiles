@@ -40,6 +40,8 @@
     directories = [
       "dotfiles"
       "work"
+      "games"
+
       "personal"
       "Downloads"
       "Music"
