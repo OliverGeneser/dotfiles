@@ -53,6 +53,35 @@ with lib; let
     hyprctl dispatch moveactive exact $pos_x $pos_y
     hyprctl dispatch resizeactive exact $size_x $size_y
   '';
+
+  gamemode_switch = pkgs.writeShellScriptBin "gamemode_switch" ''
+    #!/usr/bin/env bash
+
+    HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
+    if [ "$HYPRGAMEMODE" = 1 ] ; then
+        hyprctl --batch "\
+            keyword animations:enabled 0;\
+            keyword decoration:drop_shadow 0;\
+            keyword decoration:blur:enabled 0;\
+            keyword general:gaps_in 0;\
+            keyword general:gaps_out 0;\
+            keyword general:border_size 1;\
+            keyword decoration:rounding 0"
+        exit
+    fi
+    hyprctl reload
+  '';
+
+  protected_killactive = pkgs.writeShellScriptBin "protected_killactive" ''
+    #!/usr/bin/env bash
+
+    if [ "$(hyprctl activewindow -j | jq -r ".class")" = "Steam" ]; then
+        xdotool getactivewindow windowunmap
+    else
+        hyprctl dispatch killactive ""
+    fi
+  '';
+
 in
 {
   config = mkIf cfg.enable {
@@ -61,12 +90,12 @@ in
         "SUPER, Return, exec, [float;tile] wezterm start --always-new-process"
         "SUPER, E, exec, thunar"
         "SUPER, F, exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun"
-        "SUPER, Q, killactive,"
+        "SUPER, Q, exec, ${protected_killactive}/bin/protected_killactive"
         "SUPER, X, Fullscreen,0"
         "SUPER, R, exec, ${resize}/bin/resize"
         "SUPER, Space, togglefloating,"
         "SUPER, V, exec, ${pkgs.pyprland}/bin/pypr toggle pwvucontrol"
-        "SUPER_SHIFT, T, exec, ${pkgs.pyprland}/bin/pypr toggle term"
+        "SUPER, G, exec, ${gamemode_switch}/bin/gamemode_switch"
 
         # Lock Screen
         ", XF86Launch5, exec, ${pkgs.hyprlock}/bin/hyprlock"
@@ -76,6 +105,7 @@ in
 
         # Screenshot
         ", Print, exec, grimblast --notify copysave area"
+        "SUPER, P, exec, grimblast --notify copysave area"
         "SHIFT, Print, exec, grimblast --notify copy active"
         "CONTROL, Print, exec, grimblast --notify copy screen"
         "SUPER, Print, exec, grimblast --notify copy window"
