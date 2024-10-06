@@ -142,6 +142,10 @@
         catppuccin.nixosModules.catppuccin
       ];
 
+      homes.modules = with inputs; [
+        impermanence.nixosModules.home-manager.impermanence
+      ];
+
       systems.hosts.huawei.modules = with inputs; [
         nixos-hardware.nixosModules.huawei-machc-wa
       ];
