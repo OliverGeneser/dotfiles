@@ -15,8 +15,9 @@
   services.thermald.enable = true;
   hardware = {
     networking = {
-      allowedTCPPortRanges = [{ from = 1714; to = 1764; }];
+      allowedTCPPortRanges = [{ from = 1714; to = 1764; } { from = 19000; to = 19001; }];
       allowedUDPPortRanges = [{ from = 1714; to = 1764; }];
+      allowedTCPPorts = [ 3000 8081 ];
     };
     nvidia.enable = true;
   };
