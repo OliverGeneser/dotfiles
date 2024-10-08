@@ -17,7 +17,7 @@ in {
       layout = [
         {
           label = "lock";
-          action = "${pkgs.hyprlock}/bin/hyprlock";
+          action = "${pkgs.systemd}/bin/loginctl lock-session";
           text = "Lock";
           keybind = "l";
         }
