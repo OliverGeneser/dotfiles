@@ -1,11 +1,11 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib; let
   cfg = config.hardware.nvidia;
-in {
+in
+{
   options.hardware.nvidia = with types; {
     enable = mkEnableOption "Enable Nvidia";
   };
@@ -17,12 +17,13 @@ in {
       enable32Bit = true;
     };
 
-    boot.kernelParams = ["nvidia_drm.fbdev=1" "nvidia_drm.modeset=1"];
+    boot.kernelParams = [ "nvidia_drm.fbdev=1" "nvidia_drm.modeset=1" ];
 
     # Load nvidia driver for Xorg and Wayland
-    services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = [ "nvidia" ];
 
     environment.sessionVariables = {
+      GDK_BACKEND = "wayland,x11";
       LIBVA_DRIVER_NAME = "nvidia";
       SDL_VIDEODRIVER = "wayland";
       NVD_BACKEND = "direct";
@@ -38,15 +39,26 @@ in {
 
       # QT HDPI
       QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      QT_QPA_PLATFORM = "wayland";
 
       # Steam fixes https://www.reddit.com/r/linux_gaming/comments/zgrktp/raytracing_on_linux/
       PROTON_HIDE_NVIDIA_GPU = "0";
       PROTON_ENABLE_NVAPI = "1";
+      PROTON_ENABLE_NGX_UPDATER = "1";
       VKD3D_CONFIG = "dxr,dxr11";
       PROTON_ENABLE_NGX_UPDATER = "1";
       __GL_GSYNC_ALLOWED = "1";
       __GL_VRR_ALLOWED = "1";
       __GL_MaxFramesAllowed = "1";
+      XWAYLAND_NO_GLAMOR = "1"; # with this you'll need to use gamescope for gaming
+
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      WLR_NO_HARDWARE_CURSORS = "1";
+      __NV_PRIME_RENDER_OFFLOAD = "1";
+      __VK_LAYER_NV_optimus = "NVIDIA_only";
+      WLR_DRM_NO_ATOMIC = "1";
+      WLR_USE_LIBINPUT = "1";
+      WLR_RENDERER_ALLOW_SOFTWARE = "1";
     };
 
     hardware.nvidia = {
