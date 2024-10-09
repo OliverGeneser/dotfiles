@@ -15,6 +15,7 @@ in
     home.packages = with pkgs;
       with pkgs.custom; [
         s-tui
+        bluetuith
       ];
   };
 }
