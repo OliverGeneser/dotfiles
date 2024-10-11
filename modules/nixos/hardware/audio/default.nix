@@ -39,7 +39,6 @@ in
           Type = "simple";
           ExecStart = "${pkgs.noisetorch}/bin/noisetorch -i -s alsa_input.usb-Solid_State_System_Co._Ltd._DRELANMIC_010000000000-00.mono-fallback -t 95";
           ExecStop = "${pkgs.noisetorch}/bin/noisetorch -u";
-          ExecStartPre="/run/current-system/sw/bin/sleep 5s";
           RemainAfterExit = "yes";
           Restart = "on-failure";
           RestartSec = "3";
