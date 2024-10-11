@@ -107,6 +107,9 @@ in
         "SUPER, V, exec, ${pkgs.pyprland}/bin/pypr toggle pwvucontrol"
         "SUPER, G, exec, ${gamemode_switch}/bin/gamemode_switch"
 
+        "SUPER, Z, exec, ${pkgs.pyprland}/bin/pypr zoom ++0.5"
+        "SUPER SHIFT, Z, exec, ${pkgs.pyprland}/bin/pypr zoom"
+
         # Lock Screen
         ", XF86Launch5, exec, ${pkgs.hyprlock}/bin/hyprlock"
         ", XF86Launch4, exec, ${pkgs.hyprlock}/bin/hyprlock"
