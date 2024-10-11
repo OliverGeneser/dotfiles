@@ -45,6 +45,7 @@ in
             "kvm"
             "adbusers"
             "libvirtd"
+            "gamemode"
           ]
           ++ cfg.extraGroups;
       }
