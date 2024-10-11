@@ -75,6 +75,11 @@
       submodules = true;
     };
 
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     #hyprland-git.url = "github:hyprwm/hyprland";
     #hyprland-xdph-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
     #hyprland-protocols-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";

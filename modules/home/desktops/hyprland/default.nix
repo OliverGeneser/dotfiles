@@ -36,6 +36,10 @@ in
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       systemd.variables = [ "--all" ];
+
+      plugins = [
+        inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
+      ];
     };
 
     desktops.addons = {
