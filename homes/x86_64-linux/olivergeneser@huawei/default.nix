@@ -1,8 +1,7 @@
-{
-  lib,
-  inputs,
-  pkgs,
-  ...
+{ lib
+, inputs
+, pkgs
+, ...
 }: {
   roles = {
     desktop.enable = true;
@@ -40,6 +39,34 @@
   custom.user = {
     enable = true;
     name = "olivergeneser";
+  };
+
+  home.persistence."/persist/home/olivergeneser" = {
+    directories = [
+      "dotfiles"
+      "work"
+      "games"
+      "personal"
+
+      "Downloads"
+      "Music"
+      "Pictures"
+      "Documents"
+      "Videos"
+      ".gnupg"
+      ".ssh"
+      ".nixops"
+      ".local/share/keyrings"
+      ".local/share/direnv"
+      {
+        directory = ".local/share/Steam";
+        method = "symlink";
+      }
+    ];
+    files = [
+      ".screenrc"
+    ];
+    allowOther = true;
   };
 
   home.stateVersion = "23.11";
