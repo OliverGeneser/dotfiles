@@ -33,6 +33,7 @@ in
         tuta.enable = true;
       };
       media = {
+        vlc.enable = true;
         jellyfin.enable = true;
       };
       design = {

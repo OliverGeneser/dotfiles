@@ -18,14 +18,14 @@
     src = prev.fetchFromGitHub {
       owner = "supermerill";
       repo = "SuperSlicer";
-      rev = "2.5.59.12";
+      rev = "2.5.59.13";
       # If you don't know the hash, the first time, set:
       # hash = "";
       # then nix will fail the build with such an error message:
       # hash mismatch in fixed-output derivation '/nix/store/m1ga09c0z1a6n7rj8ky3s31dpgalsn0n-source':
       # specified: sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
       # got:    sha256-173gxk0ymiw94glyjzjizp8bv8g72gwkjhacigd1an09jshdrjb4
-      hash = "sha256-UmF3mDOKbe5C3UNhZmes59p3LyCGcX+tlppN0M/YOt0=";
+      hash = "sha256-FkoGcgVoBeHSZC3W5y30TBPmPrWnZSlO66TgwskgqAU=";
       fetchSubmodules = true;
     };
   });
