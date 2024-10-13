@@ -47,7 +47,7 @@ in
       dwindle = {
         pseudotile = true;
         preserve_split = true; # false
-        no_gaps_when_only = true;
+        #no_gaps_when_only = true;
       };
 
       plugin = {
