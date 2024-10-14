@@ -52,7 +52,7 @@ in
 
         Unit = {
           Description = "Set random desktop background using hyprpaper";
-          After = [ "graphical-session-pre.target" ];
+          After = [ "graphical-session-pre.target" "hyprpaper.service" ];
           PartOf = [ "graphical-session.target" ];
         };
 
