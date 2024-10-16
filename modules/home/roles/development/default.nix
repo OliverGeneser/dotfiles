@@ -15,7 +15,9 @@ in
 
     programs = {
       beekeeperStudio.enable = true;
+      httpie.enable = true;
     };
+
     cli = {
       editors.nvim.enable = true;
       multiplexers.zellij.enable = true;
