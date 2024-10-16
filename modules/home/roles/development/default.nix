@@ -15,6 +15,7 @@ in
 
     programs = {
       beekeeperStudio.enable = true;
+      unityhub.enable = true;
       httpie.enable = true;
     };
 
