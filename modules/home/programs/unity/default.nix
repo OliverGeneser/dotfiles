@@ -1,14 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 with lib; let
-  cfg = config.programs.beekeeperStudio;
-in {
-  options.programs.beekeeperStudio = {
-    enable = mkEnableOption "Enable Beekeeper studio";
+  cfg = config.programs.unityhub;
+in
+{
+  options.programs.unityhub = {
+    enable = mkEnableOption "Enable Unity hub";
   };
 
   config = mkIf cfg.enable {

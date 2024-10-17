@@ -1,12 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 with lib; let
   cfg = config.programs.beekeeperStudio;
-in {
+in
+{
   options.programs.beekeeperStudio = {
     enable = mkEnableOption "Enable Beekeeper studio";
   };
