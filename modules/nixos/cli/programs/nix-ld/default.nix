@@ -13,13 +13,16 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.nix-ld.enable = true;
+    programs.nix-ld = {
+      enable = true;
+
+      # Sets up all the libraries to load
+      libraries = with pkgs; [
+        stdenv.cc.cc # commonly needed
+        zlib # commonly needed
+        openssl # commonly needed
+      ];
+    };
   };
 
-  # Sets up all the libraries to load
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc # commonly needed
-    zlib # commonly needed
-    openssl # commonly needed
-  ];
 }
