@@ -29,6 +29,9 @@ in
       shotwell.enable = true;
       webcord.enable = true;
       bitwarden.enable = true;
+      audio = {
+        audacity.enable = true;
+      };
       email = {
         tuta.enable = true;
       };
