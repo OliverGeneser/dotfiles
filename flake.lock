@@ -131,6 +131,21 @@
         "type": "github"
       }
     },
+    "custom-udev-rules": {
+      "locked": {
+        "lastModified": 1629206028,
+        "narHash": "sha256-n64MnULU1TPI6kk26jjlUH1MaxEcT5XzJk9etqV1F/o=",
+        "owner": "OliverGeneser",
+        "repo": "custom-udev-rules",
+        "rev": "076820552a02db42a74dd6ee26b912fdff7643e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "OliverGeneser",
+        "repo": "custom-udev-rules",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -1671,6 +1686,7 @@
         "arkenfox": "arkenfox",
         "catppuccin": "catppuccin",
         "comma": "comma",
+        "custom-udev-rules": "custom-udev-rules",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",

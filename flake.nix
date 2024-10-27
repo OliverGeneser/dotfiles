@@ -115,6 +115,10 @@
       url = "github:wez/wezterm/main?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    custom-udev-rules = {
+      url = "github:OliverGeneser/custom-udev-rules";
+    };
   };
 
   outputs = inputs:
@@ -145,6 +149,7 @@
         impermanence.nixosModules.impermanence
         sops-nix.nixosModules.sops
         catppuccin.nixosModules.catppuccin
+        custom-udev-rules.nixosModule
       ];
 
       homes.modules = with inputs; [

@@ -1,13 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.roles.gaming;
-in {
+in
+{
   options.roles.gaming = with types; {
     enable = mkBoolOpt false "Enable the gaming suite";
   };
@@ -19,9 +19,9 @@ in {
 
       graphics = {
         enable = true;
-        extraPackages = with pkgs; [
-          mesa
-        ];
+        #extraPackages = with pkgs; [
+        #  mesa
+        #];
       };
     };
 
@@ -39,6 +39,13 @@ in {
     };
 
     services.ratbagd.enable = true;
+
+    services.udev.customRules = [{
+      name = "99-8bitdo-xinput";
+      rules = ''
+        ACTION=="add", ATTRS{idVendor}=="2dc8", ATTRS{idProduct}=="310a", RUN+="/sbin/modprobe xpad", RUN+="/bin/sh -c 'echo 2dc8 310a > /sys/bus/usb/drivers/xpad/new_id'"
+      '';
+    }];
 
     programs = {
       gamemode.enable = true;
