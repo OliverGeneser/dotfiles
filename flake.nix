@@ -33,6 +33,7 @@
 
     impermanence.url = "github:nix-community/impermanence";
     lanzaboote.url = "github:nix-community/lanzaboote";
+    lanzaboote.inputs.rust-overlay.follows = "rust-overlay";
 
     nixgl.url = "github:nix-community/nixGL";
     nix-colors.url = "github:misterio77/nix-colors";
@@ -110,10 +111,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
     # Wezterm unstable
     wezterm = {
       url = "github:wez/wezterm/main?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
 
     custom-udev-rules = {
