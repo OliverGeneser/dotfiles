@@ -14,6 +14,7 @@ in
     roles.common.enable = true;
 
     programs = {
+      arduino.enable = true;
       beekeeperStudio.enable = true;
       unityhub.enable = true;
       httpie.enable = true;

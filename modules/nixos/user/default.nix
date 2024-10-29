@@ -46,6 +46,7 @@ in
             "adbusers"
             "libvirtd"
             "gamemode"
+            "dialout"
           ]
           ++ cfg.extraGroups;
       }
