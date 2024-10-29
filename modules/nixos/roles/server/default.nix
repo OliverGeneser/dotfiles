@@ -18,6 +18,7 @@ in
 
     services = {
       getty.autologinUser = "nixos";
+      jellyfin-server.enable = true;
     };
 
     environment =
@@ -29,7 +30,7 @@ in
         # Print the URL instead on servers
         variables.BROWSER = "echo";
       }
-      // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.05") {
+      // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "23.11") {
         # Don't install the /lib/ld-linux.so.2 and /lib64/ld-linux-x86-64.so.2
         # stubs. Server users should know what they are doing.
         stub-ld.enable = lib.mkDefault false;
