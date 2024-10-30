@@ -82,6 +82,7 @@ in
         "/var/lib/nixos"
         "/var/lib/systemd/coredump"
         "/etc/NetworkManager/system-connections"
+        "/etc/zfs"
       ];
       files = [
         "/etc/machine-id"

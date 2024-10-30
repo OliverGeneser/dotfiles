@@ -26,7 +26,9 @@ in
         systemPackages = [
           pkgs.nfs-utils
           pkgs.dnsutils
+          pkgs.smartmontools
         ];
+
         # Print the URL instead on servers
         variables.BROWSER = "echo";
       }

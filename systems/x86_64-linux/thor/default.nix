@@ -26,7 +26,6 @@
     resumeDevice = "/dev/disk/by-label/nixos";
 
     zfs = {
-      package = pkgs.zfs_unstable;
       forceImportAll = false;
       forceImportRoot = false;
     };
