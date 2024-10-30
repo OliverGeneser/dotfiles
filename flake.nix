@@ -17,6 +17,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware = {
       url = "github:nixos/nixos-hardware";
     };
@@ -36,9 +41,16 @@
     lanzaboote.inputs.rust-overlay.follows = "rust-overlay";
 
     nixgl.url = "github:nix-community/nixGL";
+    stylix.url = "github:danth/stylix";
     nix-colors.url = "github:misterio77/nix-colors";
     catppuccin.url = "github:catppuccin/nix";
     nix-index-database.url = "github:nix-community/nix-index-database";
+
+    nixos-anywhere = {
+      url = "github:numtide/nixos-anywhere";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.disko.follows = "disko";
+    };
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -148,6 +160,7 @@
       };
 
       systems.modules.nixos = with inputs; [
+        stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko
         lanzaboote.nixosModules.lanzaboote
@@ -168,5 +181,14 @@
       overlays = with inputs; [
         nixgl.overlay
       ];
+
+      deploy = lib.mkDeploy { inherit (inputs) self; };
+
+      checks =
+        builtins.mapAttrs
+          (system: deploy-lib:
+            deploy-lib.deployChecks inputs.self.deploy)
+          inputs.deploy-rs.lib;
+
     };
 }

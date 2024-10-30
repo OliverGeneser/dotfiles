@@ -1,14 +1,14 @@
-{
-  pkgs,
-  lib,
-  config,
-  host,
-  ...
+{ pkgs
+, lib
+, config
+, host
+, ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.cli.shells.fish;
-in {
+in
+{
   options.cli.shells.fish = with types; {
     enable = mkBoolOpt false "enable fish shell";
   };
@@ -24,7 +24,9 @@ in {
         fish_add_path --path --prepend /usr/local/bin /usr/bin ~/.local/bin
         set -x GOPATH $XDG_DATA_HOME/go
         set -x GOPRIVATE "git.curve.tools,gitlab.com/imaginecurve"
-        fish_add_path --path --append $GOPATH/bin/
+        set -gx PATH /usr/local/bin /usr/bin ~/.local/bin $GOPATH/bin/ $PATH $HOME/.krew/bin
+        # fish_add_path --path --append $GOPATH/bin/
+        # fish_add_path --path --append /usr/local/bin /usr/bin ~/.local/bin
 
         # fifc setup
         set -Ux fifc_editor nvim
@@ -37,7 +39,6 @@ in {
         set fish_cursor_insert      line       blink
         set fish_cursor_replace_one underscore blink
         set fish_cursor_visual      block
-        bind --mode insert --sets-mode default jk repaint
       '';
       shellAliases = {
         wget = "wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\"";
@@ -62,19 +63,23 @@ in {
         sudo = "sudo -E -s";
 
         # nix
+        nhh = "nh home switch";
+        nho = "nh os switch";
+        nhu = "nh os switch --update --ask";
+
         nd = "nix develop";
         nfu = "nix flake update";
         hms = "home-manager switch --flake ~/dotfiles#${config.custom.user.name}@${host}";
         hmr = "home-manager generations | fzf --tac --no-sort | awk '{print $7}' | xargs -I{} bash {}/activate";
         nrs = "sudo nixos-rebuild switch --flake ~/dotfiles#${host}";
         nrt = "sudo nixos-rebuild test --flake ~/dotfiles#${host}";
-        niso = "nix build .#nixosConfigurations.iso.config.system.build.isoImage";
 
         resof = "sudo filefrag -v /swap/swapfile | awk '$1==\"0:\" {print substr($4, 1, length($4)-2)}'";
 
         # new commads
-        weather = "curl wttr.in/London";
+        weather = "curl wttr.in/Copenhagen";
 
+        pfile = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
         gdub = "git fetch -p && git branch -vv | grep ': gone]' | awk '{print }' | xargs git branch -D $argv;";
         tldrf = "tldr --list | fzf --preview \"tldr {1} --color=always\" --preview-window=right,70% | xargs tldr";
         dk = "docker kill (docker ps -q)";
@@ -120,10 +125,6 @@ in {
       };
       plugins = [
         {
-          name = "forgit";
-          inherit (pkgs.fishPlugins.forgit) src;
-        }
-        {
           name = "bass";
           inherit (pkgs.fishPlugins.bass) src;
         }
@@ -132,27 +133,12 @@ in {
           inherit (pkgs.fishPlugins.fzf-fish) src;
         }
         {
-          # TODO: until MR is merged in
-          name = "nix.fish";
-          src = pkgs.fetchFromGitHub {
-            owner = "Animeshz";
-            repo = "nix.fish";
-            rev = "a3256cf49846ee4de072c3a9af7a58aad4021693";
-            sha256 = "sha256-3M0dU30SrdjInp6MWEC0q7MTInrZNtY6Z9mhBw43PKs=";
-          };
-        }
-        {
           name = "fifc";
           inherit (pkgs.fishPlugins.fifc) src;
         }
         {
           name = "git-abbr";
-          src = pkgs.fetchFromGitHub {
-            owner = "lewisacidic";
-            repo = "fish-git-abbr";
-            rev = "dc590a5b9d9d2095f95f7d90608b48e55bea0b0e";
-            sha256 = "sha256-6z3Wr2t8CP85xVEp6UCYaM2KC9PX4MDyx19f/wjHkb0=";
-          };
+          inherit (pkgs.fishPlugins.git-abbr) src;
         }
       ];
     };
