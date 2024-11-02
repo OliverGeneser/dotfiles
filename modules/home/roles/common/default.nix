@@ -65,6 +65,7 @@ in
         gnupg
         e2fsprogs
         wget
+        openssl
 
         showmethekey
         python3

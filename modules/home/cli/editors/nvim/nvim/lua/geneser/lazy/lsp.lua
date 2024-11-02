@@ -12,6 +12,7 @@ return {
 		"saadparwaiz1/cmp_luasnip",
 		"j-hui/fidget.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		"nvim-highlight-colors",
 	},
 
 	config = function()
@@ -37,7 +38,6 @@ return {
 				"rnix",
 				"docker_compose_language_service",
 				"tailwindcss",
-				"cssls",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
@@ -108,6 +108,9 @@ return {
 			}, {
 				{ name = "buffer" },
 			}),
+			formatting = {
+				format = require("nvim-highlight-colors").format,
+			},
 		})
 
 		vim.diagnostic.config({
