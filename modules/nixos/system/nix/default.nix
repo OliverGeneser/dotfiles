@@ -21,11 +21,7 @@ in
         warn-dirty = false;
         system-features = [ "kvm" "big-parallel" "nixos-test" ];
       };
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-      };
+
       # flake-utils-plus
       generateRegistryFromInputs = true;
       generateNixPathFromInputs = true;

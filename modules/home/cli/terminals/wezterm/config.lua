@@ -4,7 +4,7 @@ local mux = wezterm.mux
 local sessionizer = require("sessionizer")
 
 -- Decide whether cmd represents a default startup invocation
-function is_default_startup(cmd)
+local function is_default_startup(cmd)
     if not cmd then
         -- we were started with `wezterm` or `wezterm start` with
         -- no other arguments
@@ -18,15 +18,15 @@ function is_default_startup(cmd)
     return false
 end
 
---wezterm.on('gui-startup', function(cmd)
---    if is_default_startup(cmd) then
---        -- for the default startup case, we want to switch to the unix domain instead
---        local unix = mux.get_domain("unix")
---        mux.set_default_domain(unix)
---        -- ensure that it is attached
---        unix:attach()
---    end
---end)
+wezterm.on('gui-startup', function(cmd)
+    --    if is_default_startup(cmd) then
+    --        -- for the default startup case, we want to switch to the unix domain instead
+    --        local unix = mux.get_domain("unix")
+    --        mux.set_default_domain(unix)
+    --        -- ensure that it is attached
+    --        unix:attach()
+    --    end
+end)
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
     local overrides = window:get_config_overrides() or {}
@@ -69,12 +69,12 @@ return {
         top = 20,
         bottom = 20,
     },
-    --unix_domains = {
-    --    {
-    --        name = "unix",
-    --        no_serve_automatically = false,
-    --    }
-    --},
+    unix_domains = {
+        {
+            name = "unix",
+        }
+    },
+    default_gui_startup_args = { 'connect', 'unix' },
     disable_default_key_bindings = true,
     leader = { key = "a", mods = "CTRL", timeout_milliseconds = 5000 },
     keys = {
