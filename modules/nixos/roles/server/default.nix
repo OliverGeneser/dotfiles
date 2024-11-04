@@ -23,10 +23,11 @@ in
 
     environment =
       {
-        systemPackages = [
-          pkgs.nfs-utils
-          pkgs.dnsutils
-          pkgs.smartmontools
+        systemPackages = with pkgs; [
+          nfs-utils
+          dnsutils
+          smartmontools
+          git
         ];
 
         # Print the URL instead on servers
