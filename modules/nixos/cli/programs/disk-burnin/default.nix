@@ -16,6 +16,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = [
       disk-burnin
+      pkgs.e2fsprogs
     ];
   };
 }
