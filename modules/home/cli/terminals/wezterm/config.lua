@@ -19,6 +19,16 @@ local function is_default_startup(cmd)
 end
 
 wezterm.on('gui-startup', function(cmd)
+    local args = {}
+    if cmd then
+        args = cmd.args
+        wezterm.log_info(args)
+    end
+    --if args[1] == "run_sessionizer" then
+    --    wezterm.action_callback(sessionizer.toggle)
+    --end
+
+
     --    if is_default_startup(cmd) then
     --        -- for the default startup case, we want to switch to the unix domain instead
     --        local unix = mux.get_domain("unix")
@@ -74,7 +84,6 @@ return {
             name = "unix",
         }
     },
-    default_gui_startup_args = { 'connect', 'unix' },
     disable_default_key_bindings = true,
     leader = { key = "a", mods = "CTRL", timeout_milliseconds = 5000 },
     keys = {

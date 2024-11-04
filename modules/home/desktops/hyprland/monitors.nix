@@ -14,14 +14,14 @@ in
 
       exec-once = [
         "[workspace 1 silent] firefox --new-instance --new-window localhost:8008"
-        "[workspace 3 silent] wezterm connect unix"
+        "[workspace 3 silent] wezterm"
         "[workspace 5 silent] webcord"
       ];
 
       workspace = [
         "1, monitor:${cfg.primary_monitor}, on-created-empty:[silent,fullscreen] firefox --new-instance"
         "2, monitor:${cfg.primary_monitor}, on-created-empty:[silent,fullscreen] firefox --new-instance --new-window localhost:8008"
-        "3, monitor:${cfg.primary_monitor}, on-created-empty:[silent,fullscreen] wezterm connect unix"
+        "3, monitor:${cfg.primary_monitor}, on-created-empty:[silent,fullscreen] wezterm"
         "4, monitor:${cfg.primary_monitor}"
         "5, monitor:${cfg.primary_monitor}, on-created-empty:[silent,fullscreen] webcord"
         "6, monitor:${cfg.primary_monitor}"

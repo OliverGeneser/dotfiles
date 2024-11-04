@@ -97,7 +97,7 @@ in
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       bind = [
-        "SUPER, Return, exec, [float;tile] wezterm connect unix"
+        "SUPER, Return, exec, [float;tile] wezterm"
         "SUPER, E, exec, thunar"
         "SUPER, F, exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun"
         "SUPER, Q, exec, ${protected_killactive}/bin/protected_killactive"
