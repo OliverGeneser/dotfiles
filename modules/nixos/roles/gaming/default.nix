@@ -14,14 +14,14 @@ in
 
   config = mkIf cfg.enable {
     hardware = {
-      xpadneo.enable = true;
+      # xpadneo.enable = true;
       xone.enable = true;
 
       graphics = {
         enable = true;
-        #extraPackages = with pkgs; [
-        #  mesa
-        #];
+        # extraPackages = with pkgs; [
+        #   mesa
+        # ];
       };
     };
 

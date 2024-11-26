@@ -38,7 +38,7 @@ in
       systemd.variables = [ "--all" ];
 
       plugins = [
-        inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
+        # inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
       ];
     };
 

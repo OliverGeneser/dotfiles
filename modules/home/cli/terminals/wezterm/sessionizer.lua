@@ -36,7 +36,6 @@ end
 M.toggle = function(window, pane)
     local projects = {}
 
-    wezterm.log_info("$HOME")
     wezterm.log_info(remove_up_to_third_slash(pane:get_current_working_dir()))
     local success, stdout, stderr = wezterm.run_child_process({
         fd,
