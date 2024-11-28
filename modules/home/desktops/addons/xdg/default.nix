@@ -33,7 +33,7 @@ in {
           "image/png" = ["org.gnome.Loupe.desktop"];
           "image/jpg" = ["org.gnome.Loupe.desktop"];
           "image/jpeg" = ["org.gnome.Loupe.desktop"];
-          "application/vnd.efi.iso" = ["gnome-disk-image-writer.desktop;"];
+          "application/vnd.efi.iso" = ["gnome-disk-image-mounter.desktop;" "gnome-disk-image-writer.desktop"];
         };
         defaultApplications = {
           "application/x-extension-htm" = "firefox.desktop";
