@@ -64,6 +64,57 @@
           };
         };
       };
+      disk1 = {
+        device = "/dev/disk/by-id/ata-HUH721212ALE601_8DJN8UGY";
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/mnt/disk1";
+              };
+            };
+          };
+        };
+      };
+      disk2 = {
+        device = "/dev/disk/by-id/ata-HUH721212ALE601_8HJ6EGGH";
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "xfs";
+                mountpoint = "/mnt/disk2";
+              };
+            };
+          };
+        };
+      };
+      parity1 = {
+        device = "/dev/disk/by-id/ata-WDC_WUH721414ALE6L4_Y6GJ5Z5C";
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/mnt/parity1";
+              };
+            };
+          };
+        };
+      };
       tank0 = {
         type = "disk";
         device = "/dev/disk/by-id/ata-ST2000DM001-1E6164_Z1E55KEJ";
@@ -117,7 +168,7 @@
         datasets = {
           vault = {
             type = "zfs_fs";
-            mountpoint = "/vault";
+            mountpoint = "/mnt/vault";
             options."com.sun:auto-snapshot" = "true";
           };
         };

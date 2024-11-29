@@ -25,9 +25,12 @@ in
       {
         systemPackages = with pkgs; [
           nfs-utils
+          xfsprogs
+          e2fsprogs
           dnsutils
           smartmontools
           git
+          pciutils
         ];
 
         # Print the URL instead on servers

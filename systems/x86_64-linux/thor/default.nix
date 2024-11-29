@@ -22,7 +22,7 @@
     ];
     supportedFilesystems = lib.mkForce [ "btrfs" "zfs" ];
     kernelModules = [ "zfs" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_6;
     resumeDevice = "/dev/disk/by-label/nixos";
 
     zfs = {
