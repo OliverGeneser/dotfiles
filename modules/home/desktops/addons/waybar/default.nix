@@ -1,18 +1,18 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib; let
   cfg = config.desktops.addons.waybar;
-in
-{
+in {
   options.desktops.addons.waybar = {
     enable = mkEnableOption "Enable waybar";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.hyprpanel ];
+    home.packages = [pkgs.hyprpanel];
 
     programs.waybar = {
       enable = true;
@@ -113,7 +113,7 @@ in
             format = "{icon} {capacity}%";
             format-alt = "{time}";
             format-charging = "  {capacity}%";
-            format-icons = [ "󰁻 " "󰁽 " "󰁿 " "󰂁 " "󰂂 " ];
+            format-icons = ["󰁻 " "󰁽 " "󰁿 " "󰂁 " "󰂂 "];
           };
           network = {
             interval = 1;
@@ -136,7 +136,7 @@ in
             format-icons = {
               headphone = "";
               headset = "";
-              default = [ "" "" ];
+              default = ["" ""];
             };
           };
           tray = {

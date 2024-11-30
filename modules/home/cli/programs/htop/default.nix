@@ -1,12 +1,12 @@
-{ lib
-, config
-, ...
+{
+  lib,
+  config,
+  ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.cli.programs.htop;
-in
-{
+in {
   options.cli.programs.htop = with types; {
     enable = mkBoolOpt false "Whether or not to enable htop";
   };

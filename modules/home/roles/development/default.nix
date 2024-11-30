@@ -1,11 +1,11 @@
-{ lib
-, config
-, ...
+{
+  lib,
+  config,
+  ...
 }:
 with lib; let
   cfg = config.roles.development;
-in
-{
+in {
   options.roles.development = {
     enable = mkEnableOption "Enable development configuration";
   };

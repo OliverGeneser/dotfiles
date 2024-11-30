@@ -1,7 +1,8 @@
-{ inputs
-, pkgs
-, lib
-, ...
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
 }: {
   imports = [
     ./hardware-configuration.nix
@@ -26,8 +27,8 @@
     kernelParams = [
       "resume_offset=533760" # sudo -E -s btrfs inspect-internal map-swapfile -r /swap/swapfile
     ];
-    supportedFilesystems = lib.mkForce [ "btrfs" ];
-    kernelModules = [ ];
+    supportedFilesystems = lib.mkForce ["btrfs"];
+    kernelModules = [];
     kernelPackages = pkgs.linuxPackages_latest;
     resumeDevice = "/dev/disk/by-label/nixos";
   };

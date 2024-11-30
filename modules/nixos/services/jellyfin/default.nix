@@ -1,13 +1,13 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.services.jellyfin-server;
-in
-{
+in {
   options.services.jellyfin-server = with types; {
     enable = mkBoolOpt false "Enable Jellyfin";
   };

@@ -1,19 +1,19 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.hardware.vaapi;
-in
-{
+in {
   options.hardware.vaapi = with types; {
     enable = mkEnableOption "Enable VAAPI and QSV";
   };
 
   config = mkIf cfg.enable {
     nixpkgs.config.packageOverrides = pkgs: {
-      vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+      vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
     };
     hardware.graphics = {
       enable = true;

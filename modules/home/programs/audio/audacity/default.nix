@@ -1,12 +1,12 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib; let
   cfg = config.programs.audio.audacity;
-in
-{
+in {
   options.programs.audio.audacity = {
     enable = mkEnableOption "Enable Audacity";
   };

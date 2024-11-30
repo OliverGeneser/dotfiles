@@ -1,12 +1,12 @@
-{ pkgs
-, lib
-, config
-, ...
+{
+  pkgs,
+  lib,
+  config,
+  ...
 }:
 with lib; let
   cfg = config.programs.meld;
-in
-{
+in {
   options.programs.meld = {
     enable = mkEnableOption "Enable meld";
   };

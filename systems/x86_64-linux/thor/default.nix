@@ -1,7 +1,8 @@
-{ inputs
-, pkgs
-, lib
-, ...
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
 }: {
   imports = [
     ./hardware-configuration.nix
@@ -20,8 +21,8 @@
     kernelParams = [
       "resume_offset=533760" # sudo -E -s btrfs inspect-internal map-swapfile -r /swap/swapfile
     ];
-    supportedFilesystems = lib.mkForce [ "btrfs" "zfs" ];
-    kernelModules = [ "zfs" ];
+    supportedFilesystems = lib.mkForce ["btrfs" "zfs"];
+    kernelModules = ["zfs"];
     kernelPackages = pkgs.linuxPackages_6_6;
     resumeDevice = "/dev/disk/by-label/nixos";
 
@@ -36,7 +37,7 @@
     trim.interval = "weekly";
 
     autoScrub.enable = true;
-    autoScrub.pools = [ "tank" ];
+    autoScrub.pools = ["tank"];
     autoScrub.interval = "weekly";
   };
 

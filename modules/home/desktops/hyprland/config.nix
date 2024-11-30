@@ -1,13 +1,13 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.desktops.hyprland;
   inherit (config.colorScheme) palette;
-in
-{
+in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       input = {

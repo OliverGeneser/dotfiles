@@ -1,11 +1,11 @@
-{ lib
-, config
-, ...
+{
+  lib,
+  config,
+  ...
 }:
 with lib; let
   cfg = config.roles.common;
-in
-{
+in {
   options.roles.common = {
     enable = mkEnableOption "Enable common configuration";
   };

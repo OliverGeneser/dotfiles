@@ -1,7 +1,8 @@
-{ lib
-, inputs
-, pkgs
-, ...
+{
+  lib,
+  inputs,
+  pkgs,
+  ...
 }: {
   roles = {
     desktop.enable = true;

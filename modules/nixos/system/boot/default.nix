@@ -1,15 +1,14 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkIf;
   inherit (lib.custom) mkBoolOpt;
 
   cfg = config.system.boot;
-in
-{
+in {
   options.system.boot = {
     enable = mkBoolOpt false "Whether or not to enable booting.";
     plymouth = mkBoolOpt false "Whether or not to enable plymouth boot splash.";
@@ -24,10 +23,10 @@ in
         efivar
         fwupd
       ]
-      ++ lib.optionals cfg.secureBoot [ sbctl ];
+      ++ lib.optionals cfg.secureBoot [sbctl];
 
     boot = {
-      kernelParams = lib.optionals cfg.plymouth [ "quiet" "splash" "loglevel=3" "udev.log_level=0" ];
+      kernelParams = lib.optionals cfg.plymouth ["quiet" "splash" "loglevel=3" "udev.log_level=0"];
       #initrd.verbose = lib.optionals cfg.plymouth false;
       #consoleLogLevel = lib.optionals cfg.plymouth 0;
       initrd.systemd.enable = true;
@@ -52,7 +51,7 @@ in
       plymouth = {
         enable = cfg.plymouth;
         theme = "catppuccin-mocha";
-        themePackages = [ (pkgs.catppuccin-plymouth.override { variant = "mocha"; }) ];
+        themePackages = [(pkgs.catppuccin-plymouth.override {variant = "mocha";})];
       };
     };
 

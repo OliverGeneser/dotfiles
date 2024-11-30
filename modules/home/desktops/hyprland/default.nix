@@ -1,15 +1,15 @@
-{ pkgs
-, inputs
-, config
-, lib
-, ...
+{
+  pkgs,
+  inputs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 with lib.custom;
 with types; let
   cfg = config.desktops.hyprland;
-in
-{
+in {
   imports = with inputs; [
     #hyprland-nix.homeManagerModules.default
     ./config.nix
@@ -28,14 +28,14 @@ in
 
   config = mkIf cfg.enable {
     nix.settings = {
-      trusted-substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+      trusted-substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
 
     wayland.windowManager.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      systemd.variables = [ "--all" ];
+      systemd.variables = ["--all"];
 
       plugins = [
         # inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix

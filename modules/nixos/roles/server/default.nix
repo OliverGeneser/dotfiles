@@ -1,12 +1,12 @@
-{ pkgs
-, lib
-, config
-, ...
+{
+  pkgs,
+  lib,
+  config,
+  ...
 }:
 with lib; let
   cfg = config.roles.server;
-in
-{
+in {
   options.roles.server = {
     enable = mkEnableOption "Enable server configuration";
   };
@@ -48,7 +48,7 @@ in
       fsType = "fuse.mergerfs";
       device = "/mnt/disk*";
       noCheck = true;
-      options = [ "defaults" "nonempty" "allow_other" "use_ino" "cache.files=off" "moveonenospc=true" "category.create=mfs" "dropcacheonclose=true" "minfreespace=250G" "fsname=mergerfs" ];
+      options = ["defaults" "nonempty" "allow_other" "use_ino" "cache.files=off" "moveonenospc=true" "category.create=mfs" "dropcacheonclose=true" "minfreespace=250G" "fsname=mergerfs"];
     };
 
     security = {

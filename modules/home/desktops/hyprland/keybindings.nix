@@ -1,7 +1,8 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.desktops.hyprland;
@@ -91,9 +92,7 @@ with lib; let
         hyprctl dispatch fullscreen
     fi
   '';
-
-in
-{
+in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       bind = [

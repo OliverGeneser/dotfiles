@@ -1,21 +1,21 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.user;
-in
-{
+in {
   options.user = with types; {
     name = mkOpt str "olivergeneser" "The name of the user's account";
     initialPassword =
       mkOpt str "test1234"
-        "The initial password to use";
-    extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
+      "The initial password to use";
+    extraGroups = mkOpt (listOf str) [] "Groups for the user to be assigned.";
     extraOptions =
-      mkOpt attrs { }
-        "Extra options passed to users.users.<name>";
+      mkOpt attrs {}
+      "Extra options passed to users.users.<name>";
   };
 
   config = {

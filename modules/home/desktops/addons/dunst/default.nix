@@ -1,11 +1,11 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.desktops.addons.dunst;
-in
-{
+in {
   options.desktops.addons.dunst = {
     enable = mkEnableOption "Enable dunst";
   };

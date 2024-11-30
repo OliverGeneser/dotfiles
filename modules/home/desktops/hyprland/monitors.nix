@@ -1,11 +1,11 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.desktops.hyprland;
-in
-{
+in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       monitor = [

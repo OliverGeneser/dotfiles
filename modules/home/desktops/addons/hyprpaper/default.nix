@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 with lib.custom; let
@@ -21,14 +22,13 @@ with lib.custom; let
       hyprctl hyprpaper wallpaper "$m,contain:$wallpaper"
     done
   '';
-in
-{
+in {
   options.desktops.addons.hyprpaper = with types; {
     enable = mkBoolOpt false "Whether to enable the hyprpaper config";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ wallpaperRandomizer ];
+    home.packages = [wallpaperRandomizer];
 
     services.hyprpaper = {
       enable = true;
@@ -48,12 +48,12 @@ in
 
     systemd.user = {
       services.wallpaperRandomizer = {
-        Install = { WantedBy = [ "graphical-session.target" ]; };
+        Install = {WantedBy = ["graphical-session.target"];};
 
         Unit = {
           Description = "Set random desktop background using hyprpaper";
-          After = [ "graphical-session-pre.target" "hyprpaper.service" ];
-          PartOf = [ "graphical-session.target" ];
+          After = ["graphical-session-pre.target" "hyprpaper.service"];
+          PartOf = ["graphical-session.target"];
         };
 
         Service = {
@@ -64,11 +64,11 @@ in
       };
 
       timers.wallpaperRandomizer = {
-        Unit = { Description = "Set random desktop background using hyprpaper on an interval"; };
+        Unit = {Description = "Set random desktop background using hyprpaper on an interval";};
 
-        Timer = { OnUnitActiveSec = "1h"; };
+        Timer = {OnUnitActiveSec = "1h";};
 
-        Install = { WantedBy = [ "timers.target" ]; };
+        Install = {WantedBy = ["timers.target"];};
       };
     };
   };

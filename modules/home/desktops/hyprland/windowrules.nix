@@ -1,12 +1,12 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.desktops.hyprland;
-in
-{
+in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings.windowrulev2 = [
       "idleinhibit fullscreen,class:(Mullvad Browser)"

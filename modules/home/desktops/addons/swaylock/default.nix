@@ -1,13 +1,13 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.desktops.addons.swaylock;
-in
-{
+in {
   options.desktops.addons.swaylock = {
     enable = mkEnableOption "Enable swaylock lock management";
     blur = mkOpt (types.nullOr types.str) "7x5" "radius x times blur the image.";

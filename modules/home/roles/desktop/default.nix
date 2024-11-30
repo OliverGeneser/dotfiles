@@ -1,12 +1,12 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.roles.desktop;
-in
-{
+in {
   options.roles.desktop = {
     enable = mkEnableOption "Enable desktop suite";
   };
@@ -17,7 +17,7 @@ in
       development.enable = true;
     };
 
-    services = { };
+    services = {};
     browsers = {
       mullvad.enable = true;
       firefox.enable = true;

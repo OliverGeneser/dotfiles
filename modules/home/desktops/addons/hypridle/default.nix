@@ -1,13 +1,13 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.desktops.addons.hypridle;
-in
-{
+in {
   options.desktops.addons.hypridle = with types; {
     enable = mkBoolOpt false "Whether to enable the hypridle";
   };

@@ -1,12 +1,12 @@
-{ lib
-, config
-, ...
+{
+  lib,
+  config,
+  ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.roles.desktop;
-in
-{
+in {
   options.roles.desktop = {
     enable = mkEnableOption "Enable desktop configuration";
   };

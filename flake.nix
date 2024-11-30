@@ -133,22 +133,21 @@
     };
   };
 
-  outputs = inputs:
-    let
-      lib = inputs.snowfall-lib.mkLib {
-        inherit inputs;
-        src = ./.;
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
+      inherit inputs;
+      src = ./.;
 
-        snowfall = {
-          metadata = "dotfiles";
-          namespace = "custom";
-          meta = {
-            name = "dotfiles";
-            title = "Geneser Nix Flake";
-          };
+      snowfall = {
+        metadata = "dotfiles";
+        namespace = "custom";
+        meta = {
+          name = "dotfiles";
+          title = "Geneser Nix Flake";
         };
       };
-    in
+    };
+  in
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;
@@ -177,13 +176,12 @@
         nixgl.overlay
       ];
 
-      deploy = lib.mkDeploy { inherit (inputs) self; };
+      deploy = lib.mkDeploy {inherit (inputs) self;};
 
       checks =
         builtins.mapAttrs
-          (system: deploy-lib:
-            deploy-lib.deployChecks inputs.self.deploy)
-          inputs.deploy-rs.lib;
-
+        (system: deploy-lib:
+          deploy-lib.deployChecks inputs.self.deploy)
+        inputs.deploy-rs.lib;
     };
 }

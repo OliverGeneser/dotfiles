@@ -1,13 +1,13 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.hardware.audio;
-in
-{
+in {
   options.hardware.audio = with types; {
     enable = mkBoolOpt false "Enable or disable pipewire";
   };
@@ -30,10 +30,10 @@ in
     systemd.user = {
       services.noisetorchAutostart = {
         enable = true;
-        wantedBy = [ "default.target" ];
+        wantedBy = ["default.target"];
         description = "Auto Start Noisetorch Service";
-        requires = [ "sys-devices-pci0000:00-0000:00:14.0-usb3-3\\x2d1-3\\x2d1:1.0-sound-card2-controlC2.device" ];
-        after = [ "pipewire.service" "sys-devices-pci0000:00-0000:00:14.0-usb3-3\\x2d1-3\\xd21:1.0-sound-card2-controlC2.device" ];
+        requires = ["sys-devices-pci0000:00-0000:00:14.0-usb3-3\\x2d1-3\\x2d1:1.0-sound-card2-controlC2.device"];
+        after = ["pipewire.service" "sys-devices-pci0000:00-0000:00:14.0-usb3-3\\x2d1-3\\xd21:1.0-sound-card2-controlC2.device"];
 
         serviceConfig = {
           Type = "simple";

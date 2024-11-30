@@ -1,12 +1,12 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.desktops.addons.gtk;
-in
-{
+in {
   options.desktops.addons.gtk = {
     enable = mkEnableOption "enable gtk theme management";
   };

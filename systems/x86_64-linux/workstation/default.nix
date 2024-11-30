@@ -1,7 +1,8 @@
-{ inputs
-, pkgs
-, lib
-, ...
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
 }: {
   imports = [
     ./hardware-configuration.nix
@@ -15,9 +16,23 @@
   services.thermald.enable = true;
   hardware = {
     networking = {
-      allowedTCPPortRanges = [{ from = 1714; to = 1764; } { from = 19000; to = 19001; }];
-      allowedUDPPortRanges = [{ from = 1714; to = 1764; }];
-      allowedTCPPorts = [ 3000 8081 4321 ];
+      allowedTCPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+        {
+          from = 19000;
+          to = 19001;
+        }
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ];
+      allowedTCPPorts = [3000 8081 4321];
     };
     nvidia.enable = true;
   };
@@ -36,7 +51,7 @@
     kernelParams = [
       "resume_offset=533760"
     ];
-    supportedFilesystems = lib.mkForce [ "btrfs" ];
+    supportedFilesystems = lib.mkForce ["btrfs"];
     kernelPackages = pkgs.linuxPackages_latest; #https://github.com/NixOS/nixpkgs/issues/344167
     resumeDevice = "/dev/disk/by-label/nixos";
   };

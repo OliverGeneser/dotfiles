@@ -1,12 +1,12 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib; let
   cfg = config.programs.unityhub;
-in
-{
+in {
   options.programs.unityhub = {
     enable = mkEnableOption "Enable Unity hub";
   };

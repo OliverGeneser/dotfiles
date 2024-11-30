@@ -1,14 +1,14 @@
-{ pkgs
-, inputs
-, lib
-, config
-, ...
+{
+  pkgs,
+  inputs,
+  lib,
+  config,
+  ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.browsers.firefox;
-in
-{
+in {
   options.browsers.firefox = with types; {
     enable = mkEnableOption "Enable or disable firefox browser";
   };
@@ -19,10 +19,10 @@ in
 
   config = mkIf cfg.enable {
     xdg.mimeApps.defaultApplications = {
-      "text/html" = [ "firefox.desktop" ];
-      "text/xml" = [ "firefox.desktop" ];
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "text/html" = ["firefox.desktop"];
+      "text/xml" = ["firefox.desktop"];
+      "x-scheme-handler/http" = ["firefox.desktop"];
+      "x-scheme-handler/https" = ["firefox.desktop"];
     };
 
     programs.firefox = {

@@ -1,12 +1,12 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.hardware.nvidia;
-in
-{
+in {
   options.hardware.nvidia = with types; {
     enable = mkEnableOption "Enable Nvidia";
   };
@@ -22,10 +22,10 @@ in
       egl-wayland
     ];
 
-    boot.kernelParams = [ "nvidia_drm.fbdev=1" "nvidia_drm.modeset=1" ];
+    boot.kernelParams = ["nvidia_drm.fbdev=1" "nvidia_drm.modeset=1"];
 
     # Load nvidia driver for Xorg and Wayland
-    services.xserver.videoDrivers = [ "nvidia" ];
+    services.xserver.videoDrivers = ["nvidia"];
 
     environment.sessionVariables = {
       LIBVA_DRIVER_NAME = "nvidia";

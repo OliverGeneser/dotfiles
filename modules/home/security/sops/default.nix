@@ -1,14 +1,14 @@
-{ pkgs
-, config
-, lib
-, inputs
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
 }:
 with lib;
 with lib.custom; let
   cfg = config.security.sops;
-in
-{
+in {
   options.security.sops = with types; {
     enable = mkBoolOpt false "Whether to enable sop for secrets management.";
   };
@@ -22,7 +22,7 @@ in
       age = {
         #generateKey = true;
         keyFile = "/home/${config.custom.user.name}/.config/sops/age/keys.txt";
-        sshKeyPaths = [ "/home/${config.custom.user.name}/.ssh/id_ed25519" ];
+        sshKeyPaths = ["/home/${config.custom.user.name}/.ssh/id_ed25519"];
       };
 
       defaultSymlinkPath = "/run/user/1000/secrets";

@@ -1,12 +1,12 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib; let
   cfg = config.service.ollama;
-in
-{
+in {
   options.service.ollama = {
     enable = mkEnableOption "Enable Ollama service";
   };
