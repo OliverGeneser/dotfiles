@@ -31,6 +31,7 @@ in
           smartmontools
           git
           pciutils
+          mergerfs
         ];
 
         # Print the URL instead on servers
@@ -41,6 +42,14 @@ in
         # stubs. Server users should know what they are doing.
         stub-ld.enable = lib.mkDefault false;
       };
+
+    #/mnt/disk* /mnt/storage fuse.mergerfs defaults,nonempty,allow_other,use_ino,cache.files=off,moveonenospc=true,category.create=mfs,dropcacheonclose=true,minfreespace=250G,fsname=mergerfs 0 0
+    fileSystems."/mnt/storage" = {
+      fsType = "fuse.mergerfs";
+      device = "/mnt/disk*";
+      noCheck = true;
+      options = [ "defaults" "nonempty" "allow_other" "use_ino" "cache.files=off" "moveonenospc=true" "category.create=mfs" "dropcacheonclose=true" "minfreespace=250G" "fsname=mergerfs" ];
+    };
 
     security = {
       sudo = {
