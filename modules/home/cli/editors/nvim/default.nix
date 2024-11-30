@@ -1,15 +1,16 @@
-{ pkgs
-, lib
-, inputs
-, config
-, ...
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  ...
 }:
 with lib;
 with lib.custom;
 with inputs; let
   cfg = config.cli.editors.nvim;
 
-  treesitterWithGrammars = (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
+  treesitterWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
     p.astro
     p.bash
     p.comment
@@ -36,74 +37,73 @@ with inputs; let
     p.typescript
     p.vue
     p.yaml
-  ]));
+  ]);
 
   treesitter-parsers = pkgs.symlinkJoin {
     name = "treesitter-parsers";
     paths = treesitterWithGrammars.dependencies;
   };
-
-in
-{
+in {
   options.cli.editors.nvim = with types; {
     enable = mkBoolOpt false "enable neovim editor";
   };
 
   config =
     mkIf
-      cfg.enable
-      {
-        home.packages = with pkgs; [
-          ripgrep
-          fd
-          go
-          lua-language-server
-          rustup
-          black
-          cmake
-          ninja
-          gcc
-          gpp
-          dotnetCorePackages.dotnet_8.sdk
-          prettierd
-          csharpier
+    cfg.enable
+    {
+      home.packages = with pkgs; [
+        ripgrep
+        fd
+        go
+        lua-language-server
+        rustup
+        black
+        alejandra
+        cmake
+        ninja
+        gcc
+        gpp
+        dotnetCorePackages.dotnet_8.sdk
+        prettierd
+        csharpier
+      ];
+
+      home.sessionVariables = {
+        DOTNET_ROOT = "${pkgs.dotnetCorePackages.dotnet_8.sdk}";
+      };
+
+      programs.neovim = {
+        enable = true;
+        #package = pkgs.neovim;
+        viAlias = true;
+        vimAlias = true;
+        defaultEditor = true;
+        coc.enable = false;
+        withNodeJs = true;
+
+        plugins = [
+          treesitterWithGrammars
         ];
+      };
 
-        home.sessionVariables = {
-          DOTNET_ROOT = "${pkgs.dotnetCorePackages.dotnet_8.sdk}";
-        };
-
-        programs.neovim = {
-          enable = true;
-          #package = pkgs.neovim;
-          viAlias = true;
-          vimAlias = true;
-          defaultEditor = true;
-          coc.enable = false;
-          withNodeJs = true;
-
-          plugins = [
-            treesitterWithGrammars
-          ];
-        };
-
-        home.file = {
-          ".config/nvim" = {
-            source = ./nvim;
-            recursive = true;
-          };
-        };
-
-        home.file.".config/nvim/init.lua".text = ''
-          require("geneser")
-          vim.opt.runtimepath:append("${treesitter-parsers}")
-        '';
-
-        # Treesitter is configured as a locally developed module in lazy.nvim
-        # we hardcode a symlink here so that we can refer to it in our lazy config
-        home.file.".local/share/nvim/nix/nvim-treesitter/" = {
+      home.file = {
+        ".config/nvim" = {
+          source = ./nvim;
           recursive = true;
-          source = treesitterWithGrammars;
         };
       };
+
+      home.file.".config/nvim/init.lua".text = ''
+        require("geneser")
+        vim.opt.runtimepath:append("${treesitter-parsers}")
+      '';
+
+      # Treesitter is configured as a locally developed module in lazy.nvim
+      # we hardcode a symlink here so that we can refer to it in our lazy config
+      home.file.".local/share/nvim/nix/nvim-treesitter/" = {
+        recursive = true;
+        source = treesitterWithGrammars;
+      };
+    };
 }

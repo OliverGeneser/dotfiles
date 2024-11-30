@@ -1,6 +1,5 @@
 return {
     "stevearc/conform.nvim",
-
     event = { "BufReadPre", "BufNewFile" },
     config = function()
         local conform = require("conform")
@@ -45,6 +44,7 @@ return {
                 lua = { "stylua" },
                 python = { "isort", "black" },
                 cs = { "csharpier" },
+                nix = { "alejandra" },
             },
         })
 
