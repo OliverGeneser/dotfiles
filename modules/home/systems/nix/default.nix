@@ -25,6 +25,7 @@ in
       nixgl.nixGLIntel
       nix-output-monitor
       nvd
+      nix-init
     ];
 
     systemd.user.startServices = "sd-switch";

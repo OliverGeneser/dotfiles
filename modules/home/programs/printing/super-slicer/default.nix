@@ -13,7 +13,8 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      super-slicer-beta
+      # Remove until fixed
+      #super-slicer-beta
     ];
   };
 }
