@@ -10,7 +10,7 @@ with lib.custom; let
   cfg = config.security.sops;
 in {
   options.security.sops = with types; {
-    enable = mkBoolOpt false "Whether to enable sop for secrets management.";
+    enable = mkBoolOpt false "Whether to enable sops for secrets management.";
   };
 
   imports = with inputs; [
