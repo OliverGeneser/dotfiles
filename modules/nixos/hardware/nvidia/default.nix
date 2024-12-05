@@ -30,17 +30,17 @@ in {
     environment.sessionVariables = {
       LIBVA_DRIVER_NAME = "nvidia";
       XDG_SESSION_TYPE = "wayland";
-      GBM_BACKEND = "nvidia-drm";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
 
-      #GDK_BACKEND = "wayland,x11";
-      #SDL_VIDEODRIVER = "wayland";
-      #NVD_BACKEND = "direct";
-      #CLUTTER_BACKEND = "wayland";
-      #GBM_BACKEND = "nvidia-drm";
+      GDK_BACKEND = "wayland,x11";
+      NVD_BACKEND = "direct";
+      GBM_BACKEND = "nvidia-drm";
+      SDL_VIDEODRIVER = "wayland";
 
-      #MOZ_ENABLE_WAYLAND = "1";
-      #MOZ_DISABLE_RDD_SANDBOX = "1";
+      MOZ_ENABLE_WAYLAND = "1";
+      MOZ_DISABLE_RDD_SANDBOX = "1";
+
+      #CLUTTER_BACKEND = "wayland";
 
       # https://wiki.archlinux.org/title/Java
       #_JAVA_AWT_WM_NONREPARENTING = "1";
@@ -60,7 +60,6 @@ in {
       #__GL_MaxFramesAllowed = "1";
       #XWAYLAND_NO_GLAMOR = "1"; # with this you'll need to use gamescope for gaming
 
-      #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
       #__NV_PRIME_RENDER_OFFLOAD = "1";
       #__VK_LAYER_NV_optimus = "NVIDIA_only";
       #WLR_DRM_NO_ATOMIC = "1";

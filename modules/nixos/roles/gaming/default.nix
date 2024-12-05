@@ -7,6 +7,7 @@
 with lib;
 with lib.custom; let
   cfg = config.roles.gaming;
+  nvidiaCfg = config.hardware.nvidia;
 in {
   options.roles.gaming = with types; {
     enable = mkBoolOpt false "Enable the gaming suite";
@@ -19,9 +20,13 @@ in {
 
       graphics = {
         enable = true;
-        # extraPackages = with pkgs; [
-        #   mesa
-        # ];
+        extraPackages = with pkgs; [
+          (
+            if nvidiaCfg.enable
+            then null
+            else mesa
+          )
+        ];
       };
     };
 
