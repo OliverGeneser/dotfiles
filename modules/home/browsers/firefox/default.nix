@@ -18,6 +18,10 @@ in {
   ];
 
   config = mkIf cfg.enable {
+    home.sessionVariables = {
+      MOZ_USE_XINPUT2 = "1";
+    };
+
     xdg.mimeApps.defaultApplications = {
       "text/html" = ["firefox.desktop"];
       "text/xml" = ["firefox.desktop"];
@@ -41,8 +45,11 @@ in {
         #   };
         extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
           ublock-origin
+
           bitwarden
           vimium
+          darkreader
+          don-t-fuck-with-paste
           user-agent-string-switcher
         ];
         search = {
@@ -70,6 +77,7 @@ in {
         };
         arkenfox = {
           enable = true;
+          enableAllSections = true;
           "0000".enable = true;
           "0100" = {
             enable = true;
