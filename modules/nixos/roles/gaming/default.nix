@@ -20,13 +20,13 @@ in {
 
       graphics = {
         enable = true;
-        extraPackages = with pkgs; [
-          (
+        extraPackages = with pkgs;
+          []
+          ++ (
             if nvidiaCfg.enable
-            then null
-            else mesa
-          )
-        ];
+            then []
+            else [mesa]
+          );
       };
     };
 
