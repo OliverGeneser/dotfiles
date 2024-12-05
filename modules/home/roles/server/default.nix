@@ -28,6 +28,9 @@ in {
       programs = {
         git.enable = true;
         htop.enable = true;
+        eza.enable = true;
+        fzf.enable = true;
+        modern-unix.enable = true;
       };
     };
 
