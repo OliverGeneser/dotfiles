@@ -31,6 +31,8 @@ in {
         eza.enable = true;
         fzf.enable = true;
         modern-unix.enable = true;
+        nix-index.enable = true;
+        direnv.enable = true;
       };
     };
 

@@ -68,7 +68,7 @@ in {
           };
 
           init = {
-            defaultBranch = "init";
+            defaultBranch = "main";
           };
         }
         // rewriteURL;
