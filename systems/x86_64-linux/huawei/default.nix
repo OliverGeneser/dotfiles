@@ -13,8 +13,20 @@
     hostName = "huawei";
   };
 
+  system = {
+    impermanence = {
+      usesEncryption = lib.mkForce true;
+    };
+  };
+
   services.thermald.enable = true;
-  hardware.nvidia.open = lib.mkForce false;
+
+  hardware = {
+    networking = {
+      allowedTCPPorts = [80 443];
+    };
+    nvidia.open = lib.mkForce false;
+  };
 
   roles = {
     gaming.enable = true;

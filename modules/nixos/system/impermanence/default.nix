@@ -9,6 +9,7 @@ with lib.custom; let
 in {
   options.system.impermanence = with types; {
     enable = mkBoolOpt false "Enable impermanence";
+    usesEncryption = mkBoolOpt false "Does the system use encryption";
   };
 
   config = mkIf cfg.enable {
@@ -27,7 +28,13 @@ in {
       wantedBy = ["initrd.target"];
       # make sure it's done after encryption
       # i.e. LUKS/TPM process
-      after = ["systemd-cryptsetup@cryptroot.service"];
+      after =
+        []
+        ++ (
+          if cfg.usesEncryption
+          then ["systemd-cryptsetup@cryptroot.service"]
+          else ["local-fs.target"]
+        );
       # mount the root fs before clearing
       before = ["sysroot.mount"];
       unitConfig.DefaultDependencies = "no";
@@ -37,7 +44,13 @@ in {
 
         # We first mount the btrfs root to /mnt
         # so we can manipulate btrfs subvolumes.
-        mount -o subvol=/ /dev/mapper/cryptroot /mnt
+        if [ ! -d "/dev/mapper/cryptroot" ]; then
+          echo "Mounting nixos"
+          mount -o subvol=/ /dev/disk/by-label/nixos /mnt
+        else
+          echo "Mounting cryptroot"
+          mount -o subvol=/ /dev/mapper/cryptroot /mnt
+        fi
 
         btrfs subvolume list -o /mnt/root
 
@@ -90,10 +103,7 @@ in {
         "/etc/ssh/ssh_host_ed25519_key.pub"
         "/etc/ssh/ssh_host_rsa_key"
         "/etc/ssh/ssh_host_rsa_key.pub"
-        {
-          file = "/var/keys/secret_file";
-          parentDirectory = {mode = "u=rwx,g=,o=";};
-        }
+        "/var/snapraid.content"
       ];
     };
   };

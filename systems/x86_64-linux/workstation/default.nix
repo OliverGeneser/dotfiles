@@ -13,7 +13,16 @@
     hostName = "workstation";
   };
 
-  services.thermald.enable = true;
+  system = {
+    impermanence = {
+      usesEncryption = lib.mkForce true;
+    };
+  };
+
+  services = {
+    thermald.enable = true;
+  };
+
   hardware = {
     networking = {
       allowedTCPPortRanges = [
@@ -32,7 +41,7 @@
           to = 1764;
         }
       ];
-      allowedTCPPorts = [3000 8081 4321];
+      allowedTCPPorts = [80 443 3000 8081 4321];
     };
     nvidia.enable = true;
   };
