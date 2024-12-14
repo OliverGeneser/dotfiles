@@ -26,18 +26,5 @@
     name = "nixos";
   };
 
-  home.persistence."/persist/home/nixos" = {
-    directories = [
-      "dotfiles"
-      ".gnupg"
-      ".ssh"
-      ".nixops"
-      ".local/share/keyrings"
-      ".local/share/direnv"
-    ];
-    files = [];
-    allowOther = true;
-  };
-
   home.stateVersion = "23.11";
 }
