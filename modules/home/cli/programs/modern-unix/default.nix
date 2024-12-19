@@ -35,6 +35,7 @@ in {
       ouch
       silver-searcher
       procs
+      powertop
       lm_sensors
       trash-cli
       gtrash
