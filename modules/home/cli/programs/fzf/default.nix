@@ -12,10 +12,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    catppuccin.fzf.enable = true;
     programs.fzf = {
       enable = true;
       enableFishIntegration = false;
-      catppuccin.enable = true;
     };
   };
 }
