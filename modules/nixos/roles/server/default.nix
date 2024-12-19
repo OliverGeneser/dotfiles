@@ -16,9 +16,44 @@ in {
       common.enable = true;
     };
 
+    cli = {
+      programs = {
+        nh.enable = true;
+      };
+    };
+
     services = {
       getty.autologinUser = "nixos";
       jellyfin-server.enable = true;
+
+      snapraid = {
+        enable = true;
+        dataDisks = {
+          d1 = "/mnt/disk1/";
+          d2 = "/mnt/disk2/";
+        };
+        contentFiles = [
+          "/var/snapraid.content"
+          "/mnt/disk1/snapraid.content"
+          "/mnt/disk2/snapraid.content"
+        ];
+        parityFiles = [
+          "/mnt/parity1/snapraid.parity"
+        ];
+        exclude = [
+          "*.unrecoverable"
+          "/tmp/"
+          "/lost+found/"
+          "*.!sync"
+          "/.snapshots/"
+        ];
+        sync.interval = "01:00";
+        scrub = {
+          interval = "Mon *-*-* 02:00:00";
+          plan = 8;
+          olderThan = 10;
+        };
+      };
     };
 
     environment =
@@ -32,6 +67,7 @@ in {
           git
           pciutils
           mergerfs
+          mergerfs-tools
         ];
 
         # Print the URL instead on servers
@@ -47,7 +83,6 @@ in {
     fileSystems."/mnt/storage" = {
       fsType = "fuse.mergerfs";
       device = "/mnt/disk*";
-      noCheck = true;
       options = ["defaults" "nonempty" "allow_other" "use_ino" "cache.files=off" "moveonenospc=true" "category.create=mfs" "dropcacheonclose=true" "minfreespace=250G" "fsname=mergerfs"];
     };
 

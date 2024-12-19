@@ -15,6 +15,7 @@ pkgs.mkShell {
     statix
     deadnix
     alejandra
+    disko
     home-manager
     git
     sops
