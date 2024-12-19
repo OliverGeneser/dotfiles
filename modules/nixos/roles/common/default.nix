@@ -16,7 +16,7 @@ in {
     };
 
     services = {
-      openssh.enable = true;
+      ssh.enable = true;
     };
 
     security = {

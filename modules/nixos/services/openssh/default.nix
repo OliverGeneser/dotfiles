@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  format ? "",
   ...
 }:
 with lib;
@@ -16,10 +15,11 @@ in {
   config = mkIf cfg.enable {
     services.openssh = {
       enable = true;
-      ports = [22];
+      ports = [1337];
 
       settings = {
         PasswordAuthentication = false;
+        PubkeyAuthentication = true;
         PermitRootLogin = "no";
         StreamLocalBindUnlink = "yes";
         GatewayPorts = "clientspecified";
@@ -27,7 +27,7 @@ in {
     };
     users.users = {
       ${config.user.name}.openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAA hello@geneser.xyz"
+        "sk-ecdsa-sha2-nistp256@openssh.com AAAAInNrLWVjZHNhLXNoYTItbmlzdHAyNTZAb3BlbnNzaC5jb20AAAAIbmlzdHAyNTYAAABBBGC3EOmZkrcXn3E9+xUAVxWsgWIDjPDFn6HPt/IAzkWnGa00XtfkcuLijMohxny+Lw/U8gIPs67vqSC8tR2ITowAAAAEc3NoOg== hello@geneser.xyz"
       ];
     };
   };

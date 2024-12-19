@@ -21,7 +21,6 @@ in {
   config = mkIf cfg.enable {
     programs.ssh = {
       enable = true;
-
       matchBlocks = cfg.extraHosts;
     };
   };
