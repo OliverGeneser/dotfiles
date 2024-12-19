@@ -25,6 +25,7 @@ in {
     services = {
       getty.autologinUser = "nixos";
       jellyfin-server.enable = true;
+      signal-reporting-bot.enable = true;
 
       snapraid = {
         enable = true;
