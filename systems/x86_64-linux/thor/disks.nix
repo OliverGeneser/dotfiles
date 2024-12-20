@@ -108,7 +108,7 @@
               size = "100%";
               content = {
                 type = "filesystem";
-                format = "ext4";
+                format = "xfs";
                 mountpoint = "/mnt/parity1";
               };
             };
