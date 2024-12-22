@@ -14,12 +14,12 @@
   programs = {
     androidStudio.enable = true;
   };
+
   desktops.hyprland.enable = true;
 
   cli.programs.ssh.extraHosts = {
     "bitbucket-qinspect" = {
       hostname = "bitbucket.org";
-      user = "git";
       identityFile = "~/.ssh/ssh_prod_qreport";
       identitiesOnly = true;
     };
@@ -31,6 +31,11 @@
     "q-inspect.dk" = {
       hostname = "q-inspect.dk";
       identityFile = "~/.ssh/ssh_prod_qreport";
+      identitiesOnly = true;
+    };
+    "thor" = {
+      hostname = "10.0.0.205";
+      identityFile = "~/.ssh/id_ecdsa_sk";
       identitiesOnly = true;
     };
   };
