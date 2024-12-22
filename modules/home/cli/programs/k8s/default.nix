@@ -16,7 +16,6 @@ in {
     programs = {
       k9s = {
         enable = true;
-        catppuccin.enable = true;
       };
     };
 
@@ -27,6 +26,8 @@ in {
       kubelogin-oidc
       stern
       kubernetes-helm
+      kustomize
+      fluxcd
     ];
   };
 }

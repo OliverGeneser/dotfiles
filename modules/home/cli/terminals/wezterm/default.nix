@@ -1,8 +1,8 @@
 {
-  inputs,
+  pkgs,
   config,
   lib,
-  pkgs,
+  inputs,
   ...
 }:
 with lib; let
@@ -18,6 +18,7 @@ in {
       package = inputs.wezterm.packages.${pkgs.system}.default;
       extraConfig = builtins.readFile ./config.lua;
     };
+
     xdg.configFile."wezterm/sessionizer.lua".source = ./sessionizer.lua;
   };
 }

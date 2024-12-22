@@ -20,6 +20,7 @@ in {
 
     cli = {
       shells.fish.enable = true;
+      terminals.wezterm.enable = true;
 
       editors = {
         nvim.enable = true;
@@ -36,15 +37,13 @@ in {
       };
     };
 
-    # TODO: move this to a separate module
-    home.packages = with pkgs;
-    with pkgs.custom; [
-      monolisa
-      lo-res
+    styles.stylix.enable = true;
 
+    # TODO: move this to a separate module
+    home.packages = with pkgs; [
       src-cli
 
-      (lib.hiPrio parallel)
+      (hiPrio parallel)
       moreutils
 
       unzip

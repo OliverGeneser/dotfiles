@@ -14,8 +14,9 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs;
     with pkgs.custom; [
-      s-tui
       bluetuith
+      # s-tui
+      # lazysql
     ];
   };
 }

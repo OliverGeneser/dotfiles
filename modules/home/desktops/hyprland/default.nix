@@ -11,7 +11,6 @@ with types; let
   cfg = config.desktops.hyprland;
 in {
   imports = with inputs; [
-    #hyprland-nix.homeManagerModules.default
     ./config.nix
     ./windowrules.nix
     ./monitors.nix
@@ -24,6 +23,7 @@ in {
     variant = mkOpt str "altgr-intl," "Keyboard variant";
     options = mkOpt str "grp:alt_space_toggle," "Keyboard options";
     primary_monitor = mkOpt str "eDP-1" "Primary display";
+    execOnceExtras = mkOpt (listOf str) [] "Extra programs to exec once";
   };
 
   config = mkIf cfg.enable {
@@ -44,7 +44,7 @@ in {
 
     desktops.addons = {
       gtk.enable = true;
-      qt.enable = true;
+      # qt.enable = true;
       kanshi.enable = true;
       rofi.enable = true;
       dunst.enable = true;

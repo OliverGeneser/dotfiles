@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.desktops.hyprland;
-  inherit (config.colorScheme) palette;
+  inherit (config.lib.stylix) colors;
 in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
@@ -25,8 +25,8 @@ in {
         gaps_in = 5;
         gaps_out = 5;
         border_size = 0;
-        #col.active_border = "0xff${palette.base07}";
-        #col.inactive_border = "0xff${palette.base02}";
+        #col.active_border = "0xff${colors.base07}";
+        #col.inactive_border = "0xff${colors.base02}";
         layout = "dwindle";
       };
 
@@ -66,7 +66,7 @@ in {
       exec-once = [
         "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE"
         "${pkgs.swaynotificationcenter}/bin/swaync"
-        #"${pkgs.kanshi}/bin/kanshi"
+        "${pkgs.kanshi}/bin/kanshi"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "${pkgs.pyprland}/bin/pypr"
         "${pkgs.clipse}/bin/clipse -listen"

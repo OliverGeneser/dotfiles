@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   inputs,
@@ -20,7 +19,7 @@ in {
   config = mkIf cfg.enable {
     sops = {
       age = {
-        #generateKey = true;
+        generateKey = true;
         keyFile = "/home/${config.custom.user.name}/.config/sops/age/keys.txt";
         sshKeyPaths = ["/home/${config.custom.user.name}/.ssh/id_ed25519"];
       };

@@ -90,15 +90,16 @@ in {
         "/var/cache/"
         "/var/db/sudo/"
         "/var/lib/"
-
         "/var/lib/bluetooth"
         "/var/lib/nixos"
+        "/var/lib/jellyfin"
         "/var/lib/systemd/coredump"
         "/etc/NetworkManager/system-connections"
         "/etc/zfs"
       ];
       files = [
         "/etc/machine-id"
+        "/etc/adjtime"
         "/etc/ssh/ssh_host_ed25519_key"
         "/etc/ssh/ssh_host_ed25519_key.pub"
         "/etc/ssh/ssh_host_rsa_key"

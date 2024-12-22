@@ -73,36 +73,5 @@ in {
         }
         // rewriteURL;
     };
-
-    catppuccin.lazygit.enable = true;
-
-    programs.lazygit = {
-      enable = true;
-      settings = {
-        git = {
-          paging = {
-            colorArg = "always";
-            pager = "delta --color-only --dark --paging=never";
-            useConfig = false;
-          };
-        };
-        customCommands = [
-          {
-            key = "W";
-            command = "git commit -m '{{index .PromptResponses 0}}' --no-verify";
-            description = "commit without verification";
-            context = "global";
-            subprocess = true;
-          }
-          {
-            key = "S";
-            command = "git commit -m '{{index .PromptResponses 0}}' --no-gpg-sign";
-            description = "commit without gpg signing";
-            context = "global";
-            subprocess = true;
-          }
-        ];
-      };
-    };
   };
 }

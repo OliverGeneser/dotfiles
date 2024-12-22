@@ -8,31 +8,54 @@
 with lib;
 with lib.custom; let
   cfg = config.cli.shells.fish;
+  inherit (config.lib.stylix) colors;
 in {
   options.cli.shells.fish = with types; {
     enable = mkBoolOpt false "enable fish shell";
   };
 
   config = mkIf cfg.enable {
-    catppuccin.fish.enable = true;
+    stylix.targets.fish.enable = false;
     programs.fish = {
       enable = true;
       interactiveShellInit = ''
-        # Open command buffer in vim when alt+e is pressed
-        bind \ee edit_command_buffer
         ${pkgs.nix-your-shell}/bin/nix-your-shell --nom fish | source
-        fish_add_path --path --prepend /usr/local/bin /usr/bin ~/.local/bin
         set -x GOPATH $XDG_DATA_HOME/go
-        set -x GOPRIVATE "git.curve.tools,gitlab.com/imaginecurve"
+        set -x GOPRIVATE "git.curve.tools,go.curve.tools,gitlab.com/imaginecurve"
         set -gx PATH /usr/local/bin /usr/bin ~/.local/bin $GOPATH/bin/ $PATH $HOME/.krew/bin
-        # fish_add_path --path --append $GOPATH/bin/
-        # fish_add_path --path --append /usr/local/bin /usr/bin ~/.local/bin
 
         # fifc setup
         set -Ux fifc_editor nvim
         set -U fifc_keybinding \cx
         bind \cx _fifc
         bind -M insert \cx _fifc
+
+        set -g fish_color_normal ${colors.base05}
+        set -g fish_color_command ${colors.base0D}
+        set -g fish_color_param ${colors.base0F}
+        set -g fish_color_keyword ${colors.base08}
+        set -g fish_color_quote ${colors.base0B}
+        set -g fish_color_redirection f4b8e4
+        set -g fish_color_end ${colors.base09}
+        set -g fish_color_comment 838ba7
+        set -g fish_color_error ${colors.base08}
+        set -g fish_color_gray 737994
+        set -g fish_color_selection --background=${colors.base02}
+        set -g fish_color_search_match --background=${colors.base02}
+        set -g fish_color_option ${colors.base0B}
+        set -g fish_color_operator f4b8e4
+        set -g fish_color_escape ea999c
+        set -g fish_color_autosuggestion 737994
+        set -g fish_color_cancel ${colors.base08}
+        set -g fish_color_cwd ${colors.base0A}
+        set -g fish_color_user ${colors.base0C}
+        set -g fish_color_host ${colors.base0D}
+        set -g fish_color_host_remote ${colors.base0B}
+        set -g fish_color_status ${colors.base08}
+        set -g fish_pager_color_progress 737994
+        set -g fish_pager_color_prefix f4b8e4
+        set -g fish_pager_color_completion ${colors.base05}
+        set -g fish_pager_color_description 737994
 
         fish_vi_key_bindings
         set fish_cursor_default     block      blink
@@ -42,9 +65,9 @@ in {
 
         set -Ux HUSKEY 0
       '';
+
       shellAliases = {
         wget = "wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\"";
-
         # Fuck husky
         husky = "echo \"Husky is disabled on this system.\"";
       };
@@ -63,20 +86,19 @@ in {
         ping = "gping";
         ls = "eza";
         sl = "eza";
-        l = "eza --group --header --group-directories-first --long --git --all --binary --all --icons";
+        l = "eza --group --header --group-directories-first --long --git --all --binary --all --icons always";
         tree = "eza --tree";
         sudo = "sudo -E -s";
 
         # nix
         nhh = "nh home switch";
         nho = "nh os switch";
-        nhu = "nh os switch --update --ask";
         nht = "nh os test";
+        nhu = "nh os --update --ask";
 
         nd = "nix develop";
         nfu = "nix flake update";
         hms = "home-manager switch --flake ~/dotfiles#${config.custom.user.name}@${host}";
-        hmr = "home-manager generations | fzf --tac --no-sort | awk '{print $7}' | xargs -I{} bash {}/activate";
         nrs = "sudo nixos-rebuild switch --flake ~/dotfiles#${host}";
         nrt = "sudo nixos-rebuild test --flake ~/dotfiles#${host}";
 
@@ -87,7 +109,7 @@ in {
 
         pfile = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
         gdub = "git fetch -p && git branch -vv | grep ': gone]' | awk '{print }' | xargs git branch -D $argv;";
-        tldrf = "tldr --list | fzf --preview \"tldr {1} --color=always\" --preview-window=right,70% | xargs tldr";
+        tldrf = "${pkgs.tldr}/bin/tldr --list | fzf --preview \"${pkgs.tldr}/bin/tldr {1} --color\" --preview-window=right,70% | xargs tldr";
         dk = "docker kill (docker ps -q)";
         ds = "docker stop (docker ps -a -q)";
         drm = "docker rm (docker ps -a -q)";

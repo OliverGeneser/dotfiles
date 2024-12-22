@@ -28,14 +28,13 @@ wezterm.on('gui-startup', function(cmd)
     --    wezterm.action_callback(sessionizer.toggle)
     --end
 
-
-    --    if is_default_startup(cmd) then
-    --        -- for the default startup case, we want to switch to the unix domain instead
-    --        local unix = mux.get_domain("unix")
-    --        mux.set_default_domain(unix)
-    --        -- ensure that it is attached
-    --        unix:attach()
-    --    end
+    --if is_default_startup(cmd) then
+    -- for the default startup case, we want to switch to the unix domain instead
+    --    local unix = mux.get_domain("unix")
+    --    mux.set_default_domain(unix)
+    -- ensure that it is attached
+    --    unix:attach()
+    --end
 end)
 
 wezterm.on("user-var-changed", function(window, pane, name, value)

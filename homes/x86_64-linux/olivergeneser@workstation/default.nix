@@ -35,6 +35,8 @@
     };
     "thor" = {
       hostname = "10.0.0.205";
+      port = 1337;
+      user = "nixos";
       identityFile = "~/.ssh/id_ecdsa_sk";
       identitiesOnly = true;
     };

@@ -15,12 +15,9 @@ in {
     programs.foot = {
       enable = true;
 
-      catppuccin.enable = true;
-
       settings = {
         main = {
-          term = "foot";
-          font = "MonoLisa Nerd Font:size=14, JoyPixels:size=14";
+          # term = "foot";
           shell = "fish";
           pad = "15x15";
           selection-target = "clipboard";

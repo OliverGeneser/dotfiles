@@ -2,26 +2,15 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
-}:
-with lib;
-with inputs; let
+}: let
   cfg = config.roles.common;
 in {
-  imports = [
-    catppuccin.homeManagerModules.catppuccin
-    nix-colors.homeManagerModule
-  ];
-
   options.roles.common = {
-    enable = mkEnableOption "Enable common configuration";
+    enable = lib.mkEnableOption "Enable common configuration";
   };
 
-  config = mkIf cfg.enable {
-    colorscheme = nix-colors.colorSchemes.catppuccin-mocha;
-    # catppuccin.flavour = "mocha";
-
+  config = lib.mkIf cfg.enable {
     system = {
       nix.enable = true;
     };
@@ -30,8 +19,9 @@ in {
       terminals.wezterm.enable = true;
       terminals.foot.enable = true;
       shells.fish.enable = true;
-
-      editors = {nvim.enable = true;};
+      editors = {
+        nvim.enable = true;
+      };
       programs = {
         git.enable = true;
         htop.enable = true;
@@ -47,17 +37,17 @@ in {
       sops.enable = true;
     };
 
-    # TODO: move this to a separate module
-    home.packages = with pkgs;
-    with pkgs.custom; [
-      monolisa
+    styles.stylix.enable = true;
 
+    # TODO: move this to a separate module
+    home.packages = with pkgs; [
       keymapp
       powertop
 
       src-cli
+      optinix
 
-      (lib.hiPrio parallel)
+      (hiPrio parallel)
       moreutils
       nvtopPackages.amd
       unzip

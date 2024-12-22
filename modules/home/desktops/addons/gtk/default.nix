@@ -14,11 +14,6 @@ in {
   config = mkIf cfg.enable {
     gtk = lib.mkForce {
       enable = true;
-      font = {
-        name = "Fira Sans";
-        size = 12;
-      };
-
       theme = {
         name = "adw-gtk3-dark";
         package = pkgs.adw-gtk3;
@@ -30,6 +25,12 @@ in {
           accent = "lavender";
         };
         name = "Papirus-Dark";
+      };
+
+      cursorTheme = {
+        name = "Bibata-Modern-Classic";
+        package = pkgs.bibata-cursors;
+        size = 24;
       };
 
       gtk3.extraCss = config.gtk.gtk4.extraCss;

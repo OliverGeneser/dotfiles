@@ -17,13 +17,11 @@ in {
       development.enable = true;
     };
 
-    services = {};
     browsers = {
       mullvad.enable = true;
       firefox.enable = true;
       chromium.enable = true;
     };
-    desktops.addons.xdg.enable = true;
 
     programs = {
       shotwell.enable = true;
@@ -44,6 +42,8 @@ in {
       };
       meld.enable = true;
     };
+
+    desktops.addons.xdg.enable = true;
 
     home.sessionVariables = {
       MOZ_ENABLE_WAYLAND = 1;

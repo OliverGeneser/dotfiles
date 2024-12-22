@@ -19,6 +19,7 @@ in {
       curlie
       chafa
       dogdns
+      doggo
       duf
       delta
       du-dust
@@ -28,21 +29,41 @@ in {
       fd
       gdu
       gping
+      grex
       hyperfine
       hexyl
       jq
       jqp
+      jnv
       ouch
       silver-searcher
       procs
       powertop
       lm_sensors
+      tokei
       trash-cli
+      tailspin
       gtrash
       ripgrep
       sd
       xcp
       yq-go
+      viddy
+
+      kaf
+
+      # go
+      arion
+      go
+      golangci-lint
+      air
+      templ
+      sqlc
+      golines
+      gotools
+      go-task
+      go-mockery
+      gotestsum
     ];
   };
 }

@@ -24,6 +24,8 @@ in {
       yubikey.enable = true;
     };
 
+    styles.stylix.enable = true;
+
     system = {
       nix.enable = true;
       boot.enable = true;

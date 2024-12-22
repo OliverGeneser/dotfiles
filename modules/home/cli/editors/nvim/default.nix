@@ -85,6 +85,11 @@ in {
         plugins = [
           treesitterWithGrammars
         ];
+
+        extraLuaConfig = ''
+          require("geneser")
+          vim.opt.runtimepath:append("${treesitter-parsers}")
+        '';
       };
 
       home.file = {
@@ -93,11 +98,6 @@ in {
           recursive = true;
         };
       };
-
-      home.file.".config/nvim/init.lua".text = ''
-        require("geneser")
-        vim.opt.runtimepath:append("${treesitter-parsers}")
-      '';
 
       # Treesitter is configured as a locally developed module in lazy.nvim
       # we hardcode a symlink here so that we can refer to it in our lazy config

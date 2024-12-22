@@ -11,8 +11,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    roles.common.enable = true;
-
     programs = {
       arduino.enable = true;
       beekeeperStudio.enable = true;
@@ -21,9 +19,7 @@ in {
     };
 
     cli = {
-      editors.nvim.enable = true;
       multiplexers.zellij.enable = true;
-      scripts.enable = true;
 
       programs = {
         act.enable = true;
@@ -33,6 +29,8 @@ in {
         eza.enable = true;
         fzf.enable = true;
         git.enable = true;
+        gpg.enable = true;
+        htop.enable = true;
         k8s.enable = true;
         modern-unix.enable = true;
         network-tools.enable = true;
