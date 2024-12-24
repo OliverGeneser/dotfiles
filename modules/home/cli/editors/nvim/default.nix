@@ -67,6 +67,8 @@ in {
         dotnetCorePackages.dotnet_8.sdk
         prettierd
         csharpier
+        stylua
+        eslint_d
       ];
 
       home.sessionVariables = {

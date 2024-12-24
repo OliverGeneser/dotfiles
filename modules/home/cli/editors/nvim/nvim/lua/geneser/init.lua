@@ -2,7 +2,7 @@ require("geneser.set")
 require("geneser.remap")
 require("geneser.lazy_init")
 
-vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme("catppuccin-mocha")
 
 local augroup = vim.api.nvim_create_augroup
 local geneser_group = augroup("Geneser", {})
@@ -51,7 +51,7 @@ autocmd("LspAttach", {
 			vim.lsp.buf.code_action()
 		end, opts)
 		vim.keymap.set("n", "<leader>vrr", function()
-			vim.lsp.buf.references()
+			vim.lsp.buf.referencrs()
 		end, opts)
 		vim.keymap.set("n", "<leader>vrn", function()
 			vim.lsp.buf.rename()
