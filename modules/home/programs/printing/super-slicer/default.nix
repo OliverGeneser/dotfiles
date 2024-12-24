@@ -14,7 +14,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # Remove until fixed
-      #super-slicer-beta
+      super-slicer-beta
     ];
   };
 }
