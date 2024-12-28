@@ -22,6 +22,13 @@ in {
       };
     };
 
+    custom = {
+      services = {
+        radarr.enable = true;
+        nextcloud.enable = true;
+      };
+    };
+
     services = {
       getty.autologinUser = "nixos";
       jellyfin-server.enable = true;
