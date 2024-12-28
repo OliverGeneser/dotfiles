@@ -40,6 +40,13 @@
       identityFile = "~/.ssh/id_ecdsa_sk";
       identitiesOnly = true;
     };
+    "ironman" = {
+      hostname = "10.0.0.210";
+      port = 22000;
+      user = "oliverg";
+      identityFile = "~/.ssh/id_ecdsa_sk";
+      identitiesOnly = false;
+    };
   };
 
   custom.user = {
