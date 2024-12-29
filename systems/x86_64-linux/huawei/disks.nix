@@ -40,7 +40,7 @@
                   extraArgs = ["-L" "nixos" "-f"];
                   postCreateHook = ''
                     mount -t btrfs /dev/disk/by-label/nixos /mnt
-                    btrfs subvolume snapshot -r /mnt /mnt/root-blank
+                    btrfs subvolume snapshot -r /mnt/root /mnt/root-blank
                     umount /mnt
                   '';
                   subvolumes = {

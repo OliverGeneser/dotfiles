@@ -37,13 +37,13 @@ in {
       snapraid = {
         enable = true;
         dataDisks = {
-          d1 = "/mnt/disk1/";
-          d2 = "/mnt/disk2/";
+          d1 = "/mnt/disk1";
+          d2 = "/mnt/disk2";
         };
         contentFiles = [
-          "/var/snapraid.content"
-          "/mnt/disk1/snapraid.content"
-          "/mnt/disk2/snapraid.content"
+          "/persist/var/snapraid.content"
+          "/mnt/snapraid-content/disk1/snapraid.content"
+          "/mnt/snapraid-content/disk2/snapraid.content"
         ];
         parityFiles = [
           "/mnt/parity1/snapraid.parity"
@@ -52,21 +52,37 @@ in {
           "*.unrecoverable"
           "/tmp/"
           "/lost+found/"
+          "downloads/"
+          "appdata/"
           "*.!sync"
           "/.snapshots/"
         ];
-        sync.interval = "01:00";
+        sync.interval = "";
         scrub = {
-          interval = "Mon *-*-* 02:00:00";
-          plan = 8;
-          olderThan = 10;
+          interval = "";
+        };
+      };
+
+      snapper = {
+        configs = {
+          disk1 = {
+            SUBVOLUME = "/mnt/disk1";
+            ALLOW_GROUPS = ["wheel"];
+            SYNC_ACL = true;
+          };
+          disk2 = {
+            SUBVOLUME = "/mnt/disk2";
+            ALLOW_GROUPS = ["wheel"];
+            SYNC_ACL = true;
+          };
         };
       };
     };
 
     environment =
       {
-        systemPackages = with pkgs; [
+        systemPackages = with pkgs;
+        with pkgs.custom; [
           nfs-utils
           xfsprogs
           e2fsprogs
@@ -76,6 +92,8 @@ in {
           pciutils
           mergerfs
           mergerfs-tools
+          snapraid-btrfs
+          snapraid-btrfs-runner
         ];
 
         # Print the URL instead on servers
@@ -91,7 +109,7 @@ in {
     fileSystems."/mnt/storage" = {
       fsType = "fuse.mergerfs";
       device = "/mnt/disk*";
-      options = ["defaults" "nonempty" "allow_other" "use_ino" "cache.files=off" "moveonenospc=true" "category.create=mfs" "dropcacheonclose=true" "minfreespace=250G" "fsname=mergerfs"];
+      options = ["defaults" "nofail" "nonempty" "allow_other" "use_ino" "cache.files=partial" "moveonenospc=true" "category.create=mfs" "dropcacheonclose=true" "minfreespace=250G" "fsname=mergerfs"];
     };
 
     security = {
@@ -124,7 +142,51 @@ in {
     users.mutableUsers = false;
 
     systemd = {
-      services.NetworkManager-wait-online.enable = false;
+      services = {
+        NetworkManager-wait-online.enable = false;
+        snapraid-btrfs-sync = {
+          description = "Run the snapraid-btrfs sync with the runner";
+          startAt = "01:00";
+          serviceConfig = {
+            Type = "oneshot";
+            ExecStart = "${pkgs.custom.snapraid-btrfs-runner}/bin/snapraid-btrfs-runner";
+            Nice = 19;
+            IOSchedulingPriority = 7;
+            CPUSchedulingPolicy = "batch";
+
+            LockPersonality = true;
+            MemoryDenyWriteExecute = true;
+            NoNewPrivileges = true;
+            PrivateTmp = true;
+            ProtectClock = true;
+            ProtectControlGroups = true;
+            ProtectHostname = true;
+            ProtectKernelLogs = true;
+            ProtectKernelModules = true;
+            ProtectKernelTunables = true;
+            RestrictAddressFamilies = "AF_UNIX";
+            RestrictNamespaces = true;
+            RestrictRealtime = true;
+            RestrictSUIDSGID = true;
+            SystemCallArchitectures = "native";
+            SystemCallFilter = "@system-service";
+            SystemCallErrorNumber = "EPERM";
+            CapabilityBoundingSet = "";
+            ProtectSystem = "strict";
+            ProtectHome = "read-only";
+            ReadOnlyPaths = ["/etc/snapraid.conf" "/etc/snapper"];
+            ReadWritePaths = [
+              "/mnt/disk1"
+              "/mnt/disk2"
+              "/mnt/parity1/snapraid.parity"
+              "/persist/var/snapraid.content"
+              "/mnt/snapraid-content/disk1/snapraid.content"
+              "/mnt/snapraid-content/disk2/snapraid.content"
+            ];
+          };
+        };
+      };
+
       network.wait-online.enable = false;
       tmpfiles.rules = [
         "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"

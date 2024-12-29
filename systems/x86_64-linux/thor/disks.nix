@@ -30,7 +30,7 @@
                 extraArgs = ["-L" "nixos" "-f"];
                 postCreateHook = ''
                   mount -t btrfs /dev/disk/by-label/nixos /mnt
-                  btrfs subvolume snapshot -r /mnt /mnt/root-blank
+                  btrfs subvolume snapshot -r /mnt/root /mnt/root-blank
                   umount /mnt
                 '';
                 subvolumes = {
@@ -56,7 +56,7 @@
                   };
                   "/swap" = {
                     mountpoint = "/swap";
-                    swap.swapfile.size = "38G";
+                    swap.swapfile.size = "64G";
                   };
                 };
               };
@@ -73,9 +73,25 @@
             root = {
               size = "100%";
               content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/mnt/disk1";
+                type = "btrfs";
+                subvolumes = {
+                  "/root" = {
+                    mountpoint = "/mnt/root/disk1";
+                    mountOptions = ["subvol=root"];
+                  };
+                  "/data" = {
+                    mountpoint = "/mnt/disk1";
+                    mountOptions = ["subvol=data"];
+                  };
+                  "/.snapshots" = {
+                    mountpoint = "/mnt/disk1/.snapshots";
+                    mountOptions = ["subvol=.snapshots"];
+                  };
+                  "/content" = {
+                    mountpoint = "/mnt/snapraid-content/disk1";
+                    mountOptions = ["subvol=content"];
+                  };
+                };
               };
             };
           };
@@ -90,9 +106,25 @@
             root = {
               size = "100%";
               content = {
-                type = "filesystem";
-                format = "xfs";
-                mountpoint = "/mnt/disk2";
+                type = "btrfs";
+                subvolumes = {
+                  "/root" = {
+                    mountpoint = "/mnt/root/disk2";
+                    mountOptions = ["subvol=root"];
+                  };
+                  "/data" = {
+                    mountpoint = "/mnt/disk2";
+                    mountOptions = ["subvol=data"];
+                  };
+                  "/.snapshots" = {
+                    mountpoint = "/mnt/disk2/.snapshots";
+                    mountOptions = ["subvol=.snapshots"];
+                  };
+                  "/content" = {
+                    mountpoint = "/mnt/snapraid-content/disk2";
+                    mountOptions = ["subvol=content"];
+                  };
+                };
               };
             };
           };
@@ -108,7 +140,7 @@
               size = "100%";
               content = {
                 type = "filesystem";
-                format = "xfs";
+                format = "ext4";
                 mountpoint = "/mnt/parity1";
               };
             };
