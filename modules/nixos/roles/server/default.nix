@@ -41,7 +41,7 @@ in {
           d2 = "/mnt/disk2";
         };
         contentFiles = [
-          "/persist/var/snapraid.content"
+          "/persist/var/snapraid/snapraid.content"
           "/mnt/snapraid-content/disk1/snapraid.content"
           "/mnt/snapraid-content/disk2/snapraid.content"
         ];
@@ -65,12 +65,12 @@ in {
 
       snapper = {
         configs = {
-          disk1 = {
+          d1 = {
             SUBVOLUME = "/mnt/disk1";
             ALLOW_GROUPS = ["wheel"];
             SYNC_ACL = true;
           };
-          disk2 = {
+          d2 = {
             SUBVOLUME = "/mnt/disk2";
             ALLOW_GROUPS = ["wheel"];
             SYNC_ACL = true;
@@ -109,7 +109,7 @@ in {
     fileSystems."/mnt/storage" = {
       fsType = "fuse.mergerfs";
       device = "/mnt/disk*";
-      options = ["defaults" "nofail" "nonempty" "allow_other" "use_ino" "cache.files=partial" "moveonenospc=true" "category.create=mfs" "dropcacheonclose=true" "minfreespace=250G" "fsname=mergerfs"];
+      options = ["defaults" "nonempty" "allow_other" "use_ino" "cache.files=off" "moveonenospc=true" "category.create=mfs" "dropcacheonclose=true" "minfreespace=250G" "fsname=mergerfs"];
     };
 
     security = {
@@ -149,6 +149,7 @@ in {
           startAt = "01:00";
           serviceConfig = {
             Type = "oneshot";
+            User = "nixos";
             ExecStart = "${pkgs.custom.snapraid-btrfs-runner}/bin/snapraid-btrfs-runner";
             Nice = 19;
             IOSchedulingPriority = 7;
@@ -179,7 +180,7 @@ in {
               "/mnt/disk1"
               "/mnt/disk2"
               "/mnt/parity1/snapraid.parity"
-              "/persist/var/snapraid.content"
+              "/persist/var/snapraid"
               "/mnt/snapraid-content/disk1/snapraid.content"
               "/mnt/snapraid-content/disk2/snapraid.content"
             ];

@@ -12,29 +12,30 @@
   stdenv,
   fetchFromGitHub,
   writeScriptBin,
+  symlinkJoin,
   ...
-}:
-stdenv.mkDerivation {
-  pname = "snapraid-btrfs";
-  version = "1.0.0";
-
-  src = fetchFromGitHub {
-    owner = "automorphism88";
-    repo = "snapraid-btrfs";
-    rev = "6492a45ad55c389c0301075dcc8bc8784ef3e274";
-    sha256 = "YPkKjlx7j7yjTWReAvgaFNz6dFxVIcaN9to2cDfmovU=";
-  };
-
-  buildInputs = with pkgs; [coreutils gnugrep gawk gnused snapraid snapper];
-
-  installPhase = ''
-    mkdir -p $out/bin
-    cp snapraid-btrfs $out/bin
-  '';
-
-  meta = with lib; {
-    description = "A tool to manage SnapRAID with Btrfs support.";
-    license = licenses.mit;
-    platforms = platforms.linux;
-  };
-}
+}: let
+  name = "snapraid-btrfs";
+  deps = with pkgs; [coreutils gnugrep gawk gnused snapraid snapper];
+  script =
+    (
+      writeScriptBin name
+      (builtins.readFile ((fetchFromGitHub {
+          # https://github.com/automorphism88/snapraid-btrfs/pull/34
+          owner = "D34DC3N73R";
+          repo = "snapraid-btrfs";
+          rev = "ea9a1cfbfbe1cefcae9c038e1a4962d4bc2de843";
+          sha256 = "+UCBGlGFqRKgFjCt1GdOSxaayTONfwisxdnZEwxOnSY=";
+        })
+        + "/snapraid-btrfs"))
+    )
+    .overrideAttrs (old: {
+      buildCommand = "${old.buildCommand}\n patchShebangs $out";
+    });
+in
+  symlinkJoin {
+    inherit name;
+    paths = [script] ++ deps;
+    buildInputs = with pkgs; [makeWrapper];
+    postBuild = "wrapProgram $out/bin/${name} --set PATH $out/bin";
+  }

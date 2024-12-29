@@ -10,13 +10,20 @@
   # programmatically or you may add the named attributes as arguments here.
   pkgs,
   stdenv,
+  symlinkJoin,
   fetchFromGitHub,
   writeScriptBin,
   writeTextFile,
   ...
 }: let
   name = "snapraid-btrfs-runner";
-
+  deps = with pkgs; with pkgs.custom; [python311 config snapraid snapraid-btrfs snapper];
+  src = fetchFromGitHub {
+    owner = "OliverGeneser";
+    repo = "snapraid-btrfs-runner";
+    rev = "cec880fc1c3b0542646facf22ed40c361acd9c63";
+    sha256 = "hf+hXT+QHnTmY17uLR85DoClKwVBNWZhusvCHPKYzz4=";
+  };
   config = writeTextFile {
     name = "snapraid-btrfs-runner.conf";
     text = ''
@@ -82,31 +89,20 @@
       ; only used for percent scrub plan
       older-than = 10
     '';
-    destination = "/etc/snapraid-btrfs-runner.conf";
+    destination = "/etc/${name}";
   };
+  script =
+    (
+      writeScriptBin name
+      (builtins.readFile (src + "/snapraid-btrfs-runner.py"))
+    )
+    .overrideAttrs (old: {
+      buildCommand = "${old.buildCommand}\n patchShebangs $out";
+    });
 in
-  stdenv.mkDerivation {
-    pname = name;
-    version = "1.0.0";
-
-    src = fetchFromGitHub {
-      owner = "OliverGeneser";
-      repo = "snapraid-btrfs-runner";
-      rev = "afb83c67c61fdf3769aab95dba6385184066e119";
-      sha256 = "M8LXxsc7jEn5GsiXAKykmFUgsij2aOIenw1Dx+/5Rww=";
-    };
-
-    buildInputs = with pkgs; [python311 snapraid pkgs.custom.snapraid-btrfs snapper makeWrapper];
-
-    installPhase = ''
-      mkdir -p $out/bin
-      install -Dm755 snapraid-btrfs-runner.py $out/bin/${name}
-      wrapProgram $out/bin/${name} --add-flags '-c ${config}/etc/snapraid-btrfs-runner.conf' --set PATH $out/bin
-    '';
-
-    meta = with lib; {
-      description = "A tool to run SnapRAID with Btrfs support.";
-      license = licenses.mit;
-      platforms = platforms.linux;
-    };
+  symlinkJoin {
+    inherit name;
+    paths = [script] ++ deps;
+    buildInputs = with pkgs; [makeWrapper python311];
+    postBuild = "wrapProgram $out/bin/${name} --add-flags '-c ${config}/etc/snapraid-btrfs-runner' --set PATH $out/bin";
   }

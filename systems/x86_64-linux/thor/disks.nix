@@ -74,11 +74,8 @@
               size = "100%";
               content = {
                 type = "btrfs";
+                mountpoint = "/mnt/root/disk1";
                 subvolumes = {
-                  "/root" = {
-                    mountpoint = "/mnt/root/disk1";
-                    mountOptions = ["subvol=root"];
-                  };
                   "/data" = {
                     mountpoint = "/mnt/disk1";
                     mountOptions = ["subvol=data"];
@@ -107,11 +104,8 @@
               size = "100%";
               content = {
                 type = "btrfs";
+                mountpoint = "/mnt/root/disk2";
                 subvolumes = {
-                  "/root" = {
-                    mountpoint = "/mnt/root/disk2";
-                    mountOptions = ["subvol=root"];
-                  };
                   "/data" = {
                     mountpoint = "/mnt/disk2";
                     mountOptions = ["subvol=data"];
