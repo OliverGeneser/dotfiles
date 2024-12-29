@@ -105,13 +105,6 @@ in {
         stub-ld.enable = lib.mkDefault false;
       };
 
-    #/mnt/disk* /mnt/storage fuse.mergerfs defaults,nonempty,allow_other,use_ino,cache.files=off,moveonenospc=true,category.create=mfs,dropcacheonclose=true,minfreespace=250G,fsname=mergerfs 0 0
-    fileSystems."/mnt/storage" = {
-      fsType = "fuse.mergerfs";
-      device = "/mnt/disk*";
-      options = ["defaults" "nonempty" "allow_other" "use_ino" "cache.files=off" "moveonenospc=true" "category.create=mfs" "dropcacheonclose=true" "minfreespace=250G" "fsname=mergerfs"];
-    };
-
     security = {
       sudo = {
         wheelNeedsPassword = false;

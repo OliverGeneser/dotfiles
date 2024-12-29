@@ -173,7 +173,29 @@
           };
         };
       };
+      storage = {
+        type = "filesystem";
+        device = "/mnt/disk1:/mnt/disk2";
+        content = {
+          type = "filesystem";
+          format = "fuse.mergerfs";
+          mountpoint = "/mnt/storage";
+          mountOptions = [
+            "defaults"
+            "nonempty"
+            "allow_other"
+            "use_ino"
+            "cache.files=off"
+            "moveonenospc=true"
+            "category.create=mfs"
+            "dropcacheonclose=true"
+            "minfreespace=250G"
+            "fsname=mergerfs"
+          ];
+        };
+      };
     };
+
     zpool = {
       tank = {
         type = "zpool";
