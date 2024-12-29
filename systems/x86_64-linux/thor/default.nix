@@ -17,6 +17,13 @@
     server.enable = true;
   };
 
+  hardware = {
+    networking = {
+      allowedTCPPorts = [80 443];
+      allowedUDPPorts = [80 443];
+    };
+  };
+
   boot = {
     kernelParams = [
       "resume_offset=533760" # sudo -E -s btrfs inspect-internal map-swapfile -r /swap/swapfile
