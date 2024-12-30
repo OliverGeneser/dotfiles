@@ -25,6 +25,7 @@ in {
     custom = {
       services = {
         radarr.enable = true;
+        syncthing.enable = true;
         nextcloud.enable = true;
       };
     };

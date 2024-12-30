@@ -19,8 +19,8 @@
 
   hardware = {
     networking = {
-      allowedTCPPorts = [80 443];
-      allowedUDPPorts = [80 443];
+      allowedTCPPorts = [80 443 8384 22000];
+      allowedUDPPorts = [80 443 22000 21027];
     };
   };
 
