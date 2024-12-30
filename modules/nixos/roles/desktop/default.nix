@@ -14,9 +14,13 @@ in {
   config = mkIf cfg.enable {
     roles = {
       common.enable = true;
-
       desktop.addons = {
         nautilus.enable = true;
+      };
+    };
+    custom = {
+      services = {
+        vpn.enable = true;
       };
     };
 
@@ -27,7 +31,6 @@ in {
     };
 
     services = {
-      vpn.enable = true;
       virtualisation.podman.enable = true;
     };
 

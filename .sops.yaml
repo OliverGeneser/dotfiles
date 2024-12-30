@@ -1,0 +1,31 @@
+# Make a user key
+# mkdir -p ~/.config/sops/age
+# age-keygen -o ~/.config/sops/age/keys.txt
+# chmod 600 ~/.config/sops/age/keys.txt
+
+# Display the user public key:
+# age-keygen -y ~/.config/sops/age/keys.txt
+
+# Make a host public key:
+# nix-shell -p ssh-to-age
+# ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub
+
+# Add secrets
+# sops secrets/secrets.yaml
+
+# Rekey secrets.yaml after editing recipients in .sops.yaml:
+# sops updatekeys secrets/secrets.yaml
+keys:
+  - &users:
+    - &olivergeneser_workstation age1ce9umy5mclkpzm7eklmzmrmu4q6m3jtzwhvez7rjz9eh5kzkcdmqky5p2g
+  - &hosts:
+    - &workstation age1xzt9jx0jy6dva6xkhmefzacj9zlcdp53mfxap6h2grtean8rn9kqkmsrgq
+    - &thor age1snjuvtw6el635fq79lavy0q6grsy87fcp77tneuhlxk697068fuqeuur6k
+
+creation_rules:
+  - path_regex: modules/nixos/secrets.ya?ml$
+    key_groups:
+      - age:
+          - *workstation
+          - *thor
+          - *olivergeneser_workstation

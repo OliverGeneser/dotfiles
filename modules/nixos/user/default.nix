@@ -20,15 +20,10 @@ in {
 
   config = {
     users.mutableUsers = false;
-    users.users.root = {
-      isNormalUser = false;
-      password = "!";
-    };
     users.users.${cfg.name} =
       {
         isNormalUser = true;
-        inherit (cfg) name;
-        hashedPassword = "$6$fGDkSQ/rlUmeMmpx$L3cNIDSUVuetvqVdwgynz4m3IrPEukPcMPzjvS84zaxkU1xNOglduoFDgsHSVqSSjUZOydCGvoEpbzJTFktV/1";
+        inherit (cfg) name initialPassword;
         home = "/home/${cfg.name}";
         group = "users";
 
