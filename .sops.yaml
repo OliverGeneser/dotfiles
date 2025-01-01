@@ -29,3 +29,10 @@ creation_rules:
           - *workstation
           - *thor
           - *olivergeneser_workstation
+
+  - path_regex: modules/nixos/services/secrets.ya?ml$
+    key_groups:
+      - age:
+          - *workstation
+          - *thor
+          - *olivergeneser_workstation
