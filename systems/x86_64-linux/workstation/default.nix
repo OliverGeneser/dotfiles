@@ -43,7 +43,9 @@
       ];
       allowedTCPPorts = [80 443 3000 8081 4321];
     };
-    nvidia.enable = true;
+    custom = {
+      nvidia.enable = true;
+    };
   };
 
   roles = {
