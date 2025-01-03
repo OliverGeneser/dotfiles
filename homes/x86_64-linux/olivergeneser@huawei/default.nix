@@ -34,6 +34,20 @@
       identityFile = "~/.ssh/ssh_prod_qreport";
       identitiesOnly = true;
     };
+    "thor" = {
+      hostname = "10.0.0.205";
+      port = 1337;
+      user = "nixos";
+      identityFile = "~/.ssh/id_ecdsa_sk";
+      identitiesOnly = true;
+    };
+    "ironman" = {
+      hostname = "10.0.0.210";
+      port = 22000;
+      user = "oliverg";
+      identityFile = "~/.ssh/id_ecdsa_sk";
+      identitiesOnly = false;
+    };
   };
 
   custom.user = {
