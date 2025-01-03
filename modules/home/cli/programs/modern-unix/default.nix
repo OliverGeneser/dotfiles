@@ -52,6 +52,7 @@ in {
 
       kaf
 
+      lsof
       # go
       arion
       go

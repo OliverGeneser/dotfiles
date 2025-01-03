@@ -3,7 +3,7 @@
     disk = {
       sdb = {
         type = "disk";
-        device = "/dev/sdb";
+        device = "/dev/disk/by-id/ata-SAMSUNG_MZNLN256HAJQ-00000_S3TSNX0M422911";
         content = {
           type = "gpt";
           partitions = {

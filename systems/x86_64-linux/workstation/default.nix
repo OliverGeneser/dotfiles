@@ -62,7 +62,7 @@
     kernelParams = [
       "resume_offset=533760"
     ];
-    supportedFilesystems = lib.mkForce ["btrfs"];
+    supportedFilesystems = lib.mkForce ["btrfs" "ntfs"];
     kernelPackages = pkgs.linuxPackages_latest; #https://github.com/NixOS/nixpkgs/issues/344167
     resumeDevice = "/dev/disk/by-label/nixos";
   };
