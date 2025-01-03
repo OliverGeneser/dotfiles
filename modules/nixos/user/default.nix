@@ -9,9 +9,6 @@ with lib.custom; let
 in {
   options.user = with types; {
     name = mkOpt str "olivergeneser" "The name of the user's account";
-    initialPassword =
-      mkOpt str "test1234"
-      "The initial password to use";
     extraGroups = mkOpt (listOf str) [] "Groups for the user to be assigned.";
     extraOptions =
       mkOpt attrs {}
@@ -19,11 +16,19 @@ in {
   };
 
   config = {
+    sops.secrets.password = {
+      sopsFile = ../secrets.yaml;
+      neededForUsers = true;
+    };
+
     users.mutableUsers = false;
     users.users.${cfg.name} =
       {
         isNormalUser = true;
-        inherit (cfg) name initialPassword;
+        inherit (cfg) name;
+
+        hashedPasswordFile = config.sops.secrets.password.path;
+
         home = "/home/${cfg.name}";
         group = "users";
 

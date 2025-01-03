@@ -45,7 +45,6 @@ in {
 
     user = {
       name = "olivergeneser";
-      initialPassword = "test1234";
     };
   };
 }

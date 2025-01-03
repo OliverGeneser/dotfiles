@@ -216,7 +216,6 @@ in {
 
     user = {
       name = "nixos";
-      initialPassword = "1";
     };
   };
 }

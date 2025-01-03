@@ -11,10 +11,6 @@
     hobby.enable = true;
   };
 
-  programs = {
-    androidStudio.enable = true;
-  };
-
   desktops.hyprland.enable = true;
 
   cli.programs.ssh.extraHosts = {

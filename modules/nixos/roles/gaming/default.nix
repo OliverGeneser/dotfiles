@@ -7,7 +7,7 @@
 with lib;
 with lib.custom; let
   cfg = config.roles.gaming;
-  nvidiaCfg = config.hardware.nvidia;
+  nvidiaCfg = config.hardware.custom.nvidia;
 in {
   options.roles.gaming = with types; {
     enable = mkBoolOpt false "Enable the gaming suite";
