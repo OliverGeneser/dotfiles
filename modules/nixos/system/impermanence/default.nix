@@ -10,6 +10,8 @@ in {
   options.system.impermanence = with types; {
     enable = mkBoolOpt false "Enable impermanence";
     usesEncryption = mkBoolOpt false "Does the system use encryption";
+    directories = mkOpt (listOf string) [] "Additional directories.";
+    files = mkOpt (listOf string) [] "Additional files.";
   };
 
   config = mkIf cfg.enable {
@@ -84,28 +86,28 @@ in {
 
     environment.persistence."/persist" = {
       hideMounts = true;
-      directories = [
-        "/srv/"
-        "/.cache/nix/"
-        "/var/cache/"
-        "/var/db/sudo/"
-        "/var/lib/"
-        "/var/lib/bluetooth"
-        "/var/lib/nixos"
-        "/var/lib/jellyfin"
-        "/var/lib/systemd/coredump"
-        "/var/snapraid"
-        "/etc/NetworkManager/system-connections"
-        "/etc/zfs"
-      ];
-      files = [
-        "/etc/machine-id"
-        "/etc/adjtime"
-        "/etc/ssh/ssh_host_ed25519_key"
-        "/etc/ssh/ssh_host_ed25519_key.pub"
-        "/etc/ssh/ssh_host_rsa_key"
-        "/etc/ssh/ssh_host_rsa_key.pub"
-      ];
+      directories =
+        [
+          "/.cache/nix/"
+          "/var/cache/"
+          "/var/db/sudo/"
+          "/var/lib/"
+          "/var/lib/bluetooth"
+          "/var/lib/nixos"
+          "/var/lib/systemd/coredump"
+          "/etc/NetworkManager/system-connections"
+        ]
+        ++ cfg.directories;
+      files =
+        [
+          "/etc/machine-id"
+          "/etc/adjtime"
+          "/etc/ssh/ssh_host_ed25519_key"
+          "/etc/ssh/ssh_host_ed25519_key.pub"
+          "/etc/ssh/ssh_host_rsa_key"
+          "/etc/ssh/ssh_host_rsa_key.pub"
+        ]
+        ++ cfg.files;
     };
   };
 }

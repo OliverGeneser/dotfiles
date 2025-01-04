@@ -23,6 +23,18 @@
     };
   };
 
+  system = {
+    impermanence = {
+      directories = [
+        "/srv/"
+        "/var/snapraid/"
+        "/var/lib/jellyfin"
+        "/etc/zfs"
+        "/root/.local/share/signal-cli"
+      ];
+    };
+  };
+
   hardware = {
     networking = {
       allowedTCPPorts = [80 443 8173 8384 22000];
