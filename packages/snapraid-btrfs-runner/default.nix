@@ -21,8 +21,8 @@
   src = fetchFromGitHub {
     owner = "OliverGeneser";
     repo = "snapraid-btrfs-runner";
-    rev = "cec880fc1c3b0542646facf22ed40c361acd9c63";
-    sha256 = "hf+hXT+QHnTmY17uLR85DoClKwVBNWZhusvCHPKYzz4=";
+    rev = "214f7d195fa0822347324ce0b4a789e0daab7b82";
+    sha256 = "caMD6jIuIMRaD8MPZl/qLpZo5EX1Q3qJHNJD+rhiYeA=";
   };
   config = writeTextFile {
     name = "snapraid-btrfs-runner.conf";
@@ -80,6 +80,13 @@
       tls = false
       user =
       password =
+
+      [signal]
+      enabled = true
+      sendon = success,error
+      ; path to the signal-cli executable (e.g. /usr/bin/signal-cli)
+      executable = ${pkgs.signal-cli}/bin/signal-cli
+      chatid = TO+DykH3guaqDHrFpJzM1QUQzSAfqBsEIgwVKrP74rQ=
 
       [scrub]
       ; set to true to run scrub after sync
