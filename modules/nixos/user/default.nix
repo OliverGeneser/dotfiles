@@ -27,6 +27,7 @@ in {
         isNormalUser = true;
         inherit (cfg) name;
 
+        # initialPassword ="test1234";
         hashedPasswordFile = config.sops.secrets.password.path;
 
         home = "/home/${cfg.name}";
