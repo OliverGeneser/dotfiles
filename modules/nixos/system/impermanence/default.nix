@@ -10,8 +10,8 @@ in {
   options.system.impermanence = with types; {
     enable = mkBoolOpt false "Enable impermanence";
     usesEncryption = mkBoolOpt false "Does the system use encryption";
-    directories = mkOpt (listOf string) [] "Additional directories.";
-    files = mkOpt (listOf string) [] "Additional files.";
+    directories = mkOpt (listOf str) [] "Additional directories.";
+    files = mkOpt (listOf str) [] "Additional files.";
   };
 
   config = mkIf cfg.enable {

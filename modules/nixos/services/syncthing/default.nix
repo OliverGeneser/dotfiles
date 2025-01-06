@@ -5,25 +5,21 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.custom.services.syncthing;
+  cfg = config.services.custom.syncthing;
 in {
-  options.custom.services.syncthing = with types; {
+  options.services.custom.syncthing = with types; {
     enable = mkBoolOpt false "Enable Syncthing";
   };
 
   config = mkIf cfg.enable {
     services.syncthing = {
       enable = true;
-      group = "users";
-      user = "${config.user.name}";
-
-      dataDir = "/home/${config.user.name}/Documents";
-      configDir = "/home/${config.user.name}/Documents/.config/syncthing";
 
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
 
       guiAddress = "0.0.0.0:8384";
+
       settings = {
         gui = {
           user = "${config.user.name}";

@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.custom.services.radarr;
+  cfg = config.services.custom.radarr;
 in {
-  options.custom.services.radarr = with types; {
+  options.services.custom.radarr = with types; {
     enable = mkBoolOpt false "Enable Radarr";
   };
 

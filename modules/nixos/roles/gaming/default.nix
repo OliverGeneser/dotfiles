@@ -76,7 +76,6 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      samba4Full
       winetricks
       wineWowPackages.waylandFull
       vulkan-tools

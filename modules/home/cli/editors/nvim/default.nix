@@ -64,16 +64,11 @@ in {
         ninja
         gcc
         gpp
-        dotnetCorePackages.dotnet_8.sdk
         prettierd
         csharpier
         stylua
         eslint_d
       ];
-
-      home.sessionVariables = {
-        DOTNET_ROOT = "${pkgs.dotnetCorePackages.dotnet_8.sdk}";
-      };
 
       programs.neovim = {
         enable = true;

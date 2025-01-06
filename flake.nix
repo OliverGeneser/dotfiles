@@ -151,7 +151,6 @@
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;
-        android_sdk.accept_license = true;
       };
 
       systems.modules.nixos = with inputs; [

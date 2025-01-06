@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.services.vpn;
+  cfg = config.services.custom.vpn;
 in {
-  options.custom.services.vpn = {
+  options.services.custom.vpn = {
     enable = mkEnableOption "Enable vpn";
   };
 

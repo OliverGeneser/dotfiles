@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.custom.services.nextcloud;
+  cfg = config.services.custom.nextcloud;
 in {
-  options.custom.services.nextcloud = with types; {
+  options.services.custom.nextcloud = with types; {
     enable = mkBoolOpt false "Enable Nextcloud service";
   };
 

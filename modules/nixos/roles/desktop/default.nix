@@ -18,20 +18,17 @@ in {
         nautilus.enable = true;
       };
     };
-    custom = {
-      services = {
+    services = {
+      custom = {
         vpn.enable = true;
       };
+      virtualisation.podman.enable = true;
     };
 
     hardware = {
       audio.enable = true;
       bluetooth.enable = true;
       logitechMouse.enable = true;
-    };
-
-    services = {
-      virtualisation.podman.enable = true;
     };
 
     system = {
