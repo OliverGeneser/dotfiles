@@ -19,7 +19,7 @@ in {
     };
 
     sops.secrets.mullvad_account_id = {
-      sopsFile = ../../secrets.yaml;
+      sopsFile = ../secrets.yaml;
     };
 
     systemd.services."mullvad-daemon" = {

@@ -20,6 +20,7 @@ in {
         experimental-features = ["nix-command" "flakes"];
         warn-dirty = false;
         system-features = ["kvm" "big-parallel" "nixos-test"];
+        access-tokens = [];
       };
 
       # flake-utils-plus

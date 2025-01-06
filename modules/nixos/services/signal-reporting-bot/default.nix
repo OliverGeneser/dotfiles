@@ -6,7 +6,7 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.services.signal-reporting-bot;
+  cfg = config.services.custom.signal-reporting-bot;
 
   smartShortReporting = pkgs.writeShellScriptBin "smartShortReporting" ''
     if [ "$(id -u)" -ne 0 ]; then
@@ -78,7 +78,7 @@ with lib.custom; let
     echo -e "$MESSAGE" | ${pkgs.signal-cli}/bin/signal-cli send -g "TO+DykH3guaqDHrFpJzM1QUQzSAfqBsEIgwVKrP74rQ=" --message-from-stdin
   '';
 in {
-  options.services.signal-reporting-bot = with types; {
+  options.services.custom.signal-reporting-bot = with types; {
     enable = mkBoolOpt false "Whether to enable the Signal status reporting";
   };
 

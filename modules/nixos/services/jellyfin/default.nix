@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.services.jellyfin-server;
+  cfg = config.services.custom.jellyfin-server;
 in {
-  options.services.jellyfin-server = with types; {
+  options.services.custom.jellyfin-server = with types; {
     enable = mkBoolOpt false "Enable Jellyfin";
   };
 

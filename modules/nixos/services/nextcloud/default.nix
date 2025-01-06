@@ -13,13 +13,15 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.etc."nextcloud-admin-pass".text = "PWD";
+    sops.secrets.nextcloud_admin_password = {
+      sopsFile = ../secrets.yaml;
+    };
 
     services.nextcloud = {
       enable = true;
       package = pkgs.nextcloud30;
       hostName = "localhost";
-      config.adminpassFile = "/etc/nextcloud-admin-pass";
+      config.adminpassFile = config.sops.secrets.nextcloud_admin_password.path;
     };
   };
 }
