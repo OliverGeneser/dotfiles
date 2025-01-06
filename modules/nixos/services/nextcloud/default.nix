@@ -14,6 +14,8 @@ in {
 
   config = mkIf cfg.enable {
     sops.secrets.nextcloud_admin_password = {
+      owner = "nextcloud";
+      group = "nextcloud";
       sopsFile = ../secrets.yaml;
     };
 
