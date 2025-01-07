@@ -12,15 +12,21 @@ in {
 
   config = mkIf cfg.enable {
     hardware = {
-      networking.enable = true;
+      custom = {
+        networking.enable = true;
+      };
     };
 
     services = {
-      ssh.enable = true;
+      custom = {
+        ssh.enable = true;
+      };
     };
 
     security = {
-      sops.enable = true;
+      custom = {
+        sops.enable = true;
+      };
       yubikey.enable = true;
     };
 

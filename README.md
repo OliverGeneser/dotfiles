@@ -72,5 +72,5 @@ sudo nixos-enter
 ### Build Raspberry pi
 
 ```
-nix build
+nix build .#sd-aarch64Configurations.tunnelboy
 ```

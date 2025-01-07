@@ -43,6 +43,13 @@
       identityFile = "~/.ssh/id_ecdsa_sk";
       identitiesOnly = false;
     };
+    "tunnelboy" = {
+      hostname = "10.0.0.230";
+      port = 1337;
+      user = "nixos";
+      identityFile = "~/.ssh/id_ecdsa_sk";
+      identitiesOnly = true;
+    };
   };
 
   custom.user = {

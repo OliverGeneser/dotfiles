@@ -22,8 +22,10 @@
   services.thermald.enable = true;
 
   hardware = {
-    networking = {
-      allowedTCPPorts = [80 443];
+    custom = {
+      networking = {
+        allowedTCPPorts = [80 443];
+      };
     };
     nvidia.open = lib.mkForce false;
   };

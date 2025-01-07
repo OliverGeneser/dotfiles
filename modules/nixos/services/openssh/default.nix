@@ -5,9 +5,9 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.services.ssh;
+  cfg = config.services.custom.ssh;
 in {
-  options.services.ssh = with types; {
+  options.services.custom.ssh = with types; {
     enable = mkBoolOpt false "Enable ssh";
     authorizedKeys = mkOpt (listOf str) [] "The public keys to apply.";
   };

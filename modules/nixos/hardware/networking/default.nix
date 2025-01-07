@@ -5,9 +5,9 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.hardware.networking;
+  cfg = config.hardware.custom.networking;
 in {
-  options.hardware.networking = with types; {
+  options.hardware.custom.networking = with types; {
     enable = mkBoolOpt false "Enable networkmanager";
     allowedTCPPorts = mkOpt (listOf int) [] "Allowed TCP ports.";
     allowedUDPPorts = mkOpt (listOf int) [] "Allowed UDP ports.";

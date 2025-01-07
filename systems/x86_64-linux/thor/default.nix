@@ -86,9 +86,11 @@
   };
 
   hardware = {
-    networking = {
-      allowedTCPPorts = [80 443 8173 8384 22000];
-      allowedUDPPorts = [80 443 22000 21027];
+    custom = {
+      networking = {
+        allowedTCPPorts = [80 443 8173 8384 22000];
+        allowedUDPPorts = [80 443 22000 21027];
+      };
     };
   };
 

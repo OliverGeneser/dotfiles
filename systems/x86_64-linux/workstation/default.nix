@@ -24,26 +24,26 @@
   };
 
   hardware = {
-    networking = {
-      allowedTCPPortRanges = [
-        {
-          from = 1714;
-          to = 1764;
-        }
-        {
-          from = 19000;
-          to = 19001;
-        }
-      ];
-      allowedUDPPortRanges = [
-        {
-          from = 1714;
-          to = 1764;
-        }
-      ];
-      allowedTCPPorts = [80 443 3000 8081 4321];
-    };
     custom = {
+      networking = {
+        allowedTCPPortRanges = [
+          {
+            from = 1714;
+            to = 1764;
+          }
+          {
+            from = 19000;
+            to = 19001;
+          }
+        ];
+        allowedUDPPortRanges = [
+          {
+            from = 1714;
+            to = 1764;
+          }
+        ];
+        allowedTCPPorts = [80 443 3000 8081 4321];
+      };
       nvidia.enable = true;
     };
   };

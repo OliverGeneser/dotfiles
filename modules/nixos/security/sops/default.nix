@@ -5,9 +5,9 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.security.sops;
+  cfg = config.security.custom.sops;
 in {
-  options.security.sops = with types; {
+  options.security.custom.sops = with types; {
     enable = mkBoolOpt false "Whether to enable sop for secrets management.";
   };
 
