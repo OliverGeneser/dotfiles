@@ -23,6 +23,7 @@ keys:
     - &workstation age1xzt9jx0jy6dva6xkhmefzacj9zlcdp53mfxap6h2grtean8rn9kqkmsrgq
     - &huawei age1jpth454ptlcr6c7p4889p4w8cxxf8mca9zm7rrjhkv8r24gr0cysmcma7n
     - &thor age1snjuvtw6el635fq79lavy0q6grsy87fcp77tneuhlxk697068fuqeuur6k
+    - &tunnelboy age1gc4an6pe0txqvvca0f8na7uyvgsalp2adle4fvq8gkywvz7qp93sjlmv05
 
 creation_rules:
   - path_regex: modules/nixos/secrets.ya?ml$
@@ -31,6 +32,7 @@ creation_rules:
           - *workstation
           - *huawei
           - *thor
+          - *tunnelboy
           - *olivergeneser_workstation
           - *olivergeneser_huawei
 
@@ -40,5 +42,6 @@ creation_rules:
           - *workstation
           - *huawei
           - *thor
+          - *tunnelboy
           - *olivergeneser_workstation
           - *olivergeneser_huawei
