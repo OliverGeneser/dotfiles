@@ -18,11 +18,13 @@ in {
             description = "The hostname or IP address of the SSH host.";
           };
           identityFile = lib.mkOption {
-            type = lib.types.str;
+            type = lib.types.nullOr lib.types.str;
+            default = null;
             description = "The path to the identity file for the SSH host.";
           };
           identitiesOnly = lib.mkOption {
             type = lib.types.bool;
+            default = false;
             description = "Identities only for the SSH host?";
           };
           port = lib.mkOption {

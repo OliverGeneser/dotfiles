@@ -28,6 +28,7 @@ in {
 
       programs = {
         git.enable = true;
+        ssh.enable = true;
         htop.enable = true;
         eza.enable = true;
         fzf.enable = true;
@@ -36,8 +37,6 @@ in {
         direnv.enable = true;
       };
     };
-
-    styles.stylix.enable = true;
 
     # TODO: move this to a separate module
     home.packages = with pkgs; [
