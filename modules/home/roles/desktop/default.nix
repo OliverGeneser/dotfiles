@@ -20,6 +20,7 @@ in {
     browsers = {
       mullvad.enable = true;
       firefox.enable = true;
+      zen.enable = true;
       chromium.enable = true;
     };
 
