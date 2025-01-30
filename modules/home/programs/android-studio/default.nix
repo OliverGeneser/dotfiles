@@ -12,12 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    nixpkgs = {
-      config = {
-        android_sdk.accept_license = true;
-      };
-    };
-
     home.sessionVariables = {
       NIXPKGS_ACCEPT_ANDROID_SDK_LICENSE = 1;
     };
