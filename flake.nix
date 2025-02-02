@@ -108,12 +108,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     arkenfox = {
-      url = "github:dwarfmaster/arkenfox-nixos";
+      url = "github:OliverGeneser/arkenfox-nixos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
+      url = "github:OliverGeneser/zen-browser-flake";
     };
 
     # Rust prject helper

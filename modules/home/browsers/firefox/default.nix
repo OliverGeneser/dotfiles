@@ -33,7 +33,7 @@ in {
       enable = true;
       arkenfox = {
         enable = true;
-        version = "128.0";
+        version = "133.0";
       };
       profiles.Default = {
         isDefault = true;

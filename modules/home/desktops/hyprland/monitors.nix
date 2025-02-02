@@ -10,6 +10,7 @@ in {
     wayland.windowManager.hyprland.settings = {
       monitor = [
         # "HDMI-A-1,addreserved,0,0,0,150"
+        "Unknown-1, disable"
       ];
 
       exec-once = [

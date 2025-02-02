@@ -18,6 +18,8 @@ in {
       enable32Bit = true;
     };
 
+    programs.xwayland.enable = true;
+
     environment.systemPackages = with pkgs; [
       egl-wayland
     ];
@@ -39,6 +41,8 @@ in {
 
       MOZ_ENABLE_WAYLAND = "1";
       MOZ_DISABLE_RDD_SANDBOX = "1";
+
+      NIXOS_OZONE_WL = "1";
 
       #CLUTTER_BACKEND = "wayland";
 
