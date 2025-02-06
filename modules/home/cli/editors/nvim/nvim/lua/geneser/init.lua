@@ -51,7 +51,7 @@ autocmd("LspAttach", {
 			vim.lsp.buf.code_action()
 		end, opts)
 		vim.keymap.set("n", "<leader>vrr", function()
-			vim.lsp.buf.referencrs()
+			vim.lsp.buf.references()
 		end, opts)
 		vim.keymap.set("n", "<leader>vrn", function()
 			vim.lsp.buf.rename()
