@@ -35,7 +35,6 @@
 
     impermanence.url = "github:nix-community/impermanence";
     lanzaboote.url = "github:nix-community/lanzaboote";
-    lanzaboote.inputs.rust-overlay.follows = "rust-overlay";
 
     nixgl.url = "github:nix-community/nixGL";
     stylix.url = "github:danth/stylix";
@@ -109,7 +108,6 @@
     };
     arkenfox = {
       url = "github:OliverGeneser/arkenfox-nixos";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     zen-browser = {
@@ -122,14 +120,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
     # Wezterm unstable
     wezterm = {
-      url = "github:wez/wezterm/main?dir=nix";
-      #inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
+      url = "github:wez/wezterm?dir=nix";
     };
 
     custom-udev-rules = {
