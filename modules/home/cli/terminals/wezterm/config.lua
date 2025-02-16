@@ -82,6 +82,10 @@ return {
 		{
 			name = "unix",
 		},
+		{
+			name = "thor",
+			proxy_command = { "ssh", "-T", "-A", "thor", "wezterm", "cli", "proxy" },
+		},
 	},
 	disable_default_key_bindings = true,
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 5000 },
