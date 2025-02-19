@@ -15,8 +15,7 @@
 mkShell {
   # Create your shell
   packages = with pkgs; [
-    nodejs_18
-    corepack_18
+    nodejs_22
     libuuid
     zip
   ];
