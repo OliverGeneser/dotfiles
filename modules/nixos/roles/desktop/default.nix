@@ -15,7 +15,7 @@ in {
     roles = {
       common.enable = true;
       desktop.addons = {
-        nautilus.enable = true;
+        thunar.enable = true;
       };
     };
     services = {
@@ -37,6 +37,7 @@ in {
 
     cli.programs = {
       nh.enable = true;
+      adb.enable = true;
       nix-ld.enable = true;
     };
 

@@ -13,22 +13,17 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      ## VPN
       trayscale
 
+      ## Ebook
       foliate
-      pavucontrol
+
+      ## Audio
       pwvucontrol
 
-      sushi
       gnome-disk-utility
-      totem
-      gvfs
       loupe
-
-      nautilus
-      ffmpegthumbnailer # thumbnails
-      nautilus-python # enable plugins
-      gst_all_1.gst-libav # thumbnails
     ];
 
     xdg.configFile."com.github.johnfactotum.Foliate/themes/mocha.json".text = ''

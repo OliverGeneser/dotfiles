@@ -19,7 +19,6 @@ in {
 
     browsers = {
       mullvad.enable = true;
-      firefox.enable = true;
       zen.enable = true;
       chromium.enable = true;
     };
@@ -45,6 +44,7 @@ in {
     };
 
     desktops.addons.xdg.enable = true;
+    desktops.addons.thunar.enable = true;
 
     home.sessionVariables = {
       MOZ_ENABLE_WAYLAND = 1;
@@ -63,7 +63,6 @@ in {
       clipse
       pamixer
       playerctl
-      xfce.thunar
 
       grimblast
       slurp
