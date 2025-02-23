@@ -17,6 +17,8 @@ in {
       vaapi.enable = true;
     };
 
+    users.users.jellyfin.extragroups = ["video" "render"];
+
     services = {
       jellyfin = {
         enable = true;

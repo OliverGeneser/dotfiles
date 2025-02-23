@@ -4,18 +4,13 @@
   pkgs,
   ...
 }: {
-  #cli.programs.ssh.extraHosts = {
-  #  "qmaster.q-inspect.com" = {
-  #    hostname = "qmaster.q-inspect.com";
-  #    identityFile = "~/.ssh/ssh_prod_qreport";
-  #    identitiesOnly = true;
-  #  };
-  #  "q-inspect.dk" = {
-  #    hostname = "q-inspect.dk";
-  #    identityFile = "~/.ssh/ssh_prod_qreport";
-  #    identitiesOnly = true;
-  #  };
-  #};
+  cli.programs.ssh.extraHosts = {
+    "ironman" = {
+      hostname = "10.0.0.210";
+      port = 22000;
+      user = "oliverg";
+    };
+  };
 
   roles = {
     server.enable = true;

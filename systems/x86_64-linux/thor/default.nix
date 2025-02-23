@@ -23,8 +23,10 @@
       radarr.enable = true;
       syncthing.enable = true;
       nextcloud.enable = true;
+      immich.enable = true;
       jellyfin-server.enable = true;
       signal-reporting-bot.enable = true;
+      postgresql.enable = true;
     };
 
     snapraid = {
@@ -34,7 +36,7 @@
         d2 = "/mnt/disk2";
       };
       contentFiles = [
-        "/persist/var/snapraid/snapraid.content"
+        "/persist/var/snapraid.content"
         "/mnt/snapraid-content/disk1/snapraid.content"
         "/mnt/snapraid-content/disk2/snapraid.content"
       ];
@@ -74,11 +76,19 @@
 
   system = {
     impermanence = {
+      files = [
+        "/var/snapraid.content"
+      ];
       directories = [
         "/srv/"
-        "/var/snapraid/"
+        "/data/docker-volumes"
+        "/data/torrents"
+        "/var/qbittorrent"
         "/var/lib/jellyfin"
         "/var/lib/syncthing"
+        "/var/lib/immich"
+        "/var/lib/redis-immich"
+        "/var/lib/postgresql"
         "/etc/zfs"
         "/root/.local/share/signal-cli"
       ];
@@ -142,41 +152,7 @@
         startAt = "01:00";
         serviceConfig = {
           Type = "oneshot";
-          User = "nixos";
           ExecStart = "${pkgs.custom.snapraid-btrfs-runner}/bin/snapraid-btrfs-runner";
-          Nice = 19;
-          IOSchedulingPriority = 7;
-          CPUSchedulingPolicy = "batch";
-
-          LockPersonality = true;
-          MemoryDenyWriteExecute = true;
-          NoNewPrivileges = true;
-          PrivateTmp = true;
-          ProtectClock = true;
-          ProtectControlGroups = true;
-          ProtectHostname = true;
-          ProtectKernelLogs = true;
-          ProtectKernelModules = true;
-          ProtectKernelTunables = true;
-          RestrictAddressFamilies = "AF_UNIX";
-          RestrictNamespaces = true;
-          RestrictRealtime = true;
-          RestrictSUIDSGID = true;
-          SystemCallArchitectures = "native";
-          SystemCallFilter = "@system-service";
-          SystemCallErrorNumber = "EPERM";
-          CapabilityBoundingSet = "";
-          ProtectSystem = "strict";
-          ProtectHome = "read-only";
-          ReadOnlyPaths = ["/etc/snapraid.conf" "/etc/snapper"];
-          ReadWritePaths = [
-            "/mnt/disk1"
-            "/mnt/disk2"
-            "/mnt/parity1/snapraid.parity"
-            "/persist/var/snapraid"
-            "/mnt/snapraid-content/disk1/snapraid.content"
-            "/mnt/snapraid-content/disk2/snapraid.content"
-          ];
         };
       };
     };
