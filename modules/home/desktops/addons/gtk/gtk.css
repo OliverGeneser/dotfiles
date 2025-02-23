@@ -88,10 +88,3 @@
   background-color: #11111b;
   color: #ffffff;
 }
-
-.nautilus-window .navigation-sidebar > .sidebar-row:nth-child(1) {
-  min-height: 0;
-  font-size: 0;
-  -gtk-icon-size: 0;
-  margin-top: -2px;
-}

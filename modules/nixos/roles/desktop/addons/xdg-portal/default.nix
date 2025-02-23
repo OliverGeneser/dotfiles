@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib;
@@ -19,8 +20,8 @@ in {
       autostart.enable = true;
       portal = {
         enable = true;
-        extraPortals = with pkgs; [
-          #xdg-desktop-portal-hyprland
+        extraPortals = [
+          inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
         ];
       };
     };

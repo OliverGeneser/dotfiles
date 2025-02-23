@@ -16,6 +16,13 @@ in {
   };
 
   config = mkIf cfg.enable {
+    xdg.mimeApps.defaultApplications = {
+      "text/html" = ["Zen.desktop"];
+      "text/xml" = ["Zen.desktop"];
+      "x-scheme-handler/http" = ["Zen.desktop"];
+      "x-scheme-handler/https" = ["Zen.desktop"];
+    };
+
     home.packages = [
       inputs.zen-browser.packages."${system}".twilight
     ];

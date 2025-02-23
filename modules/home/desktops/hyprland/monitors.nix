@@ -11,25 +11,25 @@ in {
       monitor = [
         # "HDMI-A-1,addreserved,0,0,0,150"
         "Unknown-1, disable"
+        "DP-1,preferred,auto,1,bitdepth,10"
       ];
 
       exec-once = [
-        "[workspace 1 silent] firefox --new-instance --new-window localhost:8008"
         "[workspace 3 silent] wezterm"
         "[workspace 5 silent] webcord"
       ];
 
       workspace = [
-        "1, monitor:${cfg.primary_monitor}, on-created-empty:[silent,fullscreen] firefox --new-instance"
-        "2, monitor:${cfg.primary_monitor}, on-created-empty:[silent,fullscreen] firefox --new-instance --new-window localhost:8008"
-        "3, monitor:${cfg.primary_monitor}, on-created-empty:[silent,fullscreen] wezterm"
+        "1, monitor:${cfg.primary_monitor}, on-created-empty:[silent] zen --new-instance, default:true"
+        "2, monitor:${cfg.primary_monitor}, on-created-empty:[silent] zen --new-instance"
+        "3, monitor:${cfg.primary_monitor}, on-created-empty:[silent] wezterm"
         "4, monitor:${cfg.primary_monitor}"
-        "5, monitor:${cfg.primary_monitor}, on-created-empty:[silent,fullscreen] webcord"
+        "5, monitor:${cfg.primary_monitor}, on-created-empty:[silent] webcord"
         "6, monitor:${cfg.primary_monitor}"
         "7, monitor:${cfg.primary_monitor}"
         "8, monitor:${cfg.primary_monitor}"
         "9, monitor:${cfg.primary_monitor}"
-        "0, monitor:${cfg.primary_monitor}"
+        "0, monitor:HDMI-A-1"
       ];
     };
   };
