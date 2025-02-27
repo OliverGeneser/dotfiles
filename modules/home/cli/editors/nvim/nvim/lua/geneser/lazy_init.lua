@@ -21,6 +21,7 @@ require("lazy").setup({
 	rocks = { enabled = false },
 	dev = {
 		path = "~/.local/share/nvim/nix",
+		patterns = { "nvim-treesitter" },
 		fallback = false,
 	},
 })

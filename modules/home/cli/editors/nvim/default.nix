@@ -55,24 +55,21 @@ in {
       home.packages = with pkgs; [
         ripgrep
         fd
-        go
         lua-language-server
-        rustup
-        black
+        rust-analyzer-unwrapped
+        # black
+        nodejs_22
         alejandra
-        cmake
-        ninja
-        gcc
-        gpp
-        prettierd
-        csharpier
+
         stylua
+
+        prettierd
+        tailwindcss-language-server
         eslint_d
       ];
 
       programs.neovim = {
         enable = true;
-        #package = pkgs.neovim;
         viAlias = true;
         vimAlias = true;
         defaultEditor = true;
