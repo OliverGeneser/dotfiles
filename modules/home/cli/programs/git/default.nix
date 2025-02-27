@@ -33,29 +33,66 @@ in {
 
       extraConfig =
         {
-          core = {
-            editor = "nvim";
-            pager = "delta";
+          branch = {
+            sort = "-committerdate";
+          };
+
+          commit = {
+            verbose = true;
           };
 
           color = {
             ui = true;
           };
 
-          interactive = {
-            diffFilter = "delta --color-only";
+          column = {
+            ui = "auto";
+          };
+
+          core = {
+            editor = "nvim";
+            pager = "delta";
           };
 
           delta = {
             enable = true;
-            navigate = true;
             light = false;
-            side-by-side = false;
+            navigate = true;
             options.syntax-theme = "catppuccin";
+            side-by-side = false;
+          };
+
+          diff = {
+            algorithm = "histogram";
+            colorMoved = "plain";
+            mnemonicPrefix = true;
+            renames = true;
+          };
+
+          fetch = {
+            all = true;
+            prune = true;
+            pruneTags = true;
           };
 
           gpg = {
             format = "ssh";
+          };
+
+          help = {
+            autocorrect = "prompt";
+          };
+
+          init = {
+            defaultBranch = "main";
+          };
+
+          interactive = {
+            diffFilter = "delta --color-only";
+          };
+
+          merge = {
+            conflictstyle = "zdiff3";
           };
 
           pull = {
@@ -63,12 +100,24 @@ in {
           };
 
           push = {
-            default = "current";
             autoSetupRemote = true;
+            default = "simple";
+            followTags = true;
           };
 
-          init = {
-            defaultBranch = "main";
+          rebase = {
+            autoSquash = true;
+            autoStash = true;
+            updateRefs = true;
+          };
+
+          rerere = {
+            autoupdate = true;
+            enabled = true;
+          };
+
+          tag = {
+            sort = "version:refname";
           };
         }
         // rewriteURL;
