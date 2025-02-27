@@ -42,7 +42,7 @@ in {
       lm_sensors
       tokei
       trash-cli
-      tailspin
+      #tailspin
       gtrash
       ripgrep
       sd
@@ -53,18 +53,6 @@ in {
       kaf
 
       lsof
-      # go
-      arion
-      go
-      golangci-lint
-      air
-      templ
-      sqlc
-      golines
-      gotools
-      go-task
-      go-mockery
-      gotestsum
     ];
   };
 }

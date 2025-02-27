@@ -96,11 +96,11 @@ in {
         nht = "nh os test";
         nhu = "nh os --update --ask";
 
-        nd = "nix develop";
-        nfu = "nix flake update";
-        hms = "home-manager switch --flake ~/dotfiles#${config.custom.user.name}@${host}";
-        nrs = "sudo nixos-rebuild switch --flake ~/dotfiles#${host}";
-        nrt = "sudo nixos-rebuild test --flake ~/dotfiles#${host}";
+        #nd = "nix develop";
+        #nfu = "nix flake update";
+        #hms = "home-manager switch --flake ~/dotfiles#${config.custom.user.name}@${host}";
+        #nrs = "sudo nixos-rebuild switch --flake ~/dotfiles#${host}";
+        #nrt = "sudo nixos-rebuild test --flake ~/dotfiles#${host}";
 
         resof = "sudo filefrag -v /swap/swapfile | awk '$1==\"0:\" {print substr($4, 1, length($4)-2)}'";
 

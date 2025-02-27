@@ -1,12 +1,13 @@
 {
   pkgs,
   lib,
+  stdenv,
   ...
 }: let
   images = builtins.attrNames (builtins.readDir ./wallpapers);
   mkWallpaper = name: src: let
     fileName = builtins.baseNameOf src;
-    pkg = pkgs.stdenvNoCC.mkDerivation {
+    pkg = stdenv.mkDerivation {
       inherit name src;
 
       dontUnpack = true;
@@ -40,7 +41,7 @@
     '')
     wallpapers;
 in
-  pkgs.stdenvNoCC.mkDerivation {
+  stdenv.mkDerivation {
     name = "wallpapers";
     src = ./wallpapers;
 

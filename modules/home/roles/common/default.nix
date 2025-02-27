@@ -41,11 +41,10 @@ in {
 
     # TODO: move this to a separate module
     home.packages = with pkgs; [
-      keymapp
       powertop
 
       src-cli
-      optinix
+      #optinix
 
       (hiPrio parallel)
       moreutils
@@ -58,8 +57,6 @@ in {
       openssl
 
       showmethekey
-      python3
-      rustup
     ];
   };
 }

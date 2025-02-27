@@ -90,15 +90,15 @@ in {
           ];
         }
         {
-          profile.name = "desktop2monitors";
+          profile.name = "enterprise-monitors";
           profile.outputs = [
             {
-              criteria = "DP-1";
+              criteria = "DP-5";
               position = "0,0";
               mode = "2560x1440@165Hz";
             }
             {
-              criteria = "HDMI-A-1";
+              criteria = "HDMI-A-2";
               position = "320,-1080";
               mode = "1920x1080@60Hz";
             }

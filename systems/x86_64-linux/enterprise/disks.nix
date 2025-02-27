@@ -1,16 +1,16 @@
 {
   disko.devices = {
     disk = {
-      sdb = {
+      main = {
         type = "disk";
-        device = "/dev/disk/by-id/ata-SAMSUNG_MZNLN256HAJQ-00000_S3TSNX0M422911";
+        device = "/dev/disk/by-id/nvme-KXG50ZNV512G_TOSHIBA_X8DB327FK5SS";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
               label = "boot";
               name = "ESP";
-              size = "512M";
+              size = "5G";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -66,7 +66,7 @@
                     };
                     "/swap" = {
                       mountpoint = "/swap";
-                      swap.swapfile.size = "32G";
+                      swap.swapfile.size = "64G";
                     };
                   };
                 };

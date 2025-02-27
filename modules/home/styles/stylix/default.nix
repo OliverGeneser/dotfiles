@@ -28,7 +28,6 @@ in {
       enable = true;
       autoEnable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-      targets.nixvim.enable = false;
 
       image = pkgs.custom.wallpapers.gfda_34-black_5120x2880;
 

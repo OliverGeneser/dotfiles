@@ -10,17 +10,13 @@
   ];
 
   networking = {
-    hostName = "workstation";
+    hostName = "enterprise";
   };
 
   system = {
     impermanence = {
       usesEncryption = lib.mkForce true;
     };
-  };
-
-  services = {
-    thermald.enable = true;
   };
 
   hardware = {
@@ -49,7 +45,7 @@
   };
 
   roles = {
-    gaming.enable = true;
+    #gaming.enable = true;
     desktop = {
       enable = true;
       addons = {
@@ -65,7 +61,6 @@
     supportedFilesystems = lib.mkForce ["btrfs" "ntfs"];
     kernelPackages = pkgs.linuxPackages_latest; #https://github.com/NixOS/nixpkgs/issues/344167
     resumeDevice = "/dev/disk/by-label/nixos";
-    binfmt.emulatedSystems = ["aarch64-linux"];
   };
 
   system.stateVersion = "23.11";

@@ -16,6 +16,7 @@ mkShell {
   # Current LTS node 22 https://endoflife.date/nodejs
   packages = with pkgs; [
     nodejs_22
+    corepack_22
     libuuid
     zip
   ];

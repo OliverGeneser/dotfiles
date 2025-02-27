@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  cfg = config.service.custom.postgresql;
+  cfg = config.services.custom.postgresql;
 in {
   options.services.custom.postgresql = {
     enable = mkEnableOption "Enable postgresql";

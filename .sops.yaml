@@ -17,10 +17,10 @@
 # sops updatekeys secrets/secrets.yaml
 keys:
   - &users:
-    - &olivergeneser_workstation age1ce9umy5mclkpzm7eklmzmrmu4q6m3jtzwhvez7rjz9eh5kzkcdmqky5p2g
+    - &olivergeneser_enterprise age1ce9umy5mclkpzm7eklmzmrmu4q6m3jtzwhvez7rjz9eh5kzkcdmqky5p2g
     - &olivergeneser_huawei age1hevs0hxh95f3uspeu2jqsh0elxnzhmjytw4p7pk36wlny4zzdpcs7egy8e
   - &hosts:
-    - &workstation age1xzt9jx0jy6dva6xkhmefzacj9zlcdp53mfxap6h2grtean8rn9kqkmsrgq
+    - &enterprise age1xzt9jx0jy6dva6xkhmefzacj9zlcdp53mfxap6h2grtean8rn9kqkmsrgq
     - &huawei age1jpth454ptlcr6c7p4889p4w8cxxf8mca9zm7rrjhkv8r24gr0cysmcma7n
     - &thor age1snjuvtw6el635fq79lavy0q6grsy87fcp77tneuhlxk697068fuqeuur6k
     - &tunnelboy age1gc4an6pe0txqvvca0f8na7uyvgsalp2adle4fvq8gkywvz7qp93sjlmv05
@@ -29,19 +29,19 @@ creation_rules:
   - path_regex: modules/nixos/secrets.ya?ml$
     key_groups:
       - age:
-          - *workstation
+          - *enterprise
           - *huawei
           - *thor
           - *tunnelboy
-          - *olivergeneser_workstation
+          - *olivergeneser_enterprise
           - *olivergeneser_huawei
 
   - path_regex: modules/nixos/services/secrets.ya?ml$
     key_groups:
       - age:
-          - *workstation
+          - *enterprise
           - *huawei
           - *thor
           - *tunnelboy
-          - *olivergeneser_workstation
+          - *olivergeneser_enterprise
           - *olivergeneser_huawei

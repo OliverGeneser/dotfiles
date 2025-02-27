@@ -14,7 +14,6 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      nixgl.nixGLIntel
       nix-output-monitor
       nvd
       nix-init

@@ -67,7 +67,6 @@ in {
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
       homeManagerIntegration.autoImport = false;
       homeManagerIntegration.followSystem = false;
-      targets.nixvim.enable = false;
 
       image = pkgs.custom.wallpapers.gfda_40-black_5120x2880;
 
