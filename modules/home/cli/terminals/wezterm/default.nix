@@ -24,6 +24,6 @@ in {
       extraConfig = builtins.readFile ./config.lua;
     };
 
-    xdg.configFile."wezterm/sessionizer.lua".source = ./sessionizer.lua;
+    #xdg.configFile."wezterm/sessionizer.lua".source = ./sessionizer.lua;
   };
 }

@@ -36,7 +36,6 @@ end
 M.toggle = function(window, pane)
 	local projects = {}
 
-	wezterm.log_info(remove_up_to_third_slash(pane:get_current_working_dir()))
 	local success, stdout, stderr = wezterm.run_child_process({
 		fd,
 		"-HI",
@@ -44,6 +43,7 @@ M.toggle = function(window, pane)
 		"--exact-depth=1",
 		"--exclude='*.*'",
 		".",
+		os.getenv("HOME") .. "/dev",
 		os.getenv("HOME") .. "/personal",
 		os.getenv("HOME") .. "/work",
 		os.getenv("HOME") .. "/",
@@ -62,6 +62,15 @@ M.toggle = function(window, pane)
 		local label = project
 		local id = project:gsub(".*/", "")
 		table.insert(projects, { label = tostring(label), id = tostring(id) })
+	end
+
+	local project = line:gsub("/.git/$", "")
+	wezterm.log_info("Project: " .. project)
+	wezterm.log_info("fd Output: " .. stdout)
+
+	local label = project
+	if not label or label == "" then
+		wezterm.log_error("Empty project: " .. project)
 	end
 
 	window:perform_action(

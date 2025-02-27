@@ -1,66 +1,8 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
-local mux = wezterm.mux
-local sessionizer = require("sessionizer")
+local sessionizer = wezterm.plugin.require("https://github.com/olivergeneser/sessionizer.wezterm")
 
--- Decide whether cmd represents a default startup invocation
-local function is_default_startup(cmd)
-	if not cmd then
-		-- we were started with `wezterm` or `wezterm start` with
-		-- no other arguments
-		return true
-	end
-	if cmd.domain == "DefaultDomain" and not cmd.args then
-		-- Launched via `wezterm start --cwd something`
-		return true
-	end
-	-- we were launched some other way
-	return false
-end
-
-wezterm.on("gui-startup", function(cmd)
-	local args = {}
-	if cmd then
-		args = cmd.args
-		wezterm.log_info(args)
-	end
-	--if args[1] == "run_sessionizer" then
-	--    wezterm.action_callback(sessionizer.toggle)
-	--end
-
-	--if is_default_startup(cmd) then
-	-- for the default startup case, we want to switch to the unix domain instead
-	--    local unix = mux.get_domain("unix")
-	--    mux.set_default_domain(unix)
-	-- ensure that it is attached
-	--    unix:attach()
-	--end
-end)
-
-wezterm.on("user-var-changed", function(window, pane, name, value)
-	local overrides = window:get_config_overrides() or {}
-	if name == "ZEN_MODE" then
-		local incremental = value:find("+")
-		local number_value = tonumber(value)
-		if incremental ~= nil then
-			while number_value > 0 do
-				window:perform_action(wezterm.action.IncreaseFontSize, pane)
-				number_value = number_value - 1
-			end
-			overrides.enable_tab_bar = false
-		elseif number_value < 0 then
-			window:perform_action(wezterm.action.ResetFontSize, pane)
-			overrides.font_size = nil
-			overrides.enable_tab_bar = false
-		else
-			overrides.font_size = number_value
-			overrides.enable_tab_bar = false
-		end
-	end
-	window:set_config_overrides(overrides)
-end)
-
-return {
+local config = {
 	color_scheme = "Catppuccin Mocha",
 	default_prog = { "fish" },
 	window_decorations = "NONE",
@@ -73,10 +15,10 @@ return {
 	enable_tab_bar = true,
 	hyperlink_rules = wezterm.default_hyperlink_rules(),
 	window_padding = {
-		left = 20,
-		right = 20,
-		top = 20,
-		bottom = 20,
+		left = 10,
+		right = 10,
+		top = 10,
+		bottom = 10,
 	},
 	unix_domains = {
 		{
@@ -86,11 +28,16 @@ return {
 			name = "thor",
 			proxy_command = { "ssh", "-T", "-A", "thor", "wezterm", "cli", "proxy" },
 		},
+		{
+			name = "enterprise",
+			proxy_command = { "ssh", "-T", "-A", "enterprise", "wezterm", "cli", "proxy" },
+		},
 	},
+	default_gui_startup_args = { "connect", "unix" },
 	disable_default_key_bindings = true,
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 5000 },
 	keys = {
-		{ key = "f", mods = "LEADER", action = wezterm.action_callback(sessionizer.toggle) },
+		{ key = "f", mods = "LEADER", action = sessionizer.show },
 		{ key = "p", mods = "LEADER", action = act.ActivateCommandPalette },
 		{ key = "e", mods = "LEADER", action = act.ShowLauncher },
 		{ key = "w", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
@@ -331,3 +278,39 @@ return {
 	},
 	enable_wayland = true,
 }
+
+sessionizer.apply_to_config(config, true)
+sessionizer.config.paths = { "/home/olivergeneser" }
+
+wezterm.on("gui-startup", function(cmd)
+	local args = {}
+	if cmd then
+		args = cmd.args
+		wezterm.log_info(args)
+	end
+end)
+
+wezterm.on("user-var-changed", function(window, pane, name, value)
+	local overrides = window:get_config_overrides() or {}
+	if name == "ZEN_MODE" then
+		local incremental = value:find("+")
+		local number_value = tonumber(value)
+		if incremental ~= nil then
+			while number_value > 0 do
+				window:perform_action(wezterm.action.IncreaseFontSize, pane)
+				number_value = number_value - 1
+			end
+			overrides.enable_tab_bar = false
+		elseif number_value < 0 then
+			window:perform_action(wezterm.action.ResetFontSize, pane)
+			overrides.font_size = nil
+			overrides.enable_tab_bar = false
+		else
+			overrides.font_size = number_value
+			overrides.enable_tab_bar = false
+		end
+	end
+	window:set_config_overrides(overrides)
+end)
+
+return config
