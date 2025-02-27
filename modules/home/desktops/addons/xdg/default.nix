@@ -1,6 +1,8 @@
 {
   config,
   lib,
+  inputs,
+  system,
   ...
 }:
 with lib;
@@ -33,21 +35,31 @@ in {
           "image/png" = ["org.gnome.Loupe.desktop"];
           "image/jpg" = ["org.gnome.Loupe.desktop"];
           "image/jpeg" = ["org.gnome.Loupe.desktop"];
+          "x-scheme-handler/http" = "zen.desktop";
+          "x-scheme-handler/https" = "zen.desktop";
+          "x-scheme-handler/chrome" = "zen.desktop";
+          "text/html" = "zen.desktop";
+          "application/x-extension-htm" = "zen.desktop";
+          "application/x-extension-html" = "zen.desktop";
+          "application/x-extension-shtml" = "zen.desktop";
+          "application/xhtml+xml" = "zen.desktop";
+          "application/x-extension-xhtml" = "zen.desktop";
+          "application/x-extension-xht" = "zen.desktop";
         };
         defaultApplications = {
-          "application/x-extension-htm" = "firefox";
-          "application/x-extension-html" = "firefox";
-          "application/x-extension-shtml" = "firefox";
-          "application/x-extension-xht" = "firefox";
-          "application/x-extension-xhtml" = "firefox";
-          "application/xhtml+xml" = "firefox";
-          "text/html" = "firefox";
-          "x-scheme-handler/about" = "firefox";
+          "application/x-extension-htm" = "zen.desktop";
+          "application/x-extension-html" = "zen.desktop";
+          "application/x-extension-shtml" = "zen.desktop";
+          "application/x-extension-xht" = "zen.desktop";
+          "application/x-extension-xhtml" = "zen.desktop";
+          "application/xhtml+xml" = "zen.desktop";
+          "text/html" = "zen.desktop";
+          "x-scheme-handler/about" = "zen.desktop";
           "x-scheme-handler/chrome" = ["chromium-browser.desktop"];
-          "x-scheme-handler/ftp" = "firefox";
-          "x-scheme-handler/http" = "firefox";
-          "x-scheme-handler/https" = "firefox";
-          "x-scheme-handler/unknown" = "firefox";
+          "x-scheme-handler/ftp" = "zen.desktop";
+          "x-scheme-handler/http" = "zen.desktop";
+          "x-scheme-handler/https" = "zen.desktop";
+          "x-scheme-handler/unknown" = "zen.desktop";
 
           "audio/*" = ["mpv.desktop"];
           "video/*" = ["org.gnome.Totem.desktop"];
@@ -57,7 +69,7 @@ in {
           "image/png" = ["org.gnome.loupe.desktop"];
           "image/jpg" = ["org.gnome.loupe.desktop"];
           "application/json" = ["gnome-text-editor.desktop"];
-          "application/pdf" = "firefox";
+          "application/pdf" = "zen.desktop";
           "application/x-gnome-saved-search" = ["org.gnome.Nautilus.desktop"];
           "x-scheme-handler/tg" = ["telegramdesktop.desktop"];
           "application/toml" = "org.gnome.TextEditor.desktop";
