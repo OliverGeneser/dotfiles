@@ -26,12 +26,12 @@ in {
     programs = {
       shotwell.enable = true;
       webcord.enable = true;
-      bitwarden.enable = true;
+      # bitwarden.enable = true;
       audio = {
         audacity.enable = true;
       };
       email = {
-        tuta.enable = true;
+        # tuta.enable = true;
       };
       media = {
         vlc.enable = true;

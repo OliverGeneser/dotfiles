@@ -12,14 +12,12 @@ in {
 
   config = mkIf cfg.enable {
     programs = {
-      arduino.enable = true;
+      #arduino.enable = true;
       beekeeperStudio.enable = true;
-      httpie.enable = true;
+      #httpie.enable = true;
     };
 
     cli = {
-      multiplexers.zellij.enable = true;
-
       programs = {
         act.enable = true;
         bat.enable = true;
@@ -40,7 +38,9 @@ in {
         starship.enable = true;
         yazi.enable = true;
         zoxide.enable = true;
+
         nodejs.enable = true;
+        bun.enable = true;
       };
     };
   };
