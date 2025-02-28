@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 with lib; let
@@ -17,7 +18,10 @@ in {
       trayscale
 
       ## Ebook
-      foliate
+      #foliate
+
+      ## Git
+      gitbutler
 
       ## Audio
       pwvucontrol
