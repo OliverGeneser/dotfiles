@@ -27,6 +27,8 @@
       jellyfin-server.enable = true;
       signal-reporting-bot.enable = true;
       postgresql.enable = true;
+
+      qbittorrent.enable = true; # For linux ISO's
     };
 
     snapraid = {
