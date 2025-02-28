@@ -41,6 +41,7 @@ in {
 
         nodejs.enable = true;
         bun.enable = true;
+        python.enable = true;
       };
     };
   };
