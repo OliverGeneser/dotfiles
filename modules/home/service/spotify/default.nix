@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.service.spotify;
+  cfg = config.services.custom.spotify;
 in {
-  options.service.spotify = {
+  options.services.custom.spotify = {
     enable = mkEnableOption "Enable spotify service";
   };
 

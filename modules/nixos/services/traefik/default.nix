@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.custom.services.traefik;
+  cfg = config.services.custom.traefik;
 in {
-  options.custom.services.traefik = with types; {
+  options.services.custom.traefik = with types; {
     enable = mkBoolOpt false "Enable Traefik";
   };
 

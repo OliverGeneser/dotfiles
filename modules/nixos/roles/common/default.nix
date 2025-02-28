@@ -26,8 +26,8 @@ in {
     security = {
       custom = {
         sops.enable = true;
+        yubikey.enable = true;
       };
-      yubikey.enable = true;
     };
 
     styles.stylix.enable = true;

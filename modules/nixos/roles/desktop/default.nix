@@ -21,8 +21,8 @@ in {
     services = {
       custom = {
         vpn.enable = true;
+        virtualisation.podman.enable = true;
       };
-      virtualisation.podman.enable = true;
     };
 
     hardware = {

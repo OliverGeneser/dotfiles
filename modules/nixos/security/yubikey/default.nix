@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.security.yubikey;
+  cfg = config.security.custom.yubikey;
 in {
-  options.security.yubikey = with types; {
+  options.security.custom.yubikey = with types; {
     enable = mkBoolOpt false "Whether to enable yubikey for auth.";
   };
 
