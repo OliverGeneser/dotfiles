@@ -43,7 +43,7 @@ in {
         #       "identity.fxaccounts.enabled" = false;
         #      "signon.rememberSignons" = false;
         #   };
-        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+        extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
           ublock-origin
 
           bitwarden

@@ -33,13 +33,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence.url = "github:nix-community/impermanence";
-    lanzaboote.url = "github:nix-community/lanzaboote";
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
 
-    nixgl.url = "github:nix-community/nixGL";
-    stylix.url = "github:danth/stylix";
-    nix-colors.url = "github:misterio77/nix-colors";
-    catppuccin.url = "github:catppuccin/nix";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+    };
+
     nix-index-database.url = "github:nix-community/nix-index-database";
 
     nixos-anywhere = {
@@ -56,6 +57,18 @@
     comma = {
       url = "github:nix-community/comma";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ### Desktop
+
+    ## Hyprland
+
+    hyprland = {
+      url = "github:OliverGeneser/Hyprland";
+    };
+
+    xdg-desktop-portal-hyprland = {
+      url = "github:hyprwm/xdg-desktop-portal-hyprland";
     };
 
     hypr-contrib = {
@@ -78,52 +91,54 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-    };
-
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
 
-    #hyprland-git.url = "github:hyprwm/hyprland";
-    #hyprland-xdph-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
-    #hyprland-protocols-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
-    #hyprland-nix.url = "github:spikespaz/hyprland-nix";
-    #hyprland-nix.inputs = {
-    #  hyprland.follows = "hyprland-git";
-    #  hyprland-xdph.follows = "hyprland-xdph-git";
-    #  hyprland-protocols.follows = "hyprland-protocols-git";
-    #};
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    ### Browser
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     arkenfox = {
       url = "github:OliverGeneser/arkenfox-nixos";
-    };
-
-    zen-browser = {
-      url = "github:OliverGeneser/zen-browser-flake";
-    };
-
-    # Rust prject helper
-    naersk = {
-      url = "github:nix-community/naersk";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Wezterm unstable
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ### Terminal
+
+    ## Wezterm unstable
+
     wezterm = {
       url = "github:wez/wezterm?dir=nix";
+      #inputs = {
+      #  nixpkgs.follows = "nixpkgs";
+      #  rust-overlay = {
+      #    url = "github:oxalica/rust-overlay/master";
+      #    inputs.nixpkgs.follows = "nixpkgs";
+      #  };
+      #};
     };
+
+    ### Styling
+
+    stylix = {
+      url = "github:danth/stylix";
+    };
+
+    catppuccin = {
+      url = "github:catppuccin/nix";
+    };
+
+    ### Custom
 
     custom-udev-rules = {
       url = "github:OliverGeneser/custom-udev-rules";
@@ -167,10 +182,6 @@
 
       systems.hosts.huawei.modules = with inputs; [
         nixos-hardware.nixosModules.huawei-machc-wa
-      ];
-
-      overlays = with inputs; [
-        nixgl.overlay
       ];
 
       deploy = lib.mkDeploy {inherit (inputs) self;};
