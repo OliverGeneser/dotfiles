@@ -28,7 +28,7 @@
       signal-reporting-bot.enable = true;
       postgresql.enable = true;
 
-      qbittorrent.enable = true; # For linux ISO's
+      virtualisation.gluetun.enable = true; # For linux ISO's
     };
 
     snapraid = {

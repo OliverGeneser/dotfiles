@@ -6,10 +6,10 @@
 }:
 with lib;
 with lib.custom; let
-  cfg = config.services.custom.qbittorrent;
+  cfg = config.services.custom.virtualisation.gluetun;
 in {
-  options.services.custom.qbittorrent = with types; {
-    enable = mkBoolOpt false "Enable qbittorrent";
+  options.services.custom.virtualisation.gluetun = with types; {
+    enable = mkBoolOpt false "Enable gluetun";
   };
 
   config = mkIf cfg.enable {
@@ -43,6 +43,9 @@ in {
       jellyseerr_env = {
         sopsFile = ../secrets.yaml;
       };
+      radarr_env = {
+        sopsFile = ../secrets.yaml;
+      };
     };
 
     # Enable container name DNS for non-default Podman networks.
@@ -66,6 +69,7 @@ in {
         "8095:8095/tcp"
         "6881:6881/tcp"
         "6881:6881/udp"
+        "7878:7878/tcp"
       ];
       log-driver = "journald";
       extraOptions = [
@@ -141,6 +145,36 @@ in {
     };
 
     systemd.services."podman-jellyseerr" = {
+      serviceConfig = {
+        Restart = lib.mkOverride 90 "always";
+      };
+      partOf = [
+        "podman-compose-gluetun-root.target"
+      ];
+      wantedBy = [
+        "podman-compose-gluetun-root.target"
+      ];
+    };
+
+    virtualisation.oci-containers.containers."radarr" = {
+      image = "ghcr.io/hotio/radarr:latest";
+      environmentFiles = [config.sops.secrets.radarr_env.path];
+      volumes = [
+        "/persist/etc/localtime:/etc/localtime:ro"
+        "/persist/docker-volumes/radarr:/config:rw"
+        "/mnt/storage/media:/data:rw"
+      ];
+      dependsOn = [
+        "gluetun"
+      ];
+      log-driver = "journald";
+      extraOptions = [
+        "--network=container:gluetun"
+        "--security-opt=no-new-privileges:true"
+      ];
+    };
+
+    systemd.services."podman-radarr" = {
       serviceConfig = {
         Restart = lib.mkOverride 90 "always";
       };

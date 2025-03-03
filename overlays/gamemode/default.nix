@@ -11,14 +11,14 @@
   inputs,
   ...
 }: final: prev: {
-  #gamemode = prev.gamemode.overrideAttrs (old: {
-  #  version = "1.8.2";
+  gamemode = prev.gamemode.overrideAttrs (old: {
+    version = "1.8.2";
 
-  # src = prev.fetchFromGitHub {
-  #   owner = "FeralInteractive";
-  #   repo = "gamemode";
-  #      tag = "1.8.2";
-  #     hash = "sha256-V0rewbSVOGFqJqXyCz4jXpuDM0EfjdkpGPl+WdDwI5I=";
-  #  };
-  # });
+    src = prev.fetchFromGitHub {
+      owner = "FeralInteractive";
+      repo = "gamemode";
+      tag = "1.8.2";
+      hash = "sha256-V0rewbSVOGFqJqXyCz4jXpuDM0EfjdkpGPl+WdDwI5I=";
+    };
+  });
 }

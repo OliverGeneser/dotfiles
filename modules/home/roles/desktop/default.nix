@@ -20,7 +20,7 @@ in {
     browsers = {
       mullvad.enable = true;
       zen.enable = true;
-      chromium.enable = true;
+      # chromium.enable = true;
     };
 
     programs = {
@@ -42,6 +42,8 @@ in {
       };
       meld.enable = true;
     };
+
+    services.custom = {syncthing.enable = true;};
 
     desktops.addons.xdg.enable = true;
     desktops.addons.thunar.enable = true;

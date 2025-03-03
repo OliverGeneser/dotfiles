@@ -12,11 +12,11 @@
   ...
 }: final: prev: {
   beekeeper-studio = prev.beekeeper-studio.overrideAttrs (old: {
-    version = "5.1.0-beta.12";
+    version = "5.1.4";
 
     src = prev.fetchurl {
-      url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v5.1.0-beta.12/Beekeeper-Studio-5.1.0-beta.12.AppImage";
-      hash = "sha256-r8x9QpRz9I8rzfBCTGpvWXyE2tXQ1TPy9bRpA28TDn8=";
+      url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v5.1.4/Beekeeper-Studio-5.1.4.AppImage";
+      hash = "sha256-7W0h7GsRg/4SArJ4ih/WEwHuTWCTC3a3TmYC9eq3XBM=";
     };
   });
 }

@@ -45,7 +45,7 @@
   };
 
   roles = {
-    #gaming.enable = true;
+    gaming.enable = true;
     desktop = {
       enable = true;
       addons = {
