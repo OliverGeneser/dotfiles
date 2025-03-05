@@ -20,7 +20,10 @@ in {
       terminals.foot.enable = true;
       shells.fish.enable = true;
       editors = {
-        nvim.enable = true;
+        nvim = {
+          enable = true;
+          additionalLanguages = true;
+        };
       };
       programs = {
         git.enable = true;

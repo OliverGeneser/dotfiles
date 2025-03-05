@@ -35,16 +35,16 @@ in {
 
     sops.secrets = {
       gluetun_env = {
-        sopsFile = ../secrets.yaml;
+        sopsFile = ../../secrets.yaml;
       };
       qbittorrent_env = {
-        sopsFile = ../secrets.yaml;
+        sopsFile = ../../secrets.yaml;
       };
       jellyseerr_env = {
-        sopsFile = ../secrets.yaml;
+        sopsFile = ../../secrets.yaml;
       };
       radarr_env = {
-        sopsFile = ../secrets.yaml;
+        sopsFile = ../../secrets.yaml;
       };
     };
 
