@@ -35,32 +35,8 @@ in {
           "image/png" = ["org.gnome.Loupe.desktop"];
           "image/jpg" = ["org.gnome.Loupe.desktop"];
           "image/jpeg" = ["org.gnome.Loupe.desktop"];
-          "x-scheme-handler/http" = "zen.desktop";
-          "x-scheme-handler/https" = "zen.desktop";
-          "x-scheme-handler/chrome" = "zen.desktop";
-          "text/html" = "zen.desktop";
-          "application/x-extension-htm" = "zen.desktop";
-          "application/x-extension-html" = "zen.desktop";
-          "application/x-extension-shtml" = "zen.desktop";
-          "application/xhtml+xml" = "zen.desktop";
-          "application/x-extension-xhtml" = "zen.desktop";
-          "application/x-extension-xht" = "zen.desktop";
         };
         defaultApplications = {
-          "application/x-extension-htm" = "zen.desktop";
-          "application/x-extension-html" = "zen.desktop";
-          "application/x-extension-shtml" = "zen.desktop";
-          "application/x-extension-xht" = "zen.desktop";
-          "application/x-extension-xhtml" = "zen.desktop";
-          "application/xhtml+xml" = "zen.desktop";
-          "text/html" = "zen.desktop";
-          "x-scheme-handler/about" = "zen.desktop";
-          "x-scheme-handler/chrome" = ["chromium-browser.desktop"];
-          "x-scheme-handler/ftp" = "zen.desktop";
-          "x-scheme-handler/http" = "zen.desktop";
-          "x-scheme-handler/https" = "zen.desktop";
-          "x-scheme-handler/unknown" = "zen.desktop";
-
           "audio/*" = ["mpv.desktop"];
           "video/*" = ["org.gnome.Totem.desktop"];
           "video/mp4" = ["org.gnome.Totem.desktop"];
@@ -68,20 +44,31 @@ in {
           "image/*" = ["org.gnome.loupe.desktop"];
           "image/png" = ["org.gnome.loupe.desktop"];
           "image/jpg" = ["org.gnome.loupe.desktop"];
-          "application/json" = ["gnome-text-editor.desktop"];
-          "application/pdf" = "zen.desktop";
+          "application/json" = ["nvim.desktop"];
           "application/x-gnome-saved-search" = ["org.gnome.Nautilus.desktop"];
           "x-scheme-handler/tg" = ["telegramdesktop.desktop"];
-          "application/toml" = "org.gnome.TextEditor.desktop";
-          "text/plain" = "org.gnome.TextEditor.desktop";
+          "application/toml" = ["nvim.desktop"];
+          "text/plain" = ["nvim.desktop"];
         };
       };
 
-      userDirs = {
+      userDirs = let
+        home = config.home.homeDirectory;
+      in {
         enable = true;
         createDirectories = true;
+
+        desktop = null;
+        download = "${home}/Downloads";
+        documents = "${home}/Documents";
+        pictures = "${home}/Pictures";
+        music = null;
+        publicShare = null;
+        templates = null;
+        videos = "${home}/Videos";
+
         extraConfig = {
-          XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/Screenshots";
+          XDG_SCREENSHOTS_DIR = "${home}/Pictures/Screenshots";
         };
       };
     };
