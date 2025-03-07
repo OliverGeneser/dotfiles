@@ -20,6 +20,7 @@ in {
     cli = {
       programs = {
         act.enable = true;
+        aws.enable = true;
         bat.enable = true;
         bottom.enable = true;
         direnv.enable = true;

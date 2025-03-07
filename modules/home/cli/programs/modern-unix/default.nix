@@ -42,6 +42,7 @@ in {
       lm_sensors
       tokei
       trash-cli
+      plocate
       #tailspin
       gtrash
       ripgrep
