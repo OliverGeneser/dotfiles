@@ -51,8 +51,6 @@ in {
       yq-go
       viddy
 
-      kaf
-
       lsof
     ];
   };

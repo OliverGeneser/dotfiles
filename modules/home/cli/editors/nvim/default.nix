@@ -14,27 +14,20 @@ with inputs; let
 in {
   options.cli.editors.nvim = with types; {
     enable = mkBoolOpt false "enable neovim editor";
-    additionalLanguages = mkBoolOpt false "enable additional languages";
   };
 
   config =
     mkIf
     cfg.enable
     {
-      home.packages = with pkgs;
-        [
-          ripgrep
-          fd
-          lua-language-server
-          alejandra
-          stylua
-          prettierd
-        ]
-        ++ lib.optionals (cfg.additionalLanguages) [
-          # black
-          tailwindcss-language-server
-          eslint_d
-        ];
+      home.packages = with pkgs; [
+        ripgrep
+        fd
+        alejandra
+        prettierd
+        eslint_d
+        # black
+      ];
 
       programs.neovim = {
         enable = true;

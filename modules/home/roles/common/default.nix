@@ -22,7 +22,6 @@ in {
       editors = {
         nvim = {
           enable = true;
-          additionalLanguages = true;
         };
       };
       programs = {

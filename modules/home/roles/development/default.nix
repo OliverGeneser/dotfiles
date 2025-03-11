@@ -42,6 +42,7 @@ in {
 
         nodejs.enable = true;
         bun.enable = true;
+        go.enable = true;
         python.enable = true;
       };
     };
