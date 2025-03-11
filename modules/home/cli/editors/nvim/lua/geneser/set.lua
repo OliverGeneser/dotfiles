@@ -1,4 +1,5 @@
 vim.opt.guicursor = ""
+vim.g.mapleader = " "
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -29,3 +30,13 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+	pattern = "*",
+	command = "checktime",
+})
+
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "FocusGained" }, {
+	pattern = "*",
+	command = "checktime",
+})
