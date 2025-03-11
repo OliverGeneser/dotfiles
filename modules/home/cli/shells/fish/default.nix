@@ -62,14 +62,13 @@ in {
         set fish_cursor_insert      line       blink
         set fish_cursor_replace_one underscore blink
         set fish_cursor_visual      block
-
-        set -Ux HUSKEY 0
       '';
 
       shellAliases = {
         wget = "wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\"";
+
         # Fuck husky
-        husky = "echo \"Husky is disabled on this system.\"";
+        husky = ": > /dev/null";
       };
       shellAbbrs = {
         # abbr existing commands
@@ -120,9 +119,6 @@ in {
 
         # git
         gmt = "git merge template/main --allow-unrelated-histories";
-
-        # Fuck husky
-        husky = "echo \"Husky is disabled on this system.\"";
       };
 
       functions = {

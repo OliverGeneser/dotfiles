@@ -12,6 +12,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    sops.secrets.nix_access_tokens = {
+      sopsFile = ../../secrets.yaml;
+    };
+
     nix = {
       settings = {
         trusted-users = ["@wheel" "root"];
@@ -20,8 +24,11 @@ in {
         experimental-features = ["nix-command" "flakes"];
         warn-dirty = false;
         system-features = ["kvm" "big-parallel" "nixos-test"];
-        access-tokens = [];
       };
+
+      extraOptions = ''
+        !include ${config.sops.secrets.nix_access_tokens.path}
+      '';
 
       # flake-utils-plus
       generateRegistryFromInputs = true;

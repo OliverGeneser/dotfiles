@@ -15,10 +15,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       ## VPN
-      trayscale
-
-      ## Ebook
-      #foliate
+      # trayscale
 
       ## Git
       gitbutler
