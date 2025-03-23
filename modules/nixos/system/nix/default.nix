@@ -12,8 +12,17 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets.nix_access_tokens = {
-      sopsFile = ../../secrets.yaml;
+    sops.secrets = {
+      nix_access_tokens = {
+        sopsFile = ../../secrets.yaml;
+      };
+      openrouter_api_key = {
+        sopsFile = ../../secrets.yaml;
+      };
+    };
+
+    environment.sessionVariables = {
+      OPENROUTER_API_KEY = "$(cat ${config.sops.secrets."openrouter_api_key".path})";
     };
 
     nix = {

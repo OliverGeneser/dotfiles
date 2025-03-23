@@ -32,11 +32,14 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
-	pattern = "*",
-	command = "checktime",
+    pattern = "*",
+    command = "checktime",
 })
 
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "FocusGained" }, {
-	pattern = "*",
-	command = "checktime",
+    pattern = "*",
+    command = "checktime",
 })
+
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3

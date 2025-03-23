@@ -1,6 +1,6 @@
 return {
-	"windwp/windline.nvim",
-	config = function()
-		require("wlsample.airline")
-	end,
+    "windwp/windline.nvim",
+    config = function()
+        require("wlsample.airline")
+    end,
 }

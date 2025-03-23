@@ -23,6 +23,7 @@ in {
       home.packages = with pkgs; [
         ripgrep
         fd
+        gnumake
         alejandra
         prettierd
         eslint_d

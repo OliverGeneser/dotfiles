@@ -34,14 +34,14 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>", opts)
 
 vim.keymap.set("n", "<leader><leader>", function()
-	vim.cmd("so")
+    vim.cmd("so")
 end, opts)
 
 vim.keymap.set({ "n", "v" }, "<leader>R", function()
-	vim.ui.input({ prompt = "Command: " }, function(command)
-		local dir = vim.fn.expand("%:p:h")
-		if command then -- check for nil in case user cancels
-			vim.cmd(string.format("!cd %s && %s", dir, command))
-		end
-	end)
+    vim.ui.input({ prompt = "Command: " }, function(command)
+        local dir = vim.fn.expand("%:p:h")
+        if command then -- check for nil in case user cancels
+            vim.cmd(string.format("!cd %s && %s", dir, command))
+        end
+    end)
 end, opts)
