@@ -11,10 +11,17 @@
   inputs,
   ...
 }: final: prev: {
-  SDL2_image = prev.SDL2_image.overrideAttrs (old: {
-    src = prev.fetchurl {
-      url = "https://www.libsdl.org/projects/SDL_image/release/SDL2_image-${old.version}.tar.gz";
-      hash = "sha256-98Bqh4OVLP6WCtzN09hHK2OrMUdbQ5DRDP3MGuphI48=";
+  tcp_wrappers = prev.tcp_wrappers.overrideAttrs (old: {
+    version = "7.6.q-36";
+
+    src = final.fetchurl {
+      url = "mirror://debian/pool/main/t/tcp-wrappers/tcp-wrappers_7.6.q.orig.tar.gz";
+      sha256 = "0p9ilj4v96q32klavx0phw9va21fjp8vpk11nbh6v2ppxnnxfhwm";
+    };
+
+    debian = final.fetchurl {
+      url = "mirror://debian/pool/main/t/tcp-wrappers/tcp-wrappers_7.6.q-36.debian.tar.xz";
+      hash = "sha256-t5W+9XKwNR1ecH49fop3ses4Ga2bUIiV/x/JqCa2z6Q=";
     };
   });
 }

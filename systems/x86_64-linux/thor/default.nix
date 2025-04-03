@@ -112,10 +112,11 @@
     ];
     supportedFilesystems = lib.mkForce ["btrfs" "zfs"];
     kernelModules = ["zfs"];
-    kernelPackages = pkgs.linuxPackages_6_6;
+    kernelPackages = pkgs.linuxPackages_6_13;
     resumeDevice = "/dev/disk/by-label/nixos";
 
     zfs = {
+      package = pkgs.zfs_2_3;
       forceImportAll = false;
       forceImportRoot = false;
     };

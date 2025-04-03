@@ -11,12 +11,21 @@
   inputs,
   ...
 }: final: prev: {
-  beekeeper-studio = prev.beekeeper-studio.overrideAttrs (old: {
-    version = "5.1.4";
-
-    src = prev.fetchurl {
-      url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v5.1.4/Beekeeper-Studio-5.1.4.AppImage";
-      hash = "sha256-7W0h7GsRg/4SArJ4ih/WEwHuTWCTC3a3TmYC9eq3XBM=";
-    };
-  });
+  pythonPackagesExtensions =
+    prev.pythonPackagesExtensions
+    ++ [
+      (
+        python-final: python-prev: {
+          flasgger = python-prev.flasgger.overridePythonAttrs (oldAttrs: {
+            src = prev.fetchFromGitHub {
+              owner = "flasgger";
+              repo = "flasgger";
+              rev = "v0.9.7.1";
+              hash = "sha256-ULEf9DJiz/S2wKlb/vjGto8VCI0QDcm0pkU5rlOwtiE="; # Corrected hash
+            };
+            patches = [];
+          });
+        }
+      )
+    ];
 }

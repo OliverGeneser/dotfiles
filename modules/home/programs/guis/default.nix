@@ -25,6 +25,8 @@ in {
 
       gnome-disk-utility
       loupe
+
+      resources
     ];
 
     xdg.configFile."com.github.johnfactotum.Foliate/themes/mocha.json".text = ''

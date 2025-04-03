@@ -17,6 +17,8 @@ in {
       enable = true;
       ports = [1337];
 
+      allowSFTP = true;
+
       settings = {
         PasswordAuthentication = false;
         PubkeyAuthentication = true;

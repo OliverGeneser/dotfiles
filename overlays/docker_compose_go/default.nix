@@ -11,12 +11,11 @@
   inputs,
   ...
 }: final: prev: {
-  gamemode = prev.gamemode.overrideAttrs (old: {
-    src = prev.fetchFromGitHub {
-      owner = "FeralInteractive";
-      repo = "gamemode";
-      tag = "1.8.2";
-      hash = "sha256-V0rewbSVOGFqJqXyCz4jXpuDM0EfjdkpGPl+WdDwI5I=";
-    };
+  docker-compose = prev.docker-compose.overrideAttrs (old: {
+    vendorHash = "sha256-6KLdDBuPiB/qh+3IfABu8Gvopu5ucTrNg9jh7G+cMss=";
+    #  goModules = prev.fetchurl {
+    #    url = "https://github.com/docker/compose/releases/download/v2.24.0/docker-compose-linux-x86_64";
+    #    hash = "sha256-Q/s5wLwkrHlhI5NQMu3c+1enrNkha63rEHFMmG6h4JA="; # Corrected hash
+    #  };
   });
 }

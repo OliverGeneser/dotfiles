@@ -16,15 +16,14 @@ in {
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
+      extraPackages = with pkgs; [
+        vaapiVdpau
+        libvdpau-va-gl
+        nvidia-vaapi-driver
+      ];
     };
 
     programs.xwayland.enable = true;
-
-    environment.systemPackages = with pkgs; [
-      egl-wayland
-    ];
-
-    boot.kernelParams = ["nvidia_drm.fbdev=1" "nvidia_drm.modeset=1"];
 
     # Load nvidia driver for Xorg and Wayland
     services.xserver.videoDrivers = ["nvidia"];
@@ -39,18 +38,22 @@ in {
       GBM_BACKEND = "nvidia-drm";
       SDL_VIDEODRIVER = "wayland";
 
+      WLR_BACKEND = "vulkan";
+      WLR_NO_HARDWARE_CURSORS = "1";
+
       MOZ_ENABLE_WAYLAND = "1";
       MOZ_DISABLE_RDD_SANDBOX = "1";
 
-      #CLUTTER_BACKEND = "wayland";
+      CLUTTER_BACKEND = "wayland";
 
       # https://wiki.archlinux.org/title/Java
       #_JAVA_AWT_WM_NONREPARENTING = "1";
       #AWT_TOOLKIT = "MToolkit";
 
       # QT HDPI
-      #QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      #QT_QPA_PLATFORM = "wayland";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      QT_QPA_PLATFORM = "wayland";
 
       # Steam fixes https://www.reddit.com/r/linux_gaming/comments/zgrktp/raytracing_on_linux/
       #PROTON_HIDE_NVIDIA_GPU = "0";
@@ -77,7 +80,7 @@ in {
       # Enable this if you have graphical corruption issues or application crashes after waking
       # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
       # of just the bare essentials.
-      powerManagement.enable = true;
+      powerManagement.enable = false;
 
       # Fine-grained power management. Turns off GPU when not in use.
       # Experimental and only works on modern Nvidia GPUs (Turing or newer).
