@@ -20,7 +20,7 @@
             src = prev.fetchFromGitHub {
               owner = "flasgger";
               repo = "flasgger";
-              rev = "v0.9.7.1";
+              rev = "v${oldAttrs.version}";
               hash = "sha256-ULEf9DJiz/S2wKlb/vjGto8VCI0QDcm0pkU5rlOwtiE="; # Corrected hash
             };
             patches = [];

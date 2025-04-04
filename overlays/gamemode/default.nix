@@ -15,7 +15,7 @@
     src = prev.fetchFromGitHub {
       owner = "FeralInteractive";
       repo = "gamemode";
-      tag = "1.8.2";
+      tag = old.version;
       hash = "sha256-V0rewbSVOGFqJqXyCz4jXpuDM0EfjdkpGPl+WdDwI5I=";
     };
   });

@@ -18,6 +18,7 @@ in {
       };
       openrouter_api_key = {
         sopsFile = ../../secrets.yaml;
+        owner = config.user.name;
       };
     };
 
