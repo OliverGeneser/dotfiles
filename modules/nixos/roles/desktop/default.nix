@@ -22,6 +22,10 @@ in {
       custom = {
         vpn.enable = true;
         virtualisation.podman.enable = true;
+        postgresql = {
+          enable = true;
+          databases = [];
+        };
       };
     };
 

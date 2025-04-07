@@ -26,8 +26,11 @@
       immich.enable = true;
       jellyfin-server.enable = true;
       signal-reporting-bot.enable = true;
-      postgresql.enable = true;
-
+      postgresql = {
+        enable = true;
+        databases = ["immich"];
+        backupLocation = "/mnt/storage/vault/postgresql";
+      };
       virtualisation.gluetun.enable = true; # For linux ISO's
     };
 
