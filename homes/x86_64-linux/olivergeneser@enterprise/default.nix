@@ -11,7 +11,11 @@
     hobby.enable = true;
   };
 
-  desktops.hyprland.enable = true;
+  desktops.hyprland = {
+    enable = true;
+    extra_monitors = ["DP-5,preferred,auto,1,bitdepth,10"];
+    extra_monitors_workspace = ["0, monitor:HDMI-A-2"];
+  };
 
   cli.programs.ssh.extraHosts = {
     "bitbucket-qinspect" = {

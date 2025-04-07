@@ -14,7 +14,7 @@ in {
     programs = {
       #arduino.enable = true;
       beekeeperStudio.enable = true;
-      #httpie.enable = true;
+      httpie.enable = true;
     };
 
     cli = {

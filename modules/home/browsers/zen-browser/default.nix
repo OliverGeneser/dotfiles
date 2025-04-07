@@ -19,6 +19,7 @@ in {
   config = mkIf cfg.enable {
     home.sessionVariables = {
       DEFAULT_BROWSER = "${zen-browser}/bin/zen-twilight";
+      BROWSER = "${zen-browser}/bin/zen-twilight";
     };
 
     home.packages = [

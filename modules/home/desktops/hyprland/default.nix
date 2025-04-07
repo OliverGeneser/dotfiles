@@ -23,6 +23,8 @@ in {
     variant = mkOpt str "altgr-intl," "Keyboard variant";
     options = mkOpt str "grp:alt_space_toggle," "Keyboard options";
     primary_monitor = mkOpt str "eDP-1" "Primary display";
+    extra_monitors = mkOpt (listOf str) [] "Extra monitors";
+    extra_monitors_workspace = mkOpt (listOf str) [] "Extra monitors workspaces";
     execOnceExtras = mkOpt (listOf str) [] "Extra programs to exec once";
   };
 
@@ -36,7 +38,7 @@ in {
       enable = true;
       package = null; #inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage = null; #inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-      systemd.variables = ["--all"];
+      systemd.variables = ["--all" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"];
     };
 
     home.sessionVariables = {

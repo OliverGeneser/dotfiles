@@ -64,7 +64,7 @@
     ## Hyprland
 
     hyprland = {
-      url = "github:OliverGeneser/Hyprland";
+      url = "github:hyprwm/Hyprland";
     };
 
     xdg-desktop-portal-hyprland = {
