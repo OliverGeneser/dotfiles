@@ -1,0 +1,187 @@
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  # pointer = config.home.pointerCursor;
+  inherit (lib) mkOption types;
+  cfg = config.system.programs.hyprland.settings;
+in {
+  options.system.programs.hyprland.settings = {
+    primary_monitor = mkOption {
+      type = types.str;
+      default = "eDP-1";
+      description = "Primary display";
+    };
+  };
+  config = {
+    programs.hyprland.settings = {
+      "$mod" = "SUPER";
+      env = [
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+        # See https://github.com/hyprwm/contrib/issues/142
+        "GRIMBLAST_NO_CURSOR,0"
+      ];
+
+      exec-once = [
+        # finalize startup
+        "uwsm finalize"
+        "hyprlock"
+        "${pkgs.kanshi}/bin/kanshi"
+        "${pkgs.pyprland}/bin/pypr"
+        "${pkgs.solaar}/bin/solaar -w hide"
+      ];
+
+      workspace = [
+        "1, monitor:${cfg.primary_monitor}, on-created-empty:[silent] zen-twilight --new-instance, default:true"
+        "2, monitor:${cfg.primary_monitor}, on-created-empty:[silent] zen-twilight --new-instance"
+        "3, monitor:${cfg.primary_monitor}, on-created-empty:[silent] wezterm"
+        "4, monitor:${cfg.primary_monitor}"
+        "5, monitor:${cfg.primary_monitor}, on-created-empty:[silent] vesktop"
+        "6, monitor:${cfg.primary_monitor}, on-created-empty:[silent] jellyfinmediaplayer"
+        "7, monitor:${cfg.primary_monitor}"
+        "8, monitor:${cfg.primary_monitor}"
+        "9, monitor:${cfg.primary_monitor}"
+      ];
+
+      general = {
+        gaps_in = 4;
+        gaps_out = 8;
+        border_size = 1;
+        "col.active_border" = "rgba(88888888)";
+        "col.inactive_border" = "rgba(00000088)";
+
+        allow_tearing = true;
+        resize_on_border = true;
+      };
+
+      decoration = {
+        rounding = 10;
+        rounding_power = 3;
+        blur = {
+          enabled = true;
+          brightness = 1.0;
+          contrast = 1.0;
+          noise = 0.01;
+
+          vibrancy = 0.2;
+          vibrancy_darkness = 0.5;
+
+          passes = 4;
+          size = 7;
+
+          popups = true;
+          popups_ignorealpha = 0.2;
+        };
+
+        shadow = {
+          enabled = true;
+          color = "rgba(00000055)";
+          ignore_window = true;
+          offset = "0 15";
+          range = 100;
+          render_power = 2;
+          scale = 0.97;
+        };
+      };
+
+      animations.enabled = false;
+
+      animation = [
+        "border, 1, 2, default"
+        "fade, 1, 4, default"
+        "windows, 1, 3, default, popin 80%"
+        "workspaces, 1, 2, default, slide"
+      ];
+
+      group = {
+        groupbar = {
+          font_size = 10;
+          gradients = false;
+          text_color = "rgb(b6c4ff)";
+        };
+
+        "col.border_active" = "rgba(35447988)";
+        "col.border_inactive" = "rgba(dce1ff88)";
+      };
+
+      input = {
+        kb_layout = "us,dk";
+
+        # focus change on cursor move
+        follow_mouse = 1;
+        accel_profile = "flat";
+        tablet.output = "current";
+      };
+
+      dwindle = {
+        # keep floating dimentions while tiling
+        pseudotile = true;
+        preserve_split = true;
+      };
+
+      misc = {
+        force_default_wallpaper = 0;
+
+        # disable dragging animation
+        animate_mouse_windowdragging = false;
+
+        # enable variable refresh rate (effective depending on hardware)
+        vrr = 1;
+      };
+
+      render.direct_scanout = true;
+
+      # touchpad gestures
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_forever = true;
+      };
+
+      permission = [
+        # Allow xdph and grim
+        "${config.programs.hyprland.portalPackage}/libexec/.xdg-desktop-portal-hyprland-wrapped, screencopy, allow"
+        "${lib.getExe pkgs.grim}, screencopy, allow"
+
+        # Optionally allow non-pipewire capturing
+        "${lib.getExe pkgs.wl-screenrec}, screencopy, allow"
+      ];
+
+      xwayland.force_zero_scaling = true;
+
+      debug.disable_logs = false;
+
+      # plugin = {
+      #   csgo-vulkan-fix = {
+      #     res_w = 1280;
+      #     res_h = 800;
+      #     class = "cs2";
+      #   };
+
+      #   hyprbars = {
+      #     bar_height = 20;
+      #     bar_precedence_over_border = true;
+
+      #     # order is right-to-left
+      #     hyprbars-button = [
+      #       # close
+      #       "rgb(ffb4ab), 15, , hyprctl dispatch killactive"
+      #       # maximize
+      #       "rgb(b6c4ff), 15, , hyprctl dispatch fullscreen 1"
+      #     ];
+      #   };
+
+      #   hyprexpo = {
+      #     columns = 3;
+      #     gap_size = 4;
+      #     bg_col = "rgb(000000)";
+
+      #     enable_gesture = true;
+      #     gesture_distance = 300;
+      #     gesture_positive = false;
+      #   };
+      # };
+    };
+  };
+}

@@ -12,10 +12,6 @@ sudo nix run github:nix-community/disko \
 ```
 
 ```
-sudo btrfs subvolume snapshot -r /mnt/ /mnt/root-blank
-```
-
-```
 sudo nixos-install --no-root-password --flake "$HOME/dotfiles#$TARGET_HOST"
 ```
 

@@ -1,8 +1,0 @@
-[pyprland]
-plugins = ["scratchpads", "magnify"]
-
-[scratchpads.pwvucontrol]
-animation = "fromTop"
-command = "pwvucontrol"
-class = "pwvucontrol"
-size = "50% 80%"

@@ -1,0 +1,20 @@
+{
+  imports = [
+    ./aws.nix
+    ./bat.nix
+    ./bun.nix
+    ./cli.nix
+    ./git.nix
+    ./htop.nix
+    ./nix.nix
+    ./nodejs.nix
+    ./podman.nix
+    ./python.nix
+    ./podman.nix
+    ./skim.nix
+    ./sqlite.nix
+    ./ssh.nix
+    ./yazi
+    ./xdg.nix
+  ];
+}
