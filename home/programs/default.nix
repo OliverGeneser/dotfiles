@@ -1,0 +1,42 @@
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: {
+  imports = [
+    ./anyrun
+    ./browsers/chromium.nix
+    ./browsers/mullvad.nix
+    ./browsers/zen.nix
+    ./communication/vesktop.nix
+    ./design
+    ./media
+    ./gtk.nix
+    ./office
+    ./qt.nix
+  ];
+
+  home.packages = with pkgs; [
+    halloy
+    signal-desktop
+    tutanota-desktop
+    tdesktop
+
+    gnome-calculator
+    gnome-control-center
+    gnome-disk-utility
+
+    meld
+
+    overskride
+    resources
+
+    zotero
+  ];
+
+  dconf = {
+    enable = true;
+    settings."org/gnome/desktop/interface".color-scheme = lib.mkForce "prefer-dark";
+  };
+}
