@@ -35,8 +35,10 @@ in {
           local all       all     trust
           # ipv4
           host  immich      immich     127.0.0.1/32   trust
+          host  jellyseerr jellyseerr     127.0.0.1/32   trust
           # ipv6
           host immich       immich     ::1/128        trust
+          host jellyseerr       jellyseerr     ::1/128        trust
         '';
         settings = {
           shared_preload_libraries = ["vectors.so"];

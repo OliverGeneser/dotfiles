@@ -16,7 +16,7 @@
       user.name = "nixos";
       services = {
         postgresql = {
-          databases = ["immich"];
+          databases = ["immich" "jellyseerr"];
           backupLocation = "/mnt/storage/vault/postgresql";
         };
       };
