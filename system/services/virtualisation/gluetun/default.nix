@@ -29,13 +29,16 @@
     radarr_env = {
       sopsFile = ../../secrets.yaml;
     };
+    prowlarr_env = {
+      sopsFile = ../../secrets.yaml;
+    };
   };
 
   # Enable container name DNS for non-default Podman networks.
   # https://github.com/NixOS/nixpkgs/issues/226365
   networking.firewall.interfaces."podman*" = {
-    allowedTCPPorts = [6881 7878 8888 8388 8090 8095];
-    allowedUDPPorts = [53 5353 6881 8388];
+    allowedTCPPorts = [6881 7878 8888 8388 8090 8095 9696];
+    allowedUDPPorts = [53 5353 6881 8388 9696];
   };
 
   virtualisation.oci-containers.backend = "podman";
@@ -56,6 +59,7 @@
       "6881:6881/tcp"
       "6881:6881/udp"
       "7878:7878/tcp"
+      "9696:9696"
     ];
     log-driver = "journald";
     extraOptions = [
@@ -90,6 +94,7 @@
     environmentFiles = [config.sops.secrets.qbittorrent_env.path];
     volumes = [
       "/persist/torrents:/data/torrents:rw"
+      "/mnt/storage/media:/data/media:rw"
       "/persist/docker-volumes/qbittorrent:/config:rw"
     ];
     dependsOn = [
@@ -161,6 +166,35 @@
   };
 
   systemd.services."podman-radarr" = {
+    serviceConfig = {
+      Restart = lib.mkOverride 90 "always";
+    };
+    partOf = [
+      "podman-compose-gluetun-root.target"
+    ];
+    wantedBy = [
+      "podman-compose-gluetun-root.target"
+    ];
+  };
+
+  virtualisation.oci-containers.containers."prowlarr" = {
+    image = "ghcr.io/hotio/prowlarr:latest";
+    environmentFiles = [config.sops.secrets.prowlarr_env.path];
+    volumes = [
+      "/persist/etc/localtime:/etc/localtime:ro"
+      "/persist/docker-volumes/prowlarr:/config:rw"
+    ];
+    dependsOn = [
+      "gluetun"
+    ];
+    log-driver = "journald";
+    extraOptions = [
+      "--network=container:gluetun"
+      "--security-opt=no-new-privileges:true"
+    ];
+  };
+
+  systemd.services."podman-prowlarr" = {
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
     };
