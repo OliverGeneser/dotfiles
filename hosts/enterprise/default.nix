@@ -9,7 +9,6 @@
     ./hardware-configuration.nix
     ./disks.nix
     ./hyprland.nix
-    ./syncthing.nix
   ];
 
   environment = {

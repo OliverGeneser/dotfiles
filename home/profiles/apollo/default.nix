@@ -19,7 +19,7 @@
     ../../programs/wayland
 
     # services
-    ../../services/quickshell
+    # ../../services/quickshell
     # ../../services/cinny.nix
 
     # media services

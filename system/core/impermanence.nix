@@ -107,6 +107,7 @@ in {
           "/var/lib/bluetooth"
           "/var/lib/nixos"
           "/var/lib/containers"
+          "/var/lib/syncthing"
           "/var/lib/systemd/coredump"
           "/etc/NetworkManager/system-connections"
         ]

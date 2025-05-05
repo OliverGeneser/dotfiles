@@ -10,7 +10,6 @@
     ./disks.nix
     ./hyprland.nix
     ./powersave.nix
-    ./syncthing.nix
     inputs.nixos-hardware.nixosModules.huawei-machc-wa
   ];
 
