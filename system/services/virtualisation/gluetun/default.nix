@@ -29,6 +29,9 @@
     radarr_env = {
       sopsFile = ../../secrets.yaml;
     };
+    sonarr_env = {
+      sopsFile = ../../secrets.yaml;
+    };
     prowlarr_env = {
       sopsFile = ../../secrets.yaml;
     };
@@ -37,8 +40,8 @@
   # Enable container name DNS for non-default Podman networks.
   # https://github.com/NixOS/nixpkgs/issues/226365
   networking.firewall.interfaces."podman*" = {
-    allowedTCPPorts = [6881 7878 8888 8388 8090 8095 9696];
-    allowedUDPPorts = [53 5353 6881 8388 9696];
+    allowedTCPPorts = [6881 7878 8888 8388 8090 8095 8989 9696];
+    allowedUDPPorts = [53 5353 6881 8388 8989 9696];
   };
 
   virtualisation.oci-containers.backend = "podman";
@@ -51,14 +54,13 @@
       "/persist/docker-volumes/gluetun:/gluetun:rw"
     ];
     ports = [
-      "8888:8888/tcp"
-      "8388:8388/tcp"
-      "8388:8388/udp"
+      "6881:6881"
+      "7878:7878/tcp"
       "8090:8090/tcp"
       "8095:8095/tcp"
-      "6881:6881/tcp"
-      "6881:6881/udp"
-      "7878:7878/tcp"
+      "8388:8388"
+      "8888:8888/tcp"
+      "8989:8989"
       "9696:9696"
     ];
     log-driver = "journald";
@@ -153,7 +155,8 @@
     volumes = [
       "/persist/etc/localtime:/etc/localtime:ro"
       "/persist/docker-volumes/radarr:/config:rw"
-      "/mnt/storage/media:/data:rw"
+      "/persist/torrents:/data/torrents:rw"
+      "/mnt/storage/media:/data/media:rw"
     ];
     dependsOn = [
       "gluetun"
@@ -166,6 +169,37 @@
   };
 
   systemd.services."podman-radarr" = {
+    serviceConfig = {
+      Restart = lib.mkOverride 90 "always";
+    };
+    partOf = [
+      "podman-compose-gluetun-root.target"
+    ];
+    wantedBy = [
+      "podman-compose-gluetun-root.target"
+    ];
+  };
+
+  virtualisation.oci-containers.containers."sonarr" = {
+    image = "ghcr.io/hotio/sonarr:latest";
+    environmentFiles = [config.sops.secrets.sonarr_env.path];
+    volumes = [
+      "/persist/etc/localtime:/etc/localtime:ro"
+      "/persist/docker-volumes/sonarr:/config:rw"
+      "/persist/torrents:/data/torrents:rw"
+      "/mnt/storage/media:/data/media:rw"
+    ];
+    dependsOn = [
+      "gluetun"
+    ];
+    log-driver = "journald";
+    extraOptions = [
+      "--network=container:gluetun"
+      "--security-opt=no-new-privileges:true"
+    ];
+  };
+
+  systemd.services."podman-sonarr" = {
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
     };
