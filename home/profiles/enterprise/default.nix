@@ -51,6 +51,24 @@
       extraOutputsToInstall = ["doc" "devdoc"];
     };
 
+    services.syncthing.settings = {
+      devices = {
+        "apollo" = {
+          id = "YX2IAXK-3MDJKKG-O6NXVKH-V2RBIZX-5M4I73R-R65A6B6-QHX7OUU-ETH7EQB";
+        };
+      };
+
+      folders = {
+        # Name of folder in Syncthing, also the folder ID
+        "dev" = {
+          id = "rrk9d-szxeq";
+          path = "~/dev"; # Which folder to add to Syncthing
+          devices = ["apollo"]; # Which devices to share the folder with
+          type = "sendonly";
+        };
+      };
+    };
+
     terminal.programs.ssh.extraHosts = {
       "bitbucket-qinspect" = {
         hostname = "bitbucket.org";

@@ -53,6 +53,24 @@
       extraOutputsToInstall = ["doc" "devdoc"];
     };
 
+    services.syncthing.settings = {
+      devices = {
+        "enterprise" = {
+          id = "ZGJM7WX-5BFTESE-ZAKA3QJ-PMEZM7W-SZLOISS-UYP6KWO-JQCUQLV-2X5NFQC";
+        };
+      };
+
+      folders = {
+        # Name of folder in Syncthing, also the folder ID
+        "dev" = {
+          id = "rrk9d-szxeq";
+          path = "~/dev"; # Which folder to add to Syncthing
+          devices = ["enterprise"]; # Which devices to share the folder with
+          type = "receiveonly";
+        };
+      };
+    };
+
     terminal.programs.ssh.extraHosts = {
       "bitbucket-qinspect" = {
         hostname = "bitbucket.org";
