@@ -26,8 +26,6 @@
     enableZshIntegration = true;
   };
 
-  programs.nix-index-database.comma.enable = true;
-
   sops = {
     age = {
       generateKey = true;

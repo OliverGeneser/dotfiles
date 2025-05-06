@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  imports = [inputs.pre-commit-hooks.flakeModule];
+  imports = [inputs.git-hooks-nix.flakeModule];
 
   perSystem.pre-commit = {
     settings.excludes = ["flake.lock"];

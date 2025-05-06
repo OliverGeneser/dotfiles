@@ -110,7 +110,7 @@ in {
         kb_layout = "us,dk";
 
         # focus change on cursor move
-        follow_mouse = 1;
+        follow_mouse = true;
         accel_profile = "flat";
         tablet.output = "current";
       };

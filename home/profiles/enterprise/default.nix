@@ -17,7 +17,6 @@
     ../../programs/wayland
 
     # services
-    # ../../services/quickshell
     # ../../services/cinny.nix
 
     # media services

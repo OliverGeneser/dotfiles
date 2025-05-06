@@ -5,27 +5,37 @@
   ...
 }: let
   inherit (lib) mkOption types;
-  cfg = config.system.services.syncthing;
+  cfg = config.custom.services.syncthing;
 in {
-  options.system.services.syncthing = {
+  options.custom.services.syncthing = {
     devices = mkOption {
-      type = lib.types.attrsOf (
-        lib.types.attrs {
+      type = lib.types.attrsOf (lib.types.submodule ({name, ...}: {
+        options = {
+          name = lib.mkOption {
+            type = lib.types.str;
+            default = name;
+            description = "The name of the device";
+          };
           id = lib.mkOption {
             type = lib.types.str;
             description = "The device ID.";
           };
-        }
-      );
-      default = {};
-      description = "A map of device names to device configurations.";
-      example = {
-        "device2" = {id = "DEVICE-ID-GOES-HERE";};
-      };
+        };
+      }));
     };
+
     folders = mkOption {
-      type = lib.types.attrsOf (
-        lib.types.attrs {
+      type = lib.types.attrsOf (lib.types.submodule ({name, ...}: {
+        options = {
+          name = lib.mkOption {
+            type = lib.types.str;
+            default = name;
+            description = "The name of the folder";
+          };
+          id = lib.mkOption {
+            type = lib.types.str;
+            description = "The id of the folder.";
+          };
           path = lib.mkOption {
             type = lib.types.str;
             description = "The path to the folder.";
@@ -39,17 +49,8 @@ in {
             default = true;
             description = "Whether to ignore file permissions during syncing.";
           };
-        }
-      );
-      default = {};
-      description = "A map of folder names to folder configurations.";
-      example = {
-        "Example" = {
-          path = "/home/myusername/Example";
-          devices = ["device1"];
-          ignorePerms = false;
         };
-      };
+      }));
     };
   };
 

@@ -74,7 +74,6 @@ in {
         "$mod, R, togglesplit,"
         "$mod ALT, R, exec, ${resize}/bin/resize"
         "$mod, T, togglefloating,"
-        "$mod, P, pseudo,"
         "$mod ALT, ,resizeactive,"
         "$mod, Z, exec, ${pkgs.pyprland}/bin/pypr zoom ++0.5"
         "$mod SHIFT, Z, exec, ${pkgs.pyprland}/bin/pypr zoom"

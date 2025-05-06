@@ -7,8 +7,6 @@
     # shorten paths
     inherit (inputs.nixpkgs.lib) nixosSystem;
 
-    # howdy = inputs.nixpkgs-howdy;
-
     homeImports = import "${self}/home/profiles";
 
     mod = "${self}/system";
@@ -46,11 +44,6 @@
             };
           }
 
-          # enable unmerged Howdy
-          #{disabledModules = ["security/pam.nix"];}
-          #"${howdy}/nixos/modules/security/pam.nix"
-          #"${howdy}/nixos/modules/services/security/howdy"
-
           inputs.chaotic.nixosModules.default
         ];
     };
@@ -83,11 +76,6 @@
             };
           }
 
-          # enable unmerged Howdy
-          #{disabledModules = ["security/pam.nix"];}
-          #"${howdy}/nixos/modules/security/pam.nix"
-          #"${howdy}/nixos/modules/services/security/howdy"
-
           inputs.chaotic.nixosModules.default
         ];
     };
@@ -104,6 +92,7 @@
 
           "${mod}/services/vpn.nix"
           "${mod}/services/postgres.nix"
+          "${mod}/services/syncthing.nix"
           "${mod}/services/gnome-services.nix"
           "${mod}/services/location.nix"
 
@@ -114,26 +103,7 @@
               backupFileExtension = ".hm-backup";
             };
           }
-
-          inputs.chaotic.nixosModules.default
         ];
-    };
-
-    nixos = nixosSystem {
-      inherit specialArgs;
-      modules = [
-        "${mod}/core/users.nix"
-        "${mod}/nix"
-        "${mod}/programs/zsh.nix"
-        "${mod}/programs/home-manager.nix"
-        {
-          home-manager = {
-            users.olivergeneser.imports = homeImports.server;
-            extraSpecialArgs = specialArgs;
-            backupFileExtension = ".hm-backup";
-          };
-        }
-      ];
     };
   };
 }

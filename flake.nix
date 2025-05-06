@@ -1,8 +1,12 @@
 {
   description = "Geneser Config";
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs = inputs @ {
+    self,
+    flake-parts,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
 
       imports = [
@@ -15,7 +19,6 @@
       ];
 
       perSystem = {
-        system,
         config,
         pkgs,
         ...
@@ -90,8 +93,6 @@
     # global, so they can be `.follow`ed
     systems.url = "github:nix-systems/default-linux";
 
-    flake-compat.url = "github:edolstra/flake-compat";
-
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
@@ -103,10 +104,8 @@
     };
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    #nixpkgs.url = "github:OliverGeneser/nixpkgs/nixos-unstable";
 
     # rest
-
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
@@ -131,11 +130,6 @@
     };
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
-    comma = {
-      url = "github:nix-community/comma";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     custom-udev-rules = {
       url = "github:OliverGeneser/custom-udev-rules";
@@ -246,17 +240,11 @@
 
     # nixpkgs-howdy.url = "github:fufexan/nixpkgs/howdy";
 
-    pre-commit-hooks = {
-      url = "github:cachix/pre-commit-hooks.nix";
+    git-hooks-nix = {
+      url = "github:cachix/git-hooks.nix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
       };
-    };
-
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix = {
