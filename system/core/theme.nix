@@ -39,6 +39,9 @@ in {
       jetbrains-mono
       open-sans
 
+      # microsoft
+      corefonts
+
       # icon fonts
       material-symbols
 
