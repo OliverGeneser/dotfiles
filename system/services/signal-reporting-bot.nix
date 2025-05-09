@@ -72,6 +72,7 @@
     done
 
     echo -e "$MESSAGE" | ${pkgs.signal-cli}/bin/signal-cli send -g "TO+DykH3guaqDHrFpJzM1QUQzSAfqBsEIgwVKrP74rQ=" --message-from-stdin
+    ${pkgs.signal-cli}/bin/signal-cli receive
   '';
 in {
   environment.systemPackages = [
