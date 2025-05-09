@@ -34,15 +34,11 @@ in {
       ];
 
       workspace = [
-        "1, monitor:${cfg.primary_monitor}, on-created-empty:[silent] zen-twilight --new-instance, default:true"
-        "2, monitor:${cfg.primary_monitor}, on-created-empty:[silent] zen-twilight --new-instance"
-        "3, monitor:${cfg.primary_monitor}, on-created-empty:[silent] wezterm"
-        "4, monitor:${cfg.primary_monitor}"
-        "5, monitor:${cfg.primary_monitor}, on-created-empty:[silent] vesktop"
-        "6, monitor:${cfg.primary_monitor}, on-created-empty:[silent] jellyfinmediaplayer"
-        "7, monitor:${cfg.primary_monitor}"
-        "8, monitor:${cfg.primary_monitor}"
-        "9, monitor:${cfg.primary_monitor}"
+        "1, on-created-empty:[silent] zen-twilight --new-instance, default:true"
+        "2, on-created-empty:[silent] zen-twilight --new-instance"
+        "3, on-created-empty:[silent] wezterm"
+        "5, on-created-empty:[silent] vesktop"
+        "6, on-created-empty:[silent] jellyfinmediaplayer"
       ];
 
       general = {
