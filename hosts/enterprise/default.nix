@@ -29,7 +29,14 @@
   # nh default flake
   environment.variables.NH_FLAKE = "/home/olivergeneser/dotfiles";
 
-  networking.hostName = "enterprise";
+  networking = {
+    hostName = "enterprise";
+    nftables.enable = true;
+    firewall = {
+      allowedTCPPorts = [3000 3005 8080];
+      allowedUDPPorts = [];
+    };
+  };
 
   security.tpm2.enable = true;
 
