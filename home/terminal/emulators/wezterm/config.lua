@@ -1,6 +1,22 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
-local sessionizer = wezterm.plugin.require("https://github.com/olivergeneser/sessionizer.wezterm")
+local sessionizer = wezterm.plugin.require "https://github.com/mikkasendke/sessionizer.wezterm"
+local history = wezterm.plugin.require "https://github.com/mikkasendke/sessionizer-history"
+
+local schema = {
+    options = { callback = history.Wrapper(sessionizer.DefaultCallback) },
+    sessionizer.DefaultWorkspace {},
+    history.MostRecentWorkspace {},
+
+    wezterm.home_dir .. "/dev",
+    wezterm.home_dir .. "/dotfiles",
+
+    sessionizer.FdSearch(wezterm.home_dir .. "/dev"),
+
+    processing = sessionizer.for_each_entry(function(entry)
+        entry.label = entry.label:gsub(wezterm.home_dir, "~")
+    end)
+}
 
 local config = {
     color_scheme = "Catppuccin Mocha",
@@ -39,7 +55,6 @@ local config = {
     disable_default_key_bindings = true,
     leader = { key = "a", mods = "CTRL", timeout_milliseconds = 5000 },
     keys = {
-        { key = "f",         mods = "LEADER",       action = sessionizer.show },
         { key = "p",         mods = "LEADER",       action = act.ActivateCommandPalette },
         { key = "e",         mods = "LEADER",       action = act.ShowLauncher },
         { key = "w",         mods = "LEADER",       action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
@@ -281,9 +296,6 @@ local config = {
     enable_wayland = true,
 }
 
-sessionizer.apply_to_config(config, true)
-sessionizer.config.paths = { "/home/olivergeneser" }
-
 wezterm.on("gui-startup", function(cmd)
     local args = {}
     if cmd then
@@ -292,27 +304,16 @@ wezterm.on("gui-startup", function(cmd)
     end
 end)
 
-wezterm.on("user-var-changed", function(window, pane, name, value)
-    local overrides = window:get_config_overrides() or {}
-    if name == "ZEN_MODE" then
-        local incremental = value:find("+")
-        local number_value = tonumber(value)
-        if incremental ~= nil then
-            while number_value > 0 do
-                window:perform_action(wezterm.action.IncreaseFontSize, pane)
-                number_value = number_value - 1
-            end
-            overrides.enable_tab_bar = false
-        elseif number_value < 0 then
-            window:perform_action(wezterm.action.ResetFontSize, pane)
-            overrides.font_size = nil
-            overrides.enable_tab_bar = false
-        else
-            overrides.font_size = number_value
-            overrides.enable_tab_bar = false
-        end
-    end
-    window:set_config_overrides(overrides)
-end)
+table.insert(config.keys, {
+    key = "f",
+    mods = "LEADER",
+    action = sessionizer.show(schema)
+})
+
+table.insert(config.keys, {
+    key = "m",
+    mods = "LEADER",
+    action = history.switch_to_most_recent_workspace
+})
 
 return config
