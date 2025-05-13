@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    nodejs_23
-    corepack_23
+    nodejs_24
+    corepack_24
     zip
   ];
 
