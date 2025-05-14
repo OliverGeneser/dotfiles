@@ -164,7 +164,7 @@ in {
 
     bindr = [
       # launcher
-      "$mod, SUPER_L, exec, ${toggle "tofi-drun"}"
+      # "$mod, SUPER_L, exec, ${toggle "tofi-drun"}"
     ];
 
     bindl = [

@@ -127,6 +127,11 @@ in {
         vrr = 1;
       };
 
+      ecosystem = {
+        no_update_news = true;
+        no_donation_nag = true;
+      };
+
       render.direct_scanout = true;
 
       # touchpad gestures
