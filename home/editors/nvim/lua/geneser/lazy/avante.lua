@@ -11,19 +11,13 @@ return {
                 __inherited_from = "openai",
                 endpoint = "https://openrouter.ai/api/v1",
                 api_key_name = "OPENROUTER_API_KEY",
-                model = "google/gemini-2.0-flash-001",
+                model = "google/gemini-2.5-flash-preview",
             },
-            openrouter_o3_mini = {
+            openrouter_o4_mini_high = {
                 __inherited_from = "openai",
                 endpoint = "https://openrouter.ai/api/v1",
                 api_key_name = "OPENROUTER_API_KEY",
-                model = "openai/o3-mini",
-            },
-            openrouter_o3_mini_high = {
-                __inherited_from = "openai",
-                endpoint = "https://openrouter.ai/api/v1",
-                api_key_name = "OPENROUTER_API_KEY",
-                model = "openai/o3-mini-high",
+                model = "openai/o4-mini-high",
             },
         },
     },
@@ -36,12 +30,12 @@ return {
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
         --- The below dependencies are optional,
-        "echasnovski/mini.pick",   -- for file_selector provider mini.pick
+        "echasnovski/mini.pick",         -- for file_selector provider mini.pick
         "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-        "hrsh7th/nvim-cmp",        -- autocompletion for avante commands and mentions
-        "ibhagwan/fzf-lua",        -- for file_selector provider fzf
-        "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-        "zbirenbaum/copilot.lua",  -- for providers='copilot'
+        "hrsh7th/nvim-cmp",              -- autocompletion for avante commands and mentions
+        "ibhagwan/fzf-lua",              -- for file_selector provider fzf
+        "nvim-tree/nvim-web-devicons",   -- or echasnovski/mini.icons
+        "zbirenbaum/copilot.lua",        -- for providers='copilot'
         {
             -- support for image pasting
             "HakonHarnes/img-clip.nvim",
