@@ -10,7 +10,7 @@
     inputs.nix-index-db.hmModules.nix-index
     inputs.tailray.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
-    inputs.stylix.homeManagerModules.stylix
+    inputs.stylix.homeModules.stylix
     inputs.catppuccin.homeModules.catppuccin
   ];
 

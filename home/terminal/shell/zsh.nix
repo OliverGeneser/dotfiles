@@ -102,6 +102,7 @@
         us = "systemctl --user"; # mnemonic for user systemctl
         rs = "sudo systemctl"; # mnemonic for root systemctl
 
+        docker = "podman";
         docker-compose = "podman-compose";
 
         # laptop

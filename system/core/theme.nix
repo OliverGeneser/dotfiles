@@ -42,6 +42,9 @@ in {
       # microsoft
       corefonts
 
+      liberation_ttf
+      helvetica-neue-lt-std
+
       # icon fonts
       material-symbols
 

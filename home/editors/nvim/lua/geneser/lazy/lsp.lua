@@ -1,10 +1,11 @@
 return {
     {
         "neovim/nvim-lspconfig",
+        version = "^1.0.0",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
+            { "mason-org/mason.nvim",           version = "^1.0.0" },
+            { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
             "WhoIsSethDaniel/mason-tool-installer.nvim",
         },
         config = function()
@@ -37,40 +38,9 @@ return {
                     vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
                 end,
             })
-            vim.lsp.config('vtsls', {
-                root_dir = require("lspconfig").util.root_pattern(
-                    ".git",
-                    "pnpm-workspace.yaml",
-                    "pnpm-lock.yaml",
-                    "yarn.lock",
-                    "package-lock.json",
-                    "bun.lockb",
-                    "bun.lock"
-                ),
-                typescript = {
-                    tsserver = {
-                        maxTsServerMemory = 12288,
-                    },
-                },
-                experimental = {
-                    completion = {
-                        entriesLimit = 3,
-                    },
-                },
-            })
-
-            vim.lsp.config('tailwindcss', {
-                tailwindCSS = {
-                    classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
-                    tailwindCSS = {
-                        classFunctions = { "cva", "cx" },
-                    },
-                },
-            })
 
             require("mason").setup()
-            -- Note: `nvim-lspconfig` needs to be in 'runtimepath' by the time you set up mason-lspconfig.nvim
-            require("mason-lspconfig").setup {
+            require("mason-lspconfig").setup({
                 ensure_installed = {
                     "astro",
                     "cssls",
@@ -79,9 +49,36 @@ return {
                     "tailwindcss",
                     "gopls",
                     "lua_ls",
-
-                }
-            }
+                },
+            })
+            require("mason-lspconfig").setup_handlers({
+                function(server_name) -- default handler (optional)
+                    require("lspconfig")[server_name].setup({})
+                end,
+                ["vtsls"] = function()
+                    require("lspconfig").vtsls.setup({
+                        root_dir = require("lspconfig").util.root_pattern(
+                            ".git",
+                            "pnpm-workspace.yaml",
+                            "pnpm-lock.yaml",
+                            "yarn.lock",
+                            "package-lock.json",
+                            "bun.lockb",
+                            "bun.lock"
+                        ),
+                        typescript = {
+                            tsserver = {
+                                maxTsServerMemory = 12288,
+                            },
+                        },
+                        experimental = {
+                            completion = {
+                                entriesLimit = 3,
+                            },
+                        },
+                    })
+                end,
+            })
         end,
     },
     {

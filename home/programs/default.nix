@@ -31,6 +31,7 @@
 
     overskride
     resources
+    wineWowPackages.wayland
 
     zotero
   ];
