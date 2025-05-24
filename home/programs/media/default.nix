@@ -19,8 +19,5 @@
 
     # images
     loupe
-
-    # videos
-    celluloid
   ];
 }

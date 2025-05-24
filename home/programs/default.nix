@@ -29,6 +29,8 @@
 
     meld
 
+    infisical
+
     overskride
     resources
     wineWowPackages.wayland
