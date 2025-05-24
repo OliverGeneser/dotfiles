@@ -103,14 +103,14 @@
           format-icons = ["󰁻 " "󰁽 " "󰁿 " "󰂁 " "󰂂 "];
         };
         network = {
-          interval = 1;
-          format-wifi = "   {essid}";
+          interval = 10;
+          format-wifi = "  {essid}";
           format-ethernet = " 󰈀 ";
           format-disconnected = " 󱚵  ";
           tooltip-format = ''
             {ifname}
             {ipaddr}/{cidr}
-            {signalstrength}
+            {signalStrength}
             Up: {bandwidthUpBits}
             Down: {bandwidthDownBits}
           '';
