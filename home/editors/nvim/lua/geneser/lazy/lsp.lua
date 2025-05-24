@@ -1,11 +1,10 @@
 return {
     {
         "neovim/nvim-lspconfig",
-        version = "^1.0.0",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
-            { "mason-org/mason.nvim",           version = "^1.0.0" },
-            { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
+            "mason-org/mason.nvim",
+            "mason-org/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
         },
         config = function()
@@ -39,8 +38,25 @@ return {
                 end,
             })
 
+            vim.lsp.config('vtsls', {
+                settings = {
+                    typescript = {
+                        tsserver = {
+                            maxTsServerMemory = 12288,
+                        },
+                    },
+                    experimental = {
+                        completion = {
+                            entriesLimit = 3,
+                        },
+                    },
+                },
+
+            })
+
             require("mason").setup()
             require("mason-lspconfig").setup({
+                automatic_enable = true,
                 ensure_installed = {
                     "astro",
                     "cssls",
@@ -48,36 +64,8 @@ return {
                     "cssmodules_ls",
                     "tailwindcss",
                     "gopls",
-                    "lua_ls",
-                },
-            })
-            require("mason-lspconfig").setup_handlers({
-                function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup({})
-                end,
-                ["vtsls"] = function()
-                    require("lspconfig").vtsls.setup({
-                        root_dir = require("lspconfig").util.root_pattern(
-                            ".git",
-                            "pnpm-workspace.yaml",
-                            "pnpm-lock.yaml",
-                            "yarn.lock",
-                            "package-lock.json",
-                            "bun.lockb",
-                            "bun.lock"
-                        ),
-                        typescript = {
-                            tsserver = {
-                                maxTsServerMemory = 12288,
-                            },
-                        },
-                        experimental = {
-                            completion = {
-                                entriesLimit = 3,
-                            },
-                        },
-                    })
-                end,
+                    "lua_ls"
+                }
             })
         end,
     },

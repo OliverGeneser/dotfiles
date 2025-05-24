@@ -1,6 +1,7 @@
 return {
     "yetone/avante.nvim",
     event = "VeryLazy",
+    lazy = false,
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
         ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
@@ -11,7 +12,7 @@ return {
                 __inherited_from = "openai",
                 endpoint = "https://openrouter.ai/api/v1",
                 api_key_name = "OPENROUTER_API_KEY",
-                model = "google/gemini-2.5-flash-preview",
+                model = "google/gemini-2.5-flash-preview-05-20",
             },
             openrouter_o4_mini_high = {
                 __inherited_from = "openai",
