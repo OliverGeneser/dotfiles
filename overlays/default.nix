@@ -2,18 +2,19 @@
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [webcord];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [podman webcord];
 
-    #gamemode = _: prev: {
-    #  gamemode = prev.gamemode.overrideAttrs (oldAttrs: {
-    #    src = prev.fetchFromGitHub {
-    #      owner = "FeralInteractive";
-    #      repo = "gamemode";
-    #      tag = "1.8.2";
-    #      hash = "sha256-V0rewbSVOGFqJqXyCz4jXpuDM0EfjdkpGPl+WdDwI5I=";
-    #    };
-    #  });
-    #};
+    podman = _: prev: {
+      podman = prev.podman.overrideAttrs (oldAttrs: {
+        version = "5.5.0";
+        src = prev.fetchFromGitHub {
+          owner = "containers";
+          repo = "podman";
+          rev = "v5.5.0";
+          hash = "sha256-B6n1NybTFhjTMDrhmXS54ZUaLtsmiqLu783bJoDgkyk=";
+        };
+      });
+    };
 
     webcord = _: prev: {
       webcord = prev.webcord.override {
