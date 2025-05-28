@@ -12,6 +12,7 @@
       "https://nix-gaming.cachix.org"
       "https://yazi.cachix.org"
       "https://wezterm.cachix.org"
+      "https://prismlauncher.cachix.org"
     ];
 
     trusted-public-keys = [
@@ -25,6 +26,7 @@
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
       "wezterm.cachix.org-1:kAbhjYUC9qvblTE+s7S+kl5XM1zVa4skO+E/1IDWdH0="
+      "prismlauncher.cachix.org-1:9/n/FGyABA2jLUVfY+DEp4hKds/rwO+SCOtbOkDzd+c="
     ];
   };
 }

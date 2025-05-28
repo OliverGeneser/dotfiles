@@ -110,7 +110,7 @@
       url = "github:ryantm/agenix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "hm";
+        home-manager.follows = "home-manager";
         systems.follows = "systems";
       };
     };
@@ -150,7 +150,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hm = {
+    home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -236,6 +236,15 @@
 
     nixos-hardware = {
       url = "github:nixos/nixos-hardware";
+    };
+
+    prismlauncher = {
+      url = "github:PrismLauncher/PrismLauncher";
+
+      # Optional: Override the nixpkgs input of prismlauncher to use the same revision as the rest of your flake
+      # Note that this may break the reproducibility mentioned above, and you might not be able to access the binary cache
+      #
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nixpkgs-howdy.url = "github:fufexan/nixpkgs/howdy";
