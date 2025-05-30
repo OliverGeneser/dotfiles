@@ -54,11 +54,9 @@
           buildInputs = with pkgs; [
             pkgs.nodePackages.node-gyp-build
             pixman
-            pixman
             cairo
             pango
             libjpeg
-            libpng
             libpng
             librsvg
             giflib
@@ -67,7 +65,7 @@
           name = "q-inspect";
 
           shellHook = ''
-            export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [pkgs.libuuid]}"
+            export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [pkgs.libuuid pkgs.pixman pkgs.pkg-config]}:$LD_LIBRARY_PATH"
             node --version
           '';
         };

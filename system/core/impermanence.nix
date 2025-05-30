@@ -49,10 +49,15 @@ in {
         if (cfg.encryption)
         then ["systemd-cryptsetup@cryptroot.service"]
         else ["local-fs.target"];
+      requires =
+        if (cfg.encryption)
+        then ["systemd-cryptsetup@cryptroot.service"]
+        else ["local-fs.target"];
       # mount the root fs before clearing
       before = ["sysroot.mount"];
       unitConfig.DefaultDependencies = "no";
       serviceConfig.Type = "oneshot";
+
       script = ''
         mkdir -p /mnt
 

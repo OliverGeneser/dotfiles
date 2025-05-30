@@ -18,7 +18,7 @@
   };
 
   boot = {
-    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_6_14; #pkgs.linuxPackages_latest;
     supportedFilesystems = lib.mkForce ["btrfs" "ntfs"];
     resumeDevice = "/dev/disk/by-label/nixos";
     kernelParams = [
@@ -33,8 +33,8 @@
     hostName = "enterprise";
     nftables.enable = true;
     firewall = {
-      allowedTCPPorts = [3000 3005 8080];
-      allowedUDPPorts = [];
+      allowedTCPPorts = [3000 3005 8080 4200];
+      allowedUDPPorts = [4200];
     };
   };
 
