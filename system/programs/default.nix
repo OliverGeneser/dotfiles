@@ -2,7 +2,8 @@
   imports = [
     ./home-manager.nix
     # ./qt.nix
-    ./thunar.nix
+    # ./thunar.nix
+    ./pcmanfm.nix
     ./xdg.nix
   ];
 
