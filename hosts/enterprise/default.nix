@@ -18,7 +18,7 @@
   };
 
   boot = {
-    kernelPackages = lib.mkForce pkgs.linuxPackages_6_14; #pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
     supportedFilesystems = lib.mkForce ["btrfs" "ntfs"];
     resumeDevice = "/dev/disk/by-label/nixos";
     kernelParams = [
