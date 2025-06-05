@@ -25,12 +25,14 @@
         "fadeIn, 0"
       ];
 
-      # background = [
-      # {
-      # monitor = "";
-      # path = self.packages.${pkgs.system}.wallpapers.gfda_40-black_5120x2880;
-      # }
-      # ];
+      background = [
+        {
+          monitor = "";
+          path = "screenshot";
+          color = "rgba(25, 20, 20, 1.0)";
+          blur_passes = 2;
+        }
+      ];
 
       input-field = [
         {
