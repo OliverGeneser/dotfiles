@@ -14,6 +14,7 @@
 
   environment.systemPackages = [
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+    pkgs.hyprpolkitagent
   ];
 
   environment.pathsToLink = ["/share/icons"];

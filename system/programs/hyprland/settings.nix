@@ -27,6 +27,7 @@ in {
       exec-once = [
         # finalize startup
         "uwsm finalize"
+        "systemctl --user start hyprpolkitagent.service"
         "hyprlock"
         "${pkgs.kanshi}/bin/kanshi"
         "${pkgs.pyprland}/bin/pypr"

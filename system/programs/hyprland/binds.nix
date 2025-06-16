@@ -93,8 +93,6 @@ in {
         ", XF86Favorites, exec, ${runOnce "wl-ocr"}"
         # open calculator
         ", XF86Calculator, exec, ${toggle "gnome-calculator"}"
-        # open settings
-        "$mod, U, exec, XDG_CURRENT_DESKTOP=gnome ${runOnce "gnome-control-center"}"
 
         # move focus
         "$mod, left, movefocus, l"
