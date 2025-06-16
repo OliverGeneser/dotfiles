@@ -7,12 +7,19 @@ return {
         ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
         provider = "openrouter_gemini_flash",
         auto_suggestions_provider = "openrouter_gemini_flash",
-        vendors = {
+
+        providers = {
             openrouter_gemini_flash = {
                 __inherited_from = "openai",
                 endpoint = "https://openrouter.ai/api/v1",
                 api_key_name = "OPENROUTER_API_KEY",
                 model = "google/gemini-2.5-flash-preview-05-20",
+            },
+            openrouter_gemini_2_5_pro = {
+                __inherited_from = "openai",
+                endpoint = "https://openrouter.ai/api/v1",
+                api_key_name = "OPENROUTER_API_KEY",
+                model = "google/gemini-2.5-pro-preview",
             },
             openrouter_o4_mini_high = {
                 __inherited_from = "openai",
@@ -21,6 +28,10 @@ return {
                 model = "openai/o4-mini-high",
             },
         },
+        web_search_engine = {
+            provider = "searxng", -- tavily, serpapi, searchapi, google, kagi, brave, or searxng
+            proxy = nil,          -- proxy support, e.g., http://127.0.0.1:7890
+        }
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",

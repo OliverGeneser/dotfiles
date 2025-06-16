@@ -20,12 +20,17 @@
       sopsFile = ../secrets.yaml;
       owner = config.custom.user.name;
     };
+    searxng_api_url = {
+      sopsFile = ../secrets.yaml;
+      owner = config.custom.user.name;
+    };
   };
 
   environment = {
     systemPackages = [pkgs.git];
     sessionVariables = {
       OPENROUTER_API_KEY = "$(cat ${config.sops.secrets."openrouter_api_key".path})";
+      SEARXNG_API_URL = "$(cat ${config.sops.secrets."searxng_api_url".path})";
     };
   };
 
