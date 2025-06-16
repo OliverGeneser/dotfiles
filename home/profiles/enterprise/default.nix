@@ -24,8 +24,6 @@
     # ../../services/media/spotifyd.nix
 
     # system services
-    ../../services/system/kdeconnect.nix
-    ../../services/system/polkit-agent.nix
     ../../services/system/syncthing.nix
     # ../../services/system/tailray.nix
     ../../services/system/udiskie.nix
@@ -102,6 +100,13 @@
         port = 22;
         user = "nixos";
         identityFile = "~/.ssh/id_ecdsa_sk";
+        identitiesOnly = true;
+      };
+      "melina" = {
+        hostname = "linux354.unoeuro.com";
+        port = 22;
+        user = "melina-workout.dk";
+        identityFile = "~/.ssh/ssh_prod_qreport";
         identitiesOnly = true;
       };
     };

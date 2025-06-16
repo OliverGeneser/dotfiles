@@ -8,7 +8,6 @@
     ./htop.nix
     ./nix.nix
     ./nodejs.nix
-    ./podman.nix
     ./python.nix
     ./podman.nix
     ./skim.nix

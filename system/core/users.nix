@@ -48,6 +48,7 @@ in {
             "libvirtd"
             "networkmanager"
             "plugdev"
+            "podman"
             "transmission"
             "video"
             "wheel"

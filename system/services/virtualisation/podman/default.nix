@@ -1,5 +1,7 @@
 {self, ...}: {
   virtualisation = {
+    containers.enable = true;
+
     podman = {
       enable = true;
       dockerSocket.enable = true;
