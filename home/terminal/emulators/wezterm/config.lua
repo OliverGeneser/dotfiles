@@ -23,8 +23,8 @@ local config = {
     default_prog = { "zsh" },
     window_decorations = "NONE",
     font = wezterm.font_with_fallback({
-        "FiraCode Nerd Font",
-        "Fira Code",
+        "FiraMono Nerd Font",
+        "Fira Mono",
         "Noto Color Emoji",
     }),
     hide_tab_bar_if_only_one_tab = true,
