@@ -1,6 +1,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        lazy = false,
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup({
@@ -13,6 +14,13 @@ return {
                     "tsx",
                     "astro",
                     "go",
+                    "css",
+                    "tailwindcss"
+                },
+            })
+            vim.filetype.add({
+                extension = {
+                    css = "tailwindcss",
                 },
             })
         end,

@@ -32,6 +32,8 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", opts
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], opts)
 
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>", opts)
+vim.keymap.set("n", "<leader>ms", "<cmd>CellularAutomaton scramble<CR>", opts)
+vim.keymap.set("n", "<leader>gol", "<cmd>CellularAutomaton game_of_life<CR>", opts)
 
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")

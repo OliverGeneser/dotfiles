@@ -18,12 +18,12 @@ return {
     opts = {
         formatters_by_ft = {
             lua = { "stylua" },
-            javascript = { "prettierd" },
-            typescript = { "prettierd" },
-            javascriptreact = { "prettierd" },
-            typescriptreact = { "prettierd" },
-            svelte = { "prettierd" },
-            astro = { "prettierd" },
+            javascript = { "biome", "biome-check", "biome-organize-imports" },
+            typescript = { "biome", "biome-check", "biome-organize-imports" },
+            javascriptreact = { "biome", "biome-check", "biome-organize-imports" },
+            typescriptreact = { "biome", "biome-check", "biome-organize-imports" },
+            svelte = { "biome", "biome-check", "biome-organize-imports" },
+            astro = { "biome", "biome-check", "biome-organize-imports" },
 
             json = { "prettierd" },
             yaml = { "prettierd" },

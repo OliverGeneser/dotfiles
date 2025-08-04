@@ -7,7 +7,8 @@ return {
             vim.cmd.colorscheme("catppuccin-mocha")
         end,
     },
-    { 'echasnovski/mini.nvim', version = false },
+    { 'echasnovski/mini.nvim',          version = false },
+    { 'eandrju/cellular-automaton.nvim' },
     {
         "brenoprata10/nvim-highlight-colors",
         config = function()

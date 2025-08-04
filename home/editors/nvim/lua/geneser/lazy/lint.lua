@@ -36,27 +36,28 @@ return {
         end
 
         lint.linters_by_ft = {
-            javascript = { "eslint_d" },
-            typescript = { "eslint_d" },
-            javascriptreact = { "eslint_d" },
-            typescriptreact = { "eslint_d" },
-            svelte = { "eslint_d" },
-            astro = { "eslint_d" },
+            javascript = { "biomejs" },
+            typescript = { "biomejs" },
+            javascriptreact = { "biomejs" },
+            typescriptreact = { "biomejs" },
+            svelte = { "biomejs" },
+            astro = { "biomejs" },
             python = { "pylint" },
         }
 
-        local eslint = lint.linters.eslint_d
+        --
+        --local eslint = lint.linters.eslint_d
 
-        eslint.args = {
-            "--no-warn-ignored", -- <-- this is the key argument
-            "--format",
-            "json",
-            "--stdin",
-            "--stdin-filename",
-            function()
-                return vim.api.nvim_buf_get_name(0)
-            end,
-        }
+        -- eslint.args = {
+        --    "--no-warn-ignored", -- <-- this is the key argument
+        --    "--format",
+        --    "json",
+        --    "--stdin",
+        --    "--stdin-filename",
+        --    function()
+        --        return vim.api.nvim_buf_get_name(0)
+        --    end,
+        --}
 
         local lint_augroup = vim.api.nvim_create_augroup("Geneser_lint", { clear = true })
 

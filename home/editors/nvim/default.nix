@@ -12,7 +12,6 @@ in {
     gnumake
     alejandra
     prettierd
-    eslint_d
     # black
   ];
 

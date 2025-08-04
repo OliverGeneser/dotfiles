@@ -8,12 +8,8 @@ return {
             "WhoIsSethDaniel/mason-tool-installer.nvim",
         },
         config = function()
-            local lspconfig_defaults = require("lspconfig").util.default_config
-            lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-                "force",
-                lspconfig_defaults.capabilities,
-                require("cmp_nvim_lsp").default_capabilities()
-            )
+            vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 desc = "LSP actions",
                 callback = function(event)
@@ -33,7 +29,7 @@ return {
                         { desc = "View Diagnostics" }
                     )
                     vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-                    vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+                    vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", opts)
                     vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
                 end,
             })
@@ -54,6 +50,16 @@ return {
 
             })
 
+            vim.lsp.config('biome', {
+                settings = {
+                    arg = {
+                        '--formatter-enabled=true',
+                        '--organize-imports-enabled=true',
+                    },
+
+                }
+            })
+
             require("mason").setup()
             require("mason-lspconfig").setup({
                 automatic_enable = true,
@@ -64,7 +70,8 @@ return {
                     "cssmodules_ls",
                     "tailwindcss",
                     "gopls",
-                    "lua_ls"
+                    "lua_ls",
+                    "biome"
                 }
             })
         end,
