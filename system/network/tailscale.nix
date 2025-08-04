@@ -1,4 +1,10 @@
 {
+  config,
+  pkgs,
+  ...
+}: {
+  environment.systemPackages = [pkgs.tailscale];
+
   networking.firewall = {
     trustedInterfaces = ["tailscale0"];
     # required to connect to Tailscale exit nodes
@@ -9,5 +15,6 @@
   services.tailscale = {
     enable = true;
     openFirewall = true;
+    useRoutingFeatures = "client";
   };
 }

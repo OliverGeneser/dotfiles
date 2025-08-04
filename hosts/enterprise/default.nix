@@ -33,8 +33,8 @@
     hostName = "enterprise";
     nftables.enable = true;
     firewall = {
-      allowedTCPPorts = [3000 3005 8080 4200];
-      allowedUDPPorts = [4200];
+      allowedTCPPorts = [3000 3005 8080 8081 4200];
+      allowedUDPPorts = [4200 8081];
     };
   };
 

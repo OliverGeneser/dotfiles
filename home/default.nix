@@ -7,7 +7,7 @@
 }: {
   imports = [
     ./terminal
-    inputs.nix-index-db.hmModules.nix-index
+    inputs.nix-index-db.homeModules.nix-index
     inputs.tailray.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
     inputs.stylix.homeModules.stylix

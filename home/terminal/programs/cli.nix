@@ -65,6 +65,14 @@
     #tailspin
     yq-go
     viddy
+
+    # terminal images
+    viu
+    ueberzugpp
+
+    wget
+
+    ghostscript
   ];
 
   programs = {
