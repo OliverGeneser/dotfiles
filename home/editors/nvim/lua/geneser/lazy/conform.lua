@@ -25,11 +25,11 @@ return {
             svelte = { "biome", "biome-check", "biome-organize-imports" },
             astro = { "biome", "biome-check", "biome-organize-imports" },
 
-            json = { "prettierd" },
+            json = { "biome", "biome-check", "biome-organize-imports" },
             yaml = { "prettierd" },
             markdown = { "prettierd" },
-            html = { "prettierd" },
-            css = { "prettierd" },
+            html = { "biome", "biome-check", "biome-organize-imports" },
+            css = { "biome", "biome-check", "biome-organize-imports" },
             nix = { "alejandra" },
         },
         default_format_opts = {

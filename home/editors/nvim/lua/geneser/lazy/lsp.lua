@@ -8,71 +8,84 @@ return {
             "WhoIsSethDaniel/mason-tool-installer.nvim",
         },
         config = function()
-            vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
+            require("mason").setup()
+            require("mason-lspconfig").setup({
+                automatic_enable = true,
+                ensure_installed = {
+                    -- "astro",
+                    -- "cssls",
+                    "vtsls",
+                    -- "cssmodules_ls",
+                    "tailwindcss",
+                    -- "gopls",
+                    "lua_ls",
+                    "biome"
+                }
+            })
+
+            -- Capabilities for autocompletion
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 desc = "LSP actions",
                 callback = function(event)
                     local opts = { buffer = event.buf }
 
-                    vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-                    vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-                    vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-                    vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-                    vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-                    vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-                    vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+                    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+                    vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
+                    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+                    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
                     vim.keymap.set(
                         "n",
                         "<leader>vd",
                         "<cmd>lua vim.diagnostic.open_float()<cr>",
                         { desc = "View Diagnostics" }
                     )
-                    vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                     vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", opts)
-                    vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+                    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
                 end,
             })
 
-            vim.lsp.config('vtsls', {
-                settings = {
-                    typescript = {
-                        tsserver = {
-                            maxTsServerMemory = 12288,
+            -- LSP server setup using Mason handlers
+            require("mason-lspconfig").setup_handlers({
+                -- Default handler for all servers
+                function(server_name)
+                    require("lspconfig")[server_name].setup({
+                        capabilities = capabilities,
+                    })
+                end,
+
+                -- Custom settings for vtsls
+                ["vtsls"] = function()
+                    require("lspconfig").vtsls.setup({
+                        capabilities = capabilities,
+                        settings = {
+                            typescript = {
+                                tsserver = { maxTsServerMemory = 12288 },
+                            },
+                            experimental = {
+                                completion = { entriesLimit = 3 },
+                            },
                         },
-                    },
-                    experimental = {
-                        completion = {
-                            entriesLimit = 3,
+                    })
+                end,
+
+                -- Custom settings for biome
+                ["biome"] = function()
+                    require("lspconfig").biome.setup({
+                        capabilities = capabilities,
+                        settings = {
+                            arg = {
+                                "--formatter-enabled=true",
+                                "--organize-imports-enabled=true",
+                            },
                         },
-                    },
-                },
-
-            })
-
-            vim.lsp.config('biome', {
-                settings = {
-                    arg = {
-                        '--formatter-enabled=true',
-                        '--organize-imports-enabled=true',
-                    },
-
-                }
-            })
-
-            require("mason").setup()
-            require("mason-lspconfig").setup({
-                automatic_enable = true,
-                ensure_installed = {
-                    "astro",
-                    "cssls",
-                    "vtsls",
-                    "cssmodules_ls",
-                    "tailwindcss",
-                    "gopls",
-                    "lua_ls",
-                    "biome"
-                }
+                    })
+                end,
             })
         end,
     },
