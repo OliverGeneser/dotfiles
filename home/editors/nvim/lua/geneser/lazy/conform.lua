@@ -1,3 +1,29 @@
+---@param bufnr integer
+---@param ... string[][]
+---@return string[]
+local function first_available_list(bufnr, ...)
+    local conform = require("conform")
+
+    for i = 1, select("#", ...) do
+        local formatter_list = select(i, ...) -- this is a string[]
+        local all_available = true
+
+        for _, formatter in ipairs(formatter_list) do
+            local info = conform.get_formatter_info(formatter, bufnr)
+            if not info or not info.available then
+                all_available = false
+                break
+            end
+        end
+
+        if all_available then
+            return formatter_list -- ✅ this is a string[]
+        end
+    end
+
+    return {} -- ✅ fallback: empty string list
+end
+
 return {
     "stevearc/conform.nvim",
     event = { "BufReadPre" },
@@ -18,18 +44,97 @@ return {
     opts = {
         formatters_by_ft = {
             lua = { "stylua" },
-            javascript = { "biome", "biome-check", "biome-organize-imports" },
-            typescript = { "biome", "biome-check", "biome-organize-imports" },
-            javascriptreact = { "biome", "biome-check", "biome-organize-imports" },
-            typescriptreact = { "biome", "biome-check", "biome-organize-imports" },
-            svelte = { "biome", "biome-check", "biome-organize-imports" },
-            astro = { "biome", "biome-check", "biome-organize-imports" },
+            javascript =
+                function(bufnr)
+                    return first_available_list(
+                        bufnr,
+                        { "biome", "biome-check", "biome-organize-imports" }, -- use biome + injected if both available
+                        { "prettierd" },                                      -- fallback to prettierd + injected
+                        { "prettier" }                                        -- fallback to prettier only
+                    )
+                end,
 
-            json = { "biome", "biome-check", "biome-organize-imports" },
+            typescript =
+                function(bufnr)
+                    return first_available_list(
+                        bufnr,
+                        { "biome", "biome-check", "biome-organize-imports" }, -- use biome + injected if both available
+                        { "prettierd" },                                      -- fallback to prettierd + injected
+                        { "prettier" }                                        -- fallback to prettier only
+                    )
+                end,
+
+            { "biome", "biome-check", "biome-organize-imports", "prettierd" },
+            javascriptreact = function(bufnr)
+                return first_available_list(
+                    bufnr,
+                    { "biome", "biome-check", "biome-organize-imports" }, -- use biome + injected if both available
+                    { "prettierd" },                                      -- fallback to prettierd + injected
+                    { "prettier" }                                        -- fallback to prettier only
+                )
+            end,
+
+            typescriptreact = function(bufnr)
+                return first_available_list(
+                    bufnr,
+                    { "biome", "biome-check", "biome-organize-imports" }, -- use biome + injected if both available
+                    { "prettierd" },                                      -- fallback to prettierd + injected
+                    { "prettier" }                                        -- fallback to prettier only
+                )
+            end,
+
+            svelte =
+                function(bufnr)
+                    return first_available_list(
+                        bufnr,
+                        { "biome", "biome-check", "biome-organize-imports" }, -- use biome + injected if both available
+                        { "prettierd" },                                      -- fallback to prettierd + injected
+                        { "prettier" }                                        -- fallback to prettier only
+                    )
+                end,
+
+            astro =
+                function(bufnr)
+                    return first_available_list(
+                        bufnr,
+                        { "biome", "biome-check", "biome-organize-imports" }, -- use biome + injected if both available
+                        { "prettierd" },                                      -- fallback to prettierd + injected
+                        { "prettier" }                                        -- fallback to prettier only
+                    )
+                end,
+
+            json =
+                function(bufnr)
+                    return first_available_list(
+                        bufnr,
+                        { "biome", "biome-check", "biome-organize-imports" }, -- use biome + injected if both available
+                        { "prettierd" },                                      -- fallback to prettierd + injected
+                        { "prettier" }                                        -- fallback to prettier only
+                    )
+                end,
+
             yaml = { "prettierd" },
             markdown = { "prettierd" },
-            html = { "biome", "biome-check", "biome-organize-imports" },
-            css = { "biome", "biome-check", "biome-organize-imports" },
+            html =
+                function(bufnr)
+                    return first_available_list(
+                        bufnr,
+                        { "biome", "biome-check", "biome-organize-imports" }, -- use biome + injected if both available
+                        { "prettierd" },                                      -- fallback to prettierd + injected
+                        { "prettier" }                                        -- fallback to prettier only
+                    )
+                end,
+
+            css =
+                function(bufnr)
+                    return first_available_list(
+                        bufnr,
+                        { "biome", "biome-check", "biome-organize-imports" }, -- use biome + injected if both available
+                        { "prettierd" },                                      -- fallback to prettierd + injected
+                        { "prettier" }                                        -- fallback to prettier only
+                    )
+                end,
+
             nix = { "alejandra" },
         },
         default_format_opts = {
