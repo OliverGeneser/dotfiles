@@ -65,7 +65,7 @@
         };
       };
       disk1 = {
-        device = "/dev/disk/by-id/ata-HUH721212ALE601_8DJN8UGY";
+        device = "/dev/disk/by-id/ata-ST20000NM007D-3DJ103_WVT0XWWL";
         type = "disk";
         content = {
           type = "gpt";
