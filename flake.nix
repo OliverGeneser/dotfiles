@@ -46,21 +46,22 @@
 
         devShells.q-inspect = pkgs.mkShell {
           packages = with pkgs; [
-            nodejs_22
             corepack_22
             libuuid
+            nodejs_22
             zip
           ];
           buildInputs = with pkgs; [
-            pkgs.nodePackages.node-gyp-build
-            pixman
             cairo
-            pango
+            giflib
             libjpeg
             libpng
             librsvg
-            giflib
+            openconnect
+            pango
+            pixman
             pkg-config
+            pkgs.nodePackages.node-gyp-build
           ];
           name = "q-inspect";
 

@@ -10,6 +10,7 @@
     # programs
     ../../programs
     ../../programs/dev
+    ../../programs/design/orca-slicer.nix
     ../../programs/design/superslicer.nix
     ../../programs/design/freecad.nix
     ../../programs/design/gimp.nix
@@ -52,6 +53,9 @@
         "apollo" = {
           id = "YX2IAXK-3MDJKKG-O6NXVKH-V2RBIZX-5M4I73R-R65A6B6-QHX7OUU-ETH7EQB";
         };
+        "thor" = {
+          id = "PXNEEIO-OUUPKQ7-RJZ2UTW-UOBCO4L-2F73KMA-GZVIOGK-ASSV74C-RYUN7QE";
+        };
       };
 
       folders = {
@@ -59,7 +63,7 @@
         "dev" = {
           id = "rrk9d-szxeq";
           path = "~/dev"; # Which folder to add to Syncthing
-          devices = ["apollo"]; # Which devices to share the folder with
+          devices = ["apollo" "thor"]; # Which devices to share the folder with
           type = "sendonly";
         };
       };

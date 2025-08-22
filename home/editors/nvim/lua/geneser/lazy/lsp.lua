@@ -12,7 +12,7 @@ return {
             require("mason-lspconfig").setup({
                 automatic_enable = true,
                 ensure_installed = {
-                    -- "astro",
+                    "astro",
                     -- "cssls",
                     "vtsls",
                     -- "cssmodules_ls",

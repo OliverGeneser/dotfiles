@@ -49,10 +49,6 @@ in {
         if (cfg.encryption)
         then ["systemd-cryptsetup@cryptroot.service"]
         else ["local-fs.target"];
-      requires =
-        if (cfg.encryption)
-        then ["systemd-cryptsetup@cryptroot.service"]
-        else ["local-fs.target"];
       # mount the root fs before clearing
       before = ["sysroot.mount"];
       unitConfig.DefaultDependencies = "no";
@@ -110,8 +106,9 @@ in {
           "/var/db/sudo/"
           "/var/lib/"
           "/var/lib/bluetooth"
-          "/var/lib/nixos"
           "/var/lib/containers"
+          "/var/lib/gitea"
+          "/var/lib/nixos"
           "/var/lib/syncthing"
           "/var/lib/systemd/coredump"
           "/etc/NetworkManager/system-connections"

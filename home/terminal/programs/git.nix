@@ -1,11 +1,15 @@
 {
+  self,
   config,
   pkgs,
   ...
 }: let
   cfg = config.programs.git;
 in {
-  home.packages = [pkgs.delta];
+  home.packages = [
+    pkgs.delta
+    self.packages.${pkgs.system}.gca
+  ];
 
   # enable scrolling in git diff
   home.sessionVariables.DELTA_PAGER = "less -R";

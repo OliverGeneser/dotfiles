@@ -2,19 +2,22 @@
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [webcord];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [webcord opencode];
 
-    # podman = _: prev: {
-    #   podman = prev.podman.overrideAttrs (oldAttrs: {
-    #     version = "5.5.0";
-    #     src = prev.fetchFromGitHub {
-    #       owner = "containers";
-    #       repo = "podman";
-    #       rev = "v5.5.0";
-    #       hash = "sha256-B6n1NybTFhjTMDrhmXS54ZUaLtsmiqLu783bJoDgkyk=";
-    #     };
-    #   });
-    # };
+    opencode = self: super: {
+      opencode = super.opencode.overrideAttrs (final: prev: {
+        version = "0.5.13";
+
+        src = prev.src.override {
+          tag = "v${final.version}";
+          hash = "sha256-CzVzBvuK/RRYxFA4wOhkIXuXjoxWHHRnzUpGuvl9kQU=";
+        };
+
+        node_modules = prev.node_modules.overrideAttrs (_: {
+          outputHash = "sha256-hznCg/7c9uNV7NXTkb6wtn3EhJDkGI7yZmSIA2SqX7g=";
+        });
+      });
+    };
 
     webcord = _: prev: {
       webcord = prev.webcord.override {
