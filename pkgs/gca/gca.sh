@@ -87,8 +87,9 @@ REQUEST_BODY=$(jq -n \
           "- Type: feat, fix, docs, style, refactor, perf, test, chore\n" +
           "- Scope: max 3 words\n" +
           "- Subject: max 70 chars, imperative mood\n" +
-          "- Body: explain what and why and optionally break it into a list if the text is longer than 70 chars\n" +
-          "- Use 'fix' for minor changes\n" +
+          "- Body: explain what and why in a short list no longer than 100 words in total\n" +
+          "Summaries the changes in as few list points as possible and dont state things that havent changed\n" +
+          "- Use (fix) for minor changes\n" +
           "- No triple backticks."
         )
       }
