@@ -44,6 +44,11 @@
     allowedUDPPorts = [53 5353 6881 8388 8989 9696];
   };
 
+  networking.firewall.interfaces."gluetun_default" = {
+    allowedTCPPorts = [6881 7878 8888 8388 8090 8095 8989 9696];
+    allowedUDPPorts = [53 5353 6881 8388 8989 9696];
+  };
+
   virtualisation.oci-containers.backend = "podman";
 
   # Containers
