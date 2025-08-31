@@ -114,10 +114,7 @@
       };
     };
 
-    anyrun = {
-      url = "github:fufexan/anyrun/launch-prefix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    anyrun.url = "github:fufexan/anyrun/launch-prefix";
 
     arkenfox = {
       url = "github:OliverGeneser/arkenfox-nixos";
