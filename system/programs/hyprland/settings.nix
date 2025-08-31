@@ -40,6 +40,7 @@ in {
         "3, on-created-empty:[silent] wezterm"
         "5, on-created-empty:[silent] vesktop"
         "6, on-created-empty:[silent] jellyfinmediaplayer"
+        "10, border:false, rounding:false"
       ];
 
       general = {

@@ -114,7 +114,7 @@ in {
         "ALT, 7, focusworkspaceoncurrentmonitor, 7"
         "ALT, 8, focusworkspaceoncurrentmonitor, 8"
         "ALT, 9, focusworkspaceoncurrentmonitor, 9"
-        "ALT, 0, focusworkspaceoncurrentmonitor, 0"
+        "ALT, 0, focusworkspaceoncurrentmonitor, 10"
 
         # Move Workspace
         "ALTSHIFT, 1, movetoworkspacesilent, 1"
@@ -126,7 +126,7 @@ in {
         "ALTSHIFT, 7, movetoworkspacesilent, 7"
         "ALTSHIFT, 8, movetoworkspacesilent, 8"
         "ALTSHIFT, 9, movetoworkspacesilent, 9"
-        "ALTSHIFT, 0, movetoworkspacesilent, 0"
+        "ALTSHIFT, 0, movetoworkspacesilent, 10"
 
         # screenshot
         # area

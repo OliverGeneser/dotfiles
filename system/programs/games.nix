@@ -30,6 +30,8 @@
       enable = true;
       capSysNice = true;
       args = [
+        "--adaptive-sync" # VRR support
+        "--hdr-enabled"
         "--rt"
         "--expose-wayland"
       ];

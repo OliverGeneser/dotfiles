@@ -91,6 +91,11 @@
       "scrolltouchpad 0.1, class:^(org.kde.kdeconnect.app)$"
       # Others
       "scrolltouchpad 0.1, class:^(org.pwmt.zathura)$"
+
+      # Steam
+      "fullscreen,class:^steam_app_\d+$"
+      "monitor 1,class:^steam_app_\d+$"
+      "workspace 10,class:^steam_app_\d+$"
     ];
   };
 }
