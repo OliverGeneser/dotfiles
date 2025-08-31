@@ -56,9 +56,9 @@
         SMART_ATTRIBUTES=""
 
         if [[ "$disk" == /dev/sd* ]]; then
-            SMART_ATTRIBUTES=$(echo "$RAW" | ${pkgs.jq}/bin/jq -r '.ata_smart_attributes.table[] | select(.id == 5 or .id == 196 or .id == 197 or .id == 198) | "\(.name): \(.raw.value)"' )
+            SMART_ATTRIBUTES=$(echo "$RAW" | ${pkgs.jq}/bin/jq -r '.ata_smart_attributes.table[] | select(.id == 5 or .id == 194 or .id == 196 or .id == 197 or .id == 198) | "\(.name): \(.raw.string)"' )
         elif [[ "$disk" == /dev/nvme* ]]; then
-            SMART_ATTRIBUTES=$(echo "$RAW" | ${pkgs.jq}/bin/jq -r '.nvme_smart_health_information_log | {critical_warning, available_spare, percentage_used, media_errors, num_err_log_entries} | to_entries | .[] | "\(.key): \(.value)"' )
+            SMART_ATTRIBUTES=$(echo "$RAW" | ${pkgs.jq}/bin/jq -r '.nvme_smart_health_information_log | {critical_warning, temperature, available_spare, percentage_used, media_errors, num_err_log_entries} | to_entries | .[] | "\(.key): \(.value)"' )
         else
             SMART_ATTRIBUTES="$disk can't find SMART attributes."
         fi
