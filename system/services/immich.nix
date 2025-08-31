@@ -5,18 +5,18 @@
   ...
 }: {
   networking.firewall = {
-    allowedTCPPorts = [2283 3003];
-    allowedUDPPorts = [2283 3003];
+    allowedTCPPorts = [2283];
   };
 
-  systemd.services."immich-server".serviceConfig.PrivateDevices = lib.mkForce false;
   users.users.immich.extraGroups = ["video" "render"];
 
   services = {
     immich = {
       enable = true;
       port = 2283;
+      host = "0.0.0.0";
       group = "users";
+      accelerationDevices = null;
       mediaLocation = "/mnt/storage/vault/immich";
     };
   };
