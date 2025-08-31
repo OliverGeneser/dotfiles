@@ -6,15 +6,19 @@
 
     opencode = self: super: {
       opencode = super.opencode.overrideAttrs (final: prev: {
-        version = "0.5.13";
+        version = "0.5.29";
 
         src = prev.src.override {
           tag = "v${final.version}";
-          hash = "sha256-CzVzBvuK/RRYxFA4wOhkIXuXjoxWHHRnzUpGuvl9kQU=";
+          hash = "sha256-l9yi+98fsFWERKsJPfhNoCTG9vKawE4aKngwBkCJupE=";
         };
 
+        tui = prev.tui.overrideAttrs (_: {
+          vendorHash = "sha256-78MfWF0HSeLFLGDr1Zh74XeyY71zUmmazgG2MnWPucw=";
+        });
+
         node_modules = prev.node_modules.overrideAttrs (_: {
-          outputHash = "sha256-hznCg/7c9uNV7NXTkb6wtn3EhJDkGI7yZmSIA2SqX7g=";
+          outputHash = "sha256-PmLO0aU2E7NlQ7WtoiCQzLRw4oKdKxS5JI571lvbhHo=";
         });
       });
     };
