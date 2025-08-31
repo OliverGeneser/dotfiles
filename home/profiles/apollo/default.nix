@@ -55,6 +55,9 @@
         "enterprise" = {
           id = "ZGJM7WX-5BFTESE-ZAKA3QJ-PMEZM7W-SZLOISS-UYP6KWO-JQCUQLV-2X5NFQC";
         };
+        "thor" = {
+          id = "PXNEEIO-OUUPKQ7-RJZ2UTW-UOBCO4L-2F73KMA-GZVIOGK-ASSV74C-RYUN7QE";
+        };
       };
 
       folders = {
@@ -62,7 +65,7 @@
         "dev" = {
           id = "rrk9d-szxeq";
           path = "~/dev"; # Which folder to add to Syncthing
-          devices = ["enterprise"]; # Which devices to share the folder with
+          devices = ["enterprise" "thor"]; # Which devices to share the folder with
           type = "receiveonly";
         };
       };

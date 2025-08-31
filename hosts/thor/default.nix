@@ -26,6 +26,12 @@
             "oliver" = {
               id = "EVZY72B-QB2I3KS-IQIXSPN-EV7Y3BX-TXJFDXZ-HISKJIB-MS6XVKT-QDDZQQS";
             };
+            "enterprise" = {
+              id = "ZGJM7WX-5BFTESE-ZAKA3QJ-PMEZM7W-SZLOISS-UYP6KWO-JQCUQLV-2X5NFQC";
+            };
+            "apollo" = {
+              id = "YX2IAXK-3MDJKKG-O6NXVKH-V2RBIZX-5M4I73R-R65A6B6-QHX7OUU-ETH7EQB";
+            };
           };
 
           folders = {
@@ -35,22 +41,34 @@
               path = "/mnt/storage/vault/homes/Oliver/Syncthing/Photos"; # Which folder to add to Syncthing
               devices = ["oliver"]; # Which devices to share the folder with
             };
+
+            "dev" = {
+              id = "rrk9d-szxeq";
+              path = "/mnt/storage/vault/backup/dev"; # Which folder to add to Syncthing
+              devices = ["enterprise" "apollo"]; # Which devices to share the folder with
+              type = "receiveonly";
+            };
           };
         };
       };
     };
 
     boot = {
-      kernelPackages = lib.mkForce pkgs.linuxPackages_6_15;
-      kernelModules = ["zfs"];
+      kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+      kernelModules = ["zfs" "coretemp" "it87"];
+      extraModulePackages = with pkgs.linuxPackages; [it87];
       supportedFilesystems = lib.mkForce ["btrfs" "zfs"];
       resumeDevice = "/dev/disk/by-label/nixos";
       kernelParams = [
         "resume_offset=533760"
       ];
 
+      extraModprobeConfig = ''
+        options it87 force_id=0x8620
+      '';
+
       zfs = {
-        package = pkgs.zfs_2_3;
+        package = pkgs.zfs;
         forceImportAll = false;
         forceImportRoot = false;
       };
@@ -66,6 +84,7 @@
         e2fsprogs
         dnsutils
         smartmontools
+        lm_sensors
         git
         pciutils
         mergerfs
@@ -79,12 +98,21 @@
       hostName = "thor";
       nftables.enable = true;
       firewall = {
-        allowedTCPPorts = [80 443 8173 8384 8090 22000];
-        allowedUDPPorts = [80 443 22000 21027];
+        allowedTCPPorts = [53 80 443 2283 3001 3003 4500 8173 8384 8090 22000];
+        allowedUDPPorts = [53 80 443 2283 3001 3003 4500 22000 21027];
       };
     };
 
     security.tpm2.enable = true;
+
+    hardware.sensor.hddtemp = {
+      enable = true;
+      drives = [
+        "/dev/disk/by-id/ata-ST20000NM007D-3DJ103_WVT0XWWL"
+        "/dev/disk/by-id/ata-HUH721212ALE601_8HJ6EGGH"
+        "/dev/disk/by-id/ata-WDC_WUH721414ALE6L4_Y6GJ5Z5C"
+      ];
+    };
 
     services = {
       # for SSD/NVME
@@ -99,6 +127,24 @@
         autoScrub.enable = true;
         autoScrub.pools = ["tank"];
         autoScrub.interval = "weekly";
+      };
+
+      hddfancontrol = {
+        enable = true;
+        settings = {
+          harddrives = {
+            disks = [
+              "/dev/disk/by-id/ata-ST20000NM007D-3DJ103_WVT0XWWL"
+              "/dev/disk/by-id/ata-HUH721212ALE601_8HJ6EGGH"
+              "/dev/disk/by-id/ata-WDC_WUH721414ALE6L4_Y6GJ5Z5C"
+            ];
+            # https://forums.servethehome.com/index.php?threads/12gen-n-series-nas-motherboard-topton-cwwk.42432/page-48#post-457741
+            pwmPaths = ["/sys/class/hwmon/hwmon4/device/pwm3"];
+            extraArgs = [
+              "-i 30sec"
+            ];
+          };
+        };
       };
 
       snapraid = {

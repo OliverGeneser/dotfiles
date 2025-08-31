@@ -49,6 +49,19 @@ in {
             default = true;
             description = "Whether to ignore file permissions during syncing.";
           };
+          type = lib.mkOption {
+            type = lib.types.enum [
+              "sendreceive"
+              "sendonly"
+              "receiveonly"
+              "receiveencrypted"
+            ];
+            default = "sendreceive";
+            description = ''
+              Controls how the folder is handled by Syncthing.
+              See <https://docs.syncthing.net/users/config.html#config-option-folder.type>.
+            '';
+          };
         };
       }));
     };
