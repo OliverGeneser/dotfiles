@@ -92,7 +92,7 @@ in {
         "$mod, O, exec, ${runOnce "wl-ocr"}"
         ", XF86Favorites, exec, ${runOnce "wl-ocr"}"
         # open calculator
-        ", XF86Calculator, exec, ${toggle "gnome-calculator"}"
+        ", XF86Calculator, exec, ${toggle "qalculate-qt"}"
 
         # move focus
         "$mod, left, movefocus, l"

@@ -24,7 +24,7 @@
     tutanota-desktop
     tdesktop
 
-    gnome-calculator
+    qalculate-qt
     gnome-control-center
     gnome-disk-utility
 

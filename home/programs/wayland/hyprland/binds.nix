@@ -55,7 +55,7 @@ in {
         "$mod, O, exec, ${runOnce "wl-ocr"}"
         ", XF86Favorites, exec, ${runOnce "wl-ocr"}"
         # open calculator
-        ", XF86Calculator, exec, ${toggle "gnome-calculator"}"
+        ", XF86Calculator, exec, ${toggle "qalculate-qt"}"
         # open settings
         "$mod, U, exec, XDG_CURRENT_DESKTOP=gnome ${runOnce "gnome-control-center"}"
 
