@@ -110,10 +110,7 @@ in {
     };
 
     # touchpad gestures
-    gestures = {
-      workspace_swipe = true;
-      workspace_swipe_forever = true;
-    };
+    gesture = "3, horizontal, workspace";
 
     xwayland.force_zero_scaling = true;
 

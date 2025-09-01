@@ -137,10 +137,7 @@ in {
       render.direct_scanout = true;
 
       # touchpad gestures
-      gestures = {
-        workspace_swipe = true;
-        workspace_swipe_forever = true;
-      };
+      gesture = "3, horizontal, workspace";
 
       permission = [
         # Allow xdph and grim
