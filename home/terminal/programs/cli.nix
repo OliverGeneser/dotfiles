@@ -73,6 +73,8 @@
     wget
 
     ghostscript
+
+    s3cmd
   ];
 
   programs = {
