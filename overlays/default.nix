@@ -6,15 +6,15 @@
 
     opencode = self: super: {
       opencode = super.opencode.overrideAttrs (final: prev: {
-        version = "0.5.29";
+        version = "0.6.4";
 
         src = prev.src.override {
           tag = "v${final.version}";
-          hash = "sha256-l9yi+98fsFWERKsJPfhNoCTG9vKawE4aKngwBkCJupE=";
+          hash = "sha256-o7SzDGbWgCh8cMNK+PeLxAw0bQMKFouHdedUslpA6gw=";
         };
 
         tui = prev.tui.overrideAttrs (_: {
-          vendorHash = "sha256-78MfWF0HSeLFLGDr1Zh74XeyY71zUmmazgG2MnWPucw=";
+          vendorHash = "sha256-8pwVQVraLSE1DRL6IFMlQ/y8HQ8464N/QwAS8Faloq4=";
         });
 
         node_modules = prev.node_modules.overrideAttrs (_: {
