@@ -2,7 +2,7 @@
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [webcord opencode];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [webcord opencode turso-cli];
 
     opencode = self: super: {
       opencode = super.opencode.overrideAttrs (final: prev: {
@@ -20,6 +20,19 @@
         node_modules = prev.node_modules.overrideAttrs (_: {
           outputHash = "sha256-PmLO0aU2E7NlQ7WtoiCQzLRw4oKdKxS5JI571lvbhHo=";
         });
+      });
+    };
+
+    turso-cli = self: super: {
+      turso-cli = super.turso-cli.overrideAttrs (final: prev: {
+        version = "1.0.13";
+
+        vendorHash = "sha256-tBO21IgUczwMgrEyV7scV3YTY898lYHASaLeXqvBopU=";
+
+        src = prev.src.override {
+          rev = "v${final.version}";
+          hash = "sha256-zldCxXFR8zG0cpR57YvApyRsGPgqCuf7XbbrWNbuHxc=";
+        };
       });
     };
 
