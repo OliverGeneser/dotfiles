@@ -2,7 +2,7 @@
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [webcord opencode turso-cli];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [webcord opencode turso-cli beekeeper-studio];
 
     opencode = self: super: {
       opencode = super.opencode.overrideAttrs (final: prev: {
@@ -32,6 +32,17 @@
         src = prev.src.override {
           rev = "v${final.version}";
           hash = "sha256-zldCxXFR8zG0cpR57YvApyRsGPgqCuf7XbbrWNbuHxc=";
+        };
+      });
+    };
+
+    beekeeper-studio = self: super: {
+      beekeeper-studio = super.beekeeper-studio.overrideAttrs (final: prev: {
+        version = "5.3.6";
+
+        src = super.fetchurl {
+          url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
+          hash = "sha256-W1yyKX333vRkcsG46KVCrFp/Zg4ryMvn6/Ns5CYRE6k=";
         };
       });
     };
