@@ -19,7 +19,8 @@ return {
                     "tailwindcss",
                     -- "gopls",
                     "lua_ls",
-                    "biome"
+                    "biome",
+                    "laravel_ls"
                 }
             })
 

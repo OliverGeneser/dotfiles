@@ -136,6 +136,16 @@ return {
                 end,
 
             nix = { "alejandra" },
+            php =
+                function(bufnr)
+                    return first_available_list(
+                        bufnr,
+                        { "pint" },
+                        { "php_cs_fixer" }
+                    )
+                end,
+
+            blade = { "blade-formatter" },
         },
         default_format_opts = {
             lsp_format = "fallback",

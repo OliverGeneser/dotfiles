@@ -11,8 +11,10 @@ in {
     fd
     gnumake
     alejandra
+    prettier
     prettierd
     # black
+    blade-formatter
   ];
 
   programs.neovim = {
