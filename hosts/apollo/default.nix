@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./disks.nix
     ./hyprland.nix
+    ./nvidia.nix
     ./powersave.nix
     inputs.nixos-hardware.nixosModules.huawei-machc-wa
   ];

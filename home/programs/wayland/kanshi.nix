@@ -20,7 +20,7 @@
             status = "enable";
             mode = null;
             position = null;
-            scale = 1.333333;
+            scale = 2.0;
             transform = "normal";
           }
         ];
