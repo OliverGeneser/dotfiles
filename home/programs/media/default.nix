@@ -3,6 +3,7 @@
 {
   imports = [
     ./mpv.nix
+    ./obs.nix
     ./rnnoise.nix
     ./jellyfin.nix
     ./audacity.nix
