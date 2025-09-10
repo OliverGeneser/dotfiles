@@ -28,7 +28,7 @@
     # system services
     ../../services/system/power-monitor.nix
     ../../services/system/syncthing.nix
-    ../../services/system/tailray.nix
+    #../../services/system/tailray.nix
     ../../services/system/udiskie.nix
 
     # wayland-specific
@@ -94,6 +94,13 @@
         identityFile = "~/.ssh/id_ecdsa_sk";
         identitiesOnly = true;
       };
+      "enterprise" = {
+        hostname = "10.0.0.200";
+        port = 22;
+        user = "olivergeneser";
+        identityFile = "~/.ssh/id_ecdsa_sk";
+        identitiesOnly = true;
+      };
       "ironman" = {
         hostname = "10.0.0.210";
         port = 22000;
@@ -117,7 +124,7 @@
       monitor = [
         # "DP-1, preferred, auto-left, auto"
         # "DP-2, preferred, auto-left, auto"
-        "eDP-1, preferred, auto, 1.600000"
+        "eDP-1, preferred, auto, 1"
       ];
 
       input = {
