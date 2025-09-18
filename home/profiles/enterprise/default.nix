@@ -118,8 +118,9 @@
 
     wayland.windowManager.hyprland.settings = {
       monitor = [
+        ", preferred, auto, auto"
         "Unknown-1, disable"
-        "DP-5, preferred, auto, 1, bitdepth, 10"
+        "DP-5, preferred, auto, auto, bitdepth, 10"
       ];
 
       input = {

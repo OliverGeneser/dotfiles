@@ -26,19 +26,6 @@
         ];
       }
       {
-        profile.name = "undocked-zoomed";
-        profile.outputs = [
-          {
-            criteria = "eDP-1";
-            status = "enable";
-            mode = null;
-            position = null;
-            scale = 1.6;
-            transform = "normal";
-          }
-        ];
-      }
-      {
         profile.name = "docked";
         profile.outputs = [
           {
@@ -46,7 +33,7 @@
             status = "enable";
             mode = null;
             position = null;
-            scale = 1.333333;
+            scale = 2.0;
             transform = "normal";
           }
           {
@@ -65,11 +52,13 @@
           {
             criteria = "DP-5";
             position = "0,0";
+            scale = 1.0;
             mode = "2560x1440@144Hz";
           }
           {
             criteria = "HDMI-A-2";
             position = "320,-1080";
+            scale = 1.0;
             mode = "1920x1080@60Hz";
           }
         ];

@@ -44,6 +44,39 @@
           '';
         };
 
+        devShells.node22 = pkgs.mkShell {
+          packages = with pkgs; [
+            corepack_22
+            libuuid
+            nodejs_22
+            zip
+          ];
+          buildInputs = with pkgs; [
+            cairo
+            giflib
+            libjpeg
+            libpng
+            librsvg
+            openssl
+            pango
+            pixman
+            pkg-config
+            pkgs.nodePackages.node-gyp-build
+          ];
+          name = "Nodejs 22";
+
+          env = {
+            PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING = 1;
+            PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+            PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
+            PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+          };
+          shellHook = ''
+            export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [pkgs.libuuid pkgs.pixman pkgs.pkg-config]}:$LD_LIBRARY_PATH"
+            node --version
+          '';
+        };
+
         devShells.q-inspect = pkgs.mkShell {
           packages = with pkgs; [
             corepack_22

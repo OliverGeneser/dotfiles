@@ -122,6 +122,7 @@
       accelpoints = "0.5 0.000 0.053 0.115 0.189 0.280 0.391 0.525 0.687 0.880 1.108 1.375 1.684 2.040 2.446 2.905 3.422 4.000 4.643 5.355 6.139";
     in {
       monitor = [
+        ", preferred, auto, auto"
         # "DP-1, preferred, auto-left, auto"
         # "DP-2, preferred, auto-left, auto"
         "eDP-1, preferred, auto, auto"

@@ -46,7 +46,8 @@ let
     ./services/greetd.nix
     ./services/pipewire.nix
     ./services/printing.nix
-    #./services/searx.nix
+    # ./services/searx.nix
+    #./services/virtualisation/docker
     ./services/virtualisation/podman
   ];
   desktop =

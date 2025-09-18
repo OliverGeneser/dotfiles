@@ -14,13 +14,6 @@
     inputs.catppuccin.homeModules.catppuccin
   ];
 
-  # disable manuals as nmd fails to build often
-  manual = {
-    html.enable = false;
-    json.enable = false;
-    manpages.enable = false;
-  };
-
   programs.nix-index = {
     enable = true;
     enableZshIntegration = true;

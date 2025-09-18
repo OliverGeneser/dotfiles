@@ -4,10 +4,13 @@
       primary_monitor = "DP-5";
     };
 
+    environment.variables.GDK_SCALE = "1";
+
     programs.hyprland.settings = {
       monitor = [
+        ", preferred, auto, auto"
         "Unknown-1, disable"
-        "DP-5, 2560x1440@144, auto, 1"
+        "DP-5, 2560x1440@144, auto, auto, bitdepth, 10"
       ];
 
       input = {
