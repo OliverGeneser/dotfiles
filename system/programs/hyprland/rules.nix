@@ -77,7 +77,7 @@
 
       # less sensitive scroll for some windows
       # browser(-based)
-      "scrolltouchpad 0.1, class:^(zen|firefox|chromium-browser|chrome-.*)$"
+      "scrolltouchpad 0.1, class:^(zen|helium|firefox|chromium-browser|chrome-.*)$"
       "scrolltouchpad 0.1, class:^(obsidian)$"
       "scrolltouchpad 0.1, class:^(steam)$"
       "scrolltouchpad 0.1, class:^(Zotero)$"

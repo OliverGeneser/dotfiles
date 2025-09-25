@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  browser = ["zen-twilight"];
+  browser = ["helium"];
   imageViewer = ["org.gnome.Loupe"];
   videoPlayer = ["io.github.celluloid_player.Celluloid"];
   audioPlayer = ["io.bassi.Amberol"];
@@ -41,7 +41,7 @@
   # XDG MIME types
   associations = builtins.mapAttrs (_: v: (map (e: "${e}.desktop") v)) ({
       "application/pdf" = ["org.pwmt.zathura-pdf-mupdf"];
-      "text/html" = ["zen-twilight"];
+      "text/html" = ["helium"];
       "text/plain" = ["nvim"];
       "inode/directory" = ["yazi"];
       "x-scheme-handler/magnet" = ["transmission-gtk"];

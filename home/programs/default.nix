@@ -6,7 +6,8 @@
 }: {
   imports = [
     # ./anyrun
-    ./browsers/chromium.nix
+    # ./browsers/chromium.nix
+    ./browsers/helium.nix
     ./browsers/mullvad.nix
     ./browsers/zen.nix
     ./communication/element.nix

@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ./appimage.nix
     ./nh.nix
     ./nix-ld.nix
     ./nixpkgs.nix
