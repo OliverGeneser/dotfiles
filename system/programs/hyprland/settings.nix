@@ -35,8 +35,8 @@ in {
       ];
 
       workspace = [
-        "1, on-created-empty:[silent] helium, default:true"
-        "2, on-created-empty:[silent] helium"
+        "1, on-created-empty:[silent] helium --profile-directory=\"Default\", default:true"
+        "2, on-created-empty:[silent] helium --profile-directory=\"Profile 2\""
         "3, on-created-empty:[silent] wezterm"
         "5, on-created-empty:[silent] vesktop"
         "6, on-created-empty:[silent] jellyfinmediaplayer"
