@@ -10,6 +10,7 @@
       snapraid-btrfs = pkgs.callPackage ./snapraid-btrfs {};
       snapraid-btrfs-runner = pkgs.callPackage ./snapraid-btrfs-runner {snapraid-btrfs = snapraid-btrfs;};
       wallpapers = pkgs.callPackage ./wallpapers {};
+      wl-ocr = pkgs.callPackage ./wl-ocr {};
     };
   };
 }

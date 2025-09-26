@@ -23,7 +23,7 @@
     slurp
 
     # utils
-    # self.packages.${pkgs.system}.wl-ocr
+    self.packages.${pkgs.system}.wl-ocr
     wl-clipboard
     wl-screenrec
     wlr-randr
