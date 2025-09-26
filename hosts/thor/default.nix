@@ -59,8 +59,9 @@
       extraModulePackages = with pkgs.linuxPackages; [it87];
       supportedFilesystems = lib.mkForce ["btrfs" "zfs"];
       resumeDevice = "/dev/disk/by-label/nixos";
+      # sudo filefrag -v /swap/swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}'
       kernelParams = [
-        "resume_offset=533760"
+        "resume_offset=269568"
       ];
 
       extraModprobeConfig = ''
