@@ -2,31 +2,32 @@
   pkgs,
   config,
   ...
-}: let
-  cfg = config.editors.nvim;
-  inherit (config.lib.file) mkOutOfStoreSymlink;
-in {
-  home.packages = with pkgs; [
-    ripgrep
-    fd
-    gnumake
-    alejandra
-    prettier
-    prettierd
-    # black
-    blade-formatter
-  ];
+}: {
+  config = {
+    stylix.targets.neovim.enable = false;
 
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    defaultEditor = true;
+    home.packages = with pkgs; [
+      ripgrep
+      fd
+      gnumake
+      alejandra
+      prettier
+      prettierd
+      # black
+      blade-formatter
+    ];
 
-    extraLuaConfig = ''
-      require("geneser")
-    '';
+    programs.neovim = {
+      enable = true;
+      viAlias = true;
+      vimAlias = true;
+      defaultEditor = true;
+
+      extraLuaConfig = ''
+        require("config.lazy")
+      '';
+    };
+
+    xdg.configFile."nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "/home/${config.home.username}/dotfiles/home/editors/nvim/lua";
   };
-
-  xdg.configFile."nvim/lua".source = mkOutOfStoreSymlink "/home/${config.home.username}/dotfiles/home/editors/nvim/lua";
 }
