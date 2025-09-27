@@ -82,7 +82,7 @@
       "plugin:hyprbars:nobar, class:MATLAB, title:DefaultOverlayManager.JWindow"
 
       # don't render hyprbars on tiling windows
-      "plugin:hyprbars:nobar, floating:0"
+      # "plugin:hyprbars:nobar, floating:0"
 
       # less sensitive scroll for some windows
       # browser(-based)
