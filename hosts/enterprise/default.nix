@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./disks.nix
     ./hyprland.nix
+    ./nvidia.nix
   ];
 
   environment = {
@@ -44,7 +45,5 @@
   services = {
     # for SSD/NVME
     fstrim.enable = true;
-
-    getty.autologinUser = "olivergeneser";
   };
 }

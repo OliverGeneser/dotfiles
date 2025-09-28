@@ -11,7 +11,7 @@
 
     mod = "${self}/system";
     # get the basic config to build on top of
-    inherit (import mod) laptop desktop desktop-nvidia server;
+    inherit (import mod) laptop desktop server;
 
     # get these into the module system
     specialArgs = {inherit inputs self;};
@@ -19,7 +19,7 @@
     enterprise = nixosSystem {
       inherit specialArgs;
       modules =
-        desktop-nvidia
+        desktop
         ++ [
           ./enterprise
           #"${mod}/core/lanzaboote.nix"

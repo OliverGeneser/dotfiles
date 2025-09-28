@@ -18,12 +18,11 @@
   programs.xwayland.enable = true;
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = ["amdgpu" "nvidia"];
 
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "nvidia";
     XDG_SESSION_TYPE = "wayland";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
 
     GDK_BACKEND = "wayland,x11";
     NVD_BACKEND = "direct";
@@ -43,7 +42,7 @@
     #AWT_TOOLKIT = "MToolkit";
 
     # QT HDPI
-    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "2";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     QT_QPA_PLATFORM = "wayland";
 
@@ -93,5 +92,15 @@
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.latest;
+
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      # Make sure to use the correct Bus ID values for your system!
+      nvidiaBusId = "PCI:1:0:0";
+      amdgpuBusId = "PCI:11:0:0";
+    };
   };
 }

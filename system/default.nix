@@ -28,7 +28,7 @@ let
     ./services/virtualisation/gluetun
   ];
 
-  desktop-minimal = [
+  desktop = [
     ./core
     ./core/boot.nix
 
@@ -47,20 +47,9 @@ let
     ./services/pipewire.nix
     ./services/printing.nix
     # ./services/searx.nix
-    #./services/virtualisation/docker
+    # ./services/virtualisation/docker
     ./services/virtualisation/podman
   ];
-  desktop =
-    desktop-minimal
-    ++ [
-      ./hardware/graphics.nix
-    ];
-
-  desktop-nvidia =
-    desktop-minimal
-    ++ [
-      ./hardware/nvidia.nix
-    ];
 
   laptop =
     desktop
@@ -71,5 +60,5 @@ let
       ./services/power.nix
     ];
 in {
-  inherit desktop desktop-nvidia laptop server;
+  inherit desktop laptop server;
 }
