@@ -89,7 +89,7 @@ in {
         # lock screen, to be used with the special key Fn+F10 on my keyboard
         "$mod, I, exec, loginctl lock-session"
         # Suspend/Hibernate system
-        "$mod, S, exec, systemctl hybrid-sleep"
+        "$mod, S, exec, systemctl suspend"
         # select area to perform OCR on
         "$mod, O, exec, ${runOnce "wl-ocr"}"
         ", XF86Favorites, exec, ${runOnce "wl-ocr"}"

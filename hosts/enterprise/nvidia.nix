@@ -56,8 +56,6 @@
     #__GL_MaxFramesAllowed = "1";
     #XWAYLAND_NO_GLAMOR = "1"; # with this you'll need to use gamescope for gaming
 
-    #__NV_PRIME_RENDER_OFFLOAD = "1";
-    #__VK_LAYER_NV_optimus = "NVIDIA_only";
     #WLR_DRM_NO_ATOMIC = "1";
     #WLR_USE_LIBINPUT = "1";
     #WLR_RENDERER_ALLOW_SOFTWARE = "1";

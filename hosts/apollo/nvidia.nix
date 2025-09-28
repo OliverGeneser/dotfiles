@@ -9,21 +9,27 @@
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
+      libva
       vaapiVdpau
       libvdpau-va-gl
       nvidia-vaapi-driver
+
+      # Intel
+      intel-compute-runtime-legacy1
+      intel-vaapi-driver
+
+      libGL
     ];
   };
 
   programs.xwayland.enable = true;
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = ["modesetting" "nvidia"];
 
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "nvidia";
     XDG_SESSION_TYPE = "wayland";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
 
     GDK_BACKEND = "wayland,x11";
     NVD_BACKEND = "direct";
@@ -57,11 +63,10 @@
     #__GL_MaxFramesAllowed = "1";
     #XWAYLAND_NO_GLAMOR = "1"; # with this you'll need to use gamescope for gaming
 
-    #__NV_PRIME_RENDER_OFFLOAD = "1";
-    #__VK_LAYER_NV_optimus = "NVIDIA_only";
     #WLR_DRM_NO_ATOMIC = "1";
     #WLR_USE_LIBINPUT = "1";
     #WLR_RENDERER_ALLOW_SOFTWARE = "1";
+    #__NV_DISABLE_EXPLICIT_SYNC="1";
   };
 
   hardware.nvidia = {
@@ -99,6 +104,11 @@
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
       # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
+
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
     };
   };
 }
