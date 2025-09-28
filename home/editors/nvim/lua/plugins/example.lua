@@ -51,7 +51,7 @@ if true then
 			},
 		},
 		{
-			"jiaoshijie/undotree",
+			"mbbill/undotree",
 			dependencies = { "nvim-lua/plenary.nvim" },
 			---@module 'undotree.collector'
 			---@type UndoTreeCollector.Opts
