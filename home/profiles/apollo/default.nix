@@ -12,6 +12,8 @@
     # programs
     ../../programs
     ../../programs/dev
+    ../../programs/design/inkscape.nix
+    ../../programs/design/orca-slicer.nix
     ../../programs/design/superslicer.nix
     ../../programs/design/freecad.nix
     ../../programs/design/gimp.nix
