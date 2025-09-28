@@ -27,7 +27,14 @@
   # nh default flake
   environment.variables.NH_FLAKE = "/home/olivergeneser/dotfiles";
 
-  networking.hostName = "apollo";
+  networking = {
+    hostName = "apollo";
+    nftables.enable = true;
+    firewall = {
+      allowedTCPPorts = [];
+      allowedUDPPorts = [];
+    };
+  };
 
   security.tpm2.enable = true;
 
