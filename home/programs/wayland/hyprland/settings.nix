@@ -123,19 +123,19 @@ in {
         class = "cs2";
       };
 
-      hyprbars = {
-        bar_height = 20;
-        bar_precedence_over_border = true;
-
-        # order is right-to-left
-        hyprbars-button = [
-          # close
-          "rgb(ffb4ab), 15, , hyprctl dispatch killactive"
-          # maximize
-          "rgb(b6c4ff), 15, , hyprctl dispatch fullscreen 1"
-        ];
-      };
-
+      # hyprbars = {
+      #   bar_height = 20;
+      #   bar_precedence_over_border = true;
+      #
+      #   # order is right-to-left
+      #   hyprbars-button = [
+      #     # close
+      #     "rgb(ffb4ab), 15, , hyprctl dispatch killactive"
+      #     # maximize
+      #     "rgb(b6c4ff), 15, , hyprctl dispatch fullscreen 1"
+      #   ];
+      # };
+      #
       hyprexpo = {
         columns = 3;
         gap_size = 4;

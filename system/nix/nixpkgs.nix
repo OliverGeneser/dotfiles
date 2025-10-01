@@ -10,7 +10,7 @@
     config.permittedInsecurePackages = [
       "electron-25.9.0"
       "electron-32.3.3"
-      "beekeeper-studio-5.3.6"
+      "beekeeper-studio-5.4.0"
       "qtwebengine-5.15.19"
     ];
 
