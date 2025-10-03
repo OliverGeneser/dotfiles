@@ -67,7 +67,7 @@
         "dev" = {
           id = "rrk9d-szxeq";
           path = "~/dev"; # Which folder to add to Syncthing
-          devices = ["enterprise" "thor"]; # Which devices to share the folder with
+          devices = ["enterprise"]; # Which devices to share the folder with
           type = "receiveonly";
         };
       };

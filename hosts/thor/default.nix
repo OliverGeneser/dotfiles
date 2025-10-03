@@ -45,7 +45,7 @@
             "dev" = {
               id = "rrk9d-szxeq";
               path = "/mnt/storage/vault/backup/dev"; # Which folder to add to Syncthing
-              devices = ["enterprise" "apollo"]; # Which devices to share the folder with
+              devices = ["enterprise"]; # Which devices to share the folder with
               type = "receiveonly";
             };
           };
@@ -56,7 +56,7 @@
     boot = {
       kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
       kernelModules = ["zfs" "coretemp" "it87"];
-      extraModulePackages = with pkgs.linuxPackages; [it87];
+      extraModulePackages = with pkgs.linuxPackages_latest; [it87];
       supportedFilesystems = lib.mkForce ["btrfs" "zfs"];
       resumeDevice = "/dev/disk/by-label/nixos";
       # sudo btrfs inspect-internal map-swapfile -r /swap/swapfile

@@ -6,6 +6,7 @@
 }: let
   inherit (lib) mkOption types;
   cfg = config.custom.services.syncthing;
+  cfgUser = config.custom.user;
 in {
   options.custom.services.syncthing = {
     devices = mkOption {
@@ -74,9 +75,17 @@ in {
         group = "users";
         overrideDevices = true; # overrides any devices added or deleted through the WebUI
         overrideFolders = true; # overrides any folders added or deleted through the WebUI
+
+        guiAddress = "0.0.0.0:8384";
+
         settings = {
           devices = cfg.devices;
           folders = cfg.folders;
+
+          gui = {
+            user = "${cfgUser.name}";
+            password = "password";
+          };
         };
       };
     };
