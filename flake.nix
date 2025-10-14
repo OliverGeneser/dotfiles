@@ -47,10 +47,15 @@
         devShells.node22 = pkgs.mkShell {
           packages = with pkgs; [
             corepack_22
-            libuuid
             nodejs_22
+            bun
             zip
+            libuuid
+            gcc
+            nodePackages.node-gyp
+            python3 # node-gyp needs Python
           ];
+
           buildInputs = with pkgs; [
             cairo
             giflib
@@ -61,9 +66,7 @@
             pango
             pixman
             pkg-config
-            pkgs.nodePackages.node-gyp-build
           ];
-          name = "Nodejs 22";
 
           env = {
             PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING = 1;
@@ -71,36 +74,16 @@
             PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
             PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
           };
-          shellHook = ''
-            export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [pkgs.libuuid pkgs.pixman pkgs.pkg-config]}:$LD_LIBRARY_PATH"
-            node --version
-          '';
-        };
-
-        devShells.q-inspect = pkgs.mkShell {
-          packages = with pkgs; [
-            corepack_22
-            libuuid
-            nodejs_22
-            zip
-          ];
-          buildInputs = with pkgs; [
-            cairo
-            giflib
-            libjpeg
-            libpng
-            librsvg
-            openconnect
-            pango
-            pixman
-            pkg-config
-            pkgs.nodePackages.node-gyp-build
-          ];
-          name = "q-inspect";
 
           shellHook = ''
-            export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [pkgs.libuuid pkgs.pixman pkgs.pkg-config]}:$LD_LIBRARY_PATH"
-            node --version
+            export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [
+              pkgs.libuuid
+              pkgs.pixman
+              pkgs.pkg-config
+            ]}:$LD_LIBRARY_PATH"
+
+            echo "Node: $(node --version)"
+            echo "Bun: $(bun --version)"
           '';
         };
 
@@ -149,11 +132,6 @@
 
     anyrun.url = "github:fufexan/anyrun/launch-prefix";
 
-    arkenfox = {
-      url = "github:OliverGeneser/arkenfox-nixos";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     catppuccin = {
       url = "github:catppuccin/nix";
     };
@@ -171,11 +149,6 @@
 
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -275,8 +248,6 @@
       #
       # inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # nixpkgs-howdy.url = "github:fufexan/nixpkgs/howdy";
 
     git-hooks-nix = {
       url = "github:cachix/git-hooks.nix";
