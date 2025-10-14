@@ -4,7 +4,6 @@
   cache = config.xdg.cacheHome;
 in {
   imports = [
-    ./programs
     ./shell/starship.nix
     ./shell/zsh.nix
     ./shell/zoxide.nix

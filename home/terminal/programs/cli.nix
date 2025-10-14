@@ -73,9 +73,6 @@
     wget
 
     ghostscript
-
-    s3cmd
-    turso-cli
   ];
 
   programs = {

@@ -39,6 +39,25 @@
     ../../services/wayland/hypridle.nix
     # ../../services/wayland/wluma.nix
 
+    # terminal
+    ../../terminal/programs/aws.nix
+    ../../terminal/programs/bat.nix
+    ../../terminal/programs/bun.nix
+    ../../terminal/programs/cli.nix
+    ../../terminal/programs/git.nix
+    ../../terminal/programs/htop.nix
+    ../../terminal/programs/nix.nix
+    ../../terminal/programs/nodejs.nix
+    ../../terminal/programs/opencode.nix
+    ../../terminal/programs/python.nix
+    ../../terminal/programs/podman.nix
+    ../../terminal/programs/skim.nix
+    ../../terminal/programs/sqlite.nix
+    ../../terminal/programs/ssh.nix
+    ../../terminal/programs/turso.nix
+    ../../terminal/programs/yazi
+    ../../terminal/programs/xdg.nix
+
     # terminal emulators
     ../../terminal/emulators/foot.nix
     ../../terminal/emulators/wezterm
