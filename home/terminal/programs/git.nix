@@ -17,7 +17,7 @@ in {
   programs.git = {
     enable = true;
 
-    extraConfig = {
+    settings = {
       branch = {
         sort = "-committerdate";
       };
@@ -104,6 +104,11 @@ in {
       tag = {
         sort = "version:refname";
       };
+
+      user = {
+        name = "Oliver Geneser";
+        email = "hello@geneser.xyz";
+      };
     };
 
     ignores = ["*~" "*.swp" "*result*" ".direnv" "node_modules"];
@@ -113,8 +118,5 @@ in {
       signByDefault = true;
       format = "ssh";
     };
-
-    userEmail = "hello@geneser.xyz";
-    userName = "Oliver Geneser";
   };
 }
