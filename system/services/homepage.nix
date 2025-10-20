@@ -108,7 +108,7 @@
         }
         {
           resources = {
-            label = "system";
+            label = "System";
             cpu = true;
             cputemp = true;
             uptime = true;
@@ -120,11 +120,11 @@
         }
         {
           resources = {
-            label = "storage";
+            label = "Storage";
             expanded = true;
             disk = [
-              "/mnt/root/disk1"
-              "/mnt/root/disk2"
+              "/mnt/disk1"
+              "/mnt/disk2"
               "/mnt/parity1"
             ];
           };
