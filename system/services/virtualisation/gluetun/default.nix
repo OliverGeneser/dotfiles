@@ -53,7 +53,7 @@
 
   # Containers
   virtualisation.oci-containers.containers."gluetun" = {
-    image = "qmcgaw/gluetun:latest";
+    image = "ghcr.io/qdm12/gluetun:latest";
     environmentFiles = [config.sops.secrets.gluetun_env.path];
     volumes = [
       "/persist/docker-volumes/gluetun:/gluetun:rw"
@@ -97,7 +97,7 @@
   };
 
   virtualisation.oci-containers.containers."qbittorrent" = {
-    image = "linuxserver/qbittorrent:latest";
+    image = "lscr.io/linuxserver/qbittorrent:latest";
     environmentFiles = [config.sops.secrets.qbittorrent_env.path];
     volumes = [
       "/persist/torrents:/data/torrents:rw"
@@ -127,7 +127,7 @@
   };
 
   virtualisation.oci-containers.containers."jellyseerr" = {
-    image = "fallenbagel/jellyseerr:latest";
+    image = "ghcr.io/fallenbagel/jellyseerr:latest";
     environmentFiles = [config.sops.secrets.jellyseerr_env.path];
     volumes = [
       "/persist/docker-volumes/jellyseerr:/app/config:rw"
