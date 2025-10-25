@@ -28,11 +28,11 @@
 
     opencode = self: super: {
       opencode = super.opencode.overrideAttrs (final: prev: {
-        version = "0.15.16";
+        version = "0.15.17";
 
         src = prev.src.override {
           tag = "v${final.version}";
-          hash = "sha256-7kv8LGWQ0QKudUDtc5h+lIyhN5DYlP7B4XQxu7SmBeU=";
+          hash = "sha256-wEWCvxSCsIrXuAshWtFRGy/iqBctWhHom/uRkSV3UTc=";
         };
 
         tui = prev.tui.overrideAttrs (_: {
@@ -40,7 +40,7 @@
         });
 
         node_modules = prev.node_modules.overrideAttrs (_: {
-          outputHash = "sha256-8pJBLNPuF7+wcUCNoI9z68q5Pl6Mvm1ZvIDianLPdHo=";
+          outputHash = "sha256-zQfbh4X/FtoVh2A7YEEZKmCHnot6lsCzxwTJwkEdu10=";
         });
       });
     };
