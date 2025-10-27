@@ -58,6 +58,7 @@ in {
       nerd-fonts.fira-code
 
       manrope
+      geist-font
     ];
 
     fontconfig = {
