@@ -67,7 +67,7 @@ in {
         "$mod, E, exec, uwsm app -- pcmanfm"
         "$mod, F, exec, ${toggle "tofi-drun"} | xargs hyprctl dispatch exec --"
         "$mod, Q, killactive,"
-        "$mod, X, fullscreen,"
+        "$mod, X, fullscreen, 1"
         "$mod, G, togglegroup,"
         "$mod SHIFT, N, changegroupactive, f"
         "$mod SHIFT, P, changegroupactive, b"
