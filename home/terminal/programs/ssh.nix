@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   inherit (lib) mkIf mkOption types;
@@ -35,6 +36,15 @@ in {
               config.home.username;
             description = "The user of the SSH host.";
           };
+          kexAlgorithms = mkOption {
+            type = types.nullOr (types.listOf types.str);
+            default = [
+              "sntrup761x25519-sha512"
+              "sntrup761x25519-sha512@openssh.com"
+              "mlkem768x25519-sha256"
+            ];
+            description = "Specifies the available KEX (Key Exchange) algorithms.";
+          };
         };
       });
       default = {};
@@ -54,7 +64,27 @@ in {
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks = cfg.extraHosts;
+      matchBlocks =
+        {
+          "*" = {
+            kexAlgorithms = [
+              "sntrup761x25519-sha512"
+              "sntrup761x25519-sha512@openssh.com"
+              "mlkem768x25519-sha256"
+            ];
+          };
+          "github.com" = {
+            kexAlgorithms = [
+              "sntrup761x25519-sha512"
+              "sntrup761x25519-sha512@openssh.com"
+              "mlkem768x25519-sha256"
+              "curve25519-sha256"
+              "curve25519-sha256@libssh.org"
+            ];
+          };
+        }
+        // cfg.extraHosts;
+      package = pkgs.openssh;
     };
   };
 }

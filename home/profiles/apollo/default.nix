@@ -44,6 +44,7 @@
     ../../terminal/programs/bat.nix
     ../../terminal/programs/bun.nix
     ../../terminal/programs/cli.nix
+    ../../terminal/programs/ffmpeg.nix
     ../../terminal/programs/git.nix
     ../../terminal/programs/htop.nix
     ../../terminal/programs/nix.nix

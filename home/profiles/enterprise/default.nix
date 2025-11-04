@@ -41,6 +41,7 @@
     ../../terminal/programs/bat.nix
     ../../terminal/programs/bun.nix
     ../../terminal/programs/cli.nix
+    ../../terminal/programs/ffmpeg.nix
     ../../terminal/programs/git.nix
     ../../terminal/programs/htop.nix
     ../../terminal/programs/nix.nix
@@ -93,18 +94,39 @@
     terminal.programs.ssh.extraHosts = {
       "bitbucket-qinspect" = {
         hostname = "bitbucket.org";
-        identityFile = "~/.ssh/ssh_prod_qreport";
+        identityFile = "~/.ssh/id_q_inspect_prod_0";
         identitiesOnly = true;
+        kexAlgorithms = [
+          "sntrup761x25519-sha512"
+          "sntrup761x25519-sha512@openssh.com"
+          "mlkem768x25519-sha256"
+          "curve25519-sha256"
+          "curve25519-sha256@libssh.org"
+        ];
       };
       "qmaster.q-inspect.com" = {
         hostname = "qmaster.q-inspect.com";
-        identityFile = "~/.ssh/ssh_prod_qreport";
+        identityFile = "~/.ssh/id_q_inspect_prod_0";
         identitiesOnly = true;
+        kexAlgorithms = [
+          "sntrup761x25519-sha512"
+          "sntrup761x25519-sha512@openssh.com"
+          "mlkem768x25519-sha256"
+          "curve25519-sha256"
+          "curve25519-sha256@libssh.org"
+        ];
       };
       "q-inspect.dk" = {
         hostname = "q-inspect.dk";
-        identityFile = "~/.ssh/ssh_prod_qreport";
+        identityFile = "~/.ssh/id_q_inspect_prod_0";
         identitiesOnly = true;
+        kexAlgorithms = [
+          "sntrup761x25519-sha512"
+          "sntrup761x25519-sha512@openssh.com"
+          "mlkem768x25519-sha256"
+          "curve25519-sha256"
+          "curve25519-sha256@libssh.org"
+        ];
       };
       "thor" = {
         hostname = "10.0.0.205";
@@ -119,6 +141,13 @@
         user = "oliverg";
         identityFile = "~/.ssh/id_ecdsa_sk";
         identitiesOnly = false;
+        kexAlgorithms = [
+          "sntrup761x25519-sha512"
+          "sntrup761x25519-sha512@openssh.com"
+          "mlkem768x25519-sha256"
+          "curve25519-sha256"
+          "curve25519-sha256@libssh.org"
+        ];
       };
       "tunnelboy" = {
         hostname = "10.0.0.230";
