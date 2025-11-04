@@ -15,7 +15,7 @@
 
     # utils
     curlie
-    du-dust
+    dust
     duf
     delta
     fd

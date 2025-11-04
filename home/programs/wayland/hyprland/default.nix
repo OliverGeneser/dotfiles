@@ -12,7 +12,7 @@
   ];
 
   home.packages = [
-    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+    inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
   ];
 
   # enable hyprland
@@ -20,9 +20,9 @@
     enable = true;
     systemd.enable = false;
 
-    package = inputs.hyprland.packages.${pkgs.system}.default;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
-    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+    plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [
       # hyprbars
       # hyprexpo
     ];

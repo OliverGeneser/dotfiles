@@ -12,7 +12,7 @@ in {
     package = mkOption {
       description = "Package to use for zen";
       type = types.package;
-      default = inputs.zen-browser.packages.${pkgs.system}.twilight;
+      default = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
     };
   };
 

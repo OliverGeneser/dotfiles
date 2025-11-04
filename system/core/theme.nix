@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  wallpapers = "(${self.packages.${pkgs.system}.wallpapers.gfda_34-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_40-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_45-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_63-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_72-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_91-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_155-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_162-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_172-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_189-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_192-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_203-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_205-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_207-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_208-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_210-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_212-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_215-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_230-black_5120x2880} ${self.packages.${pkgs.system}.wallpapers.gfda_242-black_5120x2880})";
+  wallpapers = "(${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_34-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_40-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_45-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_63-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_72-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_91-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_155-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_162-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_172-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_189-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_192-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_203-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_205-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_207-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_208-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_210-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_212-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_215-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_230-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_242-black_5120x2880})";
 
   wallpaperRandomizer = pkgs.writeShellScriptBin "wallpaperRandomizer" ''
     wallpapers=${wallpapers}
@@ -33,9 +33,9 @@ in {
     packages = with pkgs; [
       fira
       fira-go
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       source-serif
-      ubuntu_font_family
+      ubuntu-classic
       jetbrains-mono
       open-sans
 
@@ -89,7 +89,7 @@ in {
     homeManagerIntegration.autoImport = false;
     homeManagerIntegration.followSystem = false;
 
-    image = self.packages.${pkgs.system}.wallpapers.gfda_40-black_5120x2880;
+    image = self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_40-black_5120x2880;
 
     cursor = {
       name = "Bibata-Modern-Classic";
@@ -120,7 +120,7 @@ in {
       };
 
       emoji = {
-        package = pkgs.noto-fonts-emoji;
+        package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
       };
     };

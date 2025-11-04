@@ -1,16 +1,15 @@
 {pkgs, ...}: let
   pname = "helium";
-  version = "0.5.7.1";
+  version = "0.6.3.1";
 
   src = pkgs.fetchurl {
-    url = "https://github.com/imputnet/helium-linux/releases/download/0.5.7.1/helium-0.5.7.1-x86_64.AppImage";
-    hash = "sha256-A+fNcW7ujbeYqOb+gxzQ0p19J14csfFyok0RVRFxo60=";
+    url = "https://github.com/imputnet/helium-linux/releases/download/0.6.3.1/helium-0.6.3.1-x86_64.AppImage";
+    hash = "sha256-N7JpLLOdsnYuzYreN1iaHI992MR2SuXTmXHfa6fd1UU=";
   };
   appimageContents = pkgs.appimageTools.extract {inherit pname version src;};
 in
   pkgs.appimageTools.wrapType2 {
-    inherit pname version src;
-    pkgs = pkgs;
+    inherit pkgs pname version src;
     extraInstallCommands = ''
       install -m 444 -D ${appimageContents}/${pname}.desktop -t $out/share/applications
       substituteInPlace $out/share/applications/${pname}.desktop \
@@ -35,6 +34,6 @@ in
         autoPatchelfHook
         asar
         # override doesn't preserve splicing https://github.com/NixOS/nixpkgs/issues/132651
-        (buildPackages.wrapGAppsHook.override {inherit (buildPackages) makeWrapper;})
+        (buildPackages.wrapGAppsHook3.override {inherit (buildPackages) makeWrapper;})
       ];
   }

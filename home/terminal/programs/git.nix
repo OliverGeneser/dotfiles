@@ -8,7 +8,7 @@
 in {
   home.packages = [
     pkgs.delta
-    self.packages.${pkgs.system}.gca
+    self.packages.${pkgs.stdenv.hostPlatform.system}.gca
   ];
 
   # enable scrolling in git diff

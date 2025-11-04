@@ -4,7 +4,10 @@
   programs.nixcord = {
     enable = true;
     discord.enable = false;
-    vesktop.enable = true;
+    vesktop = {
+      enable = true;
+      #useSystemVencord = false;
+    };
     #quickCss = "some CSS"; # quickCSS file
     config = {
       #   useQuickCss = true; # use out quickCSS

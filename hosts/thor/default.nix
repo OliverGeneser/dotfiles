@@ -90,8 +90,8 @@
         pciutils
         mergerfs
         mergerfs-tools
-        self.packages.${pkgs.system}.snapraid-btrfs
-        self.packages.${pkgs.system}.snapraid-btrfs-runner
+        self.packages.${pkgs.stdenv.hostPlatform.system}.snapraid-btrfs
+        self.packages.${pkgs.stdenv.hostPlatform.system}.snapraid-btrfs-runner
       ];
     };
 
@@ -200,7 +200,7 @@
           startAt = "01:00";
           serviceConfig = {
             Type = "oneshot";
-            ExecStart = "${self.packages.${pkgs.system}.snapraid-btrfs-runner}/bin/snapraid-btrfs-runner";
+            ExecStart = "${self.packages.${pkgs.stdenv.hostPlatform.system}.snapraid-btrfs-runner}/bin/snapraid-btrfs-runner";
           };
         };
       };

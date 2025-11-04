@@ -3,7 +3,23 @@
   self,
   ...
 }: {
-  home.packages = with pkgs; [
-    opencode
-  ];
+  programs.opencode = {
+    enable = true;
+    settings = {
+      autoupdate = true;
+      mcp = {
+        context7 = {
+          type = "remote";
+          url = "https://mcp.context7.com/mcp";
+          headers = {
+            "CONTEXT7_API_KEY" = "{env:CONTEXT7_API_KEY}";
+          };
+        };
+        gh_grep = {
+          type = "remote";
+          url = "https://mcp.grep.app";
+        };
+      };
+    };
+  };
 }

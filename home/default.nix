@@ -46,7 +46,7 @@
     autoEnable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
-    image = self.packages.${pkgs.system}.wallpapers.gfda_40-black_5120x2880;
+    image = self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_40-black_5120x2880;
 
     cursor = {
       name = "Bibata-Modern-Classic";
@@ -77,7 +77,7 @@
       };
 
       emoji = {
-        package = pkgs.noto-fonts-emoji;
+        package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
       };
     };

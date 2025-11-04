@@ -5,8 +5,7 @@
   ...
 }: {
   imports = [
-    # ./anyrun
-    # ./browsers/chromium.nix
+    ./anyrun
     ./browsers/helium.nix
     ./browsers/mullvad.nix
     ./browsers/zen.nix
@@ -23,7 +22,7 @@
     halloy
     signal-desktop
     tutanota-desktop
-    tdesktop
+    telegram-desktop
 
     qalculate-qt
     gnome-control-center

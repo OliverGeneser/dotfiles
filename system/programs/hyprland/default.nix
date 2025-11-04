@@ -13,7 +13,7 @@
   ];
 
   environment.systemPackages = [
-    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+    inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
     pkgs.hyprpolkitagent
   ];
 
@@ -24,13 +24,13 @@
     enable = true;
     withUWSM = true;
 
-    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+    plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [
       # hyprbars
       # hyprexpo
     ];
 
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
   # tell Electron/Chromium to run on Wayland

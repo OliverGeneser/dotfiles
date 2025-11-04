@@ -59,5 +59,5 @@
     }
   ];
 
-  environment.systemPackages = [inputs.prismlauncher.packages.${pkgs.system}.prismlauncher];
+  environment.systemPackages = [inputs.prismlauncher.packages.${pkgs.stdenv.hostPlatform.system}.prismlauncher];
 }

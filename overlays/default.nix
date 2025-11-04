@@ -1,8 +1,12 @@
-{inputs, ...}: {
+{
+  inputs,
+  withSystemVencord,
+  ...
+}: {
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun opencode turso-cli];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun turso-cli];
 
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (final: prev: {
@@ -23,25 +27,6 @@
           url = "https://github.com/oven-sh/bun/releases/download/bun-v${final.version}/bun-linux-x64.zip";
           hash = "sha256-QAgkyCv8wIVDZbytoRz1PXOE7LHiw9oOLAosalJ9Vik=";
         };
-      });
-    };
-
-    opencode = self: super: {
-      opencode = super.opencode.overrideAttrs (final: prev: {
-        version = "0.15.17";
-
-        src = prev.src.override {
-          tag = "v${final.version}";
-          hash = "sha256-wEWCvxSCsIrXuAshWtFRGy/iqBctWhHom/uRkSV3UTc=";
-        };
-
-        tui = prev.tui.overrideAttrs (_: {
-          vendorHash = "sha256-g3+2q7yRaM6BgIs5oIXz/u7B84ZMMjnxXpvFpqDePU4=";
-        });
-
-        node_modules = prev.node_modules.overrideAttrs (_: {
-          outputHash = "sha256-zQfbh4X/FtoVh2A7YEEZKmCHnot6lsCzxwTJwkEdu10=";
-        });
       });
     };
 
