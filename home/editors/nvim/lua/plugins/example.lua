@@ -42,6 +42,16 @@ return {
 			inlay_hints = {
 				enabled = false,
 			},
+			servers = {
+				pyright = {
+					before_init = function(_, config)
+						local venv = vim.fn.getcwd() .. "/.venv/bin/python"
+						if vim.fn.filereadable(venv) == 1 then
+							config.settings.python.pythonPath = venv
+						end
+					end,
+				},
+			},
 		},
 	},
 	{
@@ -53,7 +63,7 @@ return {
 			-- your options
 		},
 		keys = { -- load the plugin only when using it's keybinding:
-			{ "<leader>u", "<cmd>lua require('Undotree').toggle()<cr>", desc = "Toggle undotree" },
+			{ "<leader>tu", vim.cmd.UndotreeToggle, desc = "Toggle Undotree" },
 		},
 	},
 	{
