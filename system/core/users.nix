@@ -44,6 +44,7 @@ in {
 
         extraGroups =
           [
+            "adbusers"
             "input"
             "libvirtd"
             "networkmanager"
