@@ -32,12 +32,12 @@
 
     opencode = self: super: {
       opencode = super.opencode.overrideAttrs (final: prev: {
-        version = "1.0.25";
+        version = "1.0.35";
         dontStrip = true;
 
         src = super.fetchurl {
           url = "https://github.com/sst/opencode/releases/download/v${final.version}/opencode-linux-x64.zip";
-          hash = "sha256-ESsmlnFvmEPggRYOiacg3tGifWw8UQQP+ZGDcDCsCq4=";
+          hash = "sha256-/tz89K0qtJIW9FGXOlx6MIpUW/IlHBIFmejvkdJ3h8A=";
         };
       });
     };
