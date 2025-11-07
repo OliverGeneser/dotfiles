@@ -20,6 +20,7 @@
     };
     nix_access_tokens = {
       sopsFile = ../secrets.yaml;
+      owner = config.custom.user.name;
     };
     openrouter_api_key = {
       sopsFile = ../secrets.yaml;
