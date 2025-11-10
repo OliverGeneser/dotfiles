@@ -21,24 +21,43 @@
 
     bun = self: super: {
       bun = super.bun.overrideAttrs (final: prev: {
-        version = "1.3.1";
+        version = "1.3.2";
 
         src = super.fetchurl {
           url = "https://github.com/oven-sh/bun/releases/download/bun-v${final.version}/bun-linux-x64.zip";
-          hash = "sha256-QAgkyCv8wIVDZbytoRz1PXOE7LHiw9oOLAosalJ9Vik=";
+          hash = "sha256-DLVqRIS9d2Sj7vm55nq0V4QJgSh7RnlJdNHmYSy/Zwk=";
         };
       });
     };
 
     opencode = self: super: {
       opencode = super.opencode.overrideAttrs (final: prev: {
-        version = "1.0.35";
+        version = "1.0.55";
         dontStrip = true;
 
-        src = super.fetchurl {
-          url = "https://github.com/sst/opencode/releases/download/v${final.version}/opencode-linux-x64.zip";
-          hash = "sha256-/tz89K0qtJIW9FGXOlx6MIpUW/IlHBIFmejvkdJ3h8A=";
+        src = super.fetchFromGitHub {
+          owner = "sst";
+          repo = "opencode";
+          tag = "v${final.version}";
+          hash = "sha256-iKD58BA1ueIVsQXvsAZwXCMkSAM1ZzYPL8WGtKANfIE=";
         };
+
+        postPatch = ''
+          # don't require a specifc bun version
+          substituteInPlace packages/script/src/index.ts \
+            --replace-fail "if (process.versions.bun !== expectedBunVersion)" "if (false)"
+        '';
+        patches = [
+          # NOTE: Patch `packages/opencode/src/provider/models-macro.ts` to get contents of
+          # `_api.json` from the file bundled with `bun build`.
+          ./local-models-dev.patch
+          # NOTE: Skip npm pack commands in build.ts since packages are already in node_modules
+          ./skip-npm-pack.patch
+        ];
+
+        node_modules = prev.node_modules.overrideAttrs (_: {
+          outputHash = "sha256-RIHrhZ2dr3zlyMq4WUSaUdFiVTqNuM87iNZvNizSjKk=";
+        });
       });
     };
 
