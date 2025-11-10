@@ -64,7 +64,7 @@ in {
       [
         # compositor commands
         "$mod SHIFT, E, exec, pkill Hyprland"
-        "$mod, E, exec, uwsm app -- pcmanfm"
+        "$mod, E, exec, uwsm app -- wezterm -e yazi"
         "$mod, F, exec, ${toggle "tofi-drun"} | xargs hyprctl dispatch exec --"
         "$mod, Q, killactive,"
         "$mod, X, fullscreen, 1"
