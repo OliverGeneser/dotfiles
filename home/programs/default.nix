@@ -9,7 +9,7 @@
     ./browsers/helium.nix
     ./browsers/mullvad.nix
     ./browsers/zen.nix
-    ./communication/element.nix
+    # ./communication/element.nix
     ./communication/vesktop.nix
     ./design
     ./media

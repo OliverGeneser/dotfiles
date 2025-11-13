@@ -3,7 +3,8 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/disk/by-id/nvme-KXG50ZNV512G_TOSHIBA_X8DB327FK5SS";
+        #device = "/dev/disk/by-id/nvme-KXG50ZNV512G_TOSHIBA_X8DB327FK5SS";
+        device = "/dev/disk/by-id/nvme-WD_BLACK_SN850X_HS_1000GB_2252B0454805";
         content = {
           type = "gpt";
           partitions = {
