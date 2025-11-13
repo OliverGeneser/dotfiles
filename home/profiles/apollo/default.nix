@@ -75,7 +75,7 @@
     services.syncthing.settings = {
       devices = {
         "enterprise" = {
-          id = "ZGJM7WX-5BFTESE-ZAKA3QJ-PMEZM7W-SZLOISS-UYP6KWO-JQCUQLV-2X5NFQC";
+          id = "4NW7R3L-2MNRG2Q-AZFFT2P-33FI6L3-T3FYW3P-S3GE3MR-PLI3OKP-CJTAFQ5";
         };
         "thor" = {
           id = "PXNEEIO-OUUPKQ7-RJZ2UTW-UOBCO4L-2F73KMA-GZVIOGK-ASSV74C-RYUN7QE";

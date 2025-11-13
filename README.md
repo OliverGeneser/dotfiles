@@ -3,12 +3,7 @@
 ## Install
 
 ```
-sudo nix run github:nix-community/disko \
-        --extra-experimental-features "nix-command flakes" \
-        --no-write-lock-file \
-        -- \
-        --mode zap_create_mount \
-        "$HOME/dotfiles/hosts/$TARGET_HOST/disks.nix"
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ./hosts/X/disks.nix
 ```
 
 ```
