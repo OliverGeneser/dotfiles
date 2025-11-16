@@ -50,13 +50,13 @@
         profile.name = "desktop";
         profile.outputs = [
           {
-            criteria = "DP-5";
+            criteria = "DP-2";
             position = "0,0";
             scale = 1.0;
             mode = "2560x1440@144Hz";
           }
           {
-            criteria = "HDMI-A-2";
+            criteria = "HDMI-A-1";
             position = "320,-1080";
             scale = 1.0;
             mode = "1920x1080@60Hz";

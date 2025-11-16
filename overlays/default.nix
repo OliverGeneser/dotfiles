@@ -6,15 +6,15 @@
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun opencode turso-cli];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun opencode turbo-unwrapped turso-cli];
 
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (final: prev: {
-        version = "5.4.9";
+        version = "5.4.10";
 
         src = super.fetchurl {
           url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
-          hash = "sha256-KKZmjSemVv+suwAtiAArGzWImEyqaq+OMisr380mlOE=";
+          hash = "sha256-itD+UqRUxwSvD5frpjMs7ebBCWj53tZ0oaj09Hn1zqc=";
         };
       });
     };
@@ -42,23 +42,32 @@
           hash = "sha256-iKD58BA1ueIVsQXvsAZwXCMkSAM1ZzYPL8WGtKANfIE=";
         };
 
-        postPatch = ''
-          # don't require a specifc bun version
-          substituteInPlace packages/script/src/index.ts \
-            --replace-fail "if (process.versions.bun !== expectedBunVersion)" "if (false)"
-        '';
-        patches = [
-          # NOTE: Patch `packages/opencode/src/provider/models-macro.ts` to get contents of
-          # `_api.json` from the file bundled with `bun build`.
-          ./local-models-dev.patch
-          # NOTE: Skip npm pack commands in build.ts since packages are already in node_modules
-          ./skip-npm-pack.patch
-        ];
-
         node_modules = prev.node_modules.overrideAttrs (_: {
           outputHash = "sha256-RIHrhZ2dr3zlyMq4WUSaUdFiVTqNuM87iNZvNizSjKk=";
         });
       });
+    };
+
+    turbo-unwrapped = self: super: {
+      turbo-unwrapped = super.turbo-unwrapped.overrideAttrs (final: prev: {
+        version = "2.6.1";
+
+        src = super.fetchFromGitHub {
+          owner = "vercel";
+          repo = "turborepo";
+          tag = "v2.6.1";
+          hash = "sha256-NQjN3u+xTQkU9cenBTHRwGyMsy8Sm1xbHckaq/DYHJk=";
+        };
+        cargoDeps = self.pkgs.rustPlatform.importCargoLock {
+          lockFile = final.src + "/Cargo.lock";
+          allowBuiltinFetchGit = true;
+        };
+        cargoHash = null;
+      });
+
+      turbo = super.turbo.override {
+        turbo-unwrapped = self.turbo-unwrapped;
+      };
     };
 
     turso-cli = self: super: {
