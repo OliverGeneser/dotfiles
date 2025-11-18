@@ -1,11 +1,13 @@
 {pkgs, ...}: {
-  services.udisks2.enable = true;
+  services = {
+    udisks2.enable = true;
 
-  # Mount, trash, and other functionalities
-  services.gvfs.enable = true;
+    # Mount, trash, and other functionalities
+    gvfs.enable = true;
 
-  # Thumbnail support for images
-  services.tumbler.enable = true;
+    # Thumbnail support for images
+    tumbler.enable = true;
+  };
 
   environment = {
     systemPackages = with pkgs; [

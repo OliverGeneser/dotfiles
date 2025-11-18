@@ -1,10 +1,12 @@
 {
+  inputs,
   pkgs,
   self,
   ...
 }: {
   programs.opencode = {
     enable = true;
+    package = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
     settings = {
       autoupdate = true;
       mcp = {

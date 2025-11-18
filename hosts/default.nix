@@ -43,8 +43,6 @@
               backupFileExtension = ".hm-backup";
             };
           }
-
-          inputs.chaotic.nixosModules.default
         ];
     };
 
@@ -74,8 +72,6 @@
               backupFileExtension = ".hm-backup";
             };
           }
-
-          inputs.chaotic.nixosModules.default
         ];
     };
 

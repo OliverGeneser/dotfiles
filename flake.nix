@@ -136,8 +136,6 @@
       url = "github:catppuccin/nix";
     };
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
     custom-udev-rules = {
       url = "github:OliverGeneser/custom-udev-rules";
     };
@@ -241,6 +239,10 @@
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    opencode = {
+      url = "github:sst/opencode";
     };
 
     nixos-hardware = {
