@@ -24,78 +24,78 @@
         highopacity
       ];
     in [
-      "blur, ${toRegex blurred}"
-      "xray 1, ${toRegex ["bar"]}"
-      "ignorealpha 0.5, ${toRegex (highopacity ++ ["music"])}"
-      "ignorealpha 0.2, ${toRegex lowopacity}"
+      "blur 1, match:namespace ${toRegex blurred}"
+      "xray 1, match:namespace ${toRegex ["bar"]}"
+      "ignore_alpha 0.5, match:namespace ${toRegex (highopacity ++ ["music"])}"
+      "ignore_alpha 0.2, match:namespace ${toRegex lowopacity}"
     ];
 
     # window rules
-    windowrulev2 = [
+    windowrule = [
       # telegram media viewer
-      "float, title:^(Media viewer)$"
+      "float 1, match:title ^(Media viewer)$"
 
       # Bitwarden extension
-      "float, title:^(.*Bitwarden Password Manager.*)$"
+      "float 1, match:title ^(.*Bitwarden Password Manager.*)$"
 
       # allow tearing in games
-      "immediate, class:^(osu\!|cs2)$"
+      "immediate 1, match:class ^(osu\!|cs2)$"
 
       # make Firefox/Zen PiP window floating and sticky
-      "float, title:^(Picture-in-Picture)$"
-      "pin, title:^(Picture-in-Picture)$"
-      "fullscreenstate 0 *, title:^(Picture-in-Picture)$"
-      "size 25% 25%, title:^(Picture-in-Picture)$"
-      "move 100%-w-5 100%-w-5, title:^(Picture-in-Picture)$"
+      "float 1, match:title ^(Picture-in-Picture)$"
+      "pin 1, match:title ^(Picture-in-Picture)$"
+      "fullscreen_state 0 *, match:title ^(Picture-in-Picture)$"
+      "size 25% 25%, match:title ^(Picture-in-Picture)$"
+      "move 100%-w-5 100%-w-5, match:title ^(Picture-in-Picture)$"
 
       # throw sharing indicators away
-      "workspace special silent, title:^(Firefox — Sharing Indicator)$"
-      "workspace special silent, title:^(Zen — Sharing Indicator)$"
-      "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
+      "workspace special silent, match:title ^(Firefox — Sharing Indicator)$"
+      "workspace special silent, match:title ^(Zen — Sharing Indicator)$"
+      "workspace special silent, match:title ^(.*is sharing (your screen|a window)\.)$"
 
       # start Spotify and YouTube Music in ws9
-      "workspace 9 silent, title:^(Spotify( Premium)?)$"
-      "workspace 9 silent, title:^(YouTube Music)$"
+      "workspace 9 silent, match:title ^(Spotify( Premium)?)$"
+      "workspace 9 silent, match:title ^(YouTube Music)$"
 
       # idle inhibit while watching videos
-      "idleinhibit focus, class:^(mpv|.+exe|celluloid)$"
-      "idleinhibit focus, class:^(zen)$, title:^(.*YouTube.*)$"
-      "idleinhibit fullscreen, class:^(zen)$"
+      "idle_inhibit focus 1, match:class ^(mpv|.+exe|celluloid)$"
+      "idle_inhibit focus 1, match:class ^(zen)$, match:title ^(.*YouTube.*)$"
+      "idle_inhibit fullscreen 1, match:class ^(zen)$"
 
-      "dimaround, class:^(gcr-prompter)$"
-      "dimaround, class:^(xdg-desktop-portal-gtk)$"
-      "dimaround, class:^(polkit-gnome-authentication-agent-1)$"
-      "dimaround, class:^(zen)$, title:^(File Upload)$"
+      "dim_around 1, match:class ^(gcr-prompter)$"
+      "dim_around 1, match:class ^(xdg-desktop-portal-gtk)$"
+      "dim_around 1, match:class ^(polkit-gnome-authentication-agent-1)$"
+      "dim_around 1, match:class ^(zen)$, match:title ^(File Upload)$"
 
       # fix xwayland apps
-      "rounding 0, xwayland:1"
-      "center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$"
-      "size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$"
+      "rounding 0, match:xwayland 1"
+      "center 1, match:class ^(.*jetbrains.*)$, match:title ^(Confirm Exit|Open Project|win424|win201|splash)$"
+      "size 640 400, match:class ^(.*jetbrains.*)$, match:title ^(splash)$"
 
       # don't render hyprbars on tiling windows
-      # "plugin:hyprbars:nobar, floating:0"
+      # "plugin:hyprbars:nobar, float 0"
 
       # less sensitive scroll for some windows
       # browser(-based)
-      "scrolltouchpad 0.1, class:^(zen|helium|firefox|chromium-browser|chrome-.*)$"
-      "scrolltouchpad 0.1, class:^(obsidian)$"
-      "scrolltouchpad 0.1, class:^(steam)$"
-      "scrolltouchpad 0.1, class:^(Zotero)$"
+      "scroll_touchpad 0.1, match:class ^(zen|helium|firefox|chromium-browser|chrome-.*)$"
+      "scroll_touchpad 0.1, match:class ^(obsidian)$"
+      "scroll_touchpad 0.1, match:class ^(steam)$"
+      "scroll_touchpad 0.1, match:class ^(Zotero)$"
       # GTK3
-      "scrolltouchpad 0.1, class:^(com.github.xournalpp.xournalpp)$"
-      "scrolltouchpad 0.1, class:^(libreoffice.*)$"
-      "scrolltouchpad 0.1, class:^(.virt-manager-wrapped)$"
-      "scrolltouchpad 0.1, class:^(xdg-desktop-portal-gtk)$"
+      "scroll_touchpad 0.1, match:class ^(com.github.xournalpp.xournalpp)$"
+      "scroll_touchpad 0.1, match:class ^(libreoffice.*)$"
+      "scroll_touchpad 0.1, match:class ^(.virt-manager-wrapped)$"
+      "scroll_touchpad 0.1, match:class ^(xdg-desktop-portal-gtk)$"
       # Qt5
-      "scrolltouchpad 0.1, class:^(org.prismlauncher.PrismLauncher)$"
-      "scrolltouchpad 0.1, class:^(org.kde.kdeconnect.app)$"
+      "scroll_touchpad 0.1, match:class ^(org.prismlauncher.PrismLauncher)$"
+      "scroll_touchpad 0.1, match:class ^(org.kde.kdeconnect.app)$"
       # Others
-      "scrolltouchpad 0.1, class:^(org.pwmt.zathura)$"
+      "scroll_touchpad 0.1, match:class ^(org.pwmt.zathura)$"
 
       # Steam
-      "fullscreen,class:^steam_app_\d+$"
-      "monitor 1,class:^steam_app_\d+$"
-      "workspace 10,class:^steam_app_\d+$"
+      "fullscreen 1, match:class ^steam_app_\d+$"
+      "monitor 1, match:class ^steam_app_\d+$"
+      "workspace 10, match:class ^steam_app_\d+$"
     ];
   };
 }

@@ -25,6 +25,7 @@
     withUWSM = true;
 
     plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [
+      csgo-vulkan-fix
       # hyprbars
       # hyprexpo
     ];

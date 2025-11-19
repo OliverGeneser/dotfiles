@@ -31,7 +31,7 @@
     ];
 
     # window rules
-    windowrulev2 = [
+    windowrule = [
       # telegram media viewer
       "float, title:^(Media viewer)$"
 

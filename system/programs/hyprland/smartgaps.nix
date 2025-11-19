@@ -19,15 +19,15 @@
 
       if [ $? -eq 0 ]; then
       ${forEach (selector: ''
-        hyprctl keyword workspace "${selector}, gapsout:${toString gaps_out}, gapsin:${toString gaps_in}"
-        hyprctl keyword windowrulev2 "bordersize ${toString border_size}, floating:0, onworkspace:${selector}"
-        hyprctl keyword windowrulev2 "rounding ${toString rounding}, floating:0, onworkspace:${selector}"
+        hyprctl keyword workspace "${selector}, gaps_out ${toString gaps_out}, gaps_in ${toString gaps_in}"
+        hyprctl keyword windowrule "match:workspace ${selector}, border_size ${toString border_size}, float 0"
+        hyprctl keyword windowrule "match:workspace ${selector}, rounding ${toString rounding}, float 0"
       '')}
       else
       ${forEach (selector: ''
-        hyprctl keyword workspace "${selector}, gapsout:0, gapsin:0"
-        hyprctl keyword windowrulev2 "bordersize 0, floating:0, onworkspace:${selector}"
-        hyprctl keyword windowrulev2 "rounding 0, floating:0, onworkspace:${selector}"
+        hyprctl keyword workspace "${selector}, gaps_out 0, gaps_in 0"
+        hyprctl keyword windowrule "match:workspace ${selector}, border_size 0, float 0"
+        hyprctl keyword windowrule "match:workspace ${selector}, rounding 0, float 0"
       '')}
       fi
     '';
@@ -35,11 +35,11 @@ in {
   # Ref https://wiki.hyprland.org/Configuring/Workspace-Rules/
   # "Smart gaps" / "No gaps when only"
   programs.hyprland.settings = {
-    workspace = map (x: "${x}, gapsout:0, gapsin:0") workspaceSelectors;
+    workspace = map (x: "${x}, gaps_out 0, gaps_in 0") workspaceSelectors;
 
-    windowrulev2 = flatten (map (x: [
-        "bordersize 0, floating:0, onworkspace:${x}"
-        "rounding 0, floating:0, onworkspace:${x}"
+    windowrule = flatten (map (x: [
+        "match:workspace ${x}, border_size 0, float 0"
+        "match:workspace ${x}, rounding 0, float 0"
       ])
       workspaceSelectors);
 
