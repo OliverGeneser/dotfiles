@@ -9,6 +9,7 @@
       repl = pkgs.callPackage ./repl {};
       snapraid-btrfs = pkgs.callPackage ./snapraid-btrfs {};
       snapraid-btrfs-runner = pkgs.callPackage ./snapraid-btrfs-runner {snapraid-btrfs = snapraid-btrfs;};
+      tmux-sessionizer = pkgs.callPackage ./tmux-sessionizer {};
       wallpapers = pkgs.callPackage ./wallpapers {};
       wl-ocr = pkgs.callPackage ./wl-ocr {};
     };

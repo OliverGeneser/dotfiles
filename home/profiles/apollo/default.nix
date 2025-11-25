@@ -30,7 +30,7 @@
     # system services
     ../../services/system/power-monitor.nix
     ../../services/system/syncthing.nix
-    #../../services/system/tailray.nix
+    ../../services/system/tailray.nix
     ../../services/system/udiskie.nix
 
     # wayland-specific
@@ -62,6 +62,9 @@
     # terminal emulators
     ../../terminal/emulators/foot.nix
     ../../terminal/emulators/wezterm
+
+    # terminal multiplexers
+    ../../terminal/multiplexer/tmux.nix
   ];
 
   config = {

@@ -4,7 +4,7 @@
     xdgOpenUsePortal = true;
     config = {
       common.default = ["gtk"];
-      hyprland.default = ["gtk" "hyprland"];
+      hyprland.default = ["hyprland" "gtk"];
     };
 
     extraPortals = [

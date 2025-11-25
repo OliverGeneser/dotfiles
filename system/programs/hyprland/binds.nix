@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   resize = pkgs.writeShellScriptBin "resize" ''
     #!/usr/bin/env bash
 
@@ -81,7 +85,7 @@ in {
 
         # utility
         # terminal
-        "$mod, Return, exec, uwsm app -- wezterm"
+        "$mod, Return, exec, uwsm app -- ${inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/ghostty"
         # logout menu
         "$mod, Escape, exec, ${toggle "wlogout"} -b 4 -p layer-shell"
         # lock screen

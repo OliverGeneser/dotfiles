@@ -6,50 +6,28 @@
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun turbo-unwrapped turso-cli];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun turso-cli];
 
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (final: prev: {
-        version = "5.4.11";
+        version = "5.4.12";
 
         src = super.fetchurl {
           url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
-          hash = "sha256-yTQiVhyq0w2JvxMaSoUegocHZXq4zRVZR1yxQVn+bPQ=";
+          hash = "sha256-mz4CYCdbnIJFC94EwvBiq0NuCYqLRLPCIShlg4KEZKM=";
         };
       });
     };
 
     bun = self: super: {
       bun = super.bun.overrideAttrs (final: prev: {
-        version = "1.3.2";
+        version = "1.3.3";
 
         src = super.fetchurl {
           url = "https://github.com/oven-sh/bun/releases/download/bun-v${final.version}/bun-linux-x64.zip";
-          hash = "sha256-DLVqRIS9d2Sj7vm55nq0V4QJgSh7RnlJdNHmYSy/Zwk=";
+          hash = "sha256-9cVGc2+VUUFFneIxFntv33sBQY6L42CfLN6d/kapOj0=";
         };
       });
-    };
-
-    turbo-unwrapped = self: super: {
-      turbo-unwrapped = super.turbo-unwrapped.overrideAttrs (final: prev: {
-        version = "2.6.1";
-
-        src = super.fetchFromGitHub {
-          owner = "vercel";
-          repo = "turborepo";
-          tag = "v2.6.1";
-          hash = "sha256-NQjN3u+xTQkU9cenBTHRwGyMsy8Sm1xbHckaq/DYHJk=";
-        };
-        cargoDeps = self.pkgs.rustPlatform.importCargoLock {
-          lockFile = final.src + "/Cargo.lock";
-          allowBuiltinFetchGit = true;
-        };
-        cargoHash = null;
-      });
-
-      turbo = super.turbo.override {
-        turbo-unwrapped = self.turbo-unwrapped;
-      };
     };
 
     turso-cli = self: super: {

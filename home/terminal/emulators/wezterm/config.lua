@@ -3,15 +3,17 @@ local wezterm = require("wezterm")
 local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
 local history = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer-history")
 
+sessionizer.DefaultWorkspace({ label_overwrite = "Home", id_overwrite = "home_ws" })
+
 local schema = {
 	options = {
 		callback = history.Wrapper(sessionizer.DefaultCallback),
 	},
-	{ label = "dotfiles", id = "~/dotfiles" },
+	{ label = "dotfiles", id = wezterm.home_dir .. "/dotfiles" },
 	sessionizer.DefaultWorkspace({}),
 	history.MostRecentWorkspace({}),
 	sessionizer.AllActiveWorkspaces({}),
-	sessionizer.FdSearch("~/dev"),
+	sessionizer.FdSearch(wezterm.home_dir .. "/dev"),
 }
 
 -- This will hold the configuration.
@@ -92,6 +94,7 @@ config.keys = {
 		action = wezterm.action.SendKey({ key = "a", mods = "CTRL" }),
 	},
 	{ key = "Enter", mods = "ALT", action = wezterm.action.ToggleFullScreen },
+	{ key = "t", mods = "LEADER", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
 }
 
 return config

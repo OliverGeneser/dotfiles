@@ -27,7 +27,7 @@
 
     # system services
     ../../services/system/syncthing.nix
-    # ../../services/system/tailray.nix
+    ../../services/system/tailray.nix
     ../../services/system/udiskie.nix
 
     # wayland-specific
@@ -37,7 +37,7 @@
     # ../../services/wayland/wluma.nix
 
     # terminal
-    ../../terminal/programs/aws.nix
+    #../../terminal/programs/aws.nix
     ../../terminal/programs/bat.nix
     ../../terminal/programs/bun.nix
     ../../terminal/programs/cli.nix
@@ -60,6 +60,9 @@
     ../../terminal/emulators/foot.nix
     ../../terminal/emulators/ghostty.nix
     ../../terminal/emulators/wezterm
+
+    # terminal multiplexers
+    ../../terminal/multiplexer/tmux.nix
   ];
 
   config = {

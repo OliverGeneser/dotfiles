@@ -2,7 +2,9 @@
   inputs,
   pkgs,
   ...
-}: {
+}: let
+  inherit (pkgs.stdenv.hostPlatform) system;
+in {
   imports = [
     inputs.hyprland.nixosModules.default
 
@@ -13,25 +15,24 @@
   ];
 
   environment.systemPackages = [
-    inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
+    inputs.hyprland-contrib.packages.${system}.grimblast
     pkgs.hyprpolkitagent
   ];
-
-  environment.pathsToLink = ["/share/icons"];
 
   # enable hyprland and required options
   programs.hyprland = {
     enable = true;
     withUWSM = true;
 
-    plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [
+    xwayland.enable = true;
+
+    plugins = with inputs.hyprland-plugins.packages.${system}; [
       csgo-vulkan-fix
       # hyprbars
-      # hyprexpo
     ];
 
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    package = inputs.hyprland.packages.${system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
   };
 
   # tell Electron/Chromium to run on Wayland

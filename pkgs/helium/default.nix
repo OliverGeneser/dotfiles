@@ -1,39 +1,45 @@
-{pkgs, ...}: let
-  pname = "helium";
-  version = "0.6.4.1";
-
-  src = pkgs.fetchurl {
-    url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-${version}-x86_64.AppImage";
-    hash = "sha256-DlEFuFwx2Qjr9eb6uiSYzM/F3r2hdtkMW5drJyJt/YE=";
-  };
-  appimageContents = pkgs.appimageTools.extract {inherit pname version src;};
+{
+  appimageTools,
+  fetchurl,
+  pkgs,
+  lib,
+  ...
+}: let
+  name = "Helium Nightly";
+  version = "0.6.7.1";
+  hash = "sha256-fZTBNhaDk5EeYcxZDJ83tweMZqtEhd7ws8AFUcHjFLs=";
+  filename = "helium-${version}-x86_64.AppImage";
 in
-  pkgs.appimageTools.wrapType2 {
-    inherit pkgs pname version src;
-    extraInstallCommands = ''
-      install -m 444 -D ${appimageContents}/${pname}.desktop -t $out/share/applications
-      substituteInPlace $out/share/applications/${pname}.desktop \
-        --replace 'Exec=AppRun' 'Exec=${pname}'
-      cp -r ${appimageContents}/usr/share/icons $out/share
+  appimageTools.wrapType2 rec {
+    pname = "helium";
 
-      # unless linked, the binary is placed in $out/bin/helium-someVersion
-      # ln -s $out/bin/${pname}-${version} $out/bin/${pname}
+    inherit version;
+
+    src = fetchurl {
+      inherit hash;
+      url = "https://github.com/imputnet/helium-linux/releases/download/${version}/${filename}";
+    };
+
+    extraInstallCommands = let
+      contents = appimageTools.extract {inherit pname version src;};
+    in ''
+      install -m 444 -D ${contents}/${pname}.desktop -t $out/share/applications
+      substituteInPlace $out/share/applications/${pname}.desktop --replace-fail 'Exec=AppRun' 'Exec=${meta.mainProgram}'
+
+      cp -r ${contents}/usr/share/* $out/share/
+
+      install -d $out/share/lib/${pname}
+      cp -r ${contents}/opt/${pname}/locales $out/share/lib/${pname}/
     '';
 
-    extraBwrapArgs = [
-      "--bind-try /etc/nixos/ /etc/nixos/"
-    ];
-
-    # vscode likes to kill the parent so that the
-    # gui application isn't attached to the terminal session
-    dieWithParent = false;
-
-    extraPkgs = pkgs:
-      with pkgs; [
-        unzip
-        autoPatchelfHook
-        asar
-        # override doesn't preserve splicing https://github.com/NixOS/nixpkgs/issues/132651
-        (buildPackages.wrapGAppsHook3.override {inherit (buildPackages) makeWrapper;})
-      ];
+    meta = {
+      description = "Private, fast, and honest web browser (nightly builds)";
+      homepage = "https://github.com/imputnet/${pname}";
+      changelog = "https://github.com/imputnet/helium-linux/releases/tag/${version}";
+      license = lib.licenses.gpl3;
+      maintainers = ["Ev357" "Prinky"];
+      platforms = ["x86_64-linux" "aarch64-linux"];
+      mainProgram = pname;
+      sourceProvenance = with lib.sourceTypes; [binaryNativeCode];
+    };
   }

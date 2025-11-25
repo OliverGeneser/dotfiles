@@ -5,18 +5,22 @@
 }: {
   programs.ghostty = {
     enable = true;
-    enableZshIntegration = true;
     package =
       inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     settings = {
-      window-decoration = true;
       window-padding-x = 8;
       window-padding-y = 8;
+      cursor-style = "block";
+      cursor-style-blink = true;
+
+      shell-integration-features = "no-cursor,no-sudo,no-title";
+      gtk-titlebar = false;
       keybind = [
-        "ctrl+h=goto_split:left"
-        "ctrl+l=goto_split:right"
+        "ctrl+enter=unbind"
       ];
+
+      command = "tmux";
     };
   };
 }
