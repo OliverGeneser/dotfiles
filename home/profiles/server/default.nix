@@ -20,7 +20,10 @@
     ../../terminal/programs/xdg.nix
 
     # terminal emulators
-    ../../terminal/emulators/wezterm
+    ../../terminal/emulators/ghostty.nix
+
+    # terminal multiplexers
+    ../../terminal/multiplexer/tmux.nix
   ];
   config = {
     home = {
