@@ -20,6 +20,7 @@
 
     # services
     # ../../services/cinny.nix
+    ../../services/easyeffects.nix
 
     # media services
     ../../services/media/playerctl.nix
