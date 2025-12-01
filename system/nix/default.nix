@@ -14,6 +14,14 @@
   ];
 
   sops.secrets = {
+    cloudflare_api_token = {
+      sopsFile = ../secrets.yaml;
+      owner = config.custom.user.name;
+    };
+    cloudflare_default_account_id = {
+      sopsFile = ../secrets.yaml;
+      owner = config.custom.user.name;
+    };
     context7_api_key = {
       sopsFile = ../secrets.yaml;
       owner = config.custom.user.name;
@@ -31,8 +39,10 @@
   environment = {
     systemPackages = [pkgs.git];
     sessionVariables = {
-      SEARXNG_API_URL = "$(cat ${config.sops.secrets."searxng_api_url".path})";
+      CLOUDFLARE_API_TOKEN = "$(cat ${config.sops.secrets."cloudflare_api_token".path})";
+      CLOUDFLARE_DEFAULT_ACCOUNT_ID = "$(cat ${config.sops.secrets."cloudflare_default_account_id".path})";
       CONTEXT7_API_KEY = "$(cat ${config.sops.secrets."context7_api_key".path})";
+      SEARXNG_API_URL = "$(cat ${config.sops.secrets."searxng_api_url".path})";
     };
   };
 

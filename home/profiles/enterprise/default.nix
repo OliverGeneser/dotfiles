@@ -20,7 +20,7 @@
 
     # services
     # ../../services/cinny.nix
-    ../../services/easyeffects.nix
+    # ../../services/easyeffects.nix
 
     # media services
     ../../services/media/playerctl.nix
@@ -38,7 +38,7 @@
     # ../../services/wayland/wluma.nix
 
     # terminal
-    #../../terminal/programs/aws.nix
+    ../../terminal/programs/aws.nix
     ../../terminal/programs/bat.nix
     ../../terminal/programs/bun.nix
     ../../terminal/programs/cli.nix

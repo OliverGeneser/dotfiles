@@ -23,84 +23,86 @@
         pkgs,
         ...
       }: {
-        devShells.default = pkgs.mkShell {
-          packages = [
-            pkgs.alejandra
-            pkgs.git
-            pkgs.nodePackages.prettier
-            config.packages.repl
-            pkgs.nh
-            pkgs.disko
-            pkgs.sops
-            pkgs.ssh-to-age
-            pkgs.age
-            pkgs.gnupg
-            pkgs.home-manager
-          ];
-          name = "dotfiles";
-          DIRENV_LOG_FORMAT = "";
-          shellHook = ''
-            ${config.pre-commit.installationScript}
-          '';
-        };
-
-        devShells.node22 = pkgs.mkShell {
-          packages = with pkgs; [
-            corepack_22
-            nodejs_22
-            bun
-            zip
-            libuuid
-            gcc
-            nodePackages.node-gyp
-            python3 # node-gyp needs Python
-          ];
-
-          buildInputs = with pkgs; [
-            cairo
-            giflib
-            libjpeg
-            libpng
-            librsvg
-            openssl
-            pango
-            pixman
-            pkg-config
-          ];
-
-          env = {
-            PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING = 1;
-            PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
-            PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
-            PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+        devShells = {
+          default = pkgs.mkShell {
+            packages = [
+              pkgs.alejandra
+              pkgs.git
+              pkgs.nodePackages.prettier
+              config.packages.repl
+              pkgs.nh
+              pkgs.disko
+              pkgs.sops
+              pkgs.ssh-to-age
+              pkgs.age
+              pkgs.gnupg
+              pkgs.home-manager
+            ];
+            name = "dotfiles";
+            DIRENV_LOG_FORMAT = "";
+            shellHook = ''
+              ${config.pre-commit.installationScript}
+            '';
           };
 
-          shellHook = ''
-            export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [
-              pkgs.libuuid
-              pkgs.pixman
-              pkgs.pkg-config
-            ]}:$LD_LIBRARY_PATH"
+          node22 = pkgs.mkShell {
+            packages = with pkgs; [
+              corepack_22
+              nodejs_22
+              bun
+              zip
+              libuuid
+              gcc
+              nodePackages.node-gyp
+              python3 # node-gyp needs Python
+            ];
 
-            echo "Node: $(node --version)"
-            echo "Bun: $(bun --version)"
-          '';
+            buildInputs = with pkgs; [
+              cairo
+              giflib
+              libjpeg
+              libpng
+              librsvg
+              openssl
+              pango
+              pixman
+              pkg-config
+            ];
+
+            env = {
+              PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING = 1;
+              PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+              PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
+              PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+            };
+
+            shellHook = ''
+              export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [
+                pkgs.libuuid
+                pkgs.pixman
+                pkgs.pkg-config
+              ]}:$LD_LIBRARY_PATH"
+
+              echo "Node: $(node --version)"
+              echo "Bun: $(bun --version)"
+            '';
+          };
+
+          python = pkgs.mkShell {
+            packages = with pkgs; [
+              (pkgs.python3.withPackages (
+                python-pkgs: [
+                  python-pkgs.pandas
+                  python-pkgs.requests
+                  python-pkgs.matplotlib
+                ]
+              ))
+            ];
+            name = "python";
+          };
+
+          formatter = pkgs.alejandra;
         };
-
-        devShells.python = pkgs.mkShell {
-          packages = with pkgs; [
-            (pkgs.python3.withPackages (
-              python-pkgs: [
-                python-pkgs.pandas
-                python-pkgs.requests
-                python-pkgs.matplotlib
-              ]
-            ))
-          ];
-          name = "python";
-        };
-
-        formatter = pkgs.alejandra;
       };
     };
 
@@ -271,7 +273,8 @@
     };
 
     stylix = {
-      url = "github:danth/stylix";
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     tailray = {

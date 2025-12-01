@@ -1,45 +1,49 @@
 {
-  appimageTools,
-  fetchurl,
-  pkgs,
   lib,
+  pkgs,
   ...
-}: let
-  name = "Helium Nightly";
+}:
+pkgs.appimageTools.wrapType2 rec {
+  pname = "helium";
   version = "0.6.7.1";
-  hash = "sha256-fZTBNhaDk5EeYcxZDJ83tweMZqtEhd7ws8AFUcHjFLs=";
-  filename = "helium-${version}-x86_64.AppImage";
-in
-  appimageTools.wrapType2 rec {
-    pname = "helium";
 
-    inherit version;
+  src = let
+    platformMap = {
+      "x86_64-linux" = "x86_64";
+      "aarch64-linux" = "arm64";
+    };
 
-    src = fetchurl {
+    platform = platformMap.${pkgs.system};
+
+    hashes = {
+      "x86_64-linux" = "sha256-fZTBNhaDk5EeYcxZDJ83tweMZqtEhd7ws8AFUcHjFLs=";
+      "aarch64-linux" = "sha256-daIKkKrDR+HZq4dbGL8E92eHVE277TvdqxbvTAWZDvM=";
+    };
+
+    hash = hashes.${pkgs.system};
+  in
+    pkgs.fetchurl {
+      url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-${version}-${platform}.AppImage";
       inherit hash;
-      url = "https://github.com/imputnet/helium-linux/releases/download/${version}/${filename}";
     };
 
-    extraInstallCommands = let
-      contents = appimageTools.extract {inherit pname version src;};
-    in ''
-      install -m 444 -D ${contents}/${pname}.desktop -t $out/share/applications
-      substituteInPlace $out/share/applications/${pname}.desktop --replace-fail 'Exec=AppRun' 'Exec=${meta.mainProgram}'
+  extraInstallCommands = let
+    contents = pkgs.appimageTools.extractType2 {inherit pname version src;};
+  in ''
+    mkdir -p "$out/share/applications"
+    mkdir -p "$out/share/lib/helium"
+    cp -r ${contents}/opt/helium/locales "$out/share/lib/helium"
+    cp -r ${contents}/usr/share/* "$out/share"
+    cp "${contents}/${pname}.desktop" "$out/share/applications/"
+    substituteInPlace $out/share/applications/${pname}.desktop --replace-fail 'Exec=AppRun' 'Exec=${meta.mainProgram}'
+  '';
 
-      cp -r ${contents}/usr/share/* $out/share/
-
-      install -d $out/share/lib/${pname}
-      cp -r ${contents}/opt/${pname}/locales $out/share/lib/${pname}/
-    '';
-
-    meta = {
-      description = "Private, fast, and honest web browser (nightly builds)";
-      homepage = "https://github.com/imputnet/${pname}";
-      changelog = "https://github.com/imputnet/helium-linux/releases/tag/${version}";
-      license = lib.licenses.gpl3;
-      maintainers = ["Ev357" "Prinky"];
-      platforms = ["x86_64-linux" "aarch64-linux"];
-      mainProgram = pname;
-      sourceProvenance = with lib.sourceTypes; [binaryNativeCode];
-    };
-  }
+  meta = {
+    description = "Private, fast, and honest web browser based on Chromium";
+    homepage = "https://github.com/imputnet/helium-chromium";
+    changelog = "https://github.com/imputnet/helium-linux/releases/tag/${version}";
+    platforms = ["x86_64-linux" "aarch64-linux"];
+    license = lib.licenses.gpl3;
+    mainProgram = "helium";
+  };
+}
