@@ -8,7 +8,7 @@
   ];
 
   hardware = {
-    # xpadneo.enable = true;
+    xpadneo.enable = true;
     xone.enable = true;
   };
 

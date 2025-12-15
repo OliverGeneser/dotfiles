@@ -6,7 +6,7 @@
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun turso-cli linuxPackages_latest];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun turso-cli];
 
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (final: prev: {
@@ -40,21 +40,6 @@
           rev = "v${final.version}";
           hash = "sha256-c4RtEqMCpRgr4p6STWrRv7+UIA11WySTNhyvkLgzRso=";
         };
-      });
-    };
-
-    linuxPackages_latest = self: super: {
-      linuxPackages_latest = super.linuxPackages_latest.extend (lpSelf: lpSuper: {
-        xpad-noone = lpSuper.xpad-noone.overrideAttrs (final: prev: {
-          patches = [
-            # https://github.com/medusalix/xpad-noone/pull/9
-            (super.fetchpatch2 {
-              name = "remove-usage-of-deprecated-ida-simple-xx-api.patch";
-              url = "https://github.com/medusalix/xpad-noone/commit/e0f6ad5f2fabd5f8e74796a87154c92c8e9b6068.patch";
-              hash = "sha256-7Ye/rd51RpzThgts8R5RT0CRVvx5bKmy5i0KPidic30=";
-            })
-          ];
-        });
       });
     };
   };
