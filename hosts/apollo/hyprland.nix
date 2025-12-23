@@ -7,7 +7,7 @@
 
   programs.hyprland.settings = let
     # Generated using https://gist.github.com/fufexan/e6bcccb7787116b8f9c31160fc8bc543
-    accelpoints = "0.5 0.000 0.513 1.055 1.629 2.240 2.891 3.585 4.327 5.120 5.968 6.875 7.844 8.880 9.986 11.165 12.422 13.760 15.183 16.695 18.299";
+    accelpoints = "0.2144477506 0.000 0.307 0.615 1.077 1.539 2.002 2.505 3.208 3.910 4.613 5.315 6.018 6.720 7.423 8.125 8.828 9.530 10.233 10.935 12.387";
   in {
     monitor = [
       # "DP-1, preferred, auto-left, auto"
