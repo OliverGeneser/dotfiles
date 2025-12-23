@@ -7,7 +7,7 @@
   nixpkgs = {
     config.allowUnfree = true;
     config.permittedInsecurePackages = [
-      "beekeeper-studio-5.4.12"
+      "beekeeper-studio-5.5.2"
     ];
 
     overlays = [

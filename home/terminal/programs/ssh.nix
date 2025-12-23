@@ -72,6 +72,7 @@ in {
               "sntrup761x25519-sha512@openssh.com"
               "mlkem768x25519-sha256"
             ];
+            forwardAgent = true;
           };
           "github.com" = {
             kexAlgorithms = [
@@ -81,6 +82,7 @@ in {
               "curve25519-sha256"
               "curve25519-sha256@libssh.org"
             ];
+            forwardAgent = true;
           };
         }
         // cfg.extraHosts;
