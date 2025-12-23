@@ -28,7 +28,6 @@
     # ../../services/media/spotifyd.nix
 
     # system services
-    ../../services/system/power-monitor.nix
     ../../services/system/syncthing.nix
     ../../services/system/tailray.nix
     ../../services/system/udiskie.nix

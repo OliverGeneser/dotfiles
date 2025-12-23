@@ -58,8 +58,6 @@
     ouch
     silver-searcher
     procs
-    powertop
-    lm_sensors
     tokei
     plocate
     #tailspin
