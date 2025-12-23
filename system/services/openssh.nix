@@ -3,26 +3,30 @@
   lib,
   ...
 }: {
-  services.openssh = {
-    enable = true;
-    ports = [22];
+  services = {
+    openssh = {
+      enable = true;
+      ports = [22];
 
-    allowSFTP = true;
+      allowSFTP = true;
 
-    settings = {
-      UseDns = true;
-      PasswordAuthentication = false;
-      PubkeyAuthentication = true;
-      PermitRootLogin = "no";
-      StreamLocalBindUnlink = "yes";
-      GatewayPorts = "clientspecified";
+      settings = {
+        UseDns = true;
+        PasswordAuthentication = false;
+        PubkeyAuthentication = true;
+        PermitRootLogin = "no";
+        StreamLocalBindUnlink = "yes";
+        GatewayPorts = "clientspecified";
 
-      KexAlgorithms = [
-        "sntrup761x25519-sha512"
-        "sntrup761x25519-sha512@openssh.com"
-        "mlkem768x25519-sha256"
-      ];
+        KexAlgorithms = [
+          "sntrup761x25519-sha512"
+          "sntrup761x25519-sha512@openssh.com"
+          "mlkem768x25519-sha256"
+        ];
+      };
     };
+
+    fail2ban.enable = true;
   };
 
   networking.firewall = {
