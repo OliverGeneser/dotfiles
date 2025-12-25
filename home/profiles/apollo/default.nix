@@ -60,6 +60,7 @@
 
     # terminal emulators
     ../../terminal/emulators/foot.nix
+    ../../terminal/emulators/ghostty.nix
     ../../terminal/emulators/wezterm
 
     # terminal multiplexers
@@ -131,6 +132,13 @@
         user = "oliverg";
         identityFile = "~/.ssh/id_ecdsa_sk";
         identitiesOnly = false;
+        kexAlgorithms = [
+          "sntrup761x25519-sha512"
+          "sntrup761x25519-sha512@openssh.com"
+          "mlkem768x25519-sha256"
+          "curve25519-sha256"
+          "curve25519-sha256@libssh.org"
+        ];
       };
       "tunnelboy" = {
         hostname = "10.0.0.230";
@@ -149,7 +157,7 @@
         ", preferred, auto, auto"
         # "DP-1, preferred, auto-left, auto"
         # "DP-2, preferred, auto-left, auto"
-        "eDP-1, preferred, auto, auto"
+        "eDP-1, preferred, auto, 2"
       ];
 
       input = {
