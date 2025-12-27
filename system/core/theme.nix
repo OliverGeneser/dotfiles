@@ -57,7 +57,6 @@ in {
       nerd-fonts.symbols-only
       nerd-fonts.fira-code
 
-      manrope
       geist-font
     ];
 
