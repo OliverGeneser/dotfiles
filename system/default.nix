@@ -32,6 +32,7 @@ let
     ./core
     ./core/boot.nix
 
+    ./hardware/bluetooth.nix
     ./hardware/fwupd.nix
     ./hardware/logitech.nix
 

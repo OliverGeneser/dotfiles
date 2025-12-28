@@ -6,15 +6,15 @@
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [fira-go beekeeper-studio bun turso-cli];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun turso-cli];
 
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (final: prev: {
-        version = "5.5.2";
+        version = "5.5.3";
 
         src = super.fetchurl {
           url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
-          hash = "sha256-Hsv42bIUmXqplUTR/ut/oM1GisToFzGmHe5kVrwz/+I=";
+          hash = "sha256-zbOePN975TWp7zo3XagKYPjHPQiz3r6ui2fPfNEboGs=";
         };
       });
     };
@@ -39,18 +39,6 @@
         src = prev.src.override {
           rev = "v${final.version}";
           hash = "sha256-c4RtEqMCpRgr4p6STWrRv7+UIA11WySTNhyvkLgzRso=";
-        };
-      });
-    };
-
-    fira-go = self: super: {
-      fira-go = super.fira-go.overrideAttrs (final: prev: {
-        src = super.fetchzip {
-          url = "https://carrois.com/downloads/FiraGO/Download_Folder_FiraGO_${
-            super.lib.replaceStrings ["."] [""] prev.version
-          }.zip";
-          hash = "sha256-+lw4dh7G/Xv3pzGXdMUl9xNc2Nk7wUOAh+lq3K1LrXs=";
-          stripRoot = false;
         };
       });
     };

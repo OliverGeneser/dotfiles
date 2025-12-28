@@ -157,10 +157,7 @@
     };
 
     home-manager = {
-      type = "github";
-      owner = "OliverGeneser";
-      repo = "home-manager";
-      ref = "ssh-kex-algo";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
