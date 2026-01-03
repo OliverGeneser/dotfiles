@@ -43,7 +43,6 @@
     broot
     choose
     chafa
-    dogdns
     doggo
     dysk
     entr

@@ -19,8 +19,6 @@
       keybind = [
         "ctrl+enter=unbind"
       ];
-
-      command = "tmux";
     };
   };
 }
