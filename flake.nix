@@ -90,8 +90,11 @@
 
           python = pkgs.mkShell {
             packages = with pkgs; [
+              cairo
+              pipenv
               (pkgs.python3.withPackages (
                 python-pkgs: [
+                  python-pkgs.pycairo
                   python-pkgs.pandas
                   python-pkgs.requests
                   python-pkgs.matplotlib
@@ -99,6 +102,12 @@
               ))
             ];
             name = "python";
+            shellHook = ''
+              export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [
+                pkgs.cairo
+                pkgs.pkg-config
+              ]}:$LD_LIBRARY_PATH"
+            '';
           };
 
           formatter = pkgs.alejandra;

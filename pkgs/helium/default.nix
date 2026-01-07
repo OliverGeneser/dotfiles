@@ -16,7 +16,7 @@ pkgs.appimageTools.wrapType2 rec {
     platform = platformMap.${pkgs.stdenv.hostPlatform.system};
 
     hashes = {
-      "x86_64-linux" = "";
+      "x86_64-linux" = "sha256-69y8dNJPJk+HgnLzkyYLMdps1Med65yeN+77Nk6jbyM=";
       "aarch64-linux" = "";
     };
 

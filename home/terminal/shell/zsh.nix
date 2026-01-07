@@ -5,6 +5,10 @@
   pkgs,
   ...
 }: {
+  home.sessionPath = [
+    "$HOME/.local/share/../bin"
+  ];
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
