@@ -49,7 +49,6 @@
     ../../terminal/programs/nix.nix
     ../../terminal/programs/nodejs.nix
     ../../terminal/programs/opencode.nix
-    ../../terminal/programs/python.nix
     ../../terminal/programs/podman.nix
     ../../terminal/programs/skim.nix
     ../../terminal/programs/sqlite.nix
@@ -59,7 +58,6 @@
     ../../terminal/programs/xdg.nix
 
     # terminal emulators
-    ../../terminal/emulators/foot.nix
     ../../terminal/emulators/ghostty.nix
     ../../terminal/emulators/wezterm
 

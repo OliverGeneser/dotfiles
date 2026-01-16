@@ -61,7 +61,6 @@
           "${mod}/network/syncthing.nix"
 
           "${mod}/services/vpn.nix"
-          "${mod}/services/postgres.nix"
           "${mod}/services/gnome-services.nix"
           "${mod}/services/location.nix"
 

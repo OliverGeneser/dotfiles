@@ -90,8 +90,10 @@
 
           python = pkgs.mkShell {
             packages = with pkgs; [
+              uv
               cairo
               pipenv
+              libxcrypt
               (pkgs.python3.withPackages (
                 python-pkgs: [
                   python-pkgs.pycairo

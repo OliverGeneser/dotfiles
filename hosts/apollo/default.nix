@@ -22,6 +22,10 @@
     kernelParams = [
       "resume_offset=533760"
     ];
+    extraModprobeConfig = ''
+      # example settings
+      options snd-hda-intel model=alc256-headset
+    '';
   };
 
   # nh default flake

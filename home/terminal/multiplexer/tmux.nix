@@ -35,10 +35,10 @@
 
       bind -r D neww -c "#{pane_current_path}" "[[ -e TODO.md ]] && nvim TODO.md || nvim ~/dev/todo.md"
 
-      bind-key -r f run-shell "tmux neww ${self.packages.${pkgs.stdenv.hostPlatform.system}.tmux-sessionizer}/bin/tmux-sessionizer"
-      bind-key -r M-j run-shell "tmux neww ${self.packages.${pkgs.stdenv.hostPlatform.system}.tmux-sessionizer}/bin/tmux-sessionizer -s 0"
-      bind-key -r M-k run-shell "tmux neww ${self.packages.${pkgs.stdenv.hostPlatform.system}.tmux-sessionizer}/bin/tmux-sessionizer -s 1"
-      bind-key -r M-l run-shell "tmux neww ${self.packages.${pkgs.stdenv.hostPlatform.system}.tmux-sessionizer}/bin/tmux-sessionizer -s 2"
+      bind-key -r f run-shell "tmux neww tmux-sessionizer"
+      bind-key -r M-j run-shell "tmux neww tmux-sessionizer -s 0"
+      bind-key -r M-k run-shell "tmux neww tmux-sessionizer -s 1"
+      bind-key -r M-l run-shell "tmux neww tmux-sessionizer -s 2"
     '';
 
     plugins = with pkgs; [

@@ -26,23 +26,44 @@
         ];
       }
       {
+        profile.name = "docked-alex";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            status = "enable";
+            mode = null;
+            scale = 2.0;
+            transform = "normal";
+            position = "0,0";
+          }
+          {
+            criteria = "Lenovo Group Limited LEN T32p-20 VNA735K6";
+            status = "enable";
+            mode = "2560x1440@60Hz";
+            scale = 2.0;
+            transform = "normal";
+            position = "-2560,0";
+          }
+        ];
+      }
+      {
         profile.name = "docked";
         profile.outputs = [
           {
             criteria = "eDP-1";
             status = "enable";
             mode = null;
-            position = null;
             scale = 2.0;
             transform = "normal";
+            position = null;
           }
           {
             criteria = "DP-1";
             status = "enable";
             mode = null;
-            position = null;
             scale = 1.0;
             transform = "normal";
+            position = "0,0";
           }
         ];
       }
