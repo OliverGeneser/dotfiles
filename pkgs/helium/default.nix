@@ -5,7 +5,7 @@
 }:
 pkgs.appimageTools.wrapType2 rec {
   pname = "helium";
-  version = "0.7.9.1";
+  version = "0.8.3.1";
 
   src = let
     platformMap = {
@@ -16,7 +16,7 @@ pkgs.appimageTools.wrapType2 rec {
     platform = platformMap.${pkgs.stdenv.hostPlatform.system};
 
     hashes = {
-      "x86_64-linux" = "sha256-69y8dNJPJk+HgnLzkyYLMdps1Med65yeN+77Nk6jbyM=";
+      "x86_64-linux" = "sha256-GGltZ0/6rGQJixlGz3Na/vAwOlTeUR87WGyAPpLmtKM=";
       "aarch64-linux" = "";
     };
 

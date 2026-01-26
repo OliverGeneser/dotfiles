@@ -28,8 +28,13 @@
     '';
   };
 
-  # nh default flake
-  environment.variables.NH_FLAKE = "/home/olivergeneser/dotfiles";
+  environment = {
+    # nh default flake
+    variables.NH_FLAKE = "/home/olivergeneser/dotfiles";
+
+    systemPackages = with pkgs; [
+    ];
+  };
 
   networking = {
     hostName = "apollo";

@@ -23,7 +23,7 @@
       vimAlias = true;
       defaultEditor = true;
 
-      extraLuaConfig = ''
+      initLua = ''
         require("config.lazy")
       '';
     };

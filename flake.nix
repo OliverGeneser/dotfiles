@@ -252,7 +252,7 @@
     };
 
     opencode = {
-      url = "github:sst/opencode";
+      url = "github:anomalyco/opencode";
     };
 
     nixos-hardware = {

@@ -27,11 +27,13 @@ in {
     xwayland.enable = true;
 
     plugins = with inputs.hyprland-plugins.packages.${system}; [
-      csgo-vulkan-fix
+      # csgo-vulkan-fix
       # hyprbars
     ];
 
-    package = inputs.hyprland.packages.${system}.hyprland;
+    package = inputs.hyprland.packages.${system}.default.overrideAttrs {
+      patches = [../../../overlays/patch-hyprland-glaze.patch];
+    };
     portalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
   };
 

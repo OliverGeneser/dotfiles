@@ -14,8 +14,8 @@
   src = fetchFromGitHub {
     owner = "OliverGeneser";
     repo = "snapraid-btrfs-runner";
-    rev = "214f7d195fa0822347324ce0b4a789e0daab7b82";
-    sha256 = "caMD6jIuIMRaD8MPZl/qLpZo5EX1Q3qJHNJD+rhiYeA=";
+    rev = "1f00c7e";
+    sha256 = "uZBdxqg46N/m/+iSh9N6YuBOBhTEEJVOIppG4LKvP3o=";
   };
   config = writeTextFile {
     name = "snapraid-btrfs-runner.conf";
