@@ -133,7 +133,7 @@
         ];
       };
       "thor" = {
-        hostname = "10.0.0.205";
+        hostname = "thor";
         port = 22;
         user = "nixos";
         identityFile = "~/.ssh/id_ecdsa_sk";
