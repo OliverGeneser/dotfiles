@@ -75,6 +75,35 @@
         ];
     };
 
+    ariane = nixosSystem {
+      inherit specialArgs;
+      modules =
+        laptop
+        ++ [
+          ./ariane
+          #"${mod}/core/lanzaboote.nix"
+
+          "${mod}/programs/gamemode.nix"
+          "${mod}/programs/hyprland"
+          "${mod}/programs/games.nix"
+
+          "${mod}/network/spotify.nix"
+          "${mod}/network/syncthing.nix"
+
+          "${mod}/services/vpn.nix"
+          "${mod}/services/gnome-services.nix"
+          "${mod}/services/location.nix"
+
+          {
+            home-manager = {
+              users.olivergeneser.imports = homeImports."olivergeneser@ariane";
+              extraSpecialArgs = specialArgs;
+              backupFileExtension = ".hm-backup";
+            };
+          }
+        ];
+    };
+
     thor = nixosSystem {
       inherit specialArgs;
       modules =

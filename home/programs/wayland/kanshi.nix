@@ -26,6 +26,27 @@
         ];
       }
       {
+        profile.name = "docked-work-oliver";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            status = "enable";
+            mode = null;
+            scale = 1.0;
+            transform = "normal";
+            position = null;
+          }
+          {
+            criteria = "Dell Inc. DELL P3425WE 6S0SY54";
+            status = "enable";
+            mode = "3440x1440@60hz";
+            scale = 1.0;
+            transform = "normal";
+            position = "0,0";
+          }
+        ];
+      }
+      {
         profile.name = "docked-alex";
         profile.outputs = [
           {
@@ -39,7 +60,7 @@
           {
             criteria = "Lenovo Group Limited LEN T32p-20 VNA735K6";
             status = "enable";
-            mode = "2560x1440@60Hz";
+            mode = null; #"2560x1440@60Hz";
             scale = 2.0;
             transform = "normal";
             position = "-2560,0";

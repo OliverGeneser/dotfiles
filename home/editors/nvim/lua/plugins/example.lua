@@ -1,5 +1,8 @@
 return {
 	{
+		"jbyuki/instant.nvim",
+	},
+	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
 			signs = {

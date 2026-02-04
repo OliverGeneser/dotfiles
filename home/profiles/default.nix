@@ -4,6 +4,11 @@
     ./apollo
   ];
 
+  "olivergeneser@ariane" = [
+    ../.
+    ./ariane
+  ];
+
   "olivergeneser@enterprise" = [
     ../.
     ./enterprise
