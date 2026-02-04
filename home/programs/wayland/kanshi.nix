@@ -26,6 +26,19 @@
         ];
       }
       {
+        profile.name = "undocked-work";
+        profile.outputs = [
+          {
+            criteria = "BOE NE140WUM-N6M";
+            status = "enable";
+            mode = null;
+            position = null;
+            scale = 1.0;
+            transform = "normal";
+          }
+        ];
+      }
+      {
         profile.name = "docked-work-oliver";
         profile.outputs = [
           {
@@ -34,12 +47,12 @@
             mode = null;
             scale = 1.0;
             transform = "normal";
-            position = null;
+            position = "3440,0";
           }
           {
             criteria = "Dell Inc. DELL P3425WE 6S0SY54";
             status = "enable";
-            mode = "3440x1440@60hz";
+            mode = "3440x1440@99.98Hz";
             scale = 1.0;
             transform = "normal";
             position = "0,0";

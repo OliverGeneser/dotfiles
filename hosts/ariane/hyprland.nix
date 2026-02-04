@@ -7,12 +7,9 @@
 
   programs.hyprland.settings = let
     # Generated using https://gist.github.com/fufexan/e6bcccb7787116b8f9c31160fc8bc543
-    accelpoints = "0.2144477506 0.000 0.307 0.615 1.077 1.539 2.002 2.505 3.208 3.910 4.613 5.315 6.018 6.720 7.423 8.125 8.828 9.530 10.233 10.935 12.387";
+    accelpoints = "0.5 0.000 0.053 0.115 0.189 0.280 0.391 0.525 0.687 0.880 1.108 1.375 1.684 2.040 2.446 2.905 3.422 4.000 4.643 5.355 6.139";
   in {
     monitor = [
-      # "DP-1, preferred, auto-left, auto"
-      # "DP-2, preferred, auto-left, auto"
-      # "eDP-1, preferred, auto, 1.600000"
       ", preferred, auto, 2"
     ];
 
@@ -22,7 +19,7 @@
       kb_options = "grp:alt_space_toggle";
     };
 
-    "device[syna1d31:00-06cb:cd48-touchpad]" = {
+    "device[elan06d4:00-04f3:32b5-touchpad]" = {
       accel_profile = "custom ${accelpoints}";
       scroll_points = accelpoints;
       natural_scroll = true;
