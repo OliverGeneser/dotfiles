@@ -19,9 +19,11 @@ keys:
   - &users:
     - &olivergeneser_enterprise age1ce9umy5mclkpzm7eklmzmrmu4q6m3jtzwhvez7rjz9eh5kzkcdmqky5p2g
     - &olivergeneser_apollo age1jq68f62shfaltyqxcxmh74k4r2m3aep6ycq6dqg73xsrm5qdvp3qtzwezn
+    - &olivergeneser_ariane age1v7gjjlrlgeqetysv2jzfx9sfc07djf7et824a24swn4vys78tvtqmlja7h
   - &hosts:
     - &enterprise age1xzt9jx0jy6dva6xkhmefzacj9zlcdp53mfxap6h2grtean8rn9kqkmsrgq
     - &apollo age167350n2uc9yxa82r6fr9a5jglmvgcxuxscdxg6tretudghxzfp9qrtg3h7
+    - &ariane age13k680lpvdmjpy8ycap3ltf0ygtmgtqg8hcjttd04dnel0mu2vpjq3veduk
     - &thor age1snjuvtw6el635fq79lavy0q6grsy87fcp77tneuhlxk697068fuqeuur6k
     - &tunnelboy age1gc4an6pe0txqvvca0f8na7uyvgsalp2adle4fvq8gkywvz7qp93sjlmv05
 
@@ -31,37 +33,45 @@ creation_rules:
       - age:
           - *enterprise
           - *apollo
+          - *ariane
           - *thor
           - *tunnelboy
           - *olivergeneser_enterprise
           - *olivergeneser_apollo
+          - *olivergeneser_ariane
 
   - path_regex: system/services/secrets.ya?ml$
     key_groups:
       - age:
           - *enterprise
           - *apollo
+          - *ariane
           - *thor
           - *tunnelboy
           - *olivergeneser_enterprise
           - *olivergeneser_apollo
+          - *olivergeneser_ariane
 
   - path_regex: modules/nixos/secrets.ya?ml$
     key_groups:
       - age:
           - *enterprise
           - *apollo
+          - *ariane
           - *thor
           - *tunnelboy
           - *olivergeneser_enterprise
           - *olivergeneser_apollo
+          - *olivergeneser_ariane
 
   - path_regex: modules/nixos/services/secrets.ya?ml$
     key_groups:
       - age:
           - *enterprise
           - *apollo
+          - *ariane
           - *thor
           - *tunnelboy
           - *olivergeneser_enterprise
           - *olivergeneser_apollo
+          - *olivergeneser_ariane
