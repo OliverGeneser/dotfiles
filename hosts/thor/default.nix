@@ -32,6 +32,9 @@
             "apollo" = {
               id = "YX2IAXK-3MDJKKG-O6NXVKH-V2RBIZX-5M4I73R-R65A6B6-QHX7OUU-ETH7EQB";
             };
+            "ariane" = {
+              id = "J23DJJ5-XXGSCKX-SRHBGRL-YOAGKNI-324SCVQ-MKRRANP-QDOYVWS-L3XWAQR";
+            };
           };
 
           folders = {

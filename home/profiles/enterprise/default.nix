@@ -79,6 +79,9 @@
         "apollo" = {
           id = "YX2IAXK-3MDJKKG-O6NXVKH-V2RBIZX-5M4I73R-R65A6B6-QHX7OUU-ETH7EQB";
         };
+        "ariane" = {
+          id = "J23DJJ5-XXGSCKX-SRHBGRL-YOAGKNI-324SCVQ-MKRRANP-QDOYVWS-L3XWAQR";
+        };
         "thor" = {
           id = "PXNEEIO-OUUPKQ7-RJZ2UTW-UOBCO4L-2F73KMA-GZVIOGK-ASSV74C-RYUN7QE";
         };
@@ -89,7 +92,7 @@
         "dev" = {
           id = "rrk9d-szxeq";
           path = "~/dev"; # Which folder to add to Syncthing
-          devices = ["apollo" "thor"]; # Which devices to share the folder with
+          devices = ["apollo" "ariane" "thor"]; # Which devices to share the folder with
           type = "sendonly";
         };
       };

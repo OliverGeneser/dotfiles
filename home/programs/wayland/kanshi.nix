@@ -13,19 +13,6 @@
     systemdTarget = "hyprland-session.target";
     settings = [
       {
-        profile.name = "undocked";
-        profile.outputs = [
-          {
-            criteria = "eDP-1";
-            status = "enable";
-            mode = null;
-            position = null;
-            scale = 2.0;
-            transform = "normal";
-          }
-        ];
-      }
-      {
         profile.name = "undocked-work";
         profile.outputs = [
           {
@@ -132,6 +119,19 @@
             position = "320,-1080";
             scale = 1.0;
             mode = "1920x1080@60Hz";
+          }
+        ];
+      }
+      {
+        profile.name = "undocked";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            status = "enable";
+            mode = null;
+            position = null;
+            scale = 2.0;
+            transform = "normal";
           }
         ];
       }

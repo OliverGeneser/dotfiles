@@ -5,6 +5,8 @@
     zip
   ];
 
+  programs.npm.enable = true;
+
   home.sessionVariables = {
     LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [pkgs.libuuid];
   };

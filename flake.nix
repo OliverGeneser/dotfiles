@@ -88,29 +88,186 @@
             '';
           };
 
-          python = pkgs.mkShell {
-            packages = with pkgs; [
-              uv
+          pythonLTS = let
+            inherit (pkgs) python3Packages lib;
+            py = python3Packages;
+          in
+            pkgs.mkShell {
+              packages = with pkgs; [
+                gcc.cc.lib
+                uv
+              ];
+              name = "python";
+            };
+
+          python311 = let
+            inherit (pkgs) lib;
+            python = pkgs.python311;
+
+            pythonldlibpath = lib.makeLibraryPath (with pkgs; [
               cairo
-              pipenv
-              libxcrypt
-              (pkgs.python3.withPackages (
-                python-pkgs: [
-                  python-pkgs.pycairo
-                  python-pkgs.pandas
-                  python-pkgs.requests
-                  python-pkgs.matplotlib
-                ]
-              ))
-            ];
-            name = "python";
-            shellHook = ''
-              export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [
-                pkgs.cairo
-                pkgs.pkg-config
-              ]}:$LD_LIBRARY_PATH"
-            '';
-          };
+              zlib
+              zstd
+              stdenv.cc.cc
+              curl
+              openssl
+              attr
+              libssh
+              bzip2
+              libxml2
+              acl
+              libsodium
+              util-linux
+              xz
+              systemd
+            ]);
+
+            patchedpython = python.overrideAttrs (
+              previousAttrs: {
+                # Add the nix-ld libraries to the LD_LIBRARY_PATH.
+                # creating a new library path from all desired libraries
+                postInstall =
+                  previousAttrs.postInstall
+                  + ''
+                    mv  "$out/bin/python3.11" "$out/bin/unpatched_python3.11"
+                    cat << EOF >> "$out/bin/python3.11"
+                    #!/run/current-system/sw/bin/bash
+                    export LD_LIBRARY_PATH="${pythonldlibpath}"
+                    exec "$out/bin/unpatched_python3.11" "\$@"
+                    EOF
+                    chmod +x "$out/bin/python3.11"
+                  '';
+              }
+            );
+
+            patcheduv = pkgs.uv.overrideAttrs (
+              previousAttrs: {
+                buildInputs = (previousAttrs.buildInputs or []) ++ [pkgs.makeWrapper];
+                postInstall =
+                  previousAttrs.postInstall
+                  + ''
+                    wrapProgram $out/bin/uv \
+                      --prefix LD_LIBRARY_PATH : "${pythonldlibpath}"
+                  '';
+              }
+            );
+          in
+            pkgs.mkShell {
+              packages = with pkgs; [
+                patchedpython
+                patcheduv
+                nodejs
+                yarn
+              ];
+              shellHook = ''
+                export NODE_PATH=$(npm root -g)
+              '';
+              name = "python";
+            };
+
+          pythonCERN = let
+            inherit (pkgs) python3Packages fetchFromGitHub lib;
+            py = python3Packages;
+            pynpm = py.buildPythonPackage rec {
+              pname = "pynpm";
+              version = "0.3.0";
+              pyproject = true;
+              build-system = with py; [setuptools babel];
+              src = py.fetchPypi {
+                inherit version;
+                pname = "pynpm";
+                hash = "sha256-pp/KrDPoUh6neUhMp41g44BGsYoPMp2c2WhI4+CVLSY=";
+              };
+
+              propagatedBuildInputs = with py; [setuptools babel];
+              doCheck = false;
+            };
+
+            pipfile = py.buildPythonPackage rec {
+              pname = "pipfile";
+              version = "0.0.2";
+              format = "setuptools";
+              src = py.fetchPypi {
+                inherit version;
+                pname = "pipfile";
+                hash = "sha256-99nxXei2YJhlV+s8xTkaoaFiB6xBvDeNA/QUdi02yYQ=";
+              };
+              propagatedBuildInputs = with py; [setuptools toml];
+              doCheck = false;
+            };
+
+            pipenv = py.buildPythonPackage rec {
+              pname = "pipenv";
+              version = "2026.0.3";
+              pyproject = true;
+              build-system = with py; [setuptools];
+              src = py.fetchPypi {
+                inherit version;
+                pname = "pipenv";
+                hash = "sha256-mjnROkHtjkNorVBiCUEZHzVzGcj/t99Fh1x8XcZgT/Y=";
+              };
+              propagatedBuildInputs = with py; [setuptools certifi virtualenv];
+              doCheck = false;
+            };
+
+            invenio-cli = py.buildPythonApplication rec {
+              pname = "invenio-cli";
+              version = "1.9.2";
+              pyproject = true;
+              build-system = with py; [setuptools wheel babel];
+              src = py.fetchPypi {
+                inherit version;
+                pname = "invenio_cli";
+                hash = "sha256-iLbnJ36KbXjZtU7YRAVnQINViIdWfSRnpKqUkuxBJLI=";
+              };
+              propagatedBuildInputs = with py; [
+                babel
+                cookiecutter
+                click
+                click-default-group
+                docker
+                pipfile
+                pipenv
+                pyyaml
+                pynpm
+                virtualenv
+                tomli
+
+                libxslt
+                libxml2
+              ];
+            };
+          in
+            pkgs.mkShell {
+              packages = with pkgs; [
+                uv
+                cairo
+                pipenv
+                libxcrypt
+                invenio-cli
+
+                (pkgs.python3.withPackages (
+                  python-pkgs: [
+                    python-pkgs.pycairo
+                    python-pkgs.pandas
+                    python-pkgs.requests
+                    python-pkgs.matplotlib
+
+                    python-pkgs.lxml
+                  ]
+                ))
+              ];
+              name = "python";
+              shellHook = ''
+                                export PIP_NO_BUILD_ISOLATION=1
+                export PIP_DISABLE_PIP_VERSION_CHECK=1
+                              export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [
+                  pkgs.libxml2
+                  pkgs.libxslt
+                  pkgs.cairo
+                ]}:$LD_LIBRARY_PATH"
+              '';
+            };
 
           formatter = pkgs.alejandra;
         };
