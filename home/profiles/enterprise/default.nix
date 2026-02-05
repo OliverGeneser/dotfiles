@@ -172,10 +172,46 @@
       };
     };
 
+    services.kanshi.settings = [
+      {
+        profile.name = "desktop";
+        profile.outputs = [
+          {
+            criteria = "DP-2";
+            position = "0,0";
+            scale = 1.0;
+            mode = "2560x1440@144Hz";
+          }
+          {
+            criteria = "HDMI-A-1";
+            position = "320,-1080";
+            scale = 1.0;
+            mode = "1920x1080@60Hz";
+          }
+        ];
+      }
+      {
+        profile.name = "desktop-fix";
+        profile.outputs = [
+          {
+            criteria = "DP-5";
+            position = "0,0";
+            scale = 1.0;
+            mode = "2560x1440@144Hz";
+          }
+          {
+            criteria = "HDMI-A-2";
+            position = "320,-1080";
+            scale = 1.0;
+            mode = "1920x1080@60Hz";
+          }
+        ];
+      }
+    ];
+
     wayland.windowManager.hyprland.settings = {
       monitor = [
         ", preferred, auto, auto"
-        "Unknown-1, disable"
         "DP-5, preferred, auto, auto, bitdepth, 10"
       ];
 
