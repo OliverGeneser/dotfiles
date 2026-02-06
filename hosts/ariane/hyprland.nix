@@ -3,7 +3,7 @@
     primary_monitor = "eDP-1";
   };
 
-  environment.variables.GDK_SCALE = "2";
+  environment.variables.GDK_SCALE = "1";
 
   programs.hyprland.settings = let
     # Generated using https://gist.github.com/fufexan/e6bcccb7787116b8f9c31160fc8bc543

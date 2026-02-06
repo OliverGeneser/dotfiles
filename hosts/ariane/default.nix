@@ -19,7 +19,7 @@
     resumeDevice = "/dev/disk/by-label/nixos";
     # sudo btrfs inspect-internal map-swapfile -r /swap/swapfile
     kernelParams = [
-      "resume_offset=533760"
+      "resume_offset=21767424"
     ];
     extraModprobeConfig = ''
       # example settings

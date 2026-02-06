@@ -71,7 +71,7 @@
                     };
                     "/swap" = {
                       mountpoint = "/swap";
-                      swap.swapfile.size = "32G";
+                      swap.swapfile.size = "72G";
                     };
                   };
                 };
