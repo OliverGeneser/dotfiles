@@ -152,19 +152,6 @@
         profile.name = "docked";
         profile.outputs = [
           {
-            profile.name = "undocked";
-            profile.outputs = [
-              {
-                criteria = "eDP-1";
-                status = "enable";
-                mode = null;
-                position = null;
-                scale = 2.0;
-                transform = "normal";
-              }
-            ];
-          }
-          {
             criteria = "eDP-1";
             status = "enable";
             mode = null;
@@ -179,6 +166,19 @@
             scale = 1.0;
             transform = "normal";
             position = "0,0";
+          }
+        ];
+      }
+      {
+        profile.name = "undocked";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            status = "enable";
+            mode = null;
+            position = null;
+            scale = 2.0;
+            transform = "normal";
           }
         ];
       }

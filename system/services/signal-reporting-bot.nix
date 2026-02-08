@@ -5,11 +5,6 @@
   ...
 }: let
   smartShortReporting = pkgs.writeShellScriptBin "smartShortReporting" ''
-    if [ "$(id -u)" -ne 0 ]; then
-        echo "This script requires root privileges. Please run with sudo."
-        exit 1
-    fi
-
     DISKS=$(${pkgs.util-linux}/bin/lsblk -n -d -o NAME | ${pkgs.gawk}/bin/awk '/^sd/ || /^nvme[0-9]/ {sub(/n[0-9]+$/, "", $1); print "/dev/" $1}')
     MESSAGE="Short SMART Test\n"
 
@@ -71,8 +66,8 @@
         )\n"
     done
 
-    echo -e "$MESSAGE" | ${pkgs.signal-cli}/bin/signal-cli send -g "TO+DykH3guaqDHrFpJzM1QUQzSAfqBsEIgwVKrP74rQ=" --message-from-stdin
-    ${pkgs.signal-cli}/bin/signal-cli receive
+    echo -e "$MESSAGE" | ${pkgs.signal-cli}/bin/signal-cli --config /home/nixos/.local/share/signal-cli send -g "TO+DykH3guaqDHrFpJzM1QUQzSAfqBsEIgwVKrP74rQ=" --message-from-stdin
+    ${pkgs.signal-cli}/bin/signal-cli --config /home/nixos/.local/share/signal-cli receive
   '';
 in {
   environment.systemPackages = [
@@ -88,7 +83,6 @@ in {
 
       serviceConfig = {
         Type = "oneshot";
-        User = "root";
       };
     };
 

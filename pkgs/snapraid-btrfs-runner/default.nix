@@ -14,8 +14,8 @@
   src = fetchFromGitHub {
     owner = "OliverGeneser";
     repo = "snapraid-btrfs-runner";
-    rev = "1f00c7e";
-    sha256 = "uZBdxqg46N/m/+iSh9N6YuBOBhTEEJVOIppG4LKvP3o=";
+    rev = "204c160cc974a2b40dcd93ced9c1199eced1c7d2";
+    sha256 = "sha256-jiFekEv1hz6eqgSWY8T17Z09UmRhvHsYhGnkje6xfgg=";
   };
   config = writeTextFile {
     name = "snapraid-btrfs-runner.conf";
@@ -79,6 +79,7 @@
       sendon = success,error
       ; path to the signal-cli executable (e.g. /usr/bin/signal-cli)
       executable = ${pkgs.signal-cli}/bin/signal-cli
+      config = /home/nixos/.local/share/signal-cli
       chatid = TO+DykH3guaqDHrFpJzM1QUQzSAfqBsEIgwVKrP74rQ=
 
       [scrub]
