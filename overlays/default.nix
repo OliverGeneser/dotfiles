@@ -21,11 +21,11 @@
 
     bun = self: super: {
       bun = super.bun.overrideAttrs (final: prev: {
-        version = "1.3.8";
+        version = "1.3.9";
 
         src = super.fetchurl {
           url = "https://github.com/oven-sh/bun/releases/download/bun-v${final.version}/bun-linux-x64.zip";
-          hash = "sha256-AyKxfwci2namQpiq1JgiWu3L9t8QCKHe5F4W7LImo/E=";
+          hash = "sha256-RoDoDkTjKqcYVgzq6F0i7Pvy77jzZBeC415Lfv1loao=";
         };
       });
     };
