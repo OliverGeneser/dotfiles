@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
-    ./httpie.nix
     ./beekeeper-studio.nix
+    ./bruno.nix
   ];
 
   home.packages = with pkgs; [
