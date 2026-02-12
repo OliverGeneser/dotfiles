@@ -60,7 +60,6 @@
     # terminal emulators
     ../../terminal/emulators/foot.nix
     ../../terminal/emulators/ghostty.nix
-    ../../terminal/emulators/wezterm
 
     # terminal multiplexers
     ../../terminal/multiplexer/tmux.nix
