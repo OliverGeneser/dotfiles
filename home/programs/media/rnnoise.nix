@@ -12,15 +12,6 @@
             "nodes" = [
               {
                 "type" = "ladspa";
-                "name" = "input_gain";
-                "plugin" = "${pkgs.ladspaPlugins}/lib/ladspa/amp.so";
-                "label" = "amp_stereo";
-                "control" = {
-                  "Gain (dB)" = 25.0;
-                };
-              }
-              {
-                "type" = "ladspa";
                 "name" = "rnnoise";
                 "plugin" = "${pkgs.rnnoise-plugin}/lib/ladspa/librnnoise_ladspa.so";
                 "label" = "noise_suppressor_stereo";

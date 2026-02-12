@@ -31,9 +31,10 @@ in {
       # hyprbars
     ];
 
-    package = inputs.hyprland.packages.${system}.default.overrideAttrs {
-      patches = [../../../overlays/patch-hyprland-glaze.patch];
-    };
+    package = inputs.hyprland.packages.${system}.default;
+    # package = inputs.hyprland.packages.${system}.default.overrideAttrs {
+    #   patches = [../../../overlays/patch-hyprland-glaze.patch];
+    # };
     portalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
   };
 

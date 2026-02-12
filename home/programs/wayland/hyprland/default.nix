@@ -21,9 +21,10 @@
     enable = true;
     systemd.enable = false;
 
-    package = inputs.hyprland.packages.${system}.default.overrideAttrs {
-      patches = [../../../../overlays/patch-hyprland-glaze.patch];
-    };
+    package = inputs.hyprland.packages.${system}.default;
+    # package = inputs.hyprland.packages.${system}.default.overrideAttrs {
+    #   patches = [../../../../overlays/patch-hyprland-glaze.patch];
+    # };
 
     plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [
       # hyprbars
