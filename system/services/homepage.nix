@@ -149,27 +149,5 @@
         }
       ];
     };
-
-    traefik = {
-      dynamicConfigOptions = {
-        http = {
-          services.homepage.loadBalancer.servers = [
-            {
-              url = "http://localhost:8173";
-            }
-          ];
-
-          routers = {
-            homepage = {
-              entryPoints = ["websecure"];
-              rule = "Host(`homepage.lab.geneser.local`)";
-              service = "homepage";
-              tls.certResolver = "letsencrypt";
-              middlewares = ["authentik"];
-            };
-          };
-        };
-      };
-    };
   };
 }

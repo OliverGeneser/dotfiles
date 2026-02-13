@@ -4,10 +4,11 @@
   imports = [
     ./mpv.nix
     ./obs.nix
-    ./rnnoise.nix
     ./jellyfin.nix
     ./audacity.nix
   ];
+
+  services.easyeffects.enable = true;
 
   home.packages = with pkgs; [
     # audio control

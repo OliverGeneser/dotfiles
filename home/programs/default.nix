@@ -34,7 +34,7 @@
 
     overskride
     resources
-    wineWowPackages.wayland
+    wineWow64Packages.wayland
 
     zotero
   ];

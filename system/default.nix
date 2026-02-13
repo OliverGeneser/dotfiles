@@ -23,7 +23,7 @@ let
     ./services/pipewire.nix
     ./services/signal-reporting-bot.nix
     ./services/smartd.nix
-    ./services/traefik.nix
+    # ./services/traefik.nix
     ./services/virtualisation/podman
     ./services/virtualisation/gluetun
   ];

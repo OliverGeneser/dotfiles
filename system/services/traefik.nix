@@ -44,6 +44,8 @@
       # api.insecure = true;
     };
 
+    dynamic.dir = "${config.services.traefik.dataDir}/config";
+
     dynamicConfigOptions = {
       http.routers = {
         jellyfin = {
