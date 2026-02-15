@@ -2,6 +2,7 @@
   imports = [
     ./home-manager.nix
     ./adb.nix
+    ./android.nix
     # ./qt.nix
     # ./thunar.nix
     ./pcmanfm.nix
