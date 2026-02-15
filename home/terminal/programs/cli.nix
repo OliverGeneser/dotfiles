@@ -63,6 +63,8 @@
     yq-go
     viddy
 
+    eas-cli
+
     # terminal images
     viu
     ueberzugpp
