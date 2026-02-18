@@ -3,12 +3,16 @@
   config,
   ...
 }: {
+  imports = [../../terminal/programs/python.nix];
+
   config = {
     stylix.targets.neovim.enable = false;
 
     home.packages = with pkgs; [
       ripgrep
       fd
+      gcc
+      icu
       gnumake
       alejandra
       prettier

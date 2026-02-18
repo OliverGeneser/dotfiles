@@ -88,16 +88,55 @@
             '';
           };
 
-          pythonLTS = let
-            inherit (pkgs) python3Packages lib;
-            py = python3Packages;
+          pythonCDS = let
+            inherit (pkgs) lib;
           in
             pkgs.mkShell {
+              name = "pythonUV";
               packages = with pkgs; [
-                gcc.cc.lib
+                # Python
+                python3
+
+                # Build tools
+                gcc
+                pkg-config
+
+                # Required system libs for uwsgi + common python C extensions
+                stdenv.cc.cc.lib
+                libxcrypt
+                openssl
+                zlib
+                libffi
+
+                # PDF
+                qpdf
+
+                # SVG / formatter stack
+                cairo
+                pango
+                gdk-pixbuf
+                libxml2
+                libxslt
+
+                # Your tools
+                pipenv
                 uv
               ];
-              name = "python";
+
+              # Makes sure linker finds libs
+              LD_LIBRARY_PATH = lib.makeLibraryPath [
+                pkgs.stdenv.cc.cc.lib
+                pkgs.libxcrypt
+                pkgs.openssl
+                pkgs.zlib
+                pkgs.libffi
+                pkgs.qpdf
+                pkgs.cairo
+                pkgs.pango
+                pkgs.gdk-pixbuf
+                pkgs.libxml2
+                pkgs.libxslt
+              ];
             };
 
           python311 = let
@@ -115,6 +154,7 @@
               libssh
               bzip2
               libxml2
+              libxcrypt
               acl
               libsodium
               util-linux
@@ -155,6 +195,11 @@
             pkgs.mkShell {
               packages = with pkgs; [
                 patchedpython
+                python311Packages.setuptools
+                python311Packages.wheel
+                pipenv
+                libxcrypt
+
                 patcheduv
                 nodejs
                 yarn
