@@ -17,6 +17,7 @@ in {
   environment.systemPackages = [
     inputs.hyprland-contrib.packages.${system}.grimblast
     pkgs.hyprpolkitagent
+    pkgs.satty
   ];
 
   # enable hyprland and required options

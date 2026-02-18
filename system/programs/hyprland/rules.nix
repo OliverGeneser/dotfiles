@@ -96,6 +96,9 @@
       "fullscreen 1, match:class ^steam_app_\d+$"
       "monitor 1, match:class ^steam_app_\d+$"
       "workspace 10, match:class ^steam_app_\d+$"
+
+      # Satty
+      "match:class ^(com.gabm.satty)$, fullscreen 1"
     ];
   };
 }

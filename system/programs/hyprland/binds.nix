@@ -136,9 +136,9 @@ in {
 
         # screenshot
         # area
-        ", Print, exec, ${runOnce "grimblast"} --notify copysave area"
-        "$mod SHIFT, R, exec, ${runOnce "grimblast"} --notify copysave area"
-        "$mod, P, exec, ${runOnce "grimblast"} --notify copysave area"
+        ", Print, exec, ${runOnce "grimblast"} -f -t ppm save area - | satty --filename - --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png"
+        "$mod SHIFT, R, exec, ${runOnce "grimblast"} -f -t ppm save area - | satty --filename - --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png"
+        "$mod, P, exec, ${runOnce "grimblast"} -f -t ppm save area - | satty --filename - --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png"
 
         # current screen
         "CTRL, Print, exec, ${runOnce "grimblast"} --notify --cursor copysave output"
