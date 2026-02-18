@@ -3,11 +3,11 @@
   pkgs,
   ...
 }: let
-  version = "0.9.1.1";
+  version = "0.9.2.1";
   sourceMap = {
     x86_64-linux = pkgs.fetchurl {
       url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-${version}-x86_64.AppImage";
-      hash = "sha256-0Kw8Ko41Gdz4xLn62riYAny99Hd0s7/75h8bz4LUuCE=";
+      hash = "sha256-guDBIr8NOD0GtjWznsVXlvb6llvdWHxREfDvXeP4m/w=";
     };
     aarch64-linux = pkgs.fetchurl {
       url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-${version}-arm64.AppImage";
@@ -36,7 +36,7 @@ in
       cp -r ${contents}/opt/helium/locales "$out/share/lib/helium"
       cp -r ${contents}/usr/share/* "$out/share"
       cp "${contents}/${pname}.desktop" "$out/share/applications/"
-      substituteInPlace $out/share/applications/${pname}.desktop --replace-fail 'Exec=AppRun' 'Exec=${meta.mainProgram}'
+      substituteInPlace $out/share/applications/${pname}.desktop --replace 'Exec=AppRun' 'Exec=${meta.mainProgram}'
     '';
 
     meta = {
