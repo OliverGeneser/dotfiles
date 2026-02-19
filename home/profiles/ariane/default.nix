@@ -53,6 +53,7 @@
     ../../terminal/programs/skim.nix
     ../../terminal/programs/sqlite.nix
     ../../terminal/programs/ssh.nix
+    ../../terminal/programs/temporal.nix
     ../../terminal/programs/turso.nix
     ../../terminal/programs/yazi
     ../../terminal/programs/xdg.nix
