@@ -143,7 +143,7 @@
       };
       tank0 = {
         type = "disk";
-        device = "/dev/disk/by-id/ata-ST2000DM001-1E6164_Z1E55KEJ";
+        device = "/dev/disk/by-id/ata-WDC_WD80EMZZ-11B4FB0_WD-CA02DJSG";
         content = {
           type = "gpt";
           partitions = {
@@ -159,7 +159,7 @@
       };
       tank1 = {
         type = "disk";
-        device = "/dev/disk/by-id/ata-ST3160812AS_4LS1JB4F";
+        device = "/dev/disk/by-id/ata-WDC_WD80EMZZ-11B4FB0_WD-CA059PAG";
         content = {
           type = "gpt";
           partitions = {
