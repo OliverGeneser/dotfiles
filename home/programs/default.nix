@@ -24,8 +24,6 @@
     tutanota-desktop
     telegram-desktop
 
-    yubioath-flutter
-
     qalculate-qt
     gnome-control-center
     gnome-disk-utility

@@ -50,6 +50,7 @@ let
     # ./services/searx.nix
     # ./services/virtualisation/docker
     ./services/virtualisation/podman
+    ./services/yubikey.nix
   ];
 
   laptop =
