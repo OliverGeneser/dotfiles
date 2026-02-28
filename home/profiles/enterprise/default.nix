@@ -142,7 +142,7 @@
         identitiesOnly = true;
       };
       "ironman" = {
-        hostname = "10.0.0.210";
+        hostname = "ironman";
         port = 22000;
         user = "oliverg";
         identityFile = "~/.ssh/id_ecdsa_sk";
