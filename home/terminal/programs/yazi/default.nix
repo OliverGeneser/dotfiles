@@ -23,6 +23,8 @@
     enableBashIntegration = config.programs.bash.enable;
     enableZshIntegration = config.programs.zsh.enable;
 
+    shellWrapperName = "y";
+
     settings = {
       manager = {
         layout = [1 4 3];

@@ -1,5 +1,5 @@
 {
-  systemd.sleep.extraConfig = ''
+  systemd.sleep.settings.Sleep = ''
     HibernateDelaySec=30min
   '';
 

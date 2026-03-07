@@ -119,7 +119,7 @@
           format = "{volume}% {icon}";
           format-bluetooth = " {icon} {volume}%";
           format-muted = "  ";
-          on-click = "helvum";
+          on-click = "pwvucontrol";
           format-icons = ["  " "  " "  "];
         };
         tray = {

@@ -14,7 +14,6 @@
     # audio control
     pulsemixer
     pwvucontrol
-    helvum
 
     # audio
     amberol

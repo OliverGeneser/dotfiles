@@ -10,22 +10,22 @@
 
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (final: prev: {
-        version = "5.5.7";
+        version = "5.6.0";
 
         src = super.fetchurl {
           url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
-          hash = "sha256-YKGMDX6rMNS6sYTsV/9sLpLvVkFcjEFdxO9hhb7SprU=";
+          hash = "sha256-dqwB1kCUL3DetfFCsBVh3xq3fNKSOMabJepDV7DpLGA=";
         };
       });
     };
 
     bun = self: super: {
       bun = super.bun.overrideAttrs (final: prev: {
-        version = "1.3.9";
+        version = "1.3.10";
 
         src = super.fetchurl {
           url = "https://github.com/oven-sh/bun/releases/download/bun-v${final.version}/bun-linux-x64.zip";
-          hash = "sha256-RoDoDkTjKqcYVgzq6F0i7Pvy77jzZBeC415Lfv1loao=";
+          hash = "sha256-9XvAGH45Yj3nFro6OJ/aVIay175xMamAulTce3M9Lgg=";
         };
       });
     };

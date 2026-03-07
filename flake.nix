@@ -325,7 +325,9 @@
 
     flake-utils = {
       url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
+      inputs = {
+        systems.follows = "systems";
+      };
     };
 
     flake-parts = {
@@ -345,10 +347,13 @@
       };
     };
 
-    anyrun.url = "github:fufexan/anyrun/launch-prefix";
+    anyrun = {
+      url = "github:fufexan/anyrun/launch-prefix";
+    };
 
     catppuccin = {
       url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     custom-udev-rules = {
@@ -367,6 +372,7 @@
 
     ghostty = {
       url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
@@ -427,7 +433,14 @@
       url = "github:nix-community/impermanence";
     };
 
-    lanzaboote.url = "github:nix-community/lanzaboote";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+    };
+
+    nixcord = {
+      url = "github:kaylorben/nixcord";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
@@ -493,10 +506,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixcord = {
-      url = "github:kaylorben/nixcord";
-    };
-
     wezterm = {
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -508,7 +517,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    yazi.url = "github:sxyazi/yazi";
+    yazi = {
+      url = "github:sxyazi/yazi";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
