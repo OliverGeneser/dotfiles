@@ -99,6 +99,9 @@
 
       # Satty
       "match:class ^(com.gabm.satty)$, fullscreen 1"
+
+      # Android Studio Emulator
+      "float 1, match:class ^(Emulator)$"
     ];
   };
 }

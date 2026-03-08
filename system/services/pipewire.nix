@@ -18,4 +18,8 @@
 
     pulseaudio.enable = lib.mkForce false;
   };
+
+  environment.systemPackages = with pkgs; [
+    pulseaudio
+  ];
 }

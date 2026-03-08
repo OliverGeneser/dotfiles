@@ -79,6 +79,8 @@
         battery = "set batteryCharge (bat /sys/class/power_supply/BAT0/capacity) && set batteryStatus (bat /sys/class/power_supply/BAT0/status); echo -e \"Charge: $batteryCharge% \nCurrently: $batteryStatus\"";
 
         husky = ": > /dev/null";
+
+        emu = "QT_QPA_PLATFORM=xcb emulator -feature -Vulkan @Pixel_9_Pro_XL";
       }
       // lib.optionalAttrs config.programs.bat.enable {cat = "bat";};
     shellGlobalAliases = {eza = "eza --icons --git";};
