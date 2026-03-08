@@ -75,7 +75,7 @@ in {
         "$mod, G, togglegroup,"
         "$mod SHIFT, N, changegroupactive, f"
         "$mod SHIFT, P, changegroupactive, b"
-        "$mod, R, togglesplit,"
+        "$mod, R, layoutmsg, togglesplit"
         "$mod ALT, R, exec, ${resize}/bin/resize"
         "$mod, T, togglefloating,"
         "$mod ALT, , resizeactive,"
