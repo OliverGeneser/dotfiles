@@ -1,7 +1,7 @@
 {
-  systemd.sleep.settings.Sleep = ''
-    HibernateDelaySec=30min
-  '';
+  systemd.sleep.settings.Sleep = {
+    HibernateDelaySec = "30min";
+  };
 
   services = {
     logind = {
