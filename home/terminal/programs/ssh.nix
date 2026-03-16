@@ -32,31 +32,23 @@ in {
           };
           user = mkOption {
             type = types.str;
-            default =
-              config.home.username;
+            default = config.home.username;
             description = "The user of the SSH host.";
           };
           kexAlgorithms = mkOption {
             type = types.nullOr (types.listOf types.str);
-            default = [
-              "sntrup761x25519-sha512"
-              "sntrup761x25519-sha512@openssh.com"
-              "mlkem768x25519-sha256"
-            ];
+            default = ["sntrup761x25519-sha512" "sntrup761x25519-sha512@openssh.com" "mlkem768x25519-sha256"];
             description = "Specifies the available KEX (Key Exchange) algorithms.";
+          };
+          extraOptions = mkOption {
+            type = types.attrsOf types.str;
+            default = {};
+            description = "Extra SSH options (like LogLevel, GSSAPIAuthentication, etc.)";
           };
         };
       });
       default = {};
       description = "A set of extra SSH hosts.";
-      example = types.literalExample ''
-        {
-          "gitlab-personal" = {
-            hostname = "gitlab.com";
-            identityFile = "~/.ssh/id_ed25519_personal";
-          };
-        }
-      '';
     };
   };
 

@@ -32,6 +32,8 @@
     ../../services/system/tailray.nix
     ../../services/system/udiskie.nix
 
+    ../../services/vpn/eduvpn.nix
+
     # wayland-specific
     ../../services/wayland/gammastep.nix
     ../../services/wayland/hyprpaper.nix
@@ -155,6 +157,38 @@
           "curve25519-sha256"
           "curve25519-sha256@libssh.org"
         ];
+      };
+      "zenodo-*" = {
+        hostname = "%h.cern.ch";
+        user = "root";
+        kexAlgorithms = [
+          "sntrup761x25519-sha512"
+          "sntrup761x25519-sha512@openssh.com"
+          "mlkem768x25519-sha256"
+          "curve25519-sha256"
+          "curve25519-sha256@libssh.org"
+        ];
+
+        extraOptions = {
+          GSSAPIAuthentication = "yes";
+          GSSAPIDelegateCredentials = "yes";
+        };
+      };
+
+      "zenodo-ops" = {
+        hostname = "%h.cern.ch";
+        kexAlgorithms = [
+          "sntrup761x25519-sha512"
+          "sntrup761x25519-sha512@openssh.com"
+          "mlkem768x25519-sha256"
+          "curve25519-sha256"
+          "curve25519-sha256@libssh.org"
+        ];
+
+        extraOptions = {
+          RequestTTY = "yes";
+          RemoteCommand = "tmux new-session -A -s oliver";
+        };
       };
     };
 
