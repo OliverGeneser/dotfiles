@@ -6,15 +6,15 @@
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun nvidia turso-cli];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun turso-cli];
 
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (final: prev: {
-        version = "5.6.0";
+        version = "5.6.2";
 
         src = super.fetchurl {
           url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
-          hash = "sha256-dqwB1kCUL3DetfFCsBVh3xq3fNKSOMabJepDV7DpLGA=";
+          hash = "sha256-s1Smb8du7pZjcVMnLsJ39P28erApDLnf5lqO9rO7asw=";
         };
       });
     };

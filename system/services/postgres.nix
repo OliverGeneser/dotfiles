@@ -28,7 +28,7 @@ in {
         enable = true;
         package = pkgs.postgresql_16_jit;
         ensureDatabases = ["local"] ++ cfg.databases;
-        extensions = ps: with ps; [pgvecto-rs];
+        extensions = ps: with ps; [vectorchord];
         authentication = pkgs.lib.mkOverride 10 ''
           #...
           #type database DBuser origin-address auth-method
@@ -41,8 +41,8 @@ in {
           host jellyseerr       jellyseerr     ::1/128        trust
         '';
         settings = {
-          shared_preload_libraries = ["vectors.so"];
-          search_path = "\"$user\", public, vectors";
+          shared_preload_libraries = ["vchord.so"];
+          search_path = "\"$user\", public, vchord";
         };
       };
 
