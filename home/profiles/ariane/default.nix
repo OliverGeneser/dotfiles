@@ -48,6 +48,7 @@
     ../../terminal/programs/ffmpeg.nix
     ../../terminal/programs/git.nix
     ../../terminal/programs/htop.nix
+    ../../terminal/programs/k9s.nix
     ../../terminal/programs/nix.nix
     ../../terminal/programs/nodejs.nix
     ../../terminal/programs/opencode.nix
