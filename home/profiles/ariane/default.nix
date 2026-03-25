@@ -97,98 +97,102 @@
       };
     };
 
-    terminal.programs.ssh.extraHosts = {
-      "bitbucket-qinspect" = {
-        hostname = "bitbucket.org";
-        identityFile = "~/.ssh/ssh_prod_qreport";
-        identitiesOnly = true;
-      };
-      "qmaster.q-inspect.com" = {
-        hostname = "qmaster.q-inspect.com";
-        identityFile = "~/.ssh/ssh_prod_qreport";
-        identitiesOnly = true;
-      };
-      "q-inspect.dk" = {
-        hostname = "q-inspect.dk";
-        identityFile = "~/.ssh/ssh_prod_qreport";
-        identitiesOnly = true;
-      };
-      "thor" = {
-        hostname = "thor";
-        port = 22;
-        user = "nixos";
-        identityFile = "~/.ssh/id_ecdsa_sk";
-        identitiesOnly = true;
-      };
-      "enterprise" = {
-        hostname = "10.0.0.200";
-        port = 22;
-        user = "olivergeneser";
-        identityFile = "~/.ssh/id_ecdsa_sk";
-        identitiesOnly = true;
-      };
-      "ironman" = {
-        hostname = "ironman";
-        port = 22000;
-        user = "oliverg";
-        identityFile = "~/.ssh/id_ecdsa_sk";
-        identitiesOnly = false;
-        kexAlgorithms = [
-          "sntrup761x25519-sha512"
-          "sntrup761x25519-sha512@openssh.com"
-          "mlkem768x25519-sha256"
-          "curve25519-sha256"
-          "curve25519-sha256@libssh.org"
-        ];
-      };
-      "tunnelboy" = {
-        hostname = "10.0.0.230";
-        port = 22;
-        user = "nixos";
-        identityFile = "~/.ssh/id_ecdsa_sk";
-        identitiesOnly = true;
-      };
-      "cern" = {
-        hostname = "lxplus9.cern.ch";
-        user = "ogeneser";
-        kexAlgorithms = [
-          "sntrup761x25519-sha512"
-          "sntrup761x25519-sha512@openssh.com"
-          "mlkem768x25519-sha256"
-          "curve25519-sha256"
-          "curve25519-sha256@libssh.org"
-        ];
-      };
-      "zenodo-*" = {
-        hostname = "%h.cern.ch";
-        user = "root";
-        kexAlgorithms = [
-          "sntrup761x25519-sha512"
-          "sntrup761x25519-sha512@openssh.com"
-          "mlkem768x25519-sha256"
-          "curve25519-sha256"
-          "curve25519-sha256@libssh.org"
-        ];
-
-        extraOptions = {
-          GSSAPIAuthentication = "yes";
-          GSSAPIDelegateCredentials = "yes";
+    terminal.programs.ssh = {
+      withGSSAPI = true;
+      extraHosts = {
+        "bitbucket-qinspect" = {
+          hostname = "bitbucket.org";
+          identityFile = "~/.ssh/ssh_prod_qreport";
+          identitiesOnly = true;
         };
-      };
+        "qmaster.q-inspect.com" = {
+          hostname = "qmaster.q-inspect.com";
+          identityFile = "~/.ssh/ssh_prod_qreport";
+          identitiesOnly = true;
+        };
+        "q-inspect.dk" = {
+          hostname = "q-inspect.dk";
+          identityFile = "~/.ssh/ssh_prod_qreport";
+          identitiesOnly = true;
+        };
+        "thor" = {
+          hostname = "thor";
+          port = 22;
+          user = "nixos";
+          identityFile = "~/.ssh/id_ecdsa_sk";
+          identitiesOnly = true;
+        };
+        "enterprise" = {
+          hostname = "10.0.0.200";
+          port = 22;
+          user = "olivergeneser";
+          identityFile = "~/.ssh/id_ecdsa_sk";
+          identitiesOnly = true;
+        };
+        "ironman" = {
+          hostname = "ironman";
+          port = 22000;
+          user = "oliverg";
+          identityFile = "~/.ssh/id_ecdsa_sk";
+          identitiesOnly = false;
+          kexAlgorithms = [
+            "sntrup761x25519-sha512"
+            "sntrup761x25519-sha512@openssh.com"
+            "mlkem768x25519-sha256"
+            "curve25519-sha256"
+            "curve25519-sha256@libssh.org"
+          ];
+        };
+        "tunnelboy" = {
+          hostname = "10.0.0.230";
+          port = 22;
+          user = "nixos";
+          identityFile = "~/.ssh/id_ecdsa_sk";
+          identitiesOnly = true;
+        };
+        "aiadm" = {
+          hostname = "aiadm.cern.ch";
+          user = "ogeneser";
+          kexAlgorithms = [
+            "curve25519-sha256"
+            "curve25519-sha256@libssh.org"
+            "ecdh-sha2-nistp256"
+            "ecdh-sha2-nistp384"
+            "ecdh-sha2-nistp521"
+            "diffie-hellman-group-exchange-sha256"
+            "diffie-hellman-group14-sha256"
+            "diffie-hellman-group16-sha512"
+            "diffie-hellman-group18-sha512"
+          ];
+        };
+        "zenodo-*" = {
+          hostname = "%h.cern.ch";
+          user = "root";
+          kexAlgorithms = [
+            "curve25519-sha256"
+            "curve25519-sha256@libssh.org"
+            "ecdh-sha2-nistp256"
+            "ecdh-sha2-nistp384"
+            "ecdh-sha2-nistp521"
+            "diffie-hellman-group-exchange-sha256"
+            "diffie-hellman-group14-sha256"
+            "diffie-hellman-group16-sha512"
+            "diffie-hellman-group18-sha512"
+          ];
 
-      "zenodo-ops" = {
-        hostname = "%h.cern.ch";
-        kexAlgorithms = [
-          "sntrup761x25519-sha512"
-          "sntrup761x25519-sha512@openssh.com"
-          "mlkem768x25519-sha256"
-          "curve25519-sha256"
-          "curve25519-sha256@libssh.org"
-        ];
+          extraOptions = {
+            GSSAPIAuthentication = "yes";
+            GSSAPIDelegateCredentials = "yes";
+            SetEnv = "TERM=xterm-256color";
+          };
+        };
 
-        extraOptions = {
-          RequestTTY = "yes";
-          RemoteCommand = "tmux new-session -A -s oliver";
+        "zenodo-ops" = {
+          hostname = "%h.cern.ch";
+          extraOptions = {
+            RequestTTY = "yes";
+            RemoteCommand = "tmux new-session -A -s oliver";
+          };
         };
       };
     };

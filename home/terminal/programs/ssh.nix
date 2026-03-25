@@ -8,6 +8,12 @@
   cfg = config.terminal.programs.ssh;
 in {
   options.terminal.programs.ssh = {
+    withGSSAPI = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable GSSAPIAuthentication";
+    };
+
     extraHosts = mkOption {
       type = types.attrsOf (types.submodule {
         options = {
@@ -78,7 +84,10 @@ in {
           };
         }
         // cfg.extraHosts;
-      package = pkgs.openssh;
+      package =
+        if cfg.withGSSAPI
+        then pkgs.openssh_gssapi
+        else pkgs.openssh;
     };
   };
 }
