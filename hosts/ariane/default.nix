@@ -11,6 +11,7 @@
     ./hyprland.nix
     ./battery.nix
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x1-13th-gen
+    ../../system/programs/dev/krb5.nix
   ];
 
   boot = {
