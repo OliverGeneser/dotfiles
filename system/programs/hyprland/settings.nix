@@ -33,15 +33,6 @@ in {
         "${pkgs.solaar}/bin/solaar -w hide"
       ];
 
-      workspace = [
-        "1, on-created-empty:[silent] helium --profile-directory=\"Default\", default:true"
-        "2, on-created-empty:[silent] helium --profile-directory=\"Profile 2\""
-        "3, on-created-empty:[silent] ghostty"
-        "5, on-created-empty:[silent] vesktop"
-        "6, on-created-empty:[silent] jellyfinmediaplayer"
-        "10, border:false, rounding:false"
-      ];
-
       general = {
         gaps_in = 4;
         gaps_out = 8;
