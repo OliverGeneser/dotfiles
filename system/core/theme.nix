@@ -36,7 +36,6 @@ in {
       noto-fonts-color-emoji
       source-serif
       ubuntu-classic
-      jetbrains-mono
       open-sans
 
       # microsoft
