@@ -17,7 +17,6 @@
 
       services = {
         postgresql = {
-          databases = ["immich" "jellyseerr"];
           backupLocation = "/mnt/storage/vault/postgresql";
         };
 
@@ -173,6 +172,7 @@
           "appdata/"
           "*.!sync"
           "/.snapshots/"
+          ".Trash-1000/"
         ];
         sync.interval = "";
         scrub = {
@@ -203,6 +203,7 @@
           startAt = "01:00";
           serviceConfig = {
             Type = "oneshot";
+            User = "root";
             ExecStart = "${self.packages.${pkgs.stdenv.hostPlatform.system}.snapraid-btrfs-runner}/bin/snapraid-btrfs-runner";
           };
         };

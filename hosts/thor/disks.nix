@@ -175,7 +175,7 @@
       };
       storage = {
         type = "filesystem";
-        device = "/mnt/disk1:/mnt/disk2";
+        device = "/mnt/disk1:/mnt/disk2:/mnt/tank/fuse";
         content = {
           type = "filesystem";
           format = "fuse.mergerfs";
@@ -187,7 +187,7 @@
             "use_ino"
             "cache.files=off"
             "moveonenospc=true"
-            "category.create=mfs"
+            "category.create=epmfs"
             "dropcacheonclose=true"
             "minfreespace=250G"
             "fsname=mergerfs"
@@ -210,13 +210,14 @@
           compression = "zstd";
           "com.sun:auto-snapshot" = "false";
         };
+        mountpoint = "/mnt/tank";
 
         postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^tank@blank$' || zfs snapshot tank@blank";
 
         datasets = {
-          vault = {
+          fuse = {
             type = "zfs_fs";
-            mountpoint = "/mnt/vault";
+            mountpoint = "/mnt/tank/fuse";
             options."com.sun:auto-snapshot" = "true";
           };
         };
