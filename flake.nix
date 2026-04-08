@@ -28,7 +28,7 @@
             packages = [
               pkgs.alejandra
               pkgs.git
-              pkgs.nodePackages.prettier
+              pkgs.prettier
               config.packages.repl
               pkgs.nh
               pkgs.disko
@@ -53,7 +53,6 @@
               zip
               libuuid
               gcc
-              nodePackages.node-gyp
               python3 # node-gyp needs Python
             ];
 

@@ -27,6 +27,9 @@
       vimAlias = true;
       defaultEditor = true;
 
+      withRuby = false;
+      withPython3 = false;
+
       initLua = ''
         require("config.lazy")
       '';
