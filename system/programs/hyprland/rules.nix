@@ -46,7 +46,7 @@
       "pin 1, match:title (?i)^(Picture-in-Picture)$"
       "fullscreen_state 0 *, match:title (?i)^(Picture-in-Picture)$"
       "size 25% 25%, match:title (?i)^(Picture-in-Picture)$"
-      "move 100%-w-5 100%-w-5, match:title (?i)^(Picture-in-Picture)$"
+      "move (monitor_w-window_w-5) (monitor_h-window_h-5), match:title (?i)^(Picture-in-Picture)$"
 
       # throw sharing indicators away
       "workspace special silent, match:title ^(Firefox — Sharing Indicator)$"
