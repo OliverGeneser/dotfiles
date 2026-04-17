@@ -9,7 +9,7 @@
 
   xdg.configFile = {
     "tmux-sessionizer/tmux-sessionizer.conf".text = ''
-      TS_EXTRA_SEARCH_PATHS=(~/dev:2)
+      TS_EXTRA_SEARCH_PATHS=(~/dev:3)
     '';
   };
 
