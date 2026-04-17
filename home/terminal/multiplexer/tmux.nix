@@ -27,6 +27,11 @@
     terminal = "tmux-256color";
 
     extraConfig = ''
+      set -ga terminal-overrides ",*:Tc"
+
+      set -g status-right '#[fg=black]#{cpu_bg_color} CPU: #{cpu_icon} #{cpu_percentage} | %a %h-%d %H:%M '
+      run-shell ${pkgs.tmuxPlugins.cpu}/share/tmux-plugins/cpu/cpu.tmux
+
       bind -r ^ last-window
       bind -r k select-pane -U
       bind -r j select-pane -D
@@ -42,7 +47,7 @@
     '';
 
     plugins = with pkgs; [
-      tmuxPlugins.cpu
+      tmuxPlugins.better-mouse-mode
       {
         plugin = tmuxPlugins.resurrect;
         extraConfig = ''
