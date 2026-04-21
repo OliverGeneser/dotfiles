@@ -21,11 +21,11 @@
 
     bun = self: super: {
       bun = super.bun.overrideAttrs (final: prev: {
-        version = "1.3.12";
+        version = "1.3.13";
 
         src = super.fetchurl {
           url = "https://github.com/oven-sh/bun/releases/download/bun-v${final.version}/bun-linux-x64.zip";
-          hash = "sha256-Edw+4RvBaV4UlzfGyj1WGTAs9DRua4pux5iJZ+8B3cU=";
+          hash = "sha256-ecB3H6i5LDOq5B4VoODTB+qZ0OLwAxfHHGxTI3p44lo=";
         };
       });
     };
@@ -52,13 +52,13 @@
 
     turso-cli = self: super: {
       turso-cli = super.turso-cli.overrideAttrs (final: prev: {
-        version = "1.0.19";
+        version = "1.0.20";
 
         vendorHash = "sha256-Cb4/KA9jfI/pNHbJqLWtm9oEXfMHGBS46J9o3lL4/Tk=";
 
         src = prev.src.override {
           rev = "v${final.version}";
-          hash = "sha256-A0stg1w3nlrybqRcMROlWF3PnvYEYqy8KskjIXXA7Rk=";
+          hash = "sha256-Vby81LYVEqysUmPU1P5d+VEME/SVYch14m1Mj7YvOXc=";
         };
       });
     };
