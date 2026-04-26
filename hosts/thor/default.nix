@@ -56,9 +56,9 @@
     };
 
     boot = {
-      kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+      kernelPackages = lib.mkForce pkgs.linuxPackages_6_19;
       kernelModules = ["zfs" "coretemp" "it87"];
-      extraModulePackages = with pkgs.linuxPackages_latest; [it87];
+      extraModulePackages = with pkgs.linuxPackages_6_19; [it87];
       supportedFilesystems = lib.mkForce ["btrfs" "zfs"];
       resumeDevice = "/dev/disk/by-label/nixos";
       # sudo btrfs inspect-internal map-swapfile -r /swap/swapfile

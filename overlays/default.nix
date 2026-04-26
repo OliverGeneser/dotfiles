@@ -6,7 +6,7 @@
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun turso-cli];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun efitools openldap turso-cli];
 
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (final: prev: {
@@ -30,6 +30,16 @@
       });
     };
 
+    efitools = self: super: {
+      efitools = super.efitools.overrideAttrs (old: {
+        patches =
+          (old.patches or [])
+          ++ [
+            ./patch-efitools.patch
+          ];
+      });
+    };
+
     nvidia = self: super: {
       linuxPackages_latest = super.linuxPackages_latest.extend (lpFinal: lpPrev: {
         nvidiaPackages =
@@ -47,6 +57,12 @@
                 });
               };
           };
+      });
+    };
+
+    openldap = self: super: {
+      openldap = super.openldap.overrideAttrs (_: {
+        doCheck = false;
       });
     };
 
