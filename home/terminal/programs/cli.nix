@@ -72,6 +72,8 @@
     wget
 
     ghostscript
+
+    qrencode
   ];
 
   programs = {
