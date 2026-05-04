@@ -24,7 +24,7 @@
       });
     settings = {
       autoupdate = true;
-      plugin = ["@ex-machina/opencode-anthropic-auth@1.7.5"];
+      plugin = ["@ex-machina/opencode-anthropic-auth@1.8.0"];
       mcp = {
         context7 = {
           type = "remote";

@@ -44,7 +44,6 @@
       # make Firefox/Zen/Chromium PiP window floating and sticky
       "float 1, match:title (?i)^(Picture-in-Picture)$"
       "pin 1, match:title (?i)^(Picture-in-Picture)$"
-      "fullscreen_state 0 *, match:title (?i)^(Picture-in-Picture)$"
       "size 25% 25%, match:title (?i)^(Picture-in-Picture)$"
       "move (monitor_w-window_w-5) (monitor_h-window_h-5), match:title (?i)^(Picture-in-Picture)$"
 
@@ -58,9 +57,9 @@
       "workspace 9 silent, match:title ^(YouTube Music)$"
 
       # idle inhibit while watching videos
-      "idle_inhibit focus 1, match:class ^(mpv|.+exe|celluloid)$"
-      "idle_inhibit focus 1, match:class ^(zen)$, match:title ^(.*YouTube.*)$"
-      "idle_inhibit fullscreen 1, match:class ^(zen)$"
+      "idle_inhibit focus, match:class ^(mpv|.+exe|celluloid)$"
+      "idle_inhibit focus, match:class ^(zen)$, match:title ^(.*YouTube.*)$"
+      "idle_inhibit fullscreen, match:class ^(zen)$"
 
       "dim_around 1, match:class ^(gcr-prompter)$"
       "dim_around 1, match:class ^(xdg-desktop-portal-gtk)$"

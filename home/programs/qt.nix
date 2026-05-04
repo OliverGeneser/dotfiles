@@ -38,7 +38,7 @@ in {
   xdg.configFile = {
     # Kvantum config
     "Kvantum" = {
-      source = "${KvLibadwaita}/src";
+      source = lib.mkForce "${KvLibadwaita}/src";
       recursive = true;
     };
 
