@@ -6,7 +6,7 @@
   imports = [inputs.flake-parts.flakeModules.easyOverlay];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun efitools openldap turso-cli];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [beekeeper-studio bun openldap turso-cli];
 
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (final: prev: {
