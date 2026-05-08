@@ -124,12 +124,16 @@
       getty.autologinUser = "nixos";
 
       zfs = {
-        trim.enable = true;
-        trim.interval = "weekly";
+        trim = {
+          enable = true;
+          interval = "weekly";
+        };
 
-        autoScrub.enable = true;
-        autoScrub.pools = ["tank"];
-        autoScrub.interval = "weekly";
+        autoScrub = {
+          enable = true;
+          pools = ["tank"];
+          interval = "weekly";
+        };
       };
 
       hddfancontrol = {
