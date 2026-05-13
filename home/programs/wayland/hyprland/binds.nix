@@ -44,7 +44,7 @@ in {
 
         # utility
         # terminal
-        "$mod, Return, exec, uwsm app -- foot"
+        "$mod, Return, exec, uwsm app -- ghostty"
         # logout menu
         "$mod, Escape, exec, ${toggle "wlogout"} -p layer-shell"
         # lock screen

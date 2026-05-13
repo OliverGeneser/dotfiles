@@ -58,7 +58,6 @@
     ../../terminal/programs/xdg.nix
 
     # terminal emulators
-    ../../terminal/emulators/foot.nix
     ../../terminal/emulators/ghostty.nix
 
     # terminal multiplexers

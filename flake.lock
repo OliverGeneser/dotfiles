@@ -2081,7 +2081,6 @@
         "stylix": "stylix",
         "systems": "systems_6",
         "tailray": "tailray",
-        "wezterm": "wezterm",
         "yazi": "yazi",
         "zen-browser": "zen-browser"
       }
@@ -2442,36 +2441,6 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "wezterm": {
-      "inputs": {
-        "flake-utils": "flake-utils_2",
-        "freetype2": "freetype2",
-        "harfbuzz": "harfbuzz",
-        "libpng": "libpng",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-overlay": [
-          "rust-overlay"
-        ],
-        "zlib": "zlib"
-      },
-      "locked": {
-        "dir": "nix",
-        "lastModified": 1774954828,
-        "narHash": "sha256-F6qDnwdVlX/JJhM7XYkgU2QtBfN1EQ9UysP2xVKAA6I=",
-        "owner": "wez",
-        "repo": "wezterm",
-        "rev": "577474d89ee61aef4a48145cdec82a638d874751",
-        "type": "github"
-      },
-      "original": {
-        "dir": "nix",
-        "owner": "wez",
-        "repo": "wezterm",
         "type": "github"
       }
     },
