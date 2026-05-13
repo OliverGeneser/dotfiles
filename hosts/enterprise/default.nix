@@ -4,7 +4,8 @@
   # inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./disks.nix
@@ -20,7 +21,10 @@
 
   boot = {
     kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
-    supportedFilesystems = lib.mkForce ["btrfs" "ntfs"];
+    supportedFilesystems = lib.mkForce [
+      "btrfs"
+      "ntfs"
+    ];
     resumeDevice = "/dev/disk/by-label/nixos";
     # sudo btrfs inspect-internal map-swapfile -r /swap/swapfile
     kernelParams = [
@@ -35,8 +39,17 @@
     hostName = "enterprise";
     nftables.enable = true;
     firewall = {
-      allowedTCPPorts = [3000 3005 8080 8081 4200];
-      allowedUDPPorts = [4200 8081];
+      allowedTCPPorts = [
+        3000
+        3005
+        8080
+        8081
+        4200
+      ];
+      allowedUDPPorts = [
+        4200
+        8081
+      ];
     };
   };
 

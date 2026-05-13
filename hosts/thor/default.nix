@@ -5,7 +5,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./disks.nix
@@ -41,13 +42,13 @@
             "Oliver Photos" = {
               id = "hd1901_jc5r-photos";
               path = "/mnt/storage/vault/homes/Oliver/Syncthing/Photos"; # Which folder to add to Syncthing
-              devices = ["oliver"]; # Which devices to share the folder with
+              devices = [ "oliver" ]; # Which devices to share the folder with
             };
 
             "dev" = {
               id = "rrk9d-szxeq";
               path = "/mnt/storage/vault/backup/dev"; # Which folder to add to Syncthing
-              devices = ["enterprise"]; # Which devices to share the folder with
+              devices = [ "enterprise" ]; # Which devices to share the folder with
               type = "receiveonly";
             };
           };
@@ -57,9 +58,16 @@
 
     boot = {
       kernelPackages = lib.mkForce pkgs.linuxPackages_6_19;
-      kernelModules = ["zfs" "coretemp" "it87"];
-      extraModulePackages = with pkgs.linuxPackages_6_19; [it87];
-      supportedFilesystems = lib.mkForce ["btrfs" "zfs"];
+      kernelModules = [
+        "zfs"
+        "coretemp"
+        "it87"
+      ];
+      extraModulePackages = with pkgs.linuxPackages_6_19; [ it87 ];
+      supportedFilesystems = lib.mkForce [
+        "btrfs"
+        "zfs"
+      ];
       resumeDevice = "/dev/disk/by-label/nixos";
       # sudo btrfs inspect-internal map-swapfile -r /swap/swapfile
       kernelParams = [
@@ -101,8 +109,30 @@
       hostName = "thor";
       nftables.enable = true;
       firewall = {
-        allowedTCPPorts = [53 80 443 2283 3001 3003 4500 8173 8384 8090 22000];
-        allowedUDPPorts = [53 80 443 2283 3001 3003 4500 22000 21027];
+        allowedTCPPorts = [
+          53
+          80
+          443
+          2283
+          3001
+          3003
+          4500
+          8173
+          8384
+          8090
+          22000
+        ];
+        allowedUDPPorts = [
+          53
+          80
+          443
+          2283
+          3001
+          3003
+          4500
+          22000
+          21027
+        ];
       };
     };
 
@@ -131,7 +161,7 @@
 
         autoScrub = {
           enable = true;
-          pools = ["tank"];
+          pools = [ "tank" ];
           interval = "weekly";
         };
       };
@@ -146,7 +176,7 @@
               "/dev/disk/by-id/ata-WDC_WUH721414ALE6L4_Y6GJ5Z5C"
             ];
             # https://forums.servethehome.com/index.php?threads/12gen-n-series-nas-motherboard-topton-cwwk.42432/page-48#post-457741
-            pwmPaths = ["/sys/class/hwmon/hwmon4/device/pwm3"];
+            pwmPaths = [ "/sys/class/hwmon/hwmon4/device/pwm3" ];
             extraArgs = [
               "-i 30sec"
             ];
@@ -188,12 +218,12 @@
         configs = {
           d1 = {
             SUBVOLUME = "/mnt/disk1";
-            ALLOW_GROUPS = ["wheel"];
+            ALLOW_GROUPS = [ "wheel" ];
             SYNC_ACL = true;
           };
           d2 = {
             SUBVOLUME = "/mnt/disk2";
-            ALLOW_GROUPS = ["wheel"];
+            ALLOW_GROUPS = [ "wheel" ];
             SYNC_ACL = true;
           };
         };
@@ -208,7 +238,9 @@
           serviceConfig = {
             Type = "oneshot";
             User = "root";
-            ExecStart = "${self.packages.${pkgs.stdenv.hostPlatform.system}.snapraid-btrfs-runner}/bin/snapraid-btrfs-runner";
+            ExecStart = "${
+              self.packages.${pkgs.stdenv.hostPlatform.system}.snapraid-btrfs-runner
+            }/bin/snapraid-btrfs-runner";
           };
         };
       };

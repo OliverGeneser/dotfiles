@@ -1,8 +1,10 @@
-{config, ...}: let
+{ config, ... }:
+let
   data = config.xdg.dataHome;
   conf = config.xdg.configHome;
   cache = config.xdg.cacheHome;
-in {
+in
+{
   imports = [
     ./shell/starship.nix
     ./shell/zsh.nix

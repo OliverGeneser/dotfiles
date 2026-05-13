@@ -1,4 +1,5 @@
-{self, ...}: {
+{ self, ... }:
+{
   services.dunst = {
     enable = true;
   };

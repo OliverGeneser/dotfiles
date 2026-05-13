@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.custom-udev-rules.nixosModule
   ];
@@ -59,5 +60,7 @@
     }
   ];
 
-  environment.systemPackages = [inputs.prismlauncher.packages.${pkgs.stdenv.hostPlatform.system}.prismlauncher];
+  environment.systemPackages = [
+    inputs.prismlauncher.packages.${pkgs.stdenv.hostPlatform.system}.prismlauncher
+  ];
 }

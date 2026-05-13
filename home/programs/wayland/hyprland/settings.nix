@@ -1,5 +1,7 @@
-{config, ...}: let
-in {
+{ config, ... }:
+let
+in
+{
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
     env = [

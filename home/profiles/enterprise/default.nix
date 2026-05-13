@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   imports = [
     # editors
     ../../editors/nvim
@@ -69,7 +70,10 @@
       username = "olivergeneser";
       homeDirectory = "/home/olivergeneser";
       stateVersion = "23.11";
-      extraOutputsToInstall = ["doc" "devdoc"];
+      extraOutputsToInstall = [
+        "doc"
+        "devdoc"
+      ];
     };
 
     services.syncthing.settings = {
@@ -90,7 +94,11 @@
         "dev" = {
           id = "rrk9d-szxeq";
           path = "~/dev"; # Which folder to add to Syncthing
-          devices = ["apollo" "ariane" "thor"]; # Which devices to share the folder with
+          devices = [
+            "apollo"
+            "ariane"
+            "thor"
+          ]; # Which devices to share the folder with
           type = "sendonly";
         };
       };

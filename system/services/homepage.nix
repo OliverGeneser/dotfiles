@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   sops.secrets.homepage_env = {
     sopsFile = ./secrets.yaml;
   };
@@ -10,9 +11,9 @@
   services = {
     homepage-dashboard = {
       enable = true;
-      environmentFiles = [config.sops.secrets.homepage_env.path];
+      environmentFiles = [ config.sops.secrets.homepage_env.path ];
       listenPort = 8173;
-      bookmarks = [];
+      bookmarks = [ ];
       services = [
         {
           "Media" = [

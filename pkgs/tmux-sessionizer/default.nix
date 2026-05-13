@@ -14,5 +14,9 @@ stdenv.mkDerivation rec {
     install -m 755 tmux-sessionizer.sh $out/bin/tmux-sessionizer
   '';
 
-  propagatedBuildInputs = with pkgs; [tmux coreutils fzf];
+  propagatedBuildInputs = with pkgs; [
+    tmux
+    coreutils
+    fzf
+  ];
 }

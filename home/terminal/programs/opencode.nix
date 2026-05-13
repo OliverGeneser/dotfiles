@@ -3,13 +3,14 @@
   pkgs,
   self,
   ...
-}: {
+}:
+{
   programs.opencode = {
     enable = true;
     package = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
     settings = {
       autoupdate = true;
-      plugin = ["@ex-machina/opencode-anthropic-auth@1.8.0"];
+      plugin = [ "@ex-machina/opencode-anthropic-auth@1.8.0" ];
       mcp = {
         context7 = {
           type = "remote";

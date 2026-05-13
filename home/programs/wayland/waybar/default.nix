@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -100,7 +101,13 @@
           format = "{icon} {capacity}%";
           format-alt = "{time}";
           format-charging = "  {capacity}%";
-          format-icons = ["󰁻 " "󰁽 " "󰁿 " "󰂁 " "󰂂 "];
+          format-icons = [
+            "󰁻 "
+            "󰁽 "
+            "󰁿 "
+            "󰂁 "
+            "󰂂 "
+          ];
         };
         network = {
           interval = 10;
@@ -120,7 +127,11 @@
           format-bluetooth = " {icon} {volume}%";
           format-muted = "  ";
           on-click = "pwvucontrol";
-          format-icons = ["  " "  " "  "];
+          format-icons = [
+            "  "
+            "  "
+            "  "
+          ];
         };
         tray = {
           icon-size = 16;

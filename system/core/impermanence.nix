@@ -3,10 +3,12 @@
   inputs,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkOption types;
   cfg = config.system.core.impermanence;
-in {
+in
+{
   options.system.core.impermanence = {
     encryption = mkOption {
       type = types.bool;
@@ -15,12 +17,12 @@ in {
     };
     directories = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = "Additional directories.";
     };
     files = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = "Additional files.";
     };
   };
@@ -42,15 +44,13 @@ in {
     # Taken from https://github.com/NotAShelf/nyx/blob/2a8273ed3f11a4b4ca027a68405d9eb35eba567b/modules/core/common/system/impermanence/default.nix
     boot.initrd.systemd.services.rollback = {
       description = "Rollback BTRFS root subvolume to a pristine state";
-      wantedBy = ["initrd.target"];
+      wantedBy = [ "initrd.target" ];
       # make sure it's done after encryption
       # i.e. LUKS/TPM process
       after =
-        if (cfg.encryption)
-        then ["systemd-cryptsetup@cryptroot.service"]
-        else ["local-fs.target"];
+        if (cfg.encryption) then [ "systemd-cryptsetup@cryptroot.service" ] else [ "local-fs.target" ];
       # mount the root fs before clearing
-      before = ["sysroot.mount"];
+      before = [ "sysroot.mount" ];
       unitConfig.DefaultDependencies = "no";
       serviceConfig.Type = "oneshot";
 
@@ -99,31 +99,29 @@ in {
 
     environment.persistence."/persist" = {
       hideMounts = true;
-      directories =
-        [
-          "/.cache/nix/"
-          "/var/cache/"
-          "/var/db/sudo/"
-          "/var/lib/"
-          "/var/lib/bluetooth"
-          "/var/lib/containers"
-          "/var/lib/gitea"
-          "/var/lib/nixos"
-          "/var/lib/syncthing"
-          "/var/lib/systemd/coredump"
-          "/etc/NetworkManager/system-connections"
-        ]
-        ++ cfg.directories;
-      files =
-        [
-          "/etc/machine-id"
-          "/etc/adjtime"
-          "/etc/ssh/ssh_host_ed25519_key"
-          "/etc/ssh/ssh_host_ed25519_key.pub"
-          "/etc/ssh/ssh_host_rsa_key"
-          "/etc/ssh/ssh_host_rsa_key.pub"
-        ]
-        ++ cfg.files;
+      directories = [
+        "/.cache/nix/"
+        "/var/cache/"
+        "/var/db/sudo/"
+        "/var/lib/"
+        "/var/lib/bluetooth"
+        "/var/lib/containers"
+        "/var/lib/gitea"
+        "/var/lib/nixos"
+        "/var/lib/syncthing"
+        "/var/lib/systemd/coredump"
+        "/etc/NetworkManager/system-connections"
+      ]
+      ++ cfg.directories;
+      files = [
+        "/etc/machine-id"
+        "/etc/adjtime"
+        "/etc/ssh/ssh_host_ed25519_key"
+        "/etc/ssh/ssh_host_ed25519_key.pub"
+        "/etc/ssh/ssh_host_rsa_key"
+        "/etc/ssh/ssh_host_rsa_key.pub"
+      ]
+      ++ cfg.files;
     };
   };
 }

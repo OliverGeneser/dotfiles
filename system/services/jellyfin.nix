@@ -1,5 +1,9 @@
-{pkgs, ...}: {
-  users.users.jellyfin.extraGroups = ["video" "render"];
+{ pkgs, ... }:
+{
+  users.users.jellyfin.extraGroups = [
+    "video"
+    "render"
+  ];
 
   services = {
     jellyfin = {

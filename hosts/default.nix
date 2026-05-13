@@ -2,25 +2,26 @@
   self,
   inputs,
   ...
-}: {
-  flake.nixosConfigurations = let
-    # shorten paths
-    inherit (inputs.nixpkgs.lib) nixosSystem;
+}:
+{
+  flake.nixosConfigurations =
+    let
+      # shorten paths
+      inherit (inputs.nixpkgs.lib) nixosSystem;
 
-    homeImports = import "${self}/home/profiles";
+      homeImports = import "${self}/home/profiles";
 
-    mod = "${self}/system";
-    # get the basic config to build on top of
-    inherit (import mod) laptop desktop server;
+      mod = "${self}/system";
+      # get the basic config to build on top of
+      inherit (import mod) laptop desktop server;
 
-    # get these into the module system
-    specialArgs = {inherit inputs self;};
-  in {
-    enterprise = nixosSystem {
-      inherit specialArgs;
-      modules =
-        desktop
-        ++ [
+      # get these into the module system
+      specialArgs = { inherit inputs self; };
+    in
+    {
+      enterprise = nixosSystem {
+        inherit specialArgs;
+        modules = desktop ++ [
           ./enterprise
           #"${mod}/core/lanzaboote.nix"
 
@@ -44,13 +45,11 @@
             };
           }
         ];
-    };
+      };
 
-    apollo = nixosSystem {
-      inherit specialArgs;
-      modules =
-        laptop
-        ++ [
+      apollo = nixosSystem {
+        inherit specialArgs;
+        modules = laptop ++ [
           ./apollo
           #"${mod}/core/lanzaboote.nix"
 
@@ -73,13 +72,11 @@
             };
           }
         ];
-    };
+      };
 
-    ariane = nixosSystem {
-      inherit specialArgs;
-      modules =
-        laptop
-        ++ [
+      ariane = nixosSystem {
+        inherit specialArgs;
+        modules = laptop ++ [
           ./ariane
           #"${mod}/core/lanzaboote.nix"
 
@@ -102,13 +99,11 @@
             };
           }
         ];
-    };
+      };
 
-    thor = nixosSystem {
-      inherit specialArgs;
-      modules =
-        server
-        ++ [
+      thor = nixosSystem {
+        inherit specialArgs;
+        modules = server ++ [
           ./thor
           #"${mod}/core/lanzaboote.nix"
 
@@ -128,6 +123,6 @@
             };
           }
         ];
+      };
     };
-  };
 }

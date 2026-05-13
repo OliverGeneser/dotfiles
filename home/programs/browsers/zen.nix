@@ -4,10 +4,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkOption types;
   cfg = config.programs.browsers.zen;
-in {
+in
+{
   options.programs.browsers.zen = {
     package = mkOption {
       description = "Package to use for zen";

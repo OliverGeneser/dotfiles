@@ -4,8 +4,29 @@
   pkgs,
   inputs,
   ...
-}: let
-  wallpapers = "(${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_34-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_40-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_45-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_63-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_72-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_91-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_155-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_162-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_172-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_189-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_192-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_203-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_205-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_207-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_208-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_210-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_212-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_215-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_230-black_5120x2880} ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_242-black_5120x2880})";
+}:
+let
+  wallpapers = "(${
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_34-black_5120x2880
+  } ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_40-black_5120x2880} ${
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_45-black_5120x2880
+  } ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_63-black_5120x2880} ${
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_72-black_5120x2880
+  } ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_91-black_5120x2880} ${
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_155-black_5120x2880
+  } ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_162-black_5120x2880} ${
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_172-black_5120x2880
+  } ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_189-black_5120x2880} ${
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_192-black_5120x2880
+  } ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_203-black_5120x2880} ${
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_205-black_5120x2880
+  } ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_207-black_5120x2880} ${
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_208-black_5120x2880
+  } ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_210-black_5120x2880} ${
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_212-black_5120x2880
+  } ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_215-black_5120x2880} ${
+    self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_230-black_5120x2880
+  } ${self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_242-black_5120x2880})";
 
   wallpaperRandomizer = pkgs.writeShellScriptBin "wallpaperRandomizer" ''
     wallpapers=${wallpapers}
@@ -20,13 +41,14 @@
       hyprctl hyprpaper wallpaper "$m,contain:$wallpaper"
     done
   '';
-in {
+in
+{
   imports = [
     inputs.stylix.nixosModules.stylix
     inputs.catppuccin.nixosModules.catppuccin
   ];
 
-  environment.systemPackages = [wallpaperRandomizer];
+  environment.systemPackages = [ wallpaperRandomizer ];
   fonts = {
     enableDefaultPackages = false;
     fontDir.enable = true;
@@ -49,7 +71,7 @@ in {
 
       # sans serif
       roboto
-      (google-fonts.override {fonts = ["Inter"];})
+      (google-fonts.override { fonts = [ "Inter" ]; })
 
       # monospace
       nerd-fonts.jetbrains-mono
@@ -62,10 +84,16 @@ in {
     fontconfig = {
       antialias = true;
       defaultFonts = {
-        serif = ["Source Serif"];
-        sansSerif = ["Fira Sans" "FiraGO"];
-        monospace = ["FiraMono Nerd Font" "SauceCodePro Nerd Font Mono"];
-        emoji = ["Noto Color Emoji"];
+        serif = [ "Source Serif" ];
+        sansSerif = [
+          "Fira Sans"
+          "FiraGO"
+        ];
+        monospace = [
+          "FiraMono Nerd Font"
+          "SauceCodePro Nerd Font Mono"
+        ];
+        emoji = [ "Noto Color Emoji" ];
       };
       enable = true;
       hinting = {
@@ -126,11 +154,14 @@ in {
 
   systemd = {
     services.wallpaperRandomizer = {
-      wantedBy = ["graphical-session.target"];
+      wantedBy = [ "graphical-session.target" ];
 
       description = "Set random desktop background using hyprpaper";
-      after = ["graphical-session-pre.target" "hyprpaper.service"];
-      partOf = ["graphical-session.target"];
+      after = [
+        "graphical-session-pre.target"
+        "hyprpaper.service"
+      ];
+      partOf = [ "graphical-session.target" ];
 
       serviceConfig = {
         Type = "oneshot";
@@ -144,7 +175,7 @@ in {
       timerConfig = {
         OnUnitActiveSec = "15min";
       };
-      wantedBy = ["timers.target"];
+      wantedBy = [ "timers.target" ];
     };
   };
 }

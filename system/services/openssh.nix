@@ -2,11 +2,12 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   services = {
     openssh = {
       enable = true;
-      ports = [22];
+      ports = [ 22 ];
 
       allowSFTP = true;
 
@@ -30,8 +31,8 @@
   };
 
   networking.firewall = {
-    allowedTCPPorts = [22];
-    allowedUDPPorts = [22];
+    allowedTCPPorts = [ 22 ];
+    allowedUDPPorts = [ 22 ];
   };
 
   users.users = {

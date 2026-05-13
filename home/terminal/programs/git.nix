@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.programs.git;
-in {
+in
+{
   home.packages = [
     pkgs.delta
     self.packages.${pkgs.stdenv.hostPlatform.system}.gca
@@ -111,7 +113,13 @@ in {
       };
     };
 
-    ignores = ["*~" "*.swp" "*result*" ".direnv" "node_modules"];
+    ignores = [
+      "*~"
+      "*.swp"
+      "*result*"
+      ".direnv"
+      "node_modules"
+    ];
 
     signing = {
       key = "${config.home.homeDirectory}/.ssh/id_ecdsa_sk.pub";

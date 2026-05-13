@@ -3,11 +3,13 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   # pointer = config.home.pointerCursor;
   inherit (lib) mkOption types;
   cfg = config.system.programs.hyprland.settings;
-in {
+in
+{
   options.system.programs.hyprland.settings = {
     primary_monitor = mkOption {
       type = types.str;

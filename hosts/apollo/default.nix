@@ -4,7 +4,8 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./disks.nix
@@ -16,7 +17,7 @@
 
   boot = {
     kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
-    supportedFilesystems = lib.mkForce ["btrfs"];
+    supportedFilesystems = lib.mkForce [ "btrfs" ];
     resumeDevice = "/dev/disk/by-label/nixos";
     # sudo btrfs inspect-internal map-swapfile -r /swap/swapfile
     kernelParams = [
@@ -40,8 +41,8 @@
     hostName = "apollo";
     nftables.enable = true;
     firewall = {
-      allowedTCPPorts = [];
-      allowedUDPPorts = [];
+      allowedTCPPorts = [ ];
+      allowedUDPPorts = [ ];
     };
   };
 

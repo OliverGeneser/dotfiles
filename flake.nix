@@ -1,321 +1,142 @@
 {
   description = "Geneser Config";
 
-  outputs = inputs @ {
-    self,
-    flake-parts,
-    ...
-  }:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
 
       imports = [
         ./hosts
         ./lib
         ./modules
         ./pkgs
-        ./pre-commit-hooks.nix
+        ./fmt-hooks.nix
         ./overlays
       ];
 
-      perSystem = {
-        config,
-        pkgs,
-        ...
-      }: {
-        devShells = {
-          default = pkgs.mkShell {
-            packages = [
-              pkgs.alejandra
-              pkgs.git
-              pkgs.prettier
-              config.packages.repl
-              pkgs.nh
-              pkgs.disko
-              pkgs.sops
-              pkgs.ssh-to-age
-              pkgs.age
-              pkgs.gnupg
-              pkgs.home-manager
-            ];
-            name = "dotfiles";
-            DIRENV_LOG_FORMAT = "";
-            shellHook = ''
-              ${config.pre-commit.installationScript}
-            '';
-          };
-
-          node22 = pkgs.mkShell {
-            packages = with pkgs; [
-              corepack_22
-              nodejs_22
-              bun
-              zip
-              libuuid
-              gcc
-              python3 # node-gyp needs Python
-            ];
-
-            buildInputs = with pkgs; [
-              cairo
-              giflib
-              libjpeg
-              libpng
-              librsvg
-              openssl
-              pango
-              pixman
-              pkg-config
-            ];
-
-            env = {
-              PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING = 1;
-              PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
-              PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
-              PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
-            };
-
-            shellHook = ''
-              export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [
-                pkgs.libuuid
-                pkgs.pixman
-                pkgs.pkg-config
-              ]}:$LD_LIBRARY_PATH"
-
-              echo "Node: $(node --version)"
-              echo "Bun: $(bun --version)"
-            '';
-          };
-
-          pythonCDS = let
-            inherit (pkgs) lib;
-          in
-            pkgs.mkShell {
-              name = "pythonUV";
-              packages = with pkgs; [
-                # Python
-                python3
-
-                # Build tools
-                gcc
-                pkg-config
-
-                # Required system libs for uwsgi + common python C extensions
-                stdenv.cc.cc.lib
-                libxcrypt
-                openssl
-                zlib
-                libffi
-
-                # PDF
-                qpdf
-
-                # SVG / formatter stack
-                cairo
-                pango
-                gdk-pixbuf
-                libxml2
-                libxslt
-
-                # Your tools
-                pipenv
-                uv
+      perSystem =
+        {
+          config,
+          pkgs,
+          ...
+        }:
+        {
+          devShells = {
+            default = pkgs.mkShell {
+              packages = [
+                pkgs.git
+                config.packages.repl
+                pkgs.nh
+                pkgs.disko
+                pkgs.sops
+                pkgs.ssh-to-age
+                pkgs.age
               ];
-
-              # Makes sure linker finds libs
-              LD_LIBRARY_PATH = lib.makeLibraryPath [
-                pkgs.stdenv.cc.cc.lib
-                pkgs.libxcrypt
-                pkgs.openssl
-                pkgs.zlib
-                pkgs.libffi
-                pkgs.qpdf
-                pkgs.cairo
-                pkgs.pango
-                pkgs.gdk-pixbuf
-                pkgs.libxml2
-                pkgs.libxslt
-              ];
-            };
-
-          python311 = let
-            inherit (pkgs) lib;
-            python = pkgs.python311;
-
-            pythonldlibpath = lib.makeLibraryPath (with pkgs; [
-              cairo
-              zlib
-              zstd
-              stdenv.cc.cc
-              curl
-              openssl
-              attr
-              libssh
-              bzip2
-              libxml2
-              libxcrypt
-              acl
-              libsodium
-              util-linux
-              xz
-              systemd
-            ]);
-
-            patchedpython = python.overrideAttrs (
-              previousAttrs: {
-                # Add the nix-ld libraries to the LD_LIBRARY_PATH.
-                # creating a new library path from all desired libraries
-                postInstall =
-                  previousAttrs.postInstall
-                  + ''
-                    mv  "$out/bin/python3.11" "$out/bin/unpatched_python3.11"
-                    cat << EOF >> "$out/bin/python3.11"
-                    #!/run/current-system/sw/bin/bash
-                    export LD_LIBRARY_PATH="${pythonldlibpath}"
-                    exec "$out/bin/unpatched_python3.11" "\$@"
-                    EOF
-                    chmod +x "$out/bin/python3.11"
-                  '';
-              }
-            );
-
-            patcheduv = pkgs.uv.overrideAttrs (
-              previousAttrs: {
-                buildInputs = (previousAttrs.buildInputs or []) ++ [pkgs.makeWrapper];
-                postInstall =
-                  previousAttrs.postInstall
-                  + ''
-                    wrapProgram $out/bin/uv \
-                      --prefix LD_LIBRARY_PATH : "${pythonldlibpath}"
-                  '';
-              }
-            );
-          in
-            pkgs.mkShell {
-              packages = with pkgs; [
-                patchedpython
-                python311Packages.setuptools
-                python311Packages.wheel
-                pipenv
-                libxcrypt
-
-                patcheduv
-                nodejs
-                yarn
-              ];
+              name = "dotfiles";
+              DIRENV_LOG_FORMAT = "";
               shellHook = ''
-                export NODE_PATH=$(npm root -g)
+                ${config.pre-commit.installationScript}
               '';
-              name = "python";
             };
 
-          pythonCERN = let
-            inherit (pkgs) python3Packages fetchFromGitHub lib;
-            py = python3Packages;
-            pynpm = py.buildPythonPackage rec {
-              pname = "pynpm";
-              version = "0.3.0";
-              pyproject = true;
-              build-system = with py; [setuptools babel];
-              src = py.fetchPypi {
-                inherit version;
-                pname = "pynpm";
-                hash = "sha256-pp/KrDPoUh6neUhMp41g44BGsYoPMp2c2WhI4+CVLSY=";
-              };
-
-              propagatedBuildInputs = with py; [setuptools babel];
-              doCheck = false;
-            };
-
-            pipfile = py.buildPythonPackage rec {
-              pname = "pipfile";
-              version = "0.0.2";
-              format = "setuptools";
-              src = py.fetchPypi {
-                inherit version;
-                pname = "pipfile";
-                hash = "sha256-99nxXei2YJhlV+s8xTkaoaFiB6xBvDeNA/QUdi02yYQ=";
-              };
-              propagatedBuildInputs = with py; [setuptools toml];
-              doCheck = false;
-            };
-
-            pipenv = py.buildPythonPackage rec {
-              pname = "pipenv";
-              version = "2026.0.3";
-              pyproject = true;
-              build-system = with py; [setuptools];
-              src = py.fetchPypi {
-                inherit version;
-                pname = "pipenv";
-                hash = "sha256-mjnROkHtjkNorVBiCUEZHzVzGcj/t99Fh1x8XcZgT/Y=";
-              };
-              propagatedBuildInputs = with py; [setuptools certifi virtualenv];
-              doCheck = false;
-            };
-
-            invenio-cli = py.buildPythonApplication rec {
-              pname = "invenio-cli";
-              version = "1.9.2";
-              pyproject = true;
-              build-system = with py; [setuptools wheel babel];
-              src = py.fetchPypi {
-                inherit version;
-                pname = "invenio_cli";
-                hash = "sha256-iLbnJ36KbXjZtU7YRAVnQINViIdWfSRnpKqUkuxBJLI=";
-              };
-              propagatedBuildInputs = with py; [
-                babel
-                cookiecutter
-                click
-                click-default-group
-                docker
-                pipfile
-                pipenv
-                pyyaml
-                pynpm
-                virtualenv
-                tomli
-
-                libxslt
-                libxml2
-              ];
-            };
-          in
-            pkgs.mkShell {
+            node22 = pkgs.mkShell {
               packages = with pkgs; [
-                uv
-                cairo
-                pipenv
-                libxcrypt
-                invenio-cli
-
-                (pkgs.python3.withPackages (
-                  python-pkgs: [
-                    python-pkgs.pycairo
-                    python-pkgs.pandas
-                    python-pkgs.requests
-                    python-pkgs.matplotlib
-
-                    python-pkgs.lxml
-                  ]
-                ))
+                corepack_22
+                nodejs_22
+                bun
+                zip
+                libuuid
+                gcc
+                python3 # node-gyp needs Python
               ];
-              name = "python";
+
+              buildInputs = with pkgs; [
+                cairo
+                giflib
+                libjpeg
+                libpng
+                librsvg
+                openssl
+                pango
+                pixman
+                pkg-config
+              ];
+
+              env = {
+                PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING = 1;
+                PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+                PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
+                PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+              };
+
               shellHook = ''
-                                export PIP_NO_BUILD_ISOLATION=1
-                export PIP_DISABLE_PIP_VERSION_CHECK=1
-                              export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [
+                export LD_LIBRARY_PATH="${
+                  pkgs.lib.makeLibraryPath [
+                    pkgs.libuuid
+                    pkgs.pixman
+                    pkgs.pkg-config
+                  ]
+                }:$LD_LIBRARY_PATH"
+
+                echo "Node: $(node --version)"
+                echo "Bun: $(bun --version)"
+              '';
+            };
+
+            pythonCDS =
+              let
+                inherit (pkgs) lib;
+              in
+              pkgs.mkShell {
+                name = "pythonUV";
+                packages = with pkgs; [
+                  # Python
+                  python3
+
+                  # Build tools
+                  gcc
+                  pkg-config
+
+                  # Required system libs for uwsgi + common python C extensions
+                  stdenv.cc.cc.lib
+                  libxcrypt
+                  openssl
+                  zlib
+                  libffi
+
+                  # PDF
+                  qpdf
+
+                  # SVG / formatter stack
+                  cairo
+                  pango
+                  gdk-pixbuf
+                  libxml2
+                  libxslt
+
+                  # Your tools
+                  pipenv
+                  uv
+                ];
+
+                # Makes sure linker finds libs
+                LD_LIBRARY_PATH = lib.makeLibraryPath [
+                  pkgs.stdenv.cc.cc.lib
+                  pkgs.libxcrypt
+                  pkgs.openssl
+                  pkgs.zlib
+                  pkgs.libffi
+                  pkgs.qpdf
+                  pkgs.cairo
+                  pkgs.pango
+                  pkgs.gdk-pixbuf
                   pkgs.libxml2
                   pkgs.libxslt
-                  pkgs.cairo
-                ]}:$LD_LIBRARY_PATH"
-              '';
-            };
-
-          formatter = pkgs.alejandra;
+                ];
+              };
+          };
         };
-      };
     };
 
   inputs = {
@@ -483,7 +304,7 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    git-hooks-nix = {
+    git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -502,6 +323,11 @@
 
     tailray = {
       url = "github:NotAShelf/tailray";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

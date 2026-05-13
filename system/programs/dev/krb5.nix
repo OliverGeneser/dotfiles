@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   security.krb5 = {
     enable = true;
 
@@ -11,7 +12,7 @@
       realms = {
         "CERN.CH" = {
           default_domain = "cern.ch";
-          kdc = ["cerndc.cern.ch"];
+          kdc = [ "cerndc.cern.ch" ];
         };
       };
 

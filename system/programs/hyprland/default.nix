@@ -2,9 +2,11 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (pkgs.stdenv.hostPlatform) system;
-in {
+in
+{
   imports = [
     inputs.hyprland.nixosModules.default
 

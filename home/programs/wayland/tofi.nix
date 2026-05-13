@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   stylix.targets.tofi.enable = lib.mkForce false;
   programs.tofi = {
     enable = true;

@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   version = "0.12.1.1";
   sourceMap = {
     x86_64-linux = pkgs.fetchurl {
@@ -15,22 +16,38 @@
     };
   };
 in
-  pkgs.appimageTools.wrapType2 rec {
-    pname = "helium";
-    inherit version;
+pkgs.appimageTools.wrapType2 rec {
+  pname = "helium";
+  inherit version;
 
-    src =
-      sourceMap.${pkgs.stdenv.hostPlatform.system}
+  src =
+    sourceMap.${pkgs.stdenv.hostPlatform.system}
       or (throw "Unsupported system: ${pkgs.stdenv.hostPlatform.system}");
 
-    passthru.updateScript = pkgs._experimental-update-script-combinators.sequence [
-      (pkgs.nix-update-script {extraArgs = ["--system" "x86_64-linux" "--flake"];})
-      (pkgs.nix-update-script {extraArgs = ["--system" "aarch64-linux" "--version" "skip" "--flake"];})
-    ];
+  passthru.updateScript = pkgs._experimental-update-script-combinators.sequence [
+    (pkgs.nix-update-script {
+      extraArgs = [
+        "--system"
+        "x86_64-linux"
+        "--flake"
+      ];
+    })
+    (pkgs.nix-update-script {
+      extraArgs = [
+        "--system"
+        "aarch64-linux"
+        "--version"
+        "skip"
+        "--flake"
+      ];
+    })
+  ];
 
-    extraInstallCommands = let
-      contents = pkgs.appimageTools.extractType2 {inherit pname version src;};
-    in ''
+  extraInstallCommands =
+    let
+      contents = pkgs.appimageTools.extractType2 { inherit pname version src; };
+    in
+    ''
       mkdir -p "$out/share/applications"
       mkdir -p "$out/share/lib/helium"
       cp -r ${contents}/opt/helium/locales "$out/share/lib/helium"
@@ -39,12 +56,15 @@ in
       substituteInPlace $out/share/applications/${pname}.desktop --replace 'Exec=AppRun' 'Exec=${meta.mainProgram}'
     '';
 
-    meta = {
-      description = "Private, fast, and honest web browser based on Chromium";
-      homepage = "https://github.com/imputnet/helium-chromium";
-      changelog = "https://github.com/imputnet/helium-linux/releases/tag/${version}";
-      platforms = ["x86_64-linux" "aarch64-linux"];
-      license = lib.licenses.gpl3;
-      mainProgram = "helium";
-    };
-  }
+  meta = {
+    description = "Private, fast, and honest web browser based on Chromium";
+    homepage = "https://github.com/imputnet/helium-chromium";
+    changelog = "https://github.com/imputnet/helium-linux/releases/tag/${version}";
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    license = lib.licenses.gpl3;
+    mainProgram = "helium";
+  };
+}

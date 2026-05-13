@@ -2,7 +2,8 @@
   self,
   config,
   ...
-}: {
+}:
+{
   imports = [
     # editors
     ../../editors/nvim

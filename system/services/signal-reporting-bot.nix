@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   smartShortReporting = pkgs.writeShellScriptBin "smartShortReporting" ''
     DISKS=$(${pkgs.util-linux}/bin/lsblk -n -d -o NAME | ${pkgs.gawk}/bin/awk '/^sd/ || /^nvme[0-9]/ {sub(/n[0-9]+$/, "", $1); print "/dev/" $1}')
     MESSAGE="Short SMART Test\n"
@@ -69,7 +70,8 @@
     echo -e "$MESSAGE" | ${pkgs.signal-cli}/bin/signal-cli --config /home/nixos/.local/share/signal-cli send -g "TO+DykH3guaqDHrFpJzM1QUQzSAfqBsEIgwVKrP74rQ=" --message-from-stdin
     ${pkgs.signal-cli}/bin/signal-cli --config /home/nixos/.local/share/signal-cli receive
   '';
-in {
+in
+{
   environment.systemPackages = [
     smartShortReporting
     pkgs.smartmontools
@@ -89,9 +91,9 @@ in {
     timers."signal-report-short-smart-bot" = {
       description = "Run short S.M.A.R.T reports every night";
       timerConfig = {
-        OnCalendar = "daily"; #"Mon *-*-* 03:00:00";
+        OnCalendar = "daily"; # "Mon *-*-* 03:00:00";
       };
-      wantedBy = ["timers.target"];
+      wantedBy = [ "timers.target" ];
     };
   };
 }

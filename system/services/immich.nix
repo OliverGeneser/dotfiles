@@ -3,12 +3,16 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   networking.firewall = {
-    allowedTCPPorts = [2283];
+    allowedTCPPorts = [ 2283 ];
   };
 
-  users.users.immich.extraGroups = ["video" "render"];
+  users.users.immich.extraGroups = [
+    "video"
+    "render"
+  ];
 
   services = {
     immich = {

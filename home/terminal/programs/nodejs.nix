@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     nodejs_24
     corepack_24
@@ -8,6 +9,6 @@
   programs.npm.enable = true;
 
   home.sessionVariables = {
-    LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [pkgs.libuuid];
+    LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [ pkgs.libuuid ];
   };
 }

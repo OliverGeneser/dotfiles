@@ -4,7 +4,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     # editors
     ../../editors/nvim
@@ -73,7 +74,10 @@
       username = "olivergeneser";
       homeDirectory = "/home/olivergeneser";
       stateVersion = "23.11";
-      extraOutputsToInstall = ["doc" "devdoc"];
+      extraOutputsToInstall = [
+        "doc"
+        "devdoc"
+      ];
     };
 
     services.syncthing.settings = {
@@ -91,7 +95,7 @@
         "dev" = {
           id = "rrk9d-szxeq";
           path = "~/dev"; # Which folder to add to Syncthing
-          devices = ["enterprise"]; # Which devices to share the folder with
+          devices = [ "enterprise" ]; # Which devices to share the folder with
           type = "receiveonly";
         };
       };
@@ -249,28 +253,30 @@
       }
     ];
 
-    wayland.windowManager.hyprland.settings = let
-      # Generated using https://gist.github.com/fufexan/e6bcccb7787116b8f9c31160fc8bc543
-      accelpoints = "0.5 0.000 0.053 0.115 0.189 0.280 0.391 0.525 0.687 0.880 1.108 1.375 1.684 2.040 2.446 2.905 3.422 4.000 4.643 5.355 6.139";
-    in {
-      monitor = [
-        ", preferred, auto, auto"
-        # "DP-1, preferred, auto-left, auto"
-        # "DP-2, preferred, auto-left, auto"
-      ];
+    wayland.windowManager.hyprland.settings =
+      let
+        # Generated using https://gist.github.com/fufexan/e6bcccb7787116b8f9c31160fc8bc543
+        accelpoints = "0.5 0.000 0.053 0.115 0.189 0.280 0.391 0.525 0.687 0.880 1.108 1.375 1.684 2.040 2.446 2.905 3.422 4.000 4.643 5.355 6.139";
+      in
+      {
+        monitor = [
+          ", preferred, auto, auto"
+          # "DP-1, preferred, auto-left, auto"
+          # "DP-2, preferred, auto-left, auto"
+        ];
 
-      input = {
-        kb_layout = lib.mkForce "dk,us";
-        kb_variant = ",altgr-intl";
-        kb_options = ",grp:alt_space_toggle";
-      };
+        input = {
+          kb_layout = lib.mkForce "dk,us";
+          kb_variant = ",altgr-intl";
+          kb_options = ",grp:alt_space_toggle";
+        };
 
-      device = {
-        name = "elan2841:00-04f3:31eb-touchpad";
-        accel_profile = "custom ${accelpoints}";
-        scroll_points = accelpoints;
-        natural_scroll = true;
+        device = {
+          name = "elan2841:00-04f3:31eb-touchpad";
+          accel_profile = "custom ${accelpoints}";
+          scroll_points = accelpoints;
+          natural_scroll = true;
+        };
       };
-    };
   };
 }

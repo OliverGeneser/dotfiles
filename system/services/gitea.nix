@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   services.gitea = {
     enable = true;
     appName = "Geneser Home Gitea server"; # Give the site a name

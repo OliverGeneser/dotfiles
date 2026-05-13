@@ -1,7 +1,8 @@
-{self, ...}: {
+{ self, ... }:
+{
   config = {
     custom = {
-      user.extraGroups = ["docker"];
+      user.extraGroups = [ "docker" ];
     };
 
     virtualisation = {

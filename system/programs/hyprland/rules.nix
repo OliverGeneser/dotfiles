@@ -1,34 +1,40 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   programs.hyprland.settings = {
     # layer rules
-    layerrule = let
-      toRegex = list: let
-        elements = lib.concatStringsSep "|" list;
-      in "^(${elements})$";
+    layerrule =
+      let
+        toRegex =
+          list:
+          let
+            elements = lib.concatStringsSep "|" list;
+          in
+          "^(${elements})$";
 
-      lowopacity = [
-        "bar"
-        "calendar"
-        "notifications"
-        "system-menu"
-      ];
+        lowopacity = [
+          "bar"
+          "calendar"
+          "notifications"
+          "system-menu"
+        ];
 
-      highopacity = [
-        "anyrun"
-        "osd"
-        "logout_dialog"
-      ];
+        highopacity = [
+          "anyrun"
+          "osd"
+          "logout_dialog"
+        ];
 
-      blurred = lib.concatLists [
-        lowopacity
-        highopacity
+        blurred = lib.concatLists [
+          lowopacity
+          highopacity
+        ];
+      in
+      [
+        "blur 1, match:namespace ${toRegex blurred}"
+        "xray 1, match:namespace ${toRegex [ "bar" ]}"
+        "ignore_alpha 0.5, match:namespace ${toRegex (highopacity ++ [ "music" ])}"
+        "ignore_alpha 0.2, match:namespace ${toRegex lowopacity}"
       ];
-    in [
-      "blur 1, match:namespace ${toRegex blurred}"
-      "xray 1, match:namespace ${toRegex ["bar"]}"
-      "ignore_alpha 0.5, match:namespace ${toRegex (highopacity ++ ["music"])}"
-      "ignore_alpha 0.2, match:namespace ${toRegex lowopacity}"
-    ];
 
     # window rules
     windowrule = [

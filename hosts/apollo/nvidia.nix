@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
@@ -25,7 +26,10 @@
   programs.xwayland.enable = true;
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["modesetting" "nvidia"];
+  services.xserver.videoDrivers = [
+    "modesetting"
+    "nvidia"
+  ];
 
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "nvidia";

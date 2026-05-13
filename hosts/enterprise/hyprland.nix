@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   config = {
     system.programs.hyprland.settings = {
       primary_monitor = "DP-5";

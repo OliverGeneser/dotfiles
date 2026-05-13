@@ -2,22 +2,39 @@
   config,
   pkgs,
   ...
-}: let
-  browser = ["helium"];
-  imageViewer = ["org.gnome.Loupe"];
-  videoPlayer = ["io.github.celluloid_player.Celluloid"];
-  audioPlayer = ["io.bassi.Amberol"];
+}:
+let
+  browser = [ "helium" ];
+  imageViewer = [ "org.gnome.Loupe" ];
+  videoPlayer = [ "io.github.celluloid_player.Celluloid" ];
+  audioPlayer = [ "io.bassi.Amberol" ];
 
-  xdgAssociations = type: program: list:
-    builtins.listToAttrs (map (e: {
+  xdgAssociations =
+    type: program: list:
+    builtins.listToAttrs (
+      map (e: {
         name = "${type}/${e}";
         value = program;
-      })
-      list);
+      }) list
+    );
 
-  image = xdgAssociations "image" imageViewer ["png" "svg" "jpeg" "gif"];
-  video = xdgAssociations "video" videoPlayer ["mp4" "avi" "mkv"];
-  audio = xdgAssociations "audio" audioPlayer ["mp3" "flac" "wav" "aac"];
+  image = xdgAssociations "image" imageViewer [
+    "png"
+    "svg"
+    "jpeg"
+    "gif"
+  ];
+  video = xdgAssociations "video" videoPlayer [
+    "mp4"
+    "avi"
+    "mkv"
+  ];
+  audio = xdgAssociations "audio" audioPlayer [
+    "mp3"
+    "flac"
+    "wav"
+    "aac"
+  ];
   browserTypes =
     (xdgAssociations "application" browser [
       "json"
@@ -39,21 +56,24 @@
     ]);
 
   # XDG MIME types
-  associations = builtins.mapAttrs (_: v: (map (e: "${e}.desktop") v)) ({
-      "application/pdf" = ["org.pwmt.zathura-pdf-mupdf"];
-      "text/html" = ["helium"];
-      "text/plain" = ["nvim"];
-      "inode/directory" = ["yazi"];
-      "x-scheme-handler/magnet" = ["transmission-gtk"];
+  associations = builtins.mapAttrs (_: v: (map (e: "${e}.desktop") v)) (
+    {
+      "application/pdf" = [ "org.pwmt.zathura-pdf-mupdf" ];
+      "text/html" = [ "helium" ];
+      "text/plain" = [ "nvim" ];
+      "inode/directory" = [ "yazi" ];
+      "x-scheme-handler/magnet" = [ "transmission-gtk" ];
       # Full entry is org.telegram.desktop.desktop
-      "x-scheme-handler/tg" = ["org.telegram"];
-      "x-scheme-handler/tonsite" = ["org.telegram"];
+      "x-scheme-handler/tg" = [ "org.telegram" ];
+      "x-scheme-handler/tonsite" = [ "org.telegram" ];
     }
     // image
     // video
     // audio
-    // browserTypes);
-in {
+    // browserTypes
+  );
+in
+{
   xdg = {
     enable = true;
     cacheHome = config.home.homeDirectory + "/.local/cache";

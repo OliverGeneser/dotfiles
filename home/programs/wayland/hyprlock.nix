@@ -5,7 +5,8 @@
   lib,
   self,
   ...
-}: {
+}:
+{
   stylix.targets.hyprlock.enable = lib.mkForce false;
   programs.hyprlock = {
     enable = true;

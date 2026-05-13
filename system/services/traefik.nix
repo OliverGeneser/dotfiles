@@ -3,8 +3,13 @@
   pkgs,
   lib,
   ...
-}: {
-  networking.firewall.allowedTCPPorts = [80 443 8080];
+}:
+{
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+    8080
+  ];
 
   services.traefik = {
     enable = true;
@@ -49,13 +54,13 @@
     dynamicConfigOptions = {
       http.routers = {
         jellyfin = {
-          entryPoints = ["websecure"];
+          entryPoints = [ "websecure" ];
           rule = "Host(`jellyfin.geneser.dev`)";
           service = "jellyfin";
           tls.certResolver = "letsencrypt";
         };
         immich = {
-          entryPoints = ["websecure"];
+          entryPoints = [ "websecure" ];
           rule = "Host(`immich.geneser.dev`)";
           service = "immich";
           tls.certResolver = "letsencrypt";

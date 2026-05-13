@@ -2,7 +2,8 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   resize = pkgs.writeShellScriptBin "resize" ''
     #!/usr/bin/env bash
 
@@ -36,25 +37,33 @@
   '';
 
   # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-  workspaces = builtins.concatLists (builtins.genList (
-      x: let
-        ws = let
-          c = (x + 1) / 10;
-        in
+  workspaces = builtins.concatLists (
+    builtins.genList (
+      x:
+      let
+        ws =
+          let
+            c = (x + 1) / 10;
+          in
           builtins.toString (x + 1 - (c * 10));
-      in [
+      in
+      [
         "$mod, ${ws}, workspace, ${toString (x + 1)}"
         "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
       ]
-    )
-    10);
+    ) 10
+  );
 
-  toggle = program: let
-    prog = builtins.substring 0 14 program;
-  in "pkill ${prog} || uwsm app -- ${program}";
+  toggle =
+    program:
+    let
+      prog = builtins.substring 0 14 program;
+    in
+    "pkill ${prog} || uwsm app -- ${program}";
 
   runOnce = program: "pgrep ${program} || uwsm app -- ${program}";
-in {
+in
+{
   programs.hyprland.settings = {
     # mouse movements
     bindm = [
@@ -64,107 +73,108 @@ in {
     ];
 
     # binds
-    bind =
-      [
-        # compositor commands
-        "$mod SHIFT, E, exec, pkill Hyprland"
-        "$mod, E, exec, uwsm app -- pcmanfm"
-        "$mod, F, exec, ${toggle "tofi-drun"} | xargs hyprctl dispatch exec --"
-        "$mod, Q, killactive,"
-        "$mod, X, fullscreen"
-        "$mod, G, togglegroup,"
-        "$mod SHIFT, N, changegroupactive, f"
-        "$mod SHIFT, P, changegroupactive, b"
-        "$mod, R, layoutmsg, togglesplit"
-        "$mod ALT, R, exec, ${resize}/bin/resize"
-        "$mod, T, togglefloating,"
-        "$mod ALT, , resizeactive,"
-        "$mod, Z, exec, ${pkgs.pyprland}/bin/pypr zoom ++0.5"
-        "$mod SHIFT, Z, exec, ${pkgs.pyprland}/bin/pypr zoom"
-        "$mod, V, exec, ${pkgs.pyprland}/bin/pypr toggle pwvucontrol"
+    bind = [
+      # compositor commands
+      "$mod SHIFT, E, exec, pkill Hyprland"
+      "$mod, E, exec, uwsm app -- pcmanfm"
+      "$mod, F, exec, ${toggle "tofi-drun"} | xargs hyprctl dispatch exec --"
+      "$mod, Q, killactive,"
+      "$mod, X, fullscreen"
+      "$mod, G, togglegroup,"
+      "$mod SHIFT, N, changegroupactive, f"
+      "$mod SHIFT, P, changegroupactive, b"
+      "$mod, R, layoutmsg, togglesplit"
+      "$mod ALT, R, exec, ${resize}/bin/resize"
+      "$mod, T, togglefloating,"
+      "$mod ALT, , resizeactive,"
+      "$mod, Z, exec, ${pkgs.pyprland}/bin/pypr zoom ++0.5"
+      "$mod SHIFT, Z, exec, ${pkgs.pyprland}/bin/pypr zoom"
+      "$mod, V, exec, ${pkgs.pyprland}/bin/pypr toggle pwvucontrol"
 
-        # utility
-        # terminal
-        "$mod, Return, exec, uwsm app -- ${inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/ghostty"
-        # logout menu
-        "$mod, Escape, exec, ${toggle "wlogout"} -b 4 -p layer-shell"
-        # lock screen
-        "$mod, L, exec, loginctl lock-session"
-        # lock screen, to be used with the special key Fn+F10 on my keyboard
-        "$mod, I, exec, loginctl lock-session"
-        # Suspend/Hibernate system
-        "$mod, S, exec, systemctl suspend"
-        # select area to perform OCR on
-        "$mod, O, exec, ${runOnce "wl-ocr"}"
-        ", XF86Favorites, exec, ${runOnce "wl-ocr"}"
-        # open calculator
-        ", XF86Calculator, exec, ${toggle "qalculate-qt"}"
+      # utility
+      # terminal
+      "$mod, Return, exec, uwsm app -- ${
+        inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+      }/bin/ghostty"
+      # logout menu
+      "$mod, Escape, exec, ${toggle "wlogout"} -b 4 -p layer-shell"
+      # lock screen
+      "$mod, L, exec, loginctl lock-session"
+      # lock screen, to be used with the special key Fn+F10 on my keyboard
+      "$mod, I, exec, loginctl lock-session"
+      # Suspend/Hibernate system
+      "$mod, S, exec, systemctl suspend"
+      # select area to perform OCR on
+      "$mod, O, exec, ${runOnce "wl-ocr"}"
+      ", XF86Favorites, exec, ${runOnce "wl-ocr"}"
+      # open calculator
+      ", XF86Calculator, exec, ${toggle "qalculate-qt"}"
 
-        # move focus
-        "$mod, left, movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
-        "$mod, down, movefocus, d"
-        "ALT, h, movefocus, l"
-        "ALT, l, movefocus, r"
-        "ALT, k, movefocus, u"
-        "ALT, j, movefocus, d"
+      # move focus
+      "$mod, left, movefocus, l"
+      "$mod, right, movefocus, r"
+      "$mod, up, movefocus, u"
+      "$mod, down, movefocus, d"
+      "ALT, h, movefocus, l"
+      "ALT, l, movefocus, r"
+      "ALT, k, movefocus, u"
+      "ALT, j, movefocus, d"
 
-        # Change Workspace
-        "ALT, 1, focusworkspaceoncurrentmonitor, 1"
-        "ALT, 2, focusworkspaceoncurrentmonitor, 2"
-        "ALT, 3, focusworkspaceoncurrentmonitor, 3"
-        "ALT, 4, focusworkspaceoncurrentmonitor, 4"
-        "ALT, 5, focusworkspaceoncurrentmonitor, 5"
-        "ALT, 6, focusworkspaceoncurrentmonitor, 6"
-        "ALT, 7, focusworkspaceoncurrentmonitor, 7"
-        "ALT, 8, focusworkspaceoncurrentmonitor, 8"
-        "ALT, 9, focusworkspaceoncurrentmonitor, 9"
-        "ALT, 0, focusworkspaceoncurrentmonitor, 10"
+      # Change Workspace
+      "ALT, 1, focusworkspaceoncurrentmonitor, 1"
+      "ALT, 2, focusworkspaceoncurrentmonitor, 2"
+      "ALT, 3, focusworkspaceoncurrentmonitor, 3"
+      "ALT, 4, focusworkspaceoncurrentmonitor, 4"
+      "ALT, 5, focusworkspaceoncurrentmonitor, 5"
+      "ALT, 6, focusworkspaceoncurrentmonitor, 6"
+      "ALT, 7, focusworkspaceoncurrentmonitor, 7"
+      "ALT, 8, focusworkspaceoncurrentmonitor, 8"
+      "ALT, 9, focusworkspaceoncurrentmonitor, 9"
+      "ALT, 0, focusworkspaceoncurrentmonitor, 10"
 
-        # Move Workspace
-        "ALTSHIFT, 1, movetoworkspacesilent, 1"
-        "ALTSHIFT, 2, movetoworkspacesilent, 2"
-        "ALTSHIFT, 3, movetoworkspacesilent, 3"
-        "ALTSHIFT, 4, movetoworkspacesilent, 4"
-        "ALTSHIFT, 5, movetoworkspacesilent, 5"
-        "ALTSHIFT, 6, movetoworkspacesilent, 6"
-        "ALTSHIFT, 7, movetoworkspacesilent, 7"
-        "ALTSHIFT, 8, movetoworkspacesilent, 8"
-        "ALTSHIFT, 9, movetoworkspacesilent, 9"
-        "ALTSHIFT, 0, movetoworkspacesilent, 10"
+      # Move Workspace
+      "ALTSHIFT, 1, movetoworkspacesilent, 1"
+      "ALTSHIFT, 2, movetoworkspacesilent, 2"
+      "ALTSHIFT, 3, movetoworkspacesilent, 3"
+      "ALTSHIFT, 4, movetoworkspacesilent, 4"
+      "ALTSHIFT, 5, movetoworkspacesilent, 5"
+      "ALTSHIFT, 6, movetoworkspacesilent, 6"
+      "ALTSHIFT, 7, movetoworkspacesilent, 7"
+      "ALTSHIFT, 8, movetoworkspacesilent, 8"
+      "ALTSHIFT, 9, movetoworkspacesilent, 9"
+      "ALTSHIFT, 0, movetoworkspacesilent, 10"
 
-        # screenshot
-        # area
-        ", Print, exec, ${runOnce "grimblast"} -f -t ppm save area - | satty --filename - --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png"
-        "$mod SHIFT, R, exec, ${runOnce "grimblast"} -f -t ppm save area - | satty --filename - --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png"
-        "$mod, P, exec, ${runOnce "grimblast"} -f -t ppm save area - | satty --filename - --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png"
+      # screenshot
+      # area
+      ", Print, exec, ${runOnce "grimblast"} -f -t ppm save area - | satty --filename - --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png"
+      "$mod SHIFT, R, exec, ${runOnce "grimblast"} -f -t ppm save area - | satty --filename - --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png"
+      "$mod, P, exec, ${runOnce "grimblast"} -f -t ppm save area - | satty --filename - --output-filename ~/Pictures/Screenshots/Screenshot-$(date '+%Y%m%d-%H:%M:%S').png"
 
-        # current screen
-        "CTRL, Print, exec, ${runOnce "grimblast"} --notify --cursor copysave output"
-        "$mod SHIFT CTRL, R, exec, ${runOnce "grimblast"} --notify --cursor copysave output"
+      # current screen
+      "CTRL, Print, exec, ${runOnce "grimblast"} --notify --cursor copysave output"
+      "$mod SHIFT CTRL, R, exec, ${runOnce "grimblast"} --notify --cursor copysave output"
 
-        # all screens
-        "ALT, Print, exec, ${runOnce "grimblast"} --notify --cursor copysave screen"
-        "$mod SHIFT ALT, R, exec, ${runOnce "grimblast"} --notify --cursor copysave screen"
+      # all screens
+      "ALT, Print, exec, ${runOnce "grimblast"} --notify --cursor copysave screen"
+      "$mod SHIFT ALT, R, exec, ${runOnce "grimblast"} --notify --cursor copysave screen"
 
-        # special workspace
-        "$mod SHIFT, grave, movetoworkspace, special"
-        "$mod, grave, togglespecialworkspace, eDP-1"
+      # special workspace
+      "$mod SHIFT, grave, movetoworkspace, special"
+      "$mod, grave, togglespecialworkspace, eDP-1"
 
-        # cycle workspaces
-        "$mod, bracketleft, workspace, m-1"
-        "$mod, bracketright, workspace, m+1"
+      # cycle workspaces
+      "$mod, bracketleft, workspace, m-1"
+      "$mod, bracketright, workspace, m+1"
 
-        # cycle monitors
-        "$mod SHIFT, bracketleft, focusmonitor, l"
-        "$mod SHIFT, bracketright, focusmonitor, r"
+      # cycle monitors
+      "$mod SHIFT, bracketleft, focusmonitor, l"
+      "$mod SHIFT, bracketright, focusmonitor, r"
 
-        # send focused workspace to left/right monitors
-        "$mod SHIFT ALT, bracketleft, movecurrentworkspacetomonitor, l"
-        "$mod SHIFT ALT, bracketright, movecurrentworkspacetomonitor, r"
-      ]
-      ++ workspaces;
+      # send focused workspace to left/right monitors
+      "$mod SHIFT ALT, bracketleft, movecurrentworkspacetomonitor, l"
+      "$mod SHIFT ALT, bracketright, movecurrentworkspacetomonitor, r"
+    ]
+    ++ workspaces;
 
     bindr = [
       # launcher

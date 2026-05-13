@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   sops.secrets.searx_env = {
     sopsFile = ./secrets.yaml;
   };

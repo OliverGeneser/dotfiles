@@ -4,7 +4,8 @@
   self,
   pkgs,
   ...
-}: {
+}:
+{
   home.sessionPath = [
     "$HOME/.local/share/../bin"
   ];
@@ -19,7 +20,9 @@
     };
 
     initContent = ''
-      bindkey -s ^f "${self.packages.${pkgs.stdenv.hostPlatform.system}.tmux-sessionizer}/bin/tmux-sessionizer\n"
+      bindkey -s ^f "${
+        self.packages.${pkgs.stdenv.hostPlatform.system}.tmux-sessionizer
+      }/bin/tmux-sessionizer\n"
 
       # search history based on what's typed in the prompt
       autoload -U history-search-end
@@ -47,42 +50,43 @@
       _comp_options+=(globdots)
     '';
 
-    shellAliases =
-      {
-        cd = "z";
-        cdi = "zi";
-        cp = "xcp";
-        grep = "rg";
-        ip = "ip --color";
-        ls = "eza";
-        sl = "eza";
-        l = "eza --group --header --group-directories-first --long --git --all --binary --all --icons always";
-        la = "eza -la";
-        md = "mkdir -p";
-        ppc = "powerprofilesctl";
-        pf = "powerprofilesctl launch -p performance";
-        tree = "eza --tree";
-        sudo = "sudo -E -s";
-        curl = "curlie";
-        rm = "trash";
-        ping = "gping";
+    shellAliases = {
+      cd = "z";
+      cdi = "zi";
+      cp = "xcp";
+      grep = "rg";
+      ip = "ip --color";
+      ls = "eza";
+      sl = "eza";
+      l = "eza --group --header --group-directories-first --long --git --all --binary --all --icons always";
+      la = "eza -la";
+      md = "mkdir -p";
+      ppc = "powerprofilesctl";
+      pf = "powerprofilesctl launch -p performance";
+      tree = "eza --tree";
+      sudo = "sudo -E -s";
+      curl = "curlie";
+      rm = "trash";
+      ping = "gping";
 
-        weather = "curl wttr.in/Copenhagen";
+      weather = "curl wttr.in/Copenhagen";
 
-        us = "systemctl --user"; # mnemonic for user systemctl
-        rs = "sudo systemctl"; # mnemonic for root systemctl
+      us = "systemctl --user"; # mnemonic for user systemctl
+      rs = "sudo systemctl"; # mnemonic for root systemctl
 
-        docker = "podman";
-        docker-compose = "podman-compose";
+      docker = "podman";
+      docker-compose = "podman-compose";
 
-        # laptop
-        battery = "set batteryCharge (bat /sys/class/power_supply/BAT0/capacity) && set batteryStatus (bat /sys/class/power_supply/BAT0/status); echo -e \"Charge: $batteryCharge% \nCurrently: $batteryStatus\"";
+      # laptop
+      battery = "set batteryCharge (bat /sys/class/power_supply/BAT0/capacity) && set batteryStatus (bat /sys/class/power_supply/BAT0/status); echo -e \"Charge: $batteryCharge% \nCurrently: $batteryStatus\"";
 
-        husky = ": > /dev/null";
+      husky = ": > /dev/null";
 
-        emu = "QT_QPA_PLATFORM=xcb emulator -feature -Vulkan @Pixel_9_Pro_XL";
-      }
-      // lib.optionalAttrs config.programs.bat.enable {cat = "bat";};
-    shellGlobalAliases = {eza = "eza --icons --git";};
+      emu = "QT_QPA_PLATFORM=xcb emulator -feature -Vulkan @Pixel_9_Pro_XL";
+    }
+    // lib.optionalAttrs config.programs.bat.enable { cat = "bat"; };
+    shellGlobalAliases = {
+      eza = "eza --icons --git";
+    };
   };
 }

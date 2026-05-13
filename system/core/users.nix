@@ -3,10 +3,12 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkOption types;
   cfg = config.custom.user;
-in {
+in
+{
   options.custom.user = {
     name = mkOption {
       type = types.str;
@@ -16,13 +18,13 @@ in {
 
     extraGroups = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = "Groups for the user to be assigned.";
     };
 
     extraOptions = mkOption {
       type = types.attrs;
-      default = {};
+      default = { };
       description = "Extra options passed to users.users.<name>";
     };
   };
@@ -34,29 +36,27 @@ in {
     };
 
     users.mutableUsers = false;
-    users.users.${cfg.name} =
-      {
-        isNormalUser = true;
-        shell = pkgs.zsh;
+    users.users.${cfg.name} = {
+      isNormalUser = true;
+      shell = pkgs.zsh;
 
-        # initialPassword = "test1234";
-        hashedPasswordFile = config.sops.secrets.password.path;
+      # initialPassword = "test1234";
+      hashedPasswordFile = config.sops.secrets.password.path;
 
-        extraGroups =
-          [
-            "adbusers"
-            "input"
-            "libvirtd"
-            "networkmanager"
-            "plugdev"
-            "podman"
-            "transmission"
-            "video"
-            "wheel"
-            "kvm"
-          ]
-          ++ cfg.extraGroups;
-      }
-      // cfg.extraOptions;
+      extraGroups = [
+        "adbusers"
+        "input"
+        "libvirtd"
+        "networkmanager"
+        "plugdev"
+        "podman"
+        "transmission"
+        "video"
+        "wheel"
+        "kvm"
+      ]
+      ++ cfg.extraGroups;
+    }
+    // cfg.extraOptions;
   };
 }

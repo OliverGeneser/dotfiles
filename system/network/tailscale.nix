@@ -2,11 +2,12 @@
   config,
   pkgs,
   ...
-}: {
-  environment.systemPackages = [pkgs.tailscale];
+}:
+{
+  environment.systemPackages = [ pkgs.tailscale ];
 
   networking.firewall = {
-    trustedInterfaces = ["tailscale0"];
+    trustedInterfaces = [ "tailscale0" ];
     # required to connect to Tailscale exit nodes
     checkReversePath = "loose";
   };

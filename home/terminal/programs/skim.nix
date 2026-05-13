@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   programs.skim = {
     enable = true;
     enableBashIntegration = config.programs.bash.enable;

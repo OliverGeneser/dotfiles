@@ -2,8 +2,9 @@
   pkgs,
   config,
   ...
-}: {
-  imports = [../../terminal/programs/python.nix];
+}:
+{
+  imports = [ ../../terminal/programs/python.nix ];
 
   config = {
     stylix.targets.neovim.enable = false;
@@ -35,6 +36,7 @@
       '';
     };
 
-    xdg.configFile."nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "/home/${config.home.username}/dotfiles/home/editors/nvim/lua";
+    xdg.configFile."nvim/lua".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/${config.home.username}/dotfiles/home/editors/nvim/lua";
   };
 }

@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   sops.secrets.nextcloud_admin_password = {
     owner = "nextcloud";
     group = "nextcloud";
