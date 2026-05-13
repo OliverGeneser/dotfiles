@@ -34,11 +34,5 @@
     };
   };
 
-  environment.systemPackages = [
-    config.boot.kernelPackages.cpupower
-
-    pkgs.efibootmgr
-    pkgs.efitools
-    pkgs.efivar
-  ];
+  environment.systemPackages = [ config.boot.kernelPackages.cpupower ];
 }
