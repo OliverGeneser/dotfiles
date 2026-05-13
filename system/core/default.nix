@@ -30,5 +30,5 @@
   time.timeZone = lib.mkDefault "Europe/Copenhagen";
 
   # compresses half the ram for use as swap
-  #zramSwap.enable = true;
+  zramSwap.enable = true;
 }
