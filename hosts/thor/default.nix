@@ -6,6 +6,27 @@
   config,
   ...
 }:
+let
+  zedSignal = pkgs.writeShellScript "zed-signal" ''
+        #!${pkgs.bash}/bin/bash
+
+        HOST="$(hostname)"
+
+        MESSAGE="ZFS event on $HOST
+
+    Pool:    $ZEVENT_POOL
+    Class:   $ZEVENT_SUBCLASS
+    Time:    $(date)
+
+    EID:     $ZEVENT_EID"
+
+
+        ${pkgs.signal-cli}/bin/signal-cli \
+          --config /home/nixos/.local/share/signal-cli \
+          send -g "TO+DykH3guaqDHrFpJzM1QUQzSAfqBsEIgwVKrP74rQ=" \
+          -m "$MESSAGE"
+  '';
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -57,13 +78,13 @@
     };
 
     boot = {
-      kernelPackages = lib.mkForce pkgs.linuxPackages_6_19;
+      kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
       kernelModules = [
         "zfs"
         "coretemp"
         "it87"
       ];
-      extraModulePackages = with pkgs.linuxPackages_6_19; [ it87 ];
+      extraModulePackages = with pkgs.linuxPackages_latest; [ it87 ];
       supportedFilesystems = lib.mkForce [
         "btrfs"
         "zfs"
@@ -79,7 +100,6 @@
       '';
 
       zfs = {
-        package = pkgs.zfs;
         forceImportAll = false;
         forceImportRoot = false;
       };
@@ -102,6 +122,7 @@
         mergerfs-tools
         self.packages.${pkgs.stdenv.hostPlatform.system}.snapraid-btrfs
         self.packages.${pkgs.stdenv.hostPlatform.system}.snapraid-btrfs-runner
+        signal-cli
       ];
     };
 
@@ -163,6 +184,25 @@
           enable = true;
           pools = [ "tank" ];
           interval = "weekly";
+        };
+
+        zed = {
+          settings = {
+            ZED_DEBUG_LOG = "/tmp/zed.debug.log";
+
+            ZED_NOTIFY_INTERVAL_SECS = 3600;
+            ZED_NOTIFY_VERBOSE = true;
+
+            ZED_USE_ENCLOSURE_LEDS = true;
+            ZED_SCRUB_AFTER_RESILVER = true;
+
+            # Disable built-in mail handling
+            ZED_EMAIL_ADDR = [ ];
+            ZED_EMAIL_PROG = "";
+
+            # Custom notifier
+            ZED_NOTIFY_PROG = "${zedSignal}";
+          };
         };
       };
 
