@@ -17,11 +17,11 @@
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (
         final: prev: {
-          version = "5.7.2";
+          version = "5.7.3";
 
           src = super.fetchurl {
             url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
-            hash = "sha256-PYgNkEixbIDcUKfWzYCsB0CZ4HlP2G3WHiN2xxvO/mw=";
+            hash = "sha256-uaJvoYOREflJlGGyrBT0oNuJF8qPpsPCkup8GXvJ2Bo=";
           };
         }
       );
@@ -73,13 +73,13 @@
     turso-cli = self: super: {
       turso-cli = super.turso-cli.overrideAttrs (
         final: prev: {
-          version = "1.0.24";
+          version = "1.0.25";
 
-          vendorHash = "sha256-Cb4/KA9jfI/pNHbJqLWtm9oEXfMHGBS46J9o3lL4/Tk=";
+          vendorHash = "sha256-4OIJVL3N2mWOw7ZDP4xFCxa9zmUTPCA8N79TVoi1lys=";
 
           src = prev.src.override {
             rev = "v${final.version}";
-            hash = "sha256-3fKEFK4zCeKEYfiBJ7so5pZ3ZQC2td80XKWN3GKFWLA=";
+            hash = "sha256-rjh0uxv6mR+wohQMSWoyGqAEYMUWl434QkVr+pml8Xo=";
           };
         }
       );
