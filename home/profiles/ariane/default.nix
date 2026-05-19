@@ -184,11 +184,12 @@
             "diffie-hellman-group18-sha512"
           ];
 
-          extraOptions = {
-            GSSAPIAuthentication = "yes";
-            GSSAPIDelegateCredentials = "yes";
-            SetEnv = "TERM=xterm-256color";
-          };
+          #GSSAPIAuthentication = true;
+          #GSSAPIDelegateCredentials = true;
+          setEnv = [ "TERM=xterm-256color" ];
+          #setEnv = {
+          #  TERM = "xterm-256color";
+          #};
         };
 
         "zenodo-ops" = {
@@ -205,13 +206,14 @@
             "diffie-hellman-group18-sha512"
           ];
 
-          extraOptions = {
-            GSSAPIAuthentication = "yes";
-            GSSAPIDelegateCredentials = "yes";
-            SetEnv = "TERM=xterm-256color";
-            RequestTTY = "yes";
-            RemoteCommand = "tmux new-session -A -s oliver";
-          };
+          #GSSAPIAuthentication = true;
+          #GSSAPIDelegateCredentials = true;
+          setEnv = [ "TERM=xterm-256color" ];
+          #setEnv = {
+          #  TERM= "xterm-256color";
+          #};
+          #requestTTY = true;
+          #remoteCommand = "tmux new-session -A -s oliver";
         };
       };
     };
