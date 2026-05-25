@@ -1,10 +1,6 @@
 { lib, ... }:
 {
   config = {
-    system.programs.hyprland.settings = {
-      primary_monitor = "DP-5";
-    };
-
     environment.variables.GDK_SCALE = "1";
 
     programs.hyprland.settings = {

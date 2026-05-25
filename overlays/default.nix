@@ -73,13 +73,13 @@
     turso-cli = self: super: {
       turso-cli = super.turso-cli.overrideAttrs (
         final: prev: {
-          version = "1.0.25";
+          version = "1.0.26";
 
           vendorHash = "sha256-4OIJVL3N2mWOw7ZDP4xFCxa9zmUTPCA8N79TVoi1lys=";
 
           src = prev.src.override {
             rev = "v${final.version}";
-            hash = "sha256-rjh0uxv6mR+wohQMSWoyGqAEYMUWl434QkVr+pml8Xo=";
+            hash = "sha256-M7bYt5eH+beUMQYh/dFhEALot6MRdfc2vH0b9iEvhqc=";
           };
         }
       );

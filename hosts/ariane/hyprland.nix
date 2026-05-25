@@ -1,9 +1,5 @@
 { lib, ... }:
 {
-  system.programs.hyprland.settings = {
-    primary_monitor = "eDP-1";
-  };
-
   environment.variables.GDK_SCALE = "1";
 
   programs.hyprland.settings =
