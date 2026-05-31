@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    ./anyrun
     ./browsers/helium.nix
     ./browsers/mullvad.nix
     ./browsers/zen.nix
@@ -17,6 +16,7 @@
     ./gtk.nix
     ./office
     ./qt.nix
+    ./vicinae
   ];
 
   home.packages = with pkgs; [

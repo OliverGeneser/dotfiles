@@ -1,26 +1,20 @@
 { lib, ... }:
 {
-  config = {
-    environment.variables.GDK_SCALE = "1";
-
-    programs.hyprland.settings = {
-      monitor = [
-        ", preferred, auto, auto"
-        "Unknown-1, disable"
-        "DP-5, 2560x1440@144, auto, auto, bitdepth, 10"
-      ];
-
+  environment.variables.GDK_SCALE = "1";
+  environment.etc."xdg/hypr/per_host.lua".text = ''
+    hl.config({
       input = {
-        kb_layout = lib.mkForce "us,dk";
-        kb_variant = "altgr-intl,";
-        kb_options = "grp:alt_space_toggle,";
-
-        accel_profile = lib.mkForce "";
-      };
-
-      misc = {
-        vrr = lib.mkForce 0;
-      };
-    };
-  };
+        kb_layout = "us,dk",
+        kb_variant = "altgr-intl,",
+        kb_options = "grp:alt_space_toggle,",
+      }
+    })
+    hl.monitor({
+      output   = "DP-5",
+      mode = "2560x1440@144",
+      position = "auto",
+      scale    = "auto",
+      bitdepth = 10,
+    })
+  '';
 }

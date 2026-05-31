@@ -81,13 +81,12 @@ hl.bind(mod .. " + SHIFT + ALT + bracketright", hl.dsp.workspace.move({ monitor 
 -- workspaces 1-10
 for i = 1, 10 do
 	local key = i % 10
-	hl.bind("ALT + " .. key, hl.dsp.focus({ workspace = i }))
+	hl.bind("ALT + " .. key, hl.dsp.focus({ workspace = i, on_current_monitor = true }))
 	hl.bind("ALT + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
 -- launcher (release bind)
 hl.bind(mod .. " + SUPER_L", hl.dsp.exec_cmd("vicinae toggle"), { release = true })
-hl.bind(mod .. " + F", hl.dsp.exec_cmd("tofi-drun | xargs hyprctl dispatch exec --"), { release = true })
 
 -- media controls (locked)
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })

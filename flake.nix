@@ -167,10 +167,6 @@
       };
     };
 
-    anyrun = {
-      url = "github:fufexan/anyrun/launch-prefix";
-    };
-
     catppuccin = {
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -330,6 +326,9 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    vicinae.url = "github:vicinaehq/vicinae";
+    vicinae-extensions.url = "github:vicinaehq/extensions";
 
     yazi = {
       url = "github:sxyazi/yazi";
