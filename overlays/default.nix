@@ -10,18 +10,17 @@
     upstreams = inputs.nixpkgs.lib.composeManyExtensions [
       beekeeper-studio
       bun
-      openldap
       turso-cli
     ];
 
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (
         final: prev: {
-          version = "5.7.3";
+          version = "5.8.0";
 
           src = super.fetchurl {
             url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
-            hash = "sha256-uaJvoYOREflJlGGyrBT0oNuJF8qPpsPCkup8GXvJ2Bo=";
+            hash = "sha256-N8vfNvsLyUyTiIUhapeo6wTVD4tst/nAOIfTDkz3phw=";
           };
         }
       );
