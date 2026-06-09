@@ -16,11 +16,11 @@
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (
         final: prev: {
-          version = "5.8.0";
+          version = "5.8.1";
 
           src = super.fetchurl {
             url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
-            hash = "sha256-N8vfNvsLyUyTiIUhapeo6wTVD4tst/nAOIfTDkz3phw=";
+            hash = "sha256-e5y7uBzdbDSUQKpxRjho+2kU3wx23spdSv1PwmJ30gA=";
           };
         }
       );

@@ -56,7 +56,6 @@
     jqp
     jnv
     ouch
-    silver-searcher
     procs
     tokei
     plocate
