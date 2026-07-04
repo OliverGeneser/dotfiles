@@ -237,6 +237,7 @@
     hyprpaper = {
       url = "github:hyprwm/hyprpaper";
       inputs = {
+        aquamarine.follows = "hyprland/aquamarine";
         hyprgraphics.follows = "hyprland/hyprgraphics";
         hyprlang.follows = "hyprland/hyprlang";
         hyprutils.follows = "hyprland/hyprutils";
