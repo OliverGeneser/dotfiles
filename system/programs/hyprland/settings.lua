@@ -90,7 +90,7 @@ hl.config({
 	},
 
 	misc = {
-		force_default_wallpaper = 0,
+		force_default_wallpaper = 2,
 		animate_mouse_windowdragging = false,
 		vrr = 1,
 		mouse_move_enables_dpms = true,

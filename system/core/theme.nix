@@ -35,10 +35,8 @@ let
     wallpaper=''${wallpapers[$rand]}
 
     monitor=(`hyprctl monitors | grep Monitor | awk '{print $2}'`)
-    hyprctl hyprpaper unload all
-    hyprctl hyprpaper preload $wallpaper
     for m in ''${monitor[@]}; do
-      hyprctl hyprpaper wallpaper "$m,contain:$wallpaper"
+      hyprctl hyprpaper wallpaper "$m, $wallpaper, contain"
     done
   '';
 in
