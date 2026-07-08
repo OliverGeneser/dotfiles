@@ -8,7 +8,7 @@
   nixpkgs = {
     config.allowUnfree = true;
     config.permittedInsecurePackages = [
-      "pnpm-10.29.2"
+      #"pnpm-10.29.2"
     ];
 
     overlays = [

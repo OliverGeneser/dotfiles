@@ -2,8 +2,8 @@
 ---- ENVIRONMENT VARS ----
 --------------------------
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
-hl.env("HYPRCURSOR_THEME", cursorName)
-hl.env("HYPRCURSOR_SIZE", cursorSize)
+--hl.env("HYPRCURSOR_THEME", cursorName)
+--hl.env("HYPRCURSOR_SIZE", cursorSize)
 -- See https://github.com/hyprwm/contrib/issues/142
 hl.env("GRIMBLAST_NO_CURSOR", "0")
 
@@ -11,7 +11,7 @@ hl.env("GRIMBLAST_NO_CURSOR", "0")
 ---- AUTOSTART ----
 -------------------
 hl.on("hyprland.start", function()
-	hl.exec_cmd("hyprctl setcursor " .. cursorName .. " " .. cursorSize)
+	--hl.exec_cmd("hyprctl setcursor " .. cursorName .. " " .. cursorSize)
 	hl.exec_cmd("hyprlock")
 	hl.exec_cmd("kanshi")
 	hl.exec_cmd("pypr")

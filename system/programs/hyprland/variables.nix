@@ -7,9 +7,6 @@
 {
 
   environment.etc."xdg/hypr/variables.lua".text = ''
-    cursorName = "Bibata-Modern-Classic-Hyprcursor"
-    cursorSize = "16"
-
     gaps_in = 4
     gaps_out = 8
 
