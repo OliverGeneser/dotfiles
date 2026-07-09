@@ -143,29 +143,12 @@
     # global, so they can be `.follow`ed
     systems.url = "github:nix-systems/default-linux";
 
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs = {
-        systems.follows = "systems";
-      };
-    };
-
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    # rest
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-        systems.follows = "systems";
-      };
-    };
 
     catppuccin = {
       url = "github:catppuccin/nix";
@@ -174,11 +157,6 @@
 
     custom-udev-rules = {
       url = "github:OliverGeneser/custom-udev-rules";
-    };
-
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     disko = {
@@ -269,17 +247,6 @@
 
     nix-index-db = {
       url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-anywhere = {
-      url = "github:numtide/nixos-anywhere";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.disko.follows = "disko";
-    };
-
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
