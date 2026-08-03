@@ -35,7 +35,7 @@
               };
             }
             {
-              "Jellyseerr" = {
+              "Seerr" = {
                 icon = "jellyseerr.png";
                 href = "http://10.0.0.205:8095";
                 description = "";

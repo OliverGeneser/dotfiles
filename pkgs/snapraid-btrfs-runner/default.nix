@@ -4,7 +4,6 @@
   stdenv,
   symlinkJoin,
   fetchFromGitHub,
-  writeScriptBin,
   writeTextFile,
   snapraid-btrfs,
   ...
@@ -98,11 +97,16 @@ let
     '';
     destination = "/etc/${name}";
   };
-  script =
-    (writeScriptBin name (builtins.readFile (src + "/snapraid-btrfs-runner.py"))).overrideAttrs
-      (old: {
-        buildCommand = "${old.buildCommand}\n patchShebangs $out";
-      });
+  script = stdenv.mkDerivation {
+    inherit name;
+    src = src;
+    buildPhase = ''
+      mkdir -p $out/bin
+      cp snapraid-btrfs-runner.py $out/bin/${name}
+      chmod +x $out/bin/${name}
+      patchShebangs $out/bin/${name}
+    '';
+  };
 in
 symlinkJoin {
   inherit name;

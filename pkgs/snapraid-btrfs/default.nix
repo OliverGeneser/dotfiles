@@ -24,8 +24,8 @@ let
           # https://github.com/automorphism88/snapraid-btrfs/pull/34
           owner = "D34DC3N73R";
           repo = "snapraid-btrfs";
-          rev = "ea9a1cfbfbe1cefcae9c038e1a4962d4bc2de843";
-          sha256 = "+UCBGlGFqRKgFjCt1GdOSxaayTONfwisxdnZEwxOnSY=";
+          rev = "a43e9a40773772b881b1450edfef28c9937f5f27";
+          sha256 = "sha256-zOFc1/H2hgcZMeGUnLvuWL+SFvE5kvekm0F/dvhakWI=";
         })
         + "/snapraid-btrfs"
       )

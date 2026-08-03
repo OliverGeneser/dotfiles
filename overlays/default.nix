@@ -77,7 +77,7 @@
           vendorHash = "sha256-4OIJVL3N2mWOw7ZDP4xFCxa9zmUTPCA8N79TVoi1lys=";
 
           src = prev.src.override {
-            rev = "v${final.version}";
+            tag = "v${final.version}";
             hash = "sha256-jsvXglCf/FyJ3tasnOywXLA20k94yzbojPdX+dZVPfw=";
           };
         }

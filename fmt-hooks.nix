@@ -9,7 +9,7 @@
     pre-commit.settings = {
       excludes = [
         "flake.lock"
-        "\\secrets\.yaml$"
+        "secrets\\.yaml$"
       ];
       hooks.treefmt.enable = true;
     };
