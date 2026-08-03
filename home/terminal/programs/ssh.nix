@@ -30,11 +30,6 @@ in
       enableDefaultConfig = false;
       settings = {
         "*" = {
-          KexAlgorithms = [
-            "sntrup761x25519-sha512"
-            "sntrup761x25519-sha512@openssh.com"
-            "mlkem768x25519-sha256"
-          ];
           ForwardAgent = true;
         };
         "github.com" = {
