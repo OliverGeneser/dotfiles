@@ -24,7 +24,7 @@
     qbittorrent_env = {
       sopsFile = ../../secrets.yaml;
     };
-    jellyseerr_env = {
+    seerr_env = {
       sopsFile = ../../secrets.yaml;
     };
     radarr_env = {
@@ -159,23 +159,24 @@
     ];
   };
 
-  virtualisation.oci-containers.containers."jellyseerr" = {
-    image = "ghcr.io/fallenbagel/jellyseerr:latest";
-    environmentFiles = [ config.sops.secrets.jellyseerr_env.path ];
+  virtualisation.oci-containers.containers."seerr" = {
+    image = "ghcr.io/seerr-team/seerr:latest";
+    environmentFiles = [ config.sops.secrets.seerr_env.path ];
     volumes = [
-      "/persist/docker-volumes/jellyseerr:/app/config:rw"
+      "/persist/docker-volumes/seerr:/app/config:rw"
     ];
     dependsOn = [
       "gluetun"
     ];
     log-driver = "journald";
     extraOptions = [
+      "--init"
       "--network=container:gluetun"
       "--security-opt=no-new-privileges:true"
     ];
   };
 
-  systemd.services."podman-jellyseerr" = {
+  systemd.services."podman-seerr" = {
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
     };

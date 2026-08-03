@@ -139,13 +139,6 @@
           user = "oliverg";
           identityFile = "~/.ssh/id_ecdsa_sk";
           identitiesOnly = false;
-          kexAlgorithms = [
-            "sntrup761x25519-sha512"
-            "sntrup761x25519-sha512@openssh.com"
-            "mlkem768x25519-sha256"
-            "curve25519-sha256"
-            "curve25519-sha256@libssh.org"
-          ];
         };
         "tunnelboy" = {
           hostname = "10.0.0.230";

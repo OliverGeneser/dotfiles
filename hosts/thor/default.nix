@@ -78,13 +78,13 @@ in
     };
 
     boot = {
-      kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+      kernelPackages = lib.mkForce pkgs.linuxPackages_6_18;
       kernelModules = [
         "zfs"
         "coretemp"
         "it87"
       ];
-      extraModulePackages = with pkgs.linuxPackages_latest; [ it87 ];
+      extraModulePackages = with pkgs.linuxPackages_6_18; [ it87 ];
       supportedFilesystems = lib.mkForce [
         "btrfs"
         "zfs"
