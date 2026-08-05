@@ -21,7 +21,22 @@
       };
     };
 
-    fail2ban.enable = true;
+    fail2ban = {
+      enable = true;
+
+      ignoreIP = [
+        "127.0.0.1/8"
+        "::1"
+
+        # Your Tailscale devices
+        "100.120.223.24" # thor
+        "100.125.40.82" # enterprise-1
+        "100.70.227.58" # pixel-10-pro
+        "100.78.211.15" # living-room-tv
+        "100.94.64.22" # pixel-10-pro-xl
+        "100.80.169.74" # pixel-10
+      ];
+    };
   };
 
   networking.firewall = {
