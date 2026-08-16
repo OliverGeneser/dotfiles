@@ -30,6 +30,7 @@
 
         # Your Tailscale devices
         "100.120.223.24" # thor
+        "100.101.50.22" # ariane
         "100.125.40.82" # enterprise-1
         "100.70.227.58" # pixel-10-pro
         "100.78.211.15" # living-room-tv
