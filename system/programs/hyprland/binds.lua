@@ -86,7 +86,7 @@ for i = 1, 10 do
 end
 
 -- launcher (release bind)
-hl.bind(mod .. " + SUPER_L", hl.dsp.exec_cmd("vicinae toggle"), { release = true })
+hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd("vicinae toggle"), { release = true })
 
 -- media controls (locked)
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
