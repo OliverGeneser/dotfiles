@@ -39,6 +39,7 @@
     ../../services/wayland/gammastep.nix
     ../../services/wayland/hyprpaper.nix
     ../../services/wayland/hypridle.nix
+    ../../services/wayland/voxtype.nix
     # ../../services/wayland/wluma.nix
 
     # terminal

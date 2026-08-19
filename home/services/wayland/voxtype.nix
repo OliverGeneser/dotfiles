@@ -1,0 +1,47 @@
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
+  services.voxtype = {
+    enable = true;
+    settings = {
+      state_file = "auto";
+
+      hotkey = {
+        enabled = false;
+      };
+      audio = {
+        device = "default";
+
+        sample_rate = 16000;
+
+        max_duration_secs = 60;
+
+        pause_media = true;
+      };
+
+      whisper = {
+        model = "base.en";
+        language = "en";
+        translate = false;
+      };
+
+      output = {
+        mode = "type";
+        fallback_to_clipboard = true;
+        type_delay_ms = 1;
+
+        notification = {
+          on_recording_start = false;
+
+          on_recording_stop = false;
+
+          on_transcription = false;
+        };
+      };
+    };
+  };
+}
