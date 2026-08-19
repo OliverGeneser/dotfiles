@@ -5,7 +5,6 @@
   ...
 }:
 {
-
   environment.etc."xdg/hypr/variables.lua".text = ''
     gaps_in = 4
     gaps_out = 8

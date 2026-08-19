@@ -14,8 +14,7 @@ in
     devices = mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule (
-          { name, ... }:
-          {
+          { name, ... }: {
             options = {
               name = lib.mkOption {
                 type = lib.types.str;
@@ -35,8 +34,7 @@ in
     folders = mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule (
-          { name, ... }:
-          {
+          { name, ... }: {
             options = {
               name = lib.mkOption {
                 type = lib.types.str;

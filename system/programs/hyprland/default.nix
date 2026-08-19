@@ -54,5 +54,4 @@ in
       # hyprbars
     ];
   };
-
 }

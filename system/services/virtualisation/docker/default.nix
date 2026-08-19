@@ -1,5 +1,4 @@
-{ self, ... }:
-{
+{ self, ... }: {
   config = {
     custom = {
       user.extraGroups = [ "docker" ];

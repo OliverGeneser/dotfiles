@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   # use Cinny Matrix client
   # create systemd service that serves it on localhost:9999
   systemd.user.services.cinny = {

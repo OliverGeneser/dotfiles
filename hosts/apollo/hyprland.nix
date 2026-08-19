@@ -1,5 +1,4 @@
-{ self, ... }:
-{
+{ self, ... }: {
   environment.variables.GDK_SCALE = "2";
   environment.etc."xdg/hypr/per_host.lua".text =
     let
@@ -22,7 +21,6 @@
               natural_scroll  = true,
             })
 
-        
-    '';
 
+    '';
 }

@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   services.udisks2.enable = true;
 
   programs.xfconf.enable = true;

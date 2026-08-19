@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{ lib, ... }: {
   wayland.windowManager.hyprland.settings = {
     # layer rules
     layerrule =
