@@ -39,7 +39,7 @@
 
   environment = {
     systemPackages = [ pkgs.git ];
-    sessionVariables = {
+    variables = {
       CLOUDFLARE_API_TOKEN = "$(cat ${config.sops.secrets."cloudflare_api_token".path})";
       CLOUDFLARE_DEFAULT_ACCOUNT_ID = "$(cat ${
         config.sops.secrets."cloudflare_default_account_id".path

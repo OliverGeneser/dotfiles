@@ -2,11 +2,15 @@
   config,
   inputs,
   lib,
+  utils,
   ...
 }:
 let
   inherit (lib) mkOption types;
   cfg = config.system.core.impermanence;
+
+  rootDevice = config.fileSystems."/".device;
+  rootDeviceUnit = "${utils.escapeSystemdPath rootDevice}.device";
 in
 {
   options.system.core.impermanence = {
@@ -45,10 +49,11 @@ in
     boot.initrd.systemd.services.rollback = {
       description = "Rollback BTRFS root subvolume to a pristine state";
       wantedBy = [ "initrd.target" ];
-      # make sure it's done after encryption
-      # i.e. LUKS/TPM process
-      after =
-        if (cfg.encryption) then [ "systemd-cryptsetup@cryptroot.service" ] else [ "local-fs.target" ];
+      # Wait for the device to actually show up. On encrypted hosts this
+      # implies waiting for the LUKS/TPM process to finish, since the device
+      # is the dm-crypt mapping itself.
+      requires = [ rootDeviceUnit ];
+      after = [ rootDeviceUnit ] ++ lib.optional cfg.encryption "systemd-cryptsetup@cryptroot.service";
       # mount the root fs before clearing
       before = [ "sysroot.mount" ];
       unitConfig.DefaultDependencies = "no";
@@ -59,13 +64,8 @@ in
 
         # We first mount the btrfs root to /mnt
         # so we can manipulate btrfs subvolumes.
-        if [ ! -d "/dev/mapper/cryptroot" ]; then
-          echo "Mounting nixos"
-          mount -o subvol=/ /dev/disk/by-label/nixos /mnt
-        else
-          echo "Mounting cryptroot"
-          mount -o subvol=/ /dev/mapper/cryptroot /mnt
-        fi
+        echo "Mounting ${rootDevice}"
+        mount -t btrfs -o subvol=/ ${rootDevice} /mnt
 
         btrfs subvolume list -o /mnt/root
 

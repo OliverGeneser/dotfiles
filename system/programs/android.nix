@@ -1,10 +1,17 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  sdk = "$HOME/Android/Sdk";
+in
+{
   nixpkgs.config.android_sdk.accept_license = true;
 
-  environment.sessionVariables = rec {
-    ANDROID_HOME = "$HOME/Android/Sdk";
+  environment.sessionVariables = {
+    ANDROID_HOME = sdk;
     ANDROID_AVD_HOME = "$HOME/.config/.android/avd";
-    PATH = "$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools";
+    PATH = [
+      "${sdk}/emulator"
+      "${sdk}/platform-tools"
+    ];
   };
 
   environment.systemPackages = with pkgs; [

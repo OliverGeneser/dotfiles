@@ -287,6 +287,7 @@ in
     };
 
     system.core.impermanence = {
+      encryption = false;
       files = [
         "/var/snapraid.content"
       ];
