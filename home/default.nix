@@ -12,7 +12,6 @@
     inputs.tailray.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
     inputs.stylix.homeModules.stylix
-    inputs.catppuccin.homeModules.catppuccin
   ];
 
   programs.nix-index = {
@@ -45,6 +44,12 @@
   stylix = {
     enable = true;
     autoEnable = true;
+
+    # `home-manager.useGlobalPkgs` makes home-manager ignore `nixpkgs.overlays`,
+    # so stylix's overlay-based targets are inert here and only produce an
+    # eval warning. The system-level stylix module still applies them.
+    overlays.enable = false;
+
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     image = self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_40-black_5120x2880;

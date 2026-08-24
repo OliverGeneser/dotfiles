@@ -140,7 +140,6 @@
     };
 
   inputs = {
-    # global, so they can be `.follow`ed
     systems.url = "github:nix-systems/default-linux";
 
     flake-parts = {
@@ -150,10 +149,7 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    catppuccin = {
-      url = "github:catppuccin/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # rest of inputs
 
     custom-udev-rules = {
       url = "github:OliverGeneser/custom-udev-rules";
@@ -186,9 +182,6 @@
 
     hyprland = {
       url = "github:hyprwm/hyprland";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
     };
 
     hyprland-contrib = {
@@ -219,11 +212,15 @@
         hyprgraphics.follows = "hyprland/hyprgraphics";
         hyprlang.follows = "hyprland/hyprlang";
         hyprutils.follows = "hyprland/hyprutils";
+        hyprwire.follows = "hyprland/hyprwire";
         nixpkgs.follows = "hyprland/nixpkgs";
         systems.follows = "hyprland/systems";
       };
     };
-
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     impermanence = {
       url = "github:nix-community/impermanence";
     };

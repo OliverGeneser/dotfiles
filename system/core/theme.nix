@@ -43,7 +43,6 @@ in
 {
   imports = [
     inputs.stylix.nixosModules.stylix
-    inputs.catppuccin.nixosModules.catppuccin
   ];
 
   environment.systemPackages = [ wallpaperRandomizer ];
