@@ -11,6 +11,7 @@
     ./browsers/zen.nix
     # ./communication/element.nix
     ./communication/vesktop.nix
+    ./communication/signal.nix
     ./design
     ./media
     ./gtk.nix
@@ -21,8 +22,6 @@
 
   home.packages = with pkgs; [
     halloy
-    signal-desktop
-    tutanota-desktop
     telegram-desktop
 
     qalculate-qt

@@ -18,6 +18,7 @@
     ../../programs/design/gimp.nix
     ../../programs/games
     ../../programs/wayland
+    ../../programs/communication/tutanota.nix
 
     # services
     # ../../services/cinny.nix
