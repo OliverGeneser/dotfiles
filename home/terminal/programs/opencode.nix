@@ -28,6 +28,28 @@
     settings = {
       autoupdate = false;
       plugin = [ "@ex-machina/opencode-anthropic-auth@1.8.1" ];
+      provider = {
+
+        cern-litellm = {
+          npm = "@ai-sdk/openai-compatible";
+          name = "CERN LiteLLM";
+          options = {
+            baseURL = "{env:LITELLM_API_BASE}";
+            apiKey = "{env:LITELLM_API_KEY}";
+          };
+          models = {
+            "gpt-5.6-sol" = {
+              "name" = "GPT-5.6 Sol";
+            };
+            "gpt-5.6-terra" = {
+              "name" = "GPT-5.6 Terra";
+            };
+            "gpt-5.6-luna" = {
+              "name" = "GPT-5.6 Luna";
+            };
+          };
+        };
+      };
       mcp = {
         context7 = {
           type = "remote";
