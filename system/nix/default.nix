@@ -27,6 +27,14 @@
       sopsFile = ../secrets.yaml;
       owner = config.custom.user.name;
     };
+    litellm_api_url = {
+      sopsFile = ../secrets.yaml;
+      owner = config.custom.user.name;
+    };
+    litellm_api_key = {
+      sopsFile = ../secrets.yaml;
+      owner = config.custom.user.name;
+    };
     nix_access_tokens = {
       sopsFile = ../secrets.yaml;
       owner = config.custom.user.name;
@@ -46,6 +54,8 @@
       })";
       CONTEXT7_API_KEY = "$(cat ${config.sops.secrets."context7_api_key".path})";
       SEARXNG_API_URL = "$(cat ${config.sops.secrets."searxng_api_url".path})";
+      LITELLM_API_URL = "$(cat ${config.sops.secrets."litellm_api_url".path})";
+      LITELLM_API_KEY = "$(cat ${config.sops.secrets."litellm_api_key".path})";
     };
   };
 

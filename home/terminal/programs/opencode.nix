@@ -34,7 +34,7 @@
           npm = "@ai-sdk/openai-compatible";
           name = "CERN LiteLLM";
           options = {
-            baseURL = "{env:LITELLM_API_BASE}";
+            baseURL = "{env:LITELLM_API_URL}";
             apiKey = "{env:LITELLM_API_KEY}";
           };
           models = {
