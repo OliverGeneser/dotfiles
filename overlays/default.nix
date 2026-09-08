@@ -16,11 +16,11 @@
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (
         final: prev: {
-          version = "5.9.3";
+          version = "6.0.5";
 
           src = super.fetchurl {
             url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
-            hash = "sha256-ngVE7hjtr/a6CBASwZA3gmvk7+WR2okQy+ywXbEUQpk=";
+            hash = "sha256-AlimxfT2aMPXJQKU7NxSmhqhQApIWp1K5qd3wFRvo/w=";
           };
         }
       );
@@ -29,11 +29,11 @@
     bun = self: super: {
       bun = super.bun.overrideAttrs (
         final: prev: {
-          version = "1.3.14";
+          version = "1.4.2";
 
           src = super.fetchurl {
             url = "https://github.com/oven-sh/bun/releases/download/bun-v${final.version}/bun-linux-x64.zip";
-            hash = "sha256-lR7iruhV8IWVruxiJSJqKY0/6oOj3NZGXAnLzN9+hI8=";
+            hash = "sha256-NjaPrvdSeHXV/6UuU81IAhdB8qg+tiCKjdZAaNQiqRM=";
           };
         }
       );
@@ -72,13 +72,13 @@
     turso-cli = self: super: {
       turso-cli = super.turso-cli.overrideAttrs (
         final: prev: {
-          version = "1.0.31";
+          version = "1.0.32";
 
-          vendorHash = "sha256-4OIJVL3N2mWOw7ZDP4xFCxa9zmUTPCA8N79TVoi1lys=";
+          vendorHash = "sha256-wutbVEWWoTdgwtG6IXgCYEGn/rdmaPbLGcFeCTS2VNE=";
 
           src = prev.src.override {
             tag = "v${final.version}";
-            hash = "sha256-B1sm1RBJneSoNYUrXTXMzB7n+UAmn6RlFtV1BZpOdZM=";
+            hash = "sha256-hRmDoyj6rdqB+P0nAS+Xxg/6gUjxJm3qetiSGn+Nuaw=";
           };
         }
       );
