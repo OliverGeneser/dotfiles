@@ -34,7 +34,6 @@
 
           "${mod}/services/vpn.nix"
           "${mod}/services/postgres.nix"
-          "${mod}/services/gnome-services.nix"
           "${mod}/services/location.nix"
 
           {
@@ -61,7 +60,6 @@
           "${mod}/network/syncthing.nix"
 
           "${mod}/services/vpn.nix"
-          "${mod}/services/gnome-services.nix"
           "${mod}/services/location.nix"
 
           {
@@ -88,7 +86,6 @@
           "${mod}/network/syncthing.nix"
 
           "${mod}/services/vpn.nix"
-          "${mod}/services/gnome-services.nix"
           "${mod}/services/location.nix"
 
           {
@@ -112,7 +109,6 @@
           "${mod}/services/vpn.nix"
           "${mod}/services/postgres.nix"
           "${mod}/services/syncthing.nix"
-          "${mod}/services/gnome-services.nix"
           "${mod}/services/location.nix"
 
           {
