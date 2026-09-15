@@ -12,9 +12,9 @@
         opencodePkg = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
       in
       (opencodePkg.override {
-        #node_modules = opencodePkg.node_modules.override {
-        #hash = "sha256-1tKRDDKUF+no53SwpTBB+cc81gF/shaaFkUwBmUX7Z8=";
-        #};
+        node_modules = opencodePkg.node_modules.override {
+          hash = "sha256-Ppc2Kgb9D9xdkrNMyQgPS6rn/zU5zMqMKvAmrFCj1zQ=";
+        };
       }).overrideAttrs
         (old: {
           postPatch = ''
