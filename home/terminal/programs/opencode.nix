@@ -27,9 +27,8 @@
 
     settings = {
       autoupdate = false;
-      plugin = [ "@ex-machina/opencode-anthropic-auth@1.8.1" ];
+      # plugin = [ "@ex-machina/opencode-anthropic-auth@1.8.1" ];
       provider = {
-
         cern-litellm = {
           npm = "@ai-sdk/openai-compatible";
           name = "CERN LiteLLM";
