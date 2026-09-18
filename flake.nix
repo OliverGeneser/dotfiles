@@ -252,6 +252,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    t3-code-nix = {
+      url = "github:OliverGeneser/t3-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware = {
       url = "github:nixos/nixos-hardware";
     };
