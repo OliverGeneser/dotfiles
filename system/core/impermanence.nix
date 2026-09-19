@@ -108,6 +108,7 @@ in
         "/var/lib/containers"
         "/var/lib/gitea"
         "/var/lib/nixos"
+        "/var/lib/sbctl"
         "/var/lib/syncthing"
         "/var/lib/systemd/coredump"
         "/etc/NetworkManager/system-connections"
