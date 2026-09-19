@@ -23,13 +23,12 @@
         inherit specialArgs;
         modules = desktop ++ [
           ./enterprise
-          #"${mod}/core/lanzaboote.nix"
+          "${mod}/core/lanzaboote.nix"
 
           "${mod}/programs/gamemode.nix"
           "${mod}/programs/hyprland"
           "${mod}/programs/games.nix"
 
-          "${mod}/network/spotify.nix"
           "${mod}/network/syncthing.nix"
 
           "${mod}/services/vpn.nix"
@@ -56,7 +55,6 @@
           "${mod}/programs/hyprland"
           "${mod}/programs/games.nix"
 
-          "${mod}/network/spotify.nix"
           "${mod}/network/syncthing.nix"
 
           "${mod}/services/vpn.nix"
@@ -76,13 +74,13 @@
         inherit specialArgs;
         modules = laptop ++ [
           ./ariane
-          #"${mod}/core/lanzaboote.nix"
+          "${mod}/hardware/ddcci.nix"
+          "${mod}/core/lanzaboote.nix"
 
           "${mod}/programs/gamemode.nix"
           "${mod}/programs/hyprland"
           "${mod}/programs/games.nix"
 
-          "${mod}/network/spotify.nix"
           "${mod}/network/syncthing.nix"
 
           "${mod}/services/vpn.nix"

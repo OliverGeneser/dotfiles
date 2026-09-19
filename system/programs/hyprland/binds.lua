@@ -86,7 +86,14 @@ for i = 1, 10 do
 end
 
 -- launcher (release bind)
-hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd("vicinae toggle"), { release = true })
+-- hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd("vicinae toggle"), { release = true })
+
+hl.bind(mod .. " + SPACE", function()
+	local ws = hl.get_active_workspace()
+	if not ws.has_fullscreen then
+		hl.dispatch(hl.dsp.exec_cmd("vicinae toggle"))
+	end
+end, { release = true })
 
 -- media controls (locked)
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
@@ -108,5 +115,5 @@ hl.bind(
 )
 
 -- backlight (locked + repeating)
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brillo -q -u 300000 -A 5"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brillo -q -u 300000 -U 5"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("bright -q -A 5"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("bright -q -U 5"), { locked = true, repeating = true })

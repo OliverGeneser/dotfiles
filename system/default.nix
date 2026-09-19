@@ -32,6 +32,7 @@ let
     ./core
     ./core/boot.nix
 
+    ./hardware/brightness.nix
     ./hardware/bluetooth.nix
     ./hardware/fwupd.nix
     ./hardware/logitech.nix
@@ -47,7 +48,6 @@ let
     ./services/greetd.nix
     ./services/pipewire.nix
     ./services/printing.nix
-    # ./services/searx.nix
     # ./services/virtualisation/docker
     ./services/virtualisation/podman
     ./services/yubikey.nix

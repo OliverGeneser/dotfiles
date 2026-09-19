@@ -10,6 +10,7 @@
     upstreams = inputs.nixpkgs.lib.composeManyExtensions [
       beekeeper-studio
       bun
+      linuxPackages_latest
       turso-cli
     ];
 
@@ -45,6 +46,23 @@
           ./patch-efitools.patch
         ];
       });
+    };
+
+    linuxPackages_latest = self: super: {
+      linuxPackages_latest = super.linuxPackages_latest.extend (
+        _: lpprev: {
+          ddcci-driver = lpprev.ddcci-driver.overrideAttrs (old: {
+            patches = (old.patches or [ ]) ++ [
+              # allows detection even if monitor does not report itself as such
+              "${self}/pkgs/ddcci-fix-missing-tags.patch"
+              # retry core device detection so brightness works from boot
+              # instead of only after a manual module reload (DDC/CI isn't
+              # responsive yet when the udev rule instantiates the device)
+              "${self}/pkgs/ddcci-probe-retry.patch"
+            ];
+          });
+        }
+      );
     };
 
     nvidia = self: super: {

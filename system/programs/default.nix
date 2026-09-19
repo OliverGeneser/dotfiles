@@ -1,10 +1,8 @@
-{
+{ pkgs, ... }: {
   imports = [
     ./home-manager.nix
     ./adb.nix
     ./android.nix
-    # ./qt.nix
-    # ./thunar.nix
     ./pcmanfm.nix
     ./xdg.nix
   ];
@@ -13,8 +11,14 @@
     # make HM-managed GTK stuff work
     dconf.enable = true;
 
+    gpu-screen-recorder.enable = true;
+
     kdeconnect.enable = true;
 
     seahorse.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    gpu-screen-recorder-gtk
+  ];
 }

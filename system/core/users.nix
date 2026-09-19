@@ -40,7 +40,6 @@ in
       isNormalUser = true;
       shell = pkgs.zsh;
 
-      # initialPassword = "test1234";
       hashedPasswordFile = config.sops.secrets.password.path;
 
       extraGroups = [
