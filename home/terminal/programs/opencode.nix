@@ -11,11 +11,16 @@
       let
         opencodePkg = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
       in
-      (opencodePkg.override {
-        node_modules = opencodePkg.node_modules.override {
+      opencodePkg.overrideAttrs (old: {
+        patches = (old.patches or [ ]) ++ [
+          ./opencode.patch
+        ];
+
+        node_modules = old.node_modules.override {
           hash = "sha256-Ppc2Kgb9D9xdkrNMyQgPS6rn/zU5zMqMKvAmrFCj1zQ=";
         };
       });
+
     settings = {
       autoupdate = false;
       # plugin = [ "@ex-machina/opencode-anthropic-auth@1.8.1" ];

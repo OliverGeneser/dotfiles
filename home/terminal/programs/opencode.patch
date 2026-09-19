@@ -1,0 +1,16 @@
+diff --git a/packages/opencode/script/build.ts b/packages/opencode/script/build.ts
+index ce45f770f0..3451e63418 100755
+--- a/packages/opencode/script/build.ts
++++ b/packages/opencode/script/build.ts
+@@ -166,9 +166,9 @@ for (const item of targets) {
+     plugins: [plugin],
+     external: ["node-gyp"],
+     format: "esm",
+-    minify: true,
++    minify: false,
+     sourcemap: sourcemapsFlag ? "linked" : "none",
+-    splitting: true,
++    splitting: false,
+     compile: {
+       autoloadBunfig: false,
+       autoloadDotenv: false,
