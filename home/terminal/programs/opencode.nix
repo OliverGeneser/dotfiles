@@ -12,18 +12,19 @@
         opencodePkg = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
       in
       opencodePkg.overrideAttrs (old: {
-        patches = (old.patches or [ ]) ++ [
-          ./opencode.patch
-        ];
-
         node_modules = old.node_modules.override {
-          hash = "sha256-Ppc2Kgb9D9xdkrNMyQgPS6rn/zU5zMqMKvAmrFCj1zQ=";
+          hash = "sha256-HRwQ1DFTOY2ninqmRT2EJiAPOngNajgyGC4q3NPT2VI=";
         };
+
+        # v2 removed the `completion` subcommand (yargs -> effect/cli) but
+        # nix/opencode.nix:87 still runs `installShellCompletion --cmd opencode --bash <($out/bin/opencode completion)`.
+        # That is now interpreted as `opencode <directory>` and hits packages/cli/src/commands/handlers/default.ts:19 `process.chdir(requestedDirectory)` -> ENOENT.
+        # Disable broken shell-completion generation until upstream fixes nix/opencode.nix.
+        postInstall = "";
       });
 
     settings = {
       autoupdate = false;
-      # plugin = [ "@ex-machina/opencode-anthropic-auth@1.8.1" ];
       provider = {
         cern-litellm = {
           npm = "@ai-sdk/openai-compatible";
@@ -46,16 +47,18 @@
         };
       };
       mcp = {
-        context7 = {
-          type = "remote";
-          url = "https://mcp.context7.com/mcp";
-          headers = {
-            "CONTEXT7_API_KEY" = "{env:CONTEXT7_API_KEY}";
+        servers = {
+          context7 = {
+            type = "remote";
+            url = "https://mcp.context7.com/mcp";
+            headers = {
+              "CONTEXT7_API_KEY" = "{env:CONTEXT7_API_KEY}";
+            };
           };
-        };
-        gh_grep = {
-          type = "remote";
-          url = "https://mcp.grep.app";
+          gh_grep = {
+            type = "remote";
+            url = "https://mcp.grep.app";
+          };
         };
       };
     };
