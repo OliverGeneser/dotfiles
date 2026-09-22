@@ -49,7 +49,7 @@
         inherit specialArgs;
         modules = laptop ++ [
           ./apollo
-          #"${mod}/core/lanzaboote.nix"
+          "${mod}/core/lanzaboote.nix"
 
           "${mod}/programs/gamemode.nix"
           "${mod}/programs/hyprland"
@@ -74,7 +74,6 @@
         inherit specialArgs;
         modules = laptop ++ [
           ./ariane
-          "${mod}/hardware/ddcci.nix"
           "${mod}/core/lanzaboote.nix"
 
           "${mod}/programs/gamemode.nix"
