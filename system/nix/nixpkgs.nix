@@ -8,8 +8,7 @@
   nixpkgs = {
     config.allowUnfree = true;
     config.permittedInsecurePackages = [
-      "electron-40.10.5"
-      "beekeeper-studio-6.1.2"
+      "beekeeper-studio-6.1.4"
     ];
 
     overlays = [
