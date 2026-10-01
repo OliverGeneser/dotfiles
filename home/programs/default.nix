@@ -35,8 +35,6 @@
     overskride
     resources
     wineWow64Packages.wayland
-
-    zotero
   ];
 
   dconf = {
