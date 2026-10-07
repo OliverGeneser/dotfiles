@@ -24,7 +24,9 @@
     loader = {
       # systemd-boot on UEFI
       efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+      };
     };
 
     plymouth = {

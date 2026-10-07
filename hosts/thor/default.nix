@@ -107,7 +107,7 @@ in
 
     environment = {
       # nh default flake
-      variables.NH_FLAKE = "/home/nixos/dotfiles";
+      variables.NH_OS_FLAKE = "/home/nixos/dotfiles";
 
       systemPackages = with pkgs; [
         nfs-utils

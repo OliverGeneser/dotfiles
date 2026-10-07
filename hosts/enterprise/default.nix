@@ -33,7 +33,7 @@
   };
 
   # nh default flake
-  environment.variables.NH_FLAKE = "/home/olivergeneser/dotfiles";
+  environment.variables.NH_OS_FLAKE = "/home/olivergeneser/dotfiles";
 
   networking = {
     hostName = "enterprise";

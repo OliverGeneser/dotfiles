@@ -31,7 +31,7 @@
 
   environment = {
     # nh default flake
-    variables.NH_FLAKE = "/home/olivergeneser/dotfiles";
+    variables.NH_OS_FLAKE = "/home/olivergeneser/dotfiles";
 
     systemPackages = with pkgs; [
     ];
