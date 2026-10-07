@@ -14,6 +14,7 @@
 
     settings = {
       server = {
+        ROOT_URL = "https://git.geneserlabs.com";
         HTTP_PORT = 4500;
       };
     };
