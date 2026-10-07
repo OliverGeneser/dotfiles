@@ -4,6 +4,7 @@
     ./adb.nix
     ./android.nix
     ./pcmanfm.nix
+    ./vicinae.nix
     ./xdg.nix
   ];
 
