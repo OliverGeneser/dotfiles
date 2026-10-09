@@ -13,7 +13,7 @@
       in
       opencodePkg.overrideAttrs (old: {
         node_modules = old.node_modules.override {
-          hash = "sha256-6+0Lqv+/nZL4+9QF2SVh21VqMhicCnt84lUvlxoQxjc=";
+          hash = "sha256-WdxKnM1u/GM5EU6RR+j5TICa4kOA+SUUXDV3AVVoJuw=";
         };
 
         # v2 removed the `completion` subcommand (yargs -> effect/cli) but
@@ -25,6 +25,7 @@
 
     settings = {
       autoupdate = false;
+      plugins = [ "@ex-machina/opencode-anthropic-auth@next" ];
       provider = {
         cern-litellm = {
           npm = "@ai-sdk/openai-compatible";
