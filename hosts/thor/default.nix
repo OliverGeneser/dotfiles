@@ -283,6 +283,99 @@ in
             }/bin/snapraid-btrfs-runner";
           };
         };
+        mattermost-youtube-reminder = {
+          description = "Mattermost YouTube Vote Reminder";
+
+          serviceConfig = {
+            Type = "oneshot";
+            User = "nixos";
+            WorkingDirectory = "/home/nixos/mattermost-dj-bot";
+          };
+
+          path = with pkgs; [
+            python3
+            coreutils
+          ];
+
+          script = ''
+            ./mattermost_youtube_vote.py remind \
+              --env-file .env \
+              --end-time 15:30 \
+              >> cron.log 2>&1
+          '';
+        };
+        mattermost-youtube-winner = {
+          description = "Mattermost YouTube Vote Winner";
+
+          serviceConfig = {
+            Type = "oneshot";
+            User = "nixos";
+            WorkingDirectory = "/home/nixos/mattermost-dj-bot";
+          };
+          path = with pkgs; [
+            python3
+            coreutils
+          ];
+
+          script = ''
+            ./mattermost_youtube_vote.py winner \
+             --env-file .env \
+                >> cron.log 2>&1
+          '';
+        };
+        mattermost-youtube-submission-check = {
+          description = "Mattermost YouTube Submission Check";
+
+          serviceConfig = {
+            Type = "oneshot";
+            User = "nixos";
+            WorkingDirectory = "/home/nixos/mattermost-dj-bot";
+          };
+
+          path = with pkgs; [
+            python3
+            coreutils
+          ];
+
+          script = ''
+            ./mattermost_youtube_vote.py check-submissions \
+              --env-file .env \
+              >> cron.log 2>&1
+          '';
+        };
+      };
+
+      timers = {
+        mattermost-youtube-reminder = {
+          wantedBy = [ "timers.target" ];
+
+          timerConfig = {
+            # Mon-Fri at 14:00, 16:00
+            OnCalendar = [
+              "Mon..Fri 14:00 Europe/Zurich"
+              "Mon..Fri 16:00 Europe/Zurich"
+            ];
+            Persistent = true;
+          };
+        };
+        mattermost-youtube-winner = {
+          wantedBy = [ "timers.target" ];
+
+          timerConfig = {
+            # Mon-Fri at 17:30
+            OnCalendar = "Mon..Fri 17:30 Europe/Zurich";
+            Persistent = true;
+          };
+        };
+        mattermost-youtube-submission-check = {
+          wantedBy = [ "timers.target" ];
+
+          timerConfig = {
+            # Mon-Fri at 09:30 Geneva time
+            OnCalendar = "Mon..Fri 09:30 Europe/Zurich";
+            Persistent = false;
+          };
+        };
       };
     };
 
