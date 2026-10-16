@@ -49,6 +49,7 @@
     ../../terminal/programs/cli.nix
     ../../terminal/programs/ffmpeg.nix
     ../../terminal/programs/git.nix
+    ../../terminal/programs/helm.nix
     ../../terminal/programs/htop.nix
     ../../terminal/programs/k9s.nix
     ../../terminal/programs/nix.nix
