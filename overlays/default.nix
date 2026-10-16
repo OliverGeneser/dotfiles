@@ -17,12 +17,18 @@
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (
         final: prev: {
-          version = "6.1.5";
+          version = "6.1.6";
 
           src = super.fetchurl {
             url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
-            hash = "sha256-dNix1+d5h3iMGXJtfaIKk/pzyI2UGWJwaQhyBCFCaB4=";
+            hash = "sha256-dQ4pI3rivUiNad2ZT/HcVpHTM1+av/n23vRTm/EwKzw=";
           };
+
+          # 6.1.6 bundles musl duckdb bindings that auto-patchelf can't satisfy.
+          # They are unused on glibc systems, so ignore the missing musl libc.
+          autoPatchelfIgnoreMissingDeps = (prev.autoPatchelfIgnoreMissingDeps or [ ]) ++ [
+            "libc.musl-x86_64.so.1"
+          ];
         }
       );
     };
@@ -30,11 +36,11 @@
     bun = self: super: {
       bun = super.bun.overrideAttrs (
         final: prev: {
-          version = "1.4.2";
+          version = "1.4.3";
 
           src = super.fetchurl {
             url = "https://github.com/oven-sh/bun/releases/download/bun-v${final.version}/bun-linux-x64.zip";
-            hash = "sha256-NjaPrvdSeHXV/6UuU81IAhdB8qg+tiCKjdZAaNQiqRM=";
+            hash = "sha256-PnMFKNiXdfA/h/BcBnh8TfQJnQo38/JS57gpyyOBbhg=";
           };
         }
       );
@@ -90,13 +96,13 @@
     turso-cli = self: super: {
       turso-cli = super.turso-cli.overrideAttrs (
         final: prev: {
-          version = "1.0.33";
+          version = "1.0.34";
 
           vendorHash = "sha256-wutbVEWWoTdgwtG6IXgCYEGn/rdmaPbLGcFeCTS2VNE=";
 
           src = prev.src.override {
             tag = "v${final.version}";
-            hash = "sha256-HIrKPUmXgADWh+/r1Wxbyfs5HFukDYPkX7GutAQtIuE=";
+            hash = "sha256-cMEFInZqQOIWrfZVE7D/csdelMk7OkVSZl8MPhW7Y9I=";
           };
         }
       );

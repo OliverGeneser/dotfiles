@@ -63,7 +63,12 @@
       flakeInputs = lib.filterAttrs (_: v: lib.isType "flake" v) inputs;
     in
     {
-      package = pkgs.lix;
+      # lix 2.95 (pkgs.lix / stable) is broken on current nixpkgs:
+      # common-lix.nix passes -Dmimalloc=disabled but 2.95's meson.build
+      # has no such option, so configure fails with
+      # `ERROR: Unknown option: "mimalloc"`. Use 2.96 which supports it
+      # and is already in the binary cache.
+      package = pkgs.lixPackageSets.lix_2_96.lix;
 
       # pin the registry to avoid downloading and evaling a new nixpkgs version every time
       registry = lib.mapAttrs (_: v: { flake = v; }) flakeInputs;
