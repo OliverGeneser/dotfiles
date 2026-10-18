@@ -1,21 +1,17 @@
 {
   lib,
-  pkgs,
   stdenv,
-  symlinkJoin,
   fetchFromGitHub,
   writeTextFile,
+  makeWrapper,
+  python3,
+  snapraid,
+  snapper,
+  signal-cli,
   snapraid-btrfs,
-  ...
 }:
 let
   name = "snapraid-btrfs-runner";
-  deps = with pkgs; [
-    python311
-    config
-    snapraid
-    snapper
-  ];
   src = fetchFromGitHub {
     owner = "OliverGeneser";
     repo = "snapraid-btrfs-runner";
@@ -40,11 +36,11 @@ let
 
       [snapper]
       ; path to snapper executable (e.g. /usr/bin/snapper)
-      executable = ${pkgs.snapper}/bin/snapper
+      executable = ${snapper}/bin/snapper
 
       [snapraid]
       ; path to the snapraid executable (e.g. /usr/bin/snapraid)
-      executable = ${pkgs.snapraid}/bin/snapraid
+      executable = ${snapraid}/bin/snapraid
       ; path to the snapraid config to be used
       config = /etc/snapraid.conf
       ; abort operation if there are more deletes than this, set to -1 to disable
@@ -83,7 +79,7 @@ let
       enabled = true
       sendon = success,error
       ; path to the signal-cli executable (e.g. /usr/bin/signal-cli)
-      executable = ${pkgs.signal-cli}/bin/signal-cli
+      executable = ${signal-cli}/bin/signal-cli
       config = /home/nixos/.local/share/signal-cli
       chatid = TO+DykH3guaqDHrFpJzM1QUQzSAfqBsEIgwVKrP74rQ=
 
@@ -97,23 +93,39 @@ let
     '';
     destination = "/etc/${name}";
   };
-  script = stdenv.mkDerivation {
-    inherit name;
-    src = src;
-    buildPhase = ''
-      mkdir -p $out/bin
-      cp snapraid-btrfs-runner.py $out/bin/${name}
-      chmod +x $out/bin/${name}
-      patchShebangs $out/bin/${name}
-    '';
-  };
-in
-symlinkJoin {
-  inherit name;
-  paths = [ script ] ++ deps;
-  buildInputs = with pkgs; [
-    makeWrapper
-    python311
+
+  runtimeDeps = [
+    python3
+    snapraid
+    snapper
+    signal-cli
+    snapraid-btrfs
   ];
-  postBuild = "wrapProgram $out/bin/${name} --add-flags '-c ${config}/etc/snapraid-btrfs-runner' --set PATH $out/bin";
+in
+stdenv.mkDerivation {
+  inherit name src;
+
+  nativeBuildInputs = [ makeWrapper ];
+
+  installPhase = ''
+    runHook preInstall
+    install -Dm755 snapraid-btrfs-runner.py $out/bin/${name}
+    # Upstream shebang is "#!/usr/bin/env python3". It happens to work on
+    # NixOS (because /usr/bin/env exists), but don't rely on PATH lookup.
+    # Point directly at the nix python instead.
+    substituteInPlace $out/bin/${name} \
+      --replace-fail '#!/usr/bin/env python3' '#!${lib.getExe python3}'
+    # Keep a copy of the default config in the output for discoverability.
+    install -Dm644 ${config}/etc/${name} $out/etc/${name}
+    wrapProgram $out/bin/${name} \
+      --add-flags "-c ${config}/etc/${name}" \
+      --prefix PATH : ${lib.makeBinPath runtimeDeps}
+    runHook postInstall
+  '';
+
+  meta = with lib; {
+    description = "Runner for snapraid-btrfs (diff/sync/scrub with notifications)";
+    license = licenses.gpl3Plus;
+    platforms = platforms.linux;
+  };
 }
