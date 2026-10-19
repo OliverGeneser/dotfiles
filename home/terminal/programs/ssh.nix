@@ -45,6 +45,18 @@ in
           ];
           ForwardAgent = true;
         };
+        "gitlab.cern.ch" = {
+          User = "ogeneser";
+          KexAlgorithms = [
+            "sntrup761x25519-sha512"
+            "sntrup761x25519-sha512@openssh.com"
+            "mlkem768x25519-sha256"
+            "curve25519-sha256"
+            "curve25519-sha256@libssh.org"
+          ];
+          ForwardAgent = true;
+        };
+
       }
       // cfg.extraHosts;
       package = if cfg.withGSSAPI then pkgs.openssh_gssapi else pkgs.openssh;
