@@ -11,6 +11,7 @@
       beekeeper-studio
       bun
       linuxPackages_latest
+      reuse
       turso-cli
     ];
 
@@ -91,6 +92,23 @@
       openldap = super.openldap.overrideAttrs (_: {
         doCheck = false;
       });
+    };
+
+    reuse = self: super: {
+      # Workaround for upstream nixpkgs bug (2026-10):
+      # python reuse-6.2.0 fails with "failed to produce output path for
+      # output 'man'". sphinx-hook.sh does `eval "__sphinxBuilders=($sphinxBuilders)"`
+      # which only expands to the first element when sphinxBuilders is a bash
+      # array (structuredAttrs), so the "man" builder never runs and $man is
+      # never created. Using a string makes the eval split correctly into
+      # both builders and matches the cached Hydra build.
+      pythonPackagesExtensions = (super.pythonPackagesExtensions or [ ]) ++ [
+        (py-self: py-super: {
+          reuse = py-super.reuse.overrideAttrs (_: {
+            sphinxBuilders = "html man";
+          });
+        })
+      ];
     };
 
     turso-cli = self: super: {
