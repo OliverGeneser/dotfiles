@@ -28,7 +28,9 @@
     terminal = "tmux-256color";
 
     extraConfig = ''
-      set -ga terminal-overrides ",*:Tc"
+      set -g renumber-windows on
+      set -g set-clipboard on
+      set -g allow-passthrough on
 
       set -g status-right '#[fg=black]#{cpu_bg_color} CPU: #{cpu_icon} #{cpu_percentage} | %a %h-%d %H:%M '
       run-shell ${pkgs.tmuxPlugins.cpu}/share/tmux-plugins/cpu/cpu.tmux
