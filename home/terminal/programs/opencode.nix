@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   self,
   ...
@@ -7,13 +8,18 @@
 {
   programs.opencode = {
     enable = true;
+
+    # stylix still sets `tui.theme`, but OpenCode 2 ignores tui.json. The
+    # stylix theme file is still installed and selected via cli.json.
+    tui = lib.mkForce { };
+
     package =
       let
         opencodePkg = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
       in
       opencodePkg.overrideAttrs (old: {
         node_modules = old.node_modules.override {
-          hash = "sha256-xUEdCdS+BbEWb2TsUdr088KLYLGqIOBdknGObo3xc+o=";
+          hash = "sha256-InRzS7Demz7R3D9J90um1RHO4BoUGc8L3m7RsIwP9Jk=";
         };
 
         # v2 removed the `completion` subcommand (yargs -> effect/cli) but

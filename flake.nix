@@ -211,6 +211,7 @@
         aquamarine.follows = "hyprland/aquamarine";
         hyprgraphics.follows = "hyprland/hyprgraphics";
         hyprlang.follows = "hyprland/hyprlang";
+        hyprtoolkit.follows = "hyprland/hyprtoolkit";
         hyprutils.follows = "hyprland/hyprutils";
         hyprwire.follows = "hyprland/hyprwire";
         nixpkgs.follows = "hyprland/nixpkgs";
@@ -218,7 +219,7 @@
       };
     };
     quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence = {
@@ -230,7 +231,7 @@
     };
 
     nixcord = {
-      url = "github:kaylorben/nixcord";
+      url = "github:4evy/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -248,7 +249,7 @@
     };
 
     opencode = {
-      url = "github:anomalyco/opencode/v2";
+      url = "github:anomalyco/opencode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

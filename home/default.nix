@@ -41,6 +41,12 @@
     nix-init
   ];
 
+  # stylix still sets the renamed `programs.rofi.font`, so set the new option
+  # directly instead.
+  programs.rofi.settings.font =
+    with config.stylix.fonts;
+    "${monospace.name} ${toString sizes.popups}";
+
   stylix = {
     enable = true;
     autoEnable = true;
@@ -49,6 +55,8 @@
     # so stylix's overlay-based targets are inert here and only produce an
     # eval warning. The system-level stylix module still applies them.
     overlays.enable = false;
+
+    targets.rofi.fonts.enable = false;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
