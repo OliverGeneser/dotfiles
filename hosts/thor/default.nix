@@ -286,6 +286,8 @@ in
         mattermost-youtube-reminder = {
           description = "Mattermost YouTube Vote Reminder";
 
+          environment.TZ = "Europe/Zurich";
+
           serviceConfig = {
             Type = "oneshot";
             User = "nixos";
@@ -300,7 +302,7 @@ in
           script = ''
             ./mattermost_youtube_vote.py remind \
               --env-file .env \
-              --end-time 15:30 \
+              --end-time 17:30 \
               >> cron.log 2>&1
           '';
         };
