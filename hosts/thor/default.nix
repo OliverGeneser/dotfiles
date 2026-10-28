@@ -373,8 +373,8 @@ in
           wantedBy = [ "timers.target" ];
 
           timerConfig = {
-            # Mon-Fri at 09:30 Geneva time
-            OnCalendar = "Mon..Fri 09:30 Europe/Zurich";
+            # Mon-Fri at 10:30 Geneva time
+            OnCalendar = "Mon..Fri 10:30 Europe/Zurich";
             Persistent = false;
           };
         };
