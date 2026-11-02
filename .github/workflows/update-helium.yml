@@ -36,11 +36,15 @@ jobs:
             --system x86_64-linux \
             --use-github-releases \
             helium
-          nix run nixpkgs#nix-update -- \
-            --flake \
-            --system aarch64-linux \
-            --version skip \
-            helium
+          # nix-update cannot prefetch the aarch64 hash on a stock x86_64
+          # runner (realizing an aarch64 drv needs emulation), so fetch it
+          # natively and patch only the aarch64 block.
+          NEW_VERSION=$(grep -oP 'version = "\K[^"]+' pkgs/helium/default.nix | head -1)
+          ARM_URL="https://github.com/imputnet/helium-linux/releases/download/${NEW_VERSION}/helium-${NEW_VERSION}-arm64.AppImage"
+          ARM_HASH=$(nix store prefetch-file --json "$ARM_URL" | python3 -c 'import json,sys; print(json.load(sys.stdin)["hash"])')
+          echo "arm64 hash: $ARM_HASH"
+          sed -i "/aarch64-linux = pkgs.fetchurl/,/};/ s|hash = \"[^\"]*\"|hash = \"${ARM_HASH}\"|" pkgs/helium/default.nix
+          git diff -- pkgs/helium/default.nix
 
       - name: Run nix flake check
         run: nix flake check
