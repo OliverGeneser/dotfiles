@@ -1,0 +1,74 @@
+name: Update Helium
+
+on:
+  schedule:
+    # 7am and 7pm UTC every day (GitHub Actions cron is always UTC)
+    - cron: "0 7,19 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-helium:
+    name: Update helium-linux package
+    runs-on: ubuntu-latest
+    concurrency:
+      group: update-helium
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          install_url: https://nixos.org/nix/install
+          extra_nix_config: |
+            auto-optimise-store = true
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            experimental-features = nix-command flakes
+
+      - name: Fetch latest helium-linux release and update hashes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          nix run nixpkgs#nix-update -- \
+            --flake \
+            --system x86_64-linux \
+            --use-github-releases \
+            helium
+          nix run nixpkgs#nix-update -- \
+            --flake \
+            --system aarch64-linux \
+            --version skip \
+            helium
+
+      - name: Run nix flake check
+        run: nix flake check
+
+      - name: Get helium version
+        id: helium-version
+        run: |
+          VERSION=$(grep -oP 'version = "\K[^"]+' pkgs/helium/default.nix | head -1)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create Pull Request
+        id: create-pr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update/helium-${{ steps.helium-version.outputs.version }}
+          delete-branch: true
+          commit-message: "update: helium ${{ steps.helium-version.outputs.version }}"
+          title: "update: helium ${{ steps.helium-version.outputs.version }}"
+          body: >-
+            Automated update of the `helium` package from
+            https://github.com/imputnet/helium-linux releases
+            (7am/7pm schedule).
+
+      - name: Enable auto-merge
+        if: steps.create-pr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          gh pr merge --auto --rebase
+          ${{ steps.create-pr.outputs.pull-request-number }}
