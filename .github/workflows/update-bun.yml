@@ -1,0 +1,92 @@
+name: Update Bun
+
+on:
+  schedule:
+    # 7am and 7pm UTC every day
+    - cron: "0 7,19 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-bun:
+    name: Update bun overlay
+    runs-on: ubuntu-latest
+    concurrency:
+      group: update-bun
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          install_url: https://nixos.org/nix/install
+          extra_nix_config: |
+            auto-optimise-store = true
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            experimental-features = nix-command flakes
+
+      - name: Fetch latest bun release and update overlay
+        id: update
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG=$(gh api repos/oven-sh/bun/releases/latest --jq .tag_name)
+          NEW_VERSION="${TAG#bun-v}"
+          echo "Latest bun version: $NEW_VERSION"
+          CURRENT_VERSION=$(sed -n '/bun = self: super:/,/^    };/ s/.*version = "\([^"]*\)".*/\1/p' overlays/default.nix | head -1)
+          echo "Current bun version: $CURRENT_VERSION"
+          if [ "$NEW_VERSION" = "$CURRENT_VERSION" ]; then
+            echo "bun already up to date ($CURRENT_VERSION)"
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          URL="https://github.com/oven-sh/bun/releases/download/bun-v${NEW_VERSION}/bun-linux-x64.zip"
+          NEW_HASH=$(nix store prefetch-file --json "$URL" | python3 -c 'import json,sys; print(json.load(sys.stdin)["hash"])')
+          echo "New hash: $NEW_HASH"
+          sed -i "/bun = self: super:/,/^    };/ s|version = \"[^\"]*\"|version = \"${NEW_VERSION}\"|" overlays/default.nix
+          sed -i "/bun = self: super:/,/^    };/ s|hash = \"[^\"]*\"|hash = \"${NEW_HASH}\"|" overlays/default.nix
+          git diff -- overlays/default.nix
+          echo "updated=true" >> "$GITHUB_OUTPUT"
+
+      - name: Verify bun builds with overlay
+        if: steps.update.outputs.updated == 'true'
+        run: |
+          nix build --impure --expr "let flake = builtins.getFlake \"git+file://$PWD\"; pkgs = import flake.inputs.nixpkgs { system = \"x86_64-linux\"; overlays = [ flake.overlays.upstreams ]; config.allowUnfree = true; }; in pkgs.bun"
+
+      - name: Run nix flake check
+        if: steps.update.outputs.updated == 'true'
+        run: nix flake check
+
+      - name: Get bun version
+        id: bun-version
+        if: steps.update.outputs.updated == 'true'
+        run: |
+          VERSION=$(sed -n '/bun = self: super:/,/^    };/ s/.*version = "\([^"]*\)".*/\1/p' overlays/default.nix | head -1)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create Pull Request
+        id: create-pr
+        if: steps.update.outputs.updated == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update/bun-${{ steps.bun-version.outputs.version }}
+          delete-branch: true
+          commit-message: "update: bun ${{ steps.bun-version.outputs.version }}"
+          title: "update: bun ${{ steps.bun-version.outputs.version }}"
+          body: >-
+            Automated update of the `bun` overlay from
+            https://github.com/oven-sh/bun releases
+            (7am/7pm schedule).
+
+      - name: Enable auto-merge
+        if: steps.create-pr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          gh pr merge --auto --rebase
+          ${{ steps.create-pr.outputs.pull-request-number }}

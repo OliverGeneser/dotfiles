@@ -1,0 +1,109 @@
+name: Update Turso CLI
+
+on:
+  schedule:
+    # 7am and 7pm UTC every day
+    - cron: "0 7,19 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-turso-cli:
+    name: Update turso-cli overlay
+    runs-on: ubuntu-latest
+    concurrency:
+      group: update-turso-cli
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          install_url: https://nixos.org/nix/install
+          extra_nix_config: |
+            auto-optimise-store = true
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            experimental-features = nix-command flakes
+
+      - name: Fetch latest turso-cli release and update overlay
+        id: update
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG=$(gh api repos/tursodatabase/turso-cli/releases/latest --jq .tag_name)
+          NEW_VERSION="${TAG#v}"
+          echo "Latest turso-cli version: $NEW_VERSION"
+          CURRENT_VERSION=$(sed -n '/turso-cli = self: super:/,/^    };/ s/.*version = "\([^"]*\)".*/\1/p' overlays/default.nix | head -1)
+          echo "Current turso-cli version: $CURRENT_VERSION"
+          if [ "$NEW_VERSION" = "$CURRENT_VERSION" ]; then
+            echo "turso-cli already up to date ($CURRENT_VERSION)"
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # 1. Update src hash (fetchFromGitHub tarball -> unpacked hash)
+          SRC_URL="https://github.com/tursodatabase/turso-cli/archive/refs/tags/v${NEW_VERSION}.tar.gz"
+          NEW_SRC_HASH=$(nix store prefetch-file --json --unpack "$SRC_URL" | python3 -c 'import json,sys; print(json.load(sys.stdin)["hash"])')
+          echo "New src hash: $NEW_SRC_HASH"
+          sed -i "/turso-cli = self: super:/,/^    };/ s|version = \"[^\"]*\"|version = \"${NEW_VERSION}\"|" overlays/default.nix
+          sed -i "/turso-cli = self: super:/,/^    };/ s|hash = \"[^\"]*\"|hash = \"${NEW_SRC_HASH}\"|" overlays/default.nix
+          # 2. Recompute vendorHash (buildGoModule): poison it, build goModules,
+          #    and read the expected hash back from the mismatch error.
+          sed -i "/turso-cli = self: super:/,/^    };/ s|vendorHash = \"[^\"]*\"|vendorHash = \"sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\"|" overlays/default.nix
+          set +e
+          BUILD_LOG=$(nix build --impure --expr "let flake = builtins.getFlake \"git+file://$PWD\"; pkgs = import flake.inputs.nixpkgs { system = \"x86_64-linux\"; overlays = [ flake.overlays.upstreams ]; }; in pkgs.turso-cli.goModules" 2>&1)
+          BUILD_EXIT=$?
+          set -e
+          echo "$BUILD_LOG" | tail -n 30
+          NEW_VENDOR_HASH=$(echo "$BUILD_LOG" | grep -oP 'got:\s*\Ksha256-[A-Za-z0-9+/=]+' | head -1 || true)
+          if [ -z "$NEW_VENDOR_HASH" ]; then
+            echo "Failed to extract vendorHash from build log (build exit: $BUILD_EXIT)"
+            exit 1
+          fi
+          echo "New vendorHash: $NEW_VENDOR_HASH"
+          sed -i "/turso-cli = self: super:/,/^    };/ s|vendorHash = \"[^\"]*\"|vendorHash = \"${NEW_VENDOR_HASH}\"|" overlays/default.nix
+          git diff -- overlays/default.nix
+          echo "updated=true" >> "$GITHUB_OUTPUT"
+
+      - name: Verify turso-cli builds with overlay
+        if: steps.update.outputs.updated == 'true'
+        run: |
+          nix build --impure --expr "let flake = builtins.getFlake \"git+file://$PWD\"; pkgs = import flake.inputs.nixpkgs { system = \"x86_64-linux\"; overlays = [ flake.overlays.upstreams ]; }; in pkgs.turso-cli"
+
+      - name: Run nix flake check
+        if: steps.update.outputs.updated == 'true'
+        run: nix flake check
+
+      - name: Get turso-cli version
+        id: turso-version
+        if: steps.update.outputs.updated == 'true'
+        run: |
+          VERSION=$(sed -n '/turso-cli = self: super:/,/^    };/ s/.*version = "\([^"]*\)".*/\1/p' overlays/default.nix | head -1)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create Pull Request
+        id: create-pr
+        if: steps.update.outputs.updated == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update/turso-cli-${{ steps.turso-version.outputs.version }}
+          delete-branch: true
+          commit-message: "update: turso-cli ${{ steps.turso-version.outputs.version }}"
+          title: "update: turso-cli ${{ steps.turso-version.outputs.version }}"
+          body: >-
+            Automated update of the `turso-cli` overlay from
+            https://github.com/tursodatabase/turso-cli releases
+            (7am/7pm schedule). Updates `version`, `src` hash and Go
+            `vendorHash`.
+
+      - name: Enable auto-merge
+        if: steps.create-pr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          gh pr merge --auto --rebase
+          ${{ steps.create-pr.outputs.pull-request-number }}

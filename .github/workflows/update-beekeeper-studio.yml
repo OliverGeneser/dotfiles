@@ -1,0 +1,96 @@
+name: Update Beekeeper Studio
+
+on:
+  schedule:
+    # 7am and 7pm UTC every day
+    - cron: "0 7,19 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-beekeeper-studio:
+    name: Update beekeeper-studio overlay
+    runs-on: ubuntu-latest
+    concurrency:
+      group: update-beekeeper-studio
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          install_url: https://nixos.org/nix/install
+          extra_nix_config: |
+            auto-optimise-store = true
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            experimental-features = nix-command flakes
+
+      - name: Fetch latest beekeeper-studio release and update overlay
+        id: update
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG=$(gh api repos/beekeeper-studio/beekeeper-studio/releases/latest --jq .tag_name)
+          NEW_VERSION="${TAG#v}"
+          echo "Latest beekeeper-studio version: $NEW_VERSION"
+          CURRENT_VERSION=$(sed -n '/beekeeper-studio = self: super:/,/^    };/ s/.*version = "\([^"]*\)".*/\1/p' overlays/default.nix | head -1)
+          echo "Current beekeeper-studio version: $CURRENT_VERSION"
+          if [ "$NEW_VERSION" = "$CURRENT_VERSION" ]; then
+            echo "beekeeper-studio already up to date ($CURRENT_VERSION)"
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          URL="https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${NEW_VERSION}/beekeeper-studio_${NEW_VERSION}_amd64.deb"
+          NEW_HASH=$(nix store prefetch-file --json "$URL" | python3 -c 'import json,sys; print(json.load(sys.stdin)["hash"])')
+          echo "New hash: $NEW_HASH"
+          sed -i "/beekeeper-studio = self: super:/,/^    };/ s|version = \"[^\"]*\"|version = \"${NEW_VERSION}\"|" overlays/default.nix
+          sed -i "/beekeeper-studio = self: super:/,/^    };/ s|hash = \"[^\"]*\"|hash = \"${NEW_HASH}\"|" overlays/default.nix
+          # Keep permittedInsecurePackages in sync (electron-based, flagged insecure in nixpkgs)
+          sed -i "s|beekeeper-studio-[0-9.]*|beekeeper-studio-${NEW_VERSION}|g" system/nix/nixpkgs.nix
+          git diff -- overlays/default.nix system/nix/nixpkgs.nix
+          echo "updated=true" >> "$GITHUB_OUTPUT"
+
+      - name: Verify beekeeper-studio builds with overlay
+        if: steps.update.outputs.updated == 'true'
+        run: |
+          VERSION=$(sed -n '/beekeeper-studio = self: super:/,/^    };/ s/.*version = "\([^"]*\)".*/\1/p' overlays/default.nix | head -1)
+          nix build --impure --expr "let flake = builtins.getFlake \"git+file://$PWD\"; pkgs = import flake.inputs.nixpkgs { system = \"x86_64-linux\"; overlays = [ flake.overlays.upstreams ]; config.allowUnfree = true; config.permittedInsecurePackages = [ \"beekeeper-studio-${VERSION}\" ]; }; in pkgs.beekeeper-studio"
+
+      - name: Run nix flake check
+        if: steps.update.outputs.updated == 'true'
+        run: nix flake check
+
+      - name: Get beekeeper-studio version
+        id: beekeeper-version
+        if: steps.update.outputs.updated == 'true'
+        run: |
+          VERSION=$(sed -n '/beekeeper-studio = self: super:/,/^    };/ s/.*version = "\([^"]*\)".*/\1/p' overlays/default.nix | head -1)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create Pull Request
+        id: create-pr
+        if: steps.update.outputs.updated == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update/beekeeper-studio-${{ steps.beekeeper-version.outputs.version }}
+          delete-branch: true
+          commit-message: "update: beekeeper-studio ${{ steps.beekeeper-version.outputs.version }}"
+          title: "update: beekeeper-studio ${{ steps.beekeeper-version.outputs.version }}"
+          body: >-
+            Automated update of the `beekeeper-studio` overlay from
+            https://github.com/beekeeper-studio/beekeeper-studio releases
+            (7am/7pm schedule). Also syncs `permittedInsecurePackages` in
+            `system/nix/nixpkgs.nix`.
+
+      - name: Enable auto-merge
+        if: steps.create-pr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          gh pr merge --auto --rebase
+          ${{ steps.create-pr.outputs.pull-request-number }}

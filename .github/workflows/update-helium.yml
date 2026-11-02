@@ -46,17 +46,30 @@ jobs:
           sed -i "/aarch64-linux = pkgs.fetchurl/,/};/ s|hash = \"[^\"]*\"|hash = \"${ARM_HASH}\"|" pkgs/helium/default.nix
           git diff -- pkgs/helium/default.nix
 
+      - name: Check for changes
+        id: changed
+        run: |
+          if git diff --quiet -- pkgs/helium/default.nix; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "helium already up to date"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run nix flake check
+        if: steps.changed.outputs.changed == 'true'
         run: nix flake check
 
       - name: Get helium version
         id: helium-version
+        if: steps.changed.outputs.changed == 'true'
         run: |
           VERSION=$(grep -oP 'version = "\K[^"]+' pkgs/helium/default.nix | head -1)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Create Pull Request
         id: create-pr
+        if: steps.changed.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

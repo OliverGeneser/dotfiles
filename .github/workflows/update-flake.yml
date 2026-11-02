@@ -1,0 +1,100 @@
+name: Update Flake Inputs
+
+on:
+  schedule:
+    # 7am and 7pm UTC every day
+    - cron: "0 7,19 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-flake:
+    name: Update flake.lock
+    runs-on: ubuntu-latest
+    concurrency:
+      group: update-flake
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          install_url: https://nixos.org/nix/install
+          extra_nix_config: |
+            auto-optimise-store = true
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            experimental-features = nix-command flakes
+
+      - name: Update flake inputs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          nix flake update
+          git diff --stat -- flake.lock
+
+      - name: Check for lockfile changes
+        id: lock-changed
+        run: |
+          if git diff --quiet -- flake.lock; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No flake input updates available"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run nix flake check (warnings gate automerge)
+        id: flake-check
+        if: steps.lock-changed.outputs.changed == 'true'
+        run: |
+          set +e
+          nix flake check 2>&1 | tee /tmp/flake-check.log
+          EXIT_CODE=${PIPESTATUS[0]}
+          echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
+          if grep -qiE '^[[:space:]]*warning:' /tmp/flake-check.log; then
+            echo "has_warnings=true" >> "$GITHUB_OUTPUT"
+            echo "::warning::nix flake check produced warnings - automerge disabled"
+            grep -iE '^[[:space:]]*warning:' /tmp/flake-check.log || true
+          else
+            echo "has_warnings=false" >> "$GITHUB_OUTPUT"
+          fi
+          exit "$EXIT_CODE"
+
+      - name: Get date for branch
+        id: date
+        if: steps.lock-changed.outputs.changed == 'true'
+        run: echo "date=$(date +%Y%m%d-%H%M)" >> "$GITHUB_OUTPUT"
+
+      - name: Create Pull Request
+        id: create-pr
+        if: steps.lock-changed.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update/flake-lock-${{ steps.date.outputs.date }}
+          delete-branch: true
+          commit-message: "update: flake inputs ${{ steps.date.outputs.date }}"
+          title: "update: flake inputs ${{ steps.date.outputs.date }}"
+          body: >-
+            Automated `nix flake update` (7am/7pm schedule).
+
+            Automerge is enabled only when `nix flake check` passes with no
+            warnings. If warnings were detected, this PR is left open for
+            manual review.
+
+      - name: Comment on PR when warnings detected
+        if: steps.create-pr.outputs.pull-request-number != '' && steps.flake-check.outputs.has_warnings == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          gh pr comment ${{ steps.create-pr.outputs.pull-request-number }}
+          --body "nix flake check passed but emitted warnings, so automerge was skipped. Please review the check log before merging."
+
+      - name: Enable auto-merge (only when check has no warnings)
+        if: steps.create-pr.outputs.pull-request-number != '' && steps.flake-check.outputs.has_warnings == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          gh pr merge --auto --rebase
+          ${{ steps.create-pr.outputs.pull-request-number }}
