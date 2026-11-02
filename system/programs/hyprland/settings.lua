@@ -89,6 +89,15 @@ hl.config({
 		preserve_split = true,
 	},
 
+	scrolling = {
+		column_width = 0.5,
+		fullscreen_on_one_column = false,
+		focus_fit_method = 1,
+		follow_focus = true,
+		wrap_focus = true,
+		explicit_column_widths = "0.333, 0.5, 0.667, 1.0",
+	},
+
 	misc = {
 		force_default_wallpaper = 2,
 		animate_mouse_windowdragging = false,

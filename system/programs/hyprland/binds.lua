@@ -27,6 +27,34 @@ hl.bind(mod .. " + R", hl.dsp.layout("togglesplit"))
 hl.bind(mod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + P", hl.dsp.window.pseudo())
 
+-- toggle scrolling (niri-like) layout per workspace (SUPER+L locks, so use SUPER+S for Scrolling)
+hl.bind(mod .. " + S", function()
+	local ws = hl.get_active_special_workspace() or hl.get_active_workspace()
+	if not ws then
+		return
+	end
+	local next_layout = "scrolling"
+	if ws.tiled_layout == "scrolling" then
+		next_layout = "dwindle"
+	end
+	hl.workspace_rule({ workspace = ws.name, layout = next_layout })
+end)
+
+-- move along the tape with wrap-around (needs scrolling:wrap_focus, set in settings.lua)
+-- note: this moves focus, niri-style; the view follows it. Plain view-only
+-- scrolling (layout("move -col") / ("move +col")) can't wrap in Hyprland.
+hl.bind(mod .. " + comma", hl.dsp.layout("focus l"))
+hl.bind(mod .. " + period", hl.dsp.layout("focus r"))
+
+-- move windows between columns (scrolling layout; no-op elsewhere)
+-- consume_or_expel: alone in a column -> join the neighbor; otherwise -> split out
+hl.bind(mod .. " + SHIFT + comma", hl.dsp.layout("consume_or_expel prev"))
+hl.bind(mod .. " + SHIFT + period", hl.dsp.layout("consume_or_expel next"))
+
+-- move whole columns left/right (scrolling layout; no-op elsewhere)
+hl.bind(mod .. " + CTRL + comma", hl.dsp.layout("swapcol l"))
+hl.bind(mod .. " + CTRL + period", hl.dsp.layout("swapcol r"))
+
 -- utility
 hl.bind(mod .. " + Return", hl.dsp.exec_cmd("uwsm app -- ghostty"))
 hl.bind(mod .. " + Escape", hl.dsp.exec_cmd(toggle("wlogout") .. " -b 4 -p layer-shell"))
