@@ -21,6 +21,28 @@
               natural_scroll  = true,
             })
 
-
+      -- Positive-only layout (no negative origin):
+      -- Lenovo left  (2560 wide) at 0x0
+      -- Dell middle   (3440 wide) at 2560x0
+      -- eDP-1 right   (1920 wide) at 6000x0 (2560+3440)
+      -- Use desc: prefix: DP-1/DP-3 connector names are unstable.
+      hl.monitor({
+        output   = "desc:Lenovo Group Limited LEN P27h-10",
+        mode     = "2560x1440@59.95",
+        position = "0x0",
+        scale    = 1,
+      })
+      hl.monitor({
+        output   = "desc:Dell Inc. DELL P3425WE",
+        mode     = "3440x1440@99.98",
+        position = "2560x0",
+        scale    = 1,
+      })
+      hl.monitor({
+        output   = "eDP-1",
+        mode     = "1920x1200@60",
+        position = "6000x0",
+        scale    = 1,
+      })
     '';
 }

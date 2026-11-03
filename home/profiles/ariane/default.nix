@@ -217,12 +217,20 @@
             mode = null;
             scale = 1.0;
             transform = "normal";
-            position = "3440,0";
+            position = "6000,0";
           }
           {
             criteria = "Dell Inc. DELL P3425WE 6S0SY54";
             status = "enable";
             mode = "3440x1440@99.98Hz";
+            scale = 1.0;
+            transform = "normal";
+            position = "2560,0";
+          }
+          {
+            criteria = "Lenovo Group Limited LEN P27h-10 0x01010101";
+            status = "enable";
+            mode = "2560x1440@59.95Hz";
             scale = 1.0;
             transform = "normal";
             position = "0,0";
@@ -238,9 +246,9 @@
       in
       {
         monitor = [
-          ", preferred, auto, auto"
-          # "DP-1, preferred, auto-left, auto"
-          # "DP-2, preferred, auto-left, auto"
+          "desc:Lenovo Group Limited LEN P27h-10, 2560x1440@59.95, 0x0, 1"
+          "desc:Dell Inc. DELL P3425WE, 3440x1440@99.98, 2560x0, 1"
+          "eDP-1, 1920x1200@60, 6000x0, 1"
         ];
 
         input = {
