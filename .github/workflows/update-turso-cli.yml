@@ -2,8 +2,8 @@ name: Update Turso CLI
 
 on:
   schedule:
-    # 7am and 7pm UTC every day
-    - cron: "0 7,19 * * *"
+    # Every 6 hours UTC (01/07/13/19), off the hour to avoid GitHub's top-of-hour schedule congestion
+    - cron: "35 1,7,13,19 * * *"
   workflow_dispatch:
 
 jobs:
@@ -97,7 +97,7 @@ jobs:
           body: >-
             Automated update of the `turso-cli` overlay from
             https://github.com/tursodatabase/turso-cli releases
-            (7am/7pm schedule). Updates `version`, `src` hash and Go
+            (6-hourly schedule). Updates `version`, `src` hash and Go
             `vendorHash`.
 
       - name: Enable auto-merge

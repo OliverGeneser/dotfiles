@@ -2,8 +2,8 @@ name: Update Flake Inputs
 
 on:
   schedule:
-    # 7am and 7pm UTC every day
-    - cron: "0 7,19 * * *"
+    # Every 6 hours UTC (01/07/13/19), off the hour to avoid GitHub's top-of-hour schedule congestion
+    - cron: "17 1,7,13,19 * * *"
   workflow_dispatch:
 
 jobs:
@@ -72,12 +72,12 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: update/flake-lock-${{ steps.date.outputs.date }}
+          branch: update/flake-lock
           delete-branch: true
           commit-message: "update: flake inputs ${{ steps.date.outputs.date }}"
           title: "update: flake inputs ${{ steps.date.outputs.date }}"
           body: >-
-            Automated `nix flake update` (7am/7pm schedule).
+            Automated `nix flake update` (6-hourly schedule).
 
             Automerge is enabled only when `nix flake check` passes with no
             warnings. If warnings were detected, this PR is left open for

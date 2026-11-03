@@ -2,8 +2,8 @@ name: Update Helium
 
 on:
   schedule:
-    # 7am and 7pm UTC every day (GitHub Actions cron is always UTC)
-    - cron: "0 7,19 * * *"
+    # Every 6 hours UTC (01/07/13/19; GitHub Actions cron is always UTC), off the hour to avoid top-of-hour schedule congestion
+    - cron: "23 1,7,13,19 * * *"
   workflow_dispatch:
 
 jobs:
@@ -80,7 +80,7 @@ jobs:
           body: >-
             Automated update of the `helium` package from
             https://github.com/imputnet/helium-linux releases
-            (7am/7pm schedule).
+            (6-hourly schedule).
 
       - name: Enable auto-merge
         if: steps.create-pr.outputs.pull-request-number != ''

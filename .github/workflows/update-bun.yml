@@ -2,8 +2,8 @@ name: Update Bun
 
 on:
   schedule:
-    # 7am and 7pm UTC every day
-    - cron: "0 7,19 * * *"
+    # Every 6 hours UTC (01/07/13/19), off the hour to avoid GitHub's top-of-hour schedule congestion
+    - cron: "29 1,7,13,19 * * *"
   workflow_dispatch:
 
 jobs:
@@ -81,7 +81,7 @@ jobs:
           body: >-
             Automated update of the `bun` overlay from
             https://github.com/oven-sh/bun releases
-            (7am/7pm schedule).
+            (6-hourly schedule).
 
       - name: Enable auto-merge
         if: steps.create-pr.outputs.pull-request-number != ''
