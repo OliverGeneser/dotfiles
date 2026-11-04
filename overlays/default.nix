@@ -11,6 +11,7 @@
       beekeeper-studio
       bun
       linuxPackages_latest
+      lutris
       reuse
       turso-cli
     ];
@@ -70,6 +71,24 @@
           });
         }
       );
+    };
+
+    lutris = self: super: {
+      # Backport of nixpkgs 7f22afb ("lutris: drop gtk2", 2026-11-02), not yet
+      # in nixos-unstable. gtk2 is marked broken pending removal
+      # (https://github.com/NixOS/nixpkgs/issues/410814) and lutris' FHS env
+      # was the only thing pulling it in. Filter by pname so the broken gtk2
+      # derivation is never forced. Drop once nixos-unstable has the commit.
+      lutris = super.lutris.override {
+        buildFHSEnv =
+          args:
+          super.buildFHSEnv (
+            args
+            // {
+              multiPkgs = pkgs: builtins.filter (p: (p.pname or "") != "gtk+") (args.multiPkgs pkgs);
+            }
+          );
+      };
     };
 
     nvidia = self: super: {
