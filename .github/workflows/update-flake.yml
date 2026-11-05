@@ -8,7 +8,7 @@ on:
 
 jobs:
   update-flake:
-    name: Update flake.lock
+    name: Update flake inputs
     runs-on: ubuntu-latest
     concurrency:
       group: update-flake
@@ -34,10 +34,41 @@ jobs:
           nix flake update
           git diff --stat -- flake.lock
 
+      - name: Refresh opencode node_modules hash
+        run: |
+          # opencode follows our nixpkgs, so its bun/node_modules output can
+          # drift from upstream: poison the hash, rebuild, and read back the
+          # expected hash (same fake-hash pattern as update-turso-cli.yml).
+          set -euo pipefail
+          FILE="home/terminal/programs/opencode.nix"
+          FAKE_HASH="sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+          echo "Computing expected opencode node_modules hash..."
+          set +e
+          BUILD_LOG=$(nix build --impure --expr "let flake = builtins.getFlake \"git+file://$PWD\"; opencodePkg = flake.inputs.opencode.packages.x86_64-linux.default; overridden = opencodePkg.overrideAttrs (old: { node_modules = old.node_modules.override { hash = \"${FAKE_HASH}\"; }; }); in overridden.node_modules" --no-link 2>&1)
+          set -e
+          echo "$BUILD_LOG" | tail -n 20
+          NEW_HASH=$(echo "$BUILD_LOG" | grep -oP 'got:\s*\Ksha256-[A-Za-z0-9+/=]+' | head -1 || true)
+          if [ -z "$NEW_HASH" ]; then
+            echo "Failed to extract expected node_modules hash from build log"
+            exit 1
+          fi
+          echo "Expected hash: $NEW_HASH"
+          CURRENT_HASH=$(sed -n '/node_modules/,/hash =/ s/.*hash = "\(sha256-[^"]*\)".*/\1/p' "$FILE" | head -1)
+          echo "Current hash: $CURRENT_HASH"
+          if [ "$NEW_HASH" != "$CURRENT_HASH" ]; then
+            sed -i "/node_modules/,/hash =/ s|hash = \"sha256-[^\"]*\"|hash = \"${NEW_HASH}\"|" "$FILE"
+            echo "Updated $FILE to $NEW_HASH"
+            git diff -- "$FILE"
+          else
+            echo "opencode node_modules hash already up to date"
+          fi
+          echo "Verifying opencode builds with updated hash..."
+          nix build --impure --expr "let flake = builtins.getFlake \"git+file://$PWD\"; opencodePkg = flake.inputs.opencode.packages.x86_64-linux.default; overridden = opencodePkg.overrideAttrs (old: { node_modules = old.node_modules.override { hash = \"${NEW_HASH}\"; }; postInstall = \"\"; }); in overridden" --no-link
+
       - name: Check for lockfile changes
         id: lock-changed
         run: |
-          if git diff --quiet -- flake.lock; then
+          if git diff --quiet -- flake.lock home/terminal/programs/opencode.nix; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No flake input updates available"
           else
@@ -78,6 +109,9 @@ jobs:
           title: "update: flake inputs ${{ steps.date.outputs.date }}"
           body: >-
             Automated `nix flake update` (6-hourly schedule).
+
+            Also refreshes the `opencode` `node_modules` hash in
+            `home/terminal/programs/opencode.nix`.
 
             Automerge is enabled only when `nix flake check` passes with no
             warnings. If warnings were detected, this PR is left open for
