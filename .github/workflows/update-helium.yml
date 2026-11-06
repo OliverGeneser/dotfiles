@@ -17,7 +17,16 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v6
+        with:
+          token: ${{ steps.app-token.outputs.token }}
 
       - uses: cachix/install-nix-action@v31
         with:
@@ -58,7 +67,7 @@ jobs:
 
       - name: Run nix flake check
         if: steps.changed.outputs.changed == 'true'
-        run: nix flake check
+        run: nix flake check --no-warn-dirty
 
       - name: Get helium version
         id: helium-version
@@ -72,7 +81,7 @@ jobs:
         if: steps.changed.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
           branch: update/helium-${{ steps.helium-version.outputs.version }}
           delete-branch: true
           commit-message: "update: helium ${{ steps.helium-version.outputs.version }}"
@@ -85,7 +94,7 @@ jobs:
       - name: Enable auto-merge
         if: steps.create-pr.outputs.pull-request-number != ''
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: >
           gh pr merge --auto --rebase
           ${{ steps.create-pr.outputs.pull-request-number }}

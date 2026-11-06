@@ -17,7 +17,16 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v6
+        with:
+          token: ${{ steps.app-token.outputs.token }}
 
       - uses: cachix/install-nix-action@v31
         with:
@@ -80,7 +89,7 @@ jobs:
         if: steps.lock-changed.outputs.changed == 'true'
         run: |
           set +e
-          nix flake check 2>&1 | tee /tmp/flake-check.log
+          nix flake check --no-warn-dirty 2>&1 | tee /tmp/flake-check.log
           EXIT_CODE=${PIPESTATUS[0]}
           echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
           if grep -qiE '^[[:space:]]*warning:' /tmp/flake-check.log; then
@@ -102,7 +111,7 @@ jobs:
         if: steps.lock-changed.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
           branch: update/flake-lock
           delete-branch: true
           commit-message: "update: flake inputs ${{ steps.date.outputs.date }}"
@@ -120,7 +129,7 @@ jobs:
       - name: Comment on PR when warnings detected
         if: steps.create-pr.outputs.pull-request-number != '' && steps.flake-check.outputs.has_warnings == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: >
           gh pr comment ${{ steps.create-pr.outputs.pull-request-number }}
           --body "nix flake check passed but emitted warnings, so automerge was skipped. Please review the check log before merging."
@@ -128,7 +137,7 @@ jobs:
       - name: Enable auto-merge (only when check has no warnings)
         if: steps.create-pr.outputs.pull-request-number != '' && steps.flake-check.outputs.has_warnings == 'false'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: >
           gh pr merge --auto --rebase
           ${{ steps.create-pr.outputs.pull-request-number }}
