@@ -17,7 +17,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: cachix/install-nix-action@v31
         with:
@@ -80,7 +80,7 @@ jobs:
         if: steps.lock-changed.outputs.changed == 'true'
         run: |
           set +e
-          nix flake check 2>&1 | tee /tmp/flake-check.log
+          nix flake check --no-warn-dirty 2>&1 | tee /tmp/flake-check.log
           EXIT_CODE=${PIPESTATUS[0]}
           echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
           if grep -qiE '^[[:space:]]*warning:' /tmp/flake-check.log; then
