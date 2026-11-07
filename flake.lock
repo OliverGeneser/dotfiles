@@ -1258,11 +1258,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1794015954,
-        "narHash": "sha256-LhZW1QYJ93kQLQaeto44ZQEeFlAtKZ2EWYzqLQz0Nk0=",
+        "lastModified": 1794042104,
+        "narHash": "sha256-AkS3jtwLO7zjTX1g9HA4qVe5SFItPkzFjt15g9VrApY=",
         "owner": "4evy",
         "repo": "nixcord",
-        "rev": "2b85b0d7cf809bf681f9b443afb98fbb31038405",
+        "rev": "a82a7c70b95232795567ca7db062ff1ac747b059",
         "type": "github"
       },
       "original": {
@@ -1276,11 +1276,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1793871777,
-        "narHash": "sha256-DbFyxXHjP4SJDWVVIILkgrUZxj29cDusi8ULXoQGuZ8=",
+        "lastModified": 1794051415,
+        "narHash": "sha256-mJok3uMK0awq2MPKdSnvTxm3UD89KD3LclQzASgtY1s=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "d645c71a58dbae3eb17ff551a07aea13a541cb1a",
+        "rev": "1a8ff4f57ffe1f732beaa1db842247a381ea471d",
         "type": "github"
       },
       "original": {
@@ -1394,11 +1394,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1793726008,
-        "narHash": "sha256-jQp1wKvbwWdLBASTXkSi/VYmDJ5AbBi1WvcMt9HWJC8=",
+        "lastModified": 1793876309,
+        "narHash": "sha256-Wojg9lIH/hDH91iDVH2/EPw8oDSpxjxhXONbU1yf4Zg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1d060086d60cb76a40cf37109f979d88a5bd6396",
+        "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
         "type": "github"
       },
       "original": {
@@ -1507,11 +1507,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794035307,
-        "narHash": "sha256-BII+co1JoyqpUzEDGvIaJF4LPXm2Oe73k2oyp2ei4QU=",
+        "lastModified": 1794053531,
+        "narHash": "sha256-bb93Z1rNuxrgaRsftLX6dUzGuCvHhE3uFeusnhBynLI=",
         "owner": "anomalyco",
         "repo": "opencode",
-        "rev": "21bf6b493b76efcf3769ade999f05163760d61af",
+        "rev": "6a89e9f287ade1e1ceefc0e4d13df97ff7631567",
         "type": "github"
       },
       "original": {
@@ -1870,11 +1870,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794019737,
-        "narHash": "sha256-eawTdOMBIWyHmCWAbJ/QUhRVCPqEhbUDYZxcPZu5i0o=",
+        "lastModified": 1794046320,
+        "narHash": "sha256-y+pAWxjxZ5BXyeXIQssdC1CuKdnYzQURd+IG9KfawTs=",
         "owner": "OliverGeneser",
         "repo": "t3-code-nix",
-        "rev": "e583c9b6b0a1a98797833a53e66ac70266f11aca",
+        "rev": "86bdd54588b90148b24c6c4856eccdf030516f54",
         "type": "github"
       },
       "original": {
