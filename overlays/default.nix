@@ -10,10 +10,14 @@
     upstreams = inputs.nixpkgs.lib.composeManyExtensions [
       beekeeper-studio
       bun
+      gitbutler
       linuxPackages_latest
-      lutris
-      reuse
+      #lutris
+      #reuse
+      turbo-unwrapped
       turso-cli
+      viddy
+      voxtype
     ];
 
     beekeeper-studio = self: super: {
@@ -52,6 +56,22 @@
       efitools = super.efitools.overrideAttrs (old: {
         patches = (old.patches or [ ]) ++ [
           ./patch-efitools.patch
+        ];
+      });
+    };
+
+    gitbutler = self: super: {
+      # Workaround for nixpkgs cargoSetupHook (2026-10) forcing system libs
+      # (*_SYS_USE_PKG_CONFIG=1) while gitbutler 0.19.9 doesn't declare them
+      # in buildInputs:
+      # - `ld.bfd: cannot find -lsqlite3` in gitbutler-tauri link -> sqlite
+      # - onig_sys build.rs: `Unable to find oniguruma in pkg-config` -> oniguruma
+      # Same class as viddy/voxtype below. Drop once upstream fixes
+      # pkgs/by-name/gi/gitbutler/package.nix.
+      gitbutler = super.gitbutler.overrideAttrs (old: {
+        buildInputs = (old.buildInputs or [ ]) ++ [
+          super.sqlite
+          super.oniguruma
         ];
       });
     };
@@ -143,6 +163,50 @@
           };
         }
       );
+    };
+
+    turbo-unwrapped = self: super: {
+      # Workaround for nixpkgs cargoSetupHook (2026-10) forcing system libs
+      # (ZSTD_SYS_USE_PKG_CONFIG=1, OPENSSL_NO_VENDOR=1, AWS_LC_SYS_USE_SYSTEM=1)
+      # while turbo-unwrapped 2.11.7 declares no system deps. Provide them
+      # until nixpkgs fixes pkgs/by-name/tu/turbo-unwrapped/package.nix.
+      turbo-unwrapped = super.turbo-unwrapped.overrideAttrs (old: {
+        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
+          super.pkg-config
+        ];
+        buildInputs = (old.buildInputs or [ ]) ++ [
+          super.zstd
+          super.openssl
+          super.aws-lc
+        ];
+      });
+    };
+
+    viddy = self: super: {
+      # Workaround for nixpkgs cargoSetupHook forcing system sqlite
+      # (LIBSQLITE3_SYS_USE_PKG_CONFIG=1) while viddy 1.3.1 declares no
+      # buildInputs. Upstream needs pkg-config + sqlite; add them here until
+      # nixpkgs fixes pkgs/by-name/vi/viddy/package.nix.
+      viddy = super.viddy.overrideAttrs (old: {
+        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
+          super.pkg-config
+        ];
+        buildInputs = (old.buildInputs or [ ]) ++ [
+          super.sqlite
+        ];
+      });
+    };
+
+    voxtype = self: super: {
+      # Same class of fix as viddy: voxtype 1.1.1 links -lsqlite3 (via
+      # rusqlite) but doesn't declare sqlite in buildInputs. The new
+      # cargoSetupHook forces LIBSQLITE3_SYS_USE_PKG_CONFIG=1, so the link
+      # fails without system sqlite.
+      voxtype = super.voxtype.overrideAttrs (old: {
+        buildInputs = (old.buildInputs or [ ]) ++ [
+          super.sqlite
+        ];
+      });
     };
   };
 }
