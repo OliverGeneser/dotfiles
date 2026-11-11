@@ -350,11 +350,11 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1794341152,
-        "narHash": "sha256-StOkzKAg0TPwxxFGGu+EKxkgovdykcy4f9HjkZWFRSo=",
+        "lastModified": 1794373490,
+        "narHash": "sha256-o0m9zJm+Kv16AP+bik71Iyiou23Xl96DFB2zhP57lao=",
         "owner": "ghostty-org",
         "repo": "ghostty",
-        "rev": "1b22f331a58a5be5ede2f1d76b7793d4130b4072",
+        "rev": "a622196c930138f312884382ab784e45b9ab653b",
         "type": "github"
       },
       "original": {
@@ -644,11 +644,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1794332834,
-        "narHash": "sha256-+MJFROJBRK0jq32Ymx6Eu6DOwi2bEo91/wZrhOYZAiA=",
+        "lastModified": 1794355752,
+        "narHash": "sha256-hl3GQ1lmv4P+8U2oCEYsikz+3u9fra3qkWL8mjSW+W0=",
         "owner": "hyprwm",
         "repo": "hyprland",
-        "rev": "df680d40f81fb72b4f222a427088ff643279b89f",
+        "rev": "815585bb8197f9bec5e0fc5cd2d307a7b135e015",
         "type": "github"
       },
       "original": {
@@ -1213,11 +1213,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794293202,
-        "narHash": "sha256-sMffGA16WJBVMDoWUPLH6PXy5V5W3IeaTOxgA9cYw8A=",
+        "lastModified": 1794375173,
+        "narHash": "sha256-x97M5XOV+IDcm7K9Bv6a7OUePyEVCjPeLpr3iD3BJD8=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "01772509e6c8d07deaa5f5c1d5fd494c3460a026",
+        "rev": "3d460ece2fde6ba86a7f9deacc9a65e40f9ed19e",
         "type": "github"
       },
       "original": {
@@ -1258,11 +1258,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1794341718,
-        "narHash": "sha256-9bj63AR1pMyDiIvG7xUmoaWaen++SFAfoNZ2PWksnOU=",
+        "lastModified": 1794382994,
+        "narHash": "sha256-e2z9ppppIj0s4bwmJGGX/J5oSbqlZ/vaN0wjqa3UzaA=",
         "owner": "4evy",
         "repo": "nixcord",
-        "rev": "724ee63395f8ada6767a67ef737a2b3336527307",
+        "rev": "1f146383108d6411a3d32c39560f93437aaac785",
         "type": "github"
       },
       "original": {
@@ -1507,11 +1507,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794342503,
-        "narHash": "sha256-A/pMSYCURbPcZh0W5HlqY4iqmcE3zP81KYbuwQ+jvxw=",
+        "lastModified": 1794382910,
+        "narHash": "sha256-G0E6C3s2gOygKAgA/jY74TqMhjXIQSk3BegQ/KMHiCE=",
         "owner": "anomalyco",
         "repo": "opencode",
-        "rev": "05d347d75054bf27778750ad5f2cd30336e81d8f",
+        "rev": "e56eff2bc01649b3aa21224876b8874e77dea4b0",
         "type": "github"
       },
       "original": {
@@ -1870,11 +1870,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794333113,
-        "narHash": "sha256-FclJkWbZOxMXO+RjHX+NvJpuaASvB9oB7RGdnkqdDdk=",
+        "lastModified": 1794378185,
+        "narHash": "sha256-JbhunTu/HcEQ+DRIdYrRgOMqCPqirhFCLdLc0h8845A=",
         "owner": "OliverGeneser",
         "repo": "t3-code-nix",
-        "rev": "943a133a88f2925d8c13ec3f6746c66c37885dc2",
+        "rev": "e38713ce009c7e20234507963b56ec9a796cd169",
         "type": "github"
       },
       "original": {
@@ -2016,11 +2016,11 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1794278344,
-        "narHash": "sha256-RWmum1MyV0K6IC6VI0s0BTARxTbWUYp/25KwVqAC9Tk=",
+        "lastModified": 1794348084,
+        "narHash": "sha256-kmBjKvYQIu8LfQt51Sow0H75lUsZfcRPCPB/3X8WRN8=",
         "owner": "vicinaehq",
         "repo": "vicinae",
-        "rev": "cbba6f819801fffb809aa1043fe9f5bc7fd5598f",
+        "rev": "479026e394808340f3a31505e78bfea8851e9ac9",
         "type": "github"
       },
       "original": {
@@ -2158,11 +2158,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794215717,
-        "narHash": "sha256-es8MSf8k9iRKAW0ny1Dfqo09imWwx0w561wbuz4u5Xk=",
+        "lastModified": 1794356940,
+        "narHash": "sha256-ML+0SjnxlkLAFclntmMJpUBs13IGQNb5BD14jrmWHsw=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "3c9c2843c3ca92de0c82f98e1c4641d95e7163f2",
+        "rev": "a7cac935fd58b6f177d2412ea00c566ed4f0abab",
         "type": "github"
       },
       "original": {
