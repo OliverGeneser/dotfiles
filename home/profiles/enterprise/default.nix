@@ -50,6 +50,9 @@
     ../../terminal/programs/nix.nix
     ../../terminal/programs/nodejs.nix
     ../../terminal/programs/opencode.nix
+    ../../terminal/programs/mcp.nix
+    ../../terminal/programs/claude-code.nix
+    ../../terminal/programs/codex.nix
     ../../terminal/programs/python.nix
     ../../terminal/programs/podman.nix
     ../../terminal/programs/skim.nix

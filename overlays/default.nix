@@ -14,7 +14,6 @@
       linuxPackages_latest
       #lutris
       #reuse
-      turbo-unwrapped
       turso-cli
       viddy
       voxtype
