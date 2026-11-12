@@ -9,6 +9,9 @@
   programs.opencode = {
     enable = true;
 
+    # Shared MCP servers from ./mcp.nix (context7, gh_grep).
+    enableMcpIntegration = true;
+
     # stylix still sets `tui.theme`, but OpenCode 2 ignores tui.json. The
     # stylix theme file is still installed and selected via cli.json.
     tui = lib.mkForce { };
@@ -50,21 +53,6 @@
             "gpt-5.6-luna" = {
               "name" = "GPT-5.6 Luna";
             };
-          };
-        };
-      };
-      mcp = {
-        servers = {
-          context7 = {
-            type = "remote";
-            url = "https://mcp.context7.com/mcp";
-            headers = {
-              "CONTEXT7_API_KEY" = "{env:CONTEXT7_API_KEY}";
-            };
-          };
-          gh_grep = {
-            type = "remote";
-            url = "https://mcp.grep.app";
           };
         };
       };
