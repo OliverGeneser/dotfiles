@@ -3,7 +3,7 @@ name: Update Helium
 on:
   schedule:
     # Every 6 hours UTC (01/07/13/19; GitHub Actions cron is always UTC), off the hour to avoid top-of-hour schedule congestion
-    - cron: "23 1,7,13,19 * * *"
+    - cron: "23 7,19 * * *"
   workflow_dispatch:
 
 jobs:

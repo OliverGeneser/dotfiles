@@ -3,7 +3,7 @@ name: Update Flake Inputs
 on:
   schedule:
     # Every 6 hours UTC (01/07/13/19), off the hour to avoid GitHub's top-of-hour schedule congestion
-    - cron: "17 1,7,13,19 * * *"
+    - cron: "17 7,19 * * *"
   workflow_dispatch:
 
 jobs:
