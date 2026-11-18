@@ -22,7 +22,7 @@
       in
       opencodePkg.overrideAttrs (old: {
         node_modules = old.node_modules.override {
-          hash = "sha256-TZJtdK3IULtOnbeYjrYZy9U47etQ63V7BplXGVstNPI=";
+          hash = "sha256-T05vLavvt6Awt39N7rVWDB1J2eZfuR83Deeae3bLX+0=";
         };
 
         # v2 removed the `completion` subcommand (yargs -> effect/cli) but
