@@ -22,11 +22,11 @@
     beekeeper-studio = self: super: {
       beekeeper-studio = super.beekeeper-studio.overrideAttrs (
         final: prev: {
-          version = "6.3.2";
+          version = "6.3.3";
 
           src = super.fetchurl {
             url = "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v${final.version}/beekeeper-studio_${final.version}_amd64.deb";
-            hash = "sha256-JrcZxx5a8gdORdz6MP1DlXnosjbsSPmi9A4CNT3EFig=";
+            hash = "sha256-FUFwASCibLgcaaRXDJ9z0pMVVaSKQJ3Ag7xRobY0VFU=";
           };
 
           # 6.1.6 bundles musl duckdb bindings that auto-patchelf can't satisfy.
