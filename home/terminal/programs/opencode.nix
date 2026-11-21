@@ -17,6 +17,7 @@
     tui = lib.mkForce { };
 
     package =
+
       let
         opencodePkg = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
       in
@@ -24,12 +25,6 @@
         node_modules = old.node_modules.override {
           hash = "sha256-1YrR3eb2bEvJZx3q3iIpcQHk36nULYu1gs3X6nBEj8o=";
         };
-
-        # v2 removed the `completion` subcommand (yargs -> effect/cli) but
-        # nix/opencode.nix:87 still runs `installShellCompletion --cmd opencode --bash <($out/bin/opencode completion)`.
-        # That is now interpreted as `opencode <directory>` and hits packages/cli/src/commands/handlers/default.ts:19 `process.chdir(requestedDirectory)` -> ENOENT.
-        # Disable broken shell-completion generation until upstream fixes nix/opencode.nix.
-        postInstall = "";
       });
 
     settings = {

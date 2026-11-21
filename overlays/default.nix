@@ -10,13 +10,13 @@
     upstreams = inputs.nixpkgs.lib.composeManyExtensions [
       beekeeper-studio
       bun
-      gitbutler
+      #gitbutler
       linuxPackages_latest
       #lutris
       #reuse
       turso-cli
-      viddy
-      voxtype
+      #viddy
+      #voxtype
     ];
 
     beekeeper-studio = self: super: {
