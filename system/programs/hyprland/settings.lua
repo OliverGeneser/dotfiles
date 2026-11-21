@@ -101,7 +101,7 @@ hl.config({
 	misc = {
 		force_default_wallpaper = 2,
 		animate_mouse_windowdragging = false,
-		vrr = 1,
+		vrr = 3,
 		mouse_move_enables_dpms = true,
 		key_press_enables_dpms = true,
 		focus_on_activate = true,
@@ -113,7 +113,9 @@ hl.config({
 	},
 
 	render = {
-		direct_scanout = true,
+		direct_scanout = 2,
+		send_content_type = false,
+		cm_auto_hdr = 0,
 	},
 
 	gestures = {
