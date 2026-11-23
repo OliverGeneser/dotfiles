@@ -20,7 +20,7 @@
             {
               "Jellyfin" = {
                 icon = "jellyfin.png";
-                href = "http://10.0.0.205:8096";
+                href = "https://jellyfin.thor.geneser.dev";
                 description = "";
                 widget = {
                   type = "jellyfin";
@@ -37,7 +37,7 @@
             {
               "Seerr" = {
                 icon = "jellyseerr.png";
-                href = "http://10.0.0.205:8095";
+                href = "https://seerr.thor.geneser.dev";
                 description = "";
                 widget = {
                   type = "jellyseerr";
@@ -49,14 +49,14 @@
             {
               "Sonarr" = {
                 icon = "sonarr.png";
-                href = "http://10.0.0.205:8989";
+                href = "https://sonarr.thor.geneser.dev";
                 description = "";
               };
             }
             {
               "Radarr" = {
                 icon = "radarr.png";
-                href = "http://10.0.0.205:7878";
+                href = "https://radarr.thor.geneser.dev";
                 description = "";
               };
             }
@@ -67,7 +67,7 @@
             {
               "Immich" = {
                 icon = "immich.png";
-                href = "http://10.0.0.205:2283";
+                href = "https://immich.thor.geneser.dev";
                 description = "";
                 widget = {
                   type = "immich";

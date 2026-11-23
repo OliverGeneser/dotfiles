@@ -394,6 +394,7 @@ in
         "/var/lib/jellyfin"
         "/var/lib/immich"
         "/var/lib/redis-immich"
+        "/var/lib/traefik"
         "/var/lib/postgresql"
         "/etc/zfs"
         "/root/.local/share/signal-cli"
