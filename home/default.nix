@@ -58,12 +58,6 @@
 
     targets.rofi.fonts.enable = false;
 
-    # wayprompt was removed from nixpkgs (unmaintained, fails to build) and
-    # home-manager removed `programs.wayprompt` (2026-11-21). Stylix still
-    # ships modules/wayprompt/hm.nix which sets that removed option, so
-    # disable the target until upstream stylix removes it.
-    targets.wayprompt.enable = false;
-
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     image = self.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers.gfda_40-black_5120x2880;
