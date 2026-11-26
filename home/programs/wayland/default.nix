@@ -7,7 +7,6 @@
 # Wayland config
 {
   imports = [
-    # ./hyprland
     ./kanshi.nix
     ./pyprland
     ./hyprlock.nix

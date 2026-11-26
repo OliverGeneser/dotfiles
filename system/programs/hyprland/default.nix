@@ -9,7 +9,6 @@ let
 in
 {
   imports = [
-    inputs.hyprland.nixosModules.default
     ./variables.nix
   ];
 
@@ -48,10 +47,10 @@ in
   programs.hyprland = {
     enable = true;
     withUWSM = true;
+    package = inputs.hyprland.packages.${system}.default;
 
-    plugins = with inputs.hyprland-plugins.packages.${system}; [
-      # csgo-vulkan-fix
-      # hyprbars
-    ];
+    #plugins = with inputs.hyprland-plugins.packages.${system}; [
+    # csgo-vulkan-fix
+    #];
   };
 }
