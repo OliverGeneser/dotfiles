@@ -23,7 +23,7 @@
       in
       opencodePkg.overrideAttrs (old: {
         node_modules = old.node_modules.override {
-          hash = "sha256-qRaUFo09EK62LP1xIAjZbIPnFhomyVZACnGxOMiWvsU=";
+          hash = "sha256-IihuzfxzivzNSjpjnZB8zwqeCUty5ZJcxQH1fodfkGs=";
         };
       });
 
