@@ -31,7 +31,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          nix run nixpkgs#nix-update -- \
+          # nixpkgs-unstable still ships nix-update 1.16.0, which is broken for
+          # clean git trees in CI: `nix flake metadata` reports a store path it
+          # never copies, so builtins.getFlake fails with "No such file or
+          # directory". Fixed upstream in v1.17.0 (`nix flake prefetch`).
+          nix run github:Mic92/nix-update/v1.17.0 -- \
             --flake \
             --system x86_64-linux \
             --use-github-releases \
