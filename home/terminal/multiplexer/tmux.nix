@@ -32,7 +32,12 @@
       set -g set-clipboard on
       set -g allow-passthrough on
 
-      set -g status-right '#[fg=black]#{cpu_bg_color} CPU: #{cpu_icon} #{cpu_percentage} | %a %h-%d %H:%M '
+      # Continuum only wires up autosave via its status-right interpolation if it
+      # thinks no other tmux server/clients are running at load time; otherwise it
+      # silently disables autosave until the server reloads. Adding the save hook
+      # ourselves makes autosave independent of that race.
+      set -g @continuum-save-interval 15
+      set -g status-right '#(${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum/scripts/continuum_save.sh)#[fg=black]#{cpu_bg_color} CPU: #{cpu_icon} #{cpu_percentage} | %a %h-%d %H:%M '
       run-shell ${pkgs.tmuxPlugins.cpu}/share/tmux-plugins/cpu/cpu.tmux
 
       bind -r ^ last-window
